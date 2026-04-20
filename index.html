@@ -1,1022 +1,2203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>AskGogo — GCC & India market access</title>
-  <!-- Fonts & icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/feather-icons/dist/feather.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #1a2b3c;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    /* navigation */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 0;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #1a4b53, #2c6b7a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #2e3b4e;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: #215E68;
-    }
-
-    /* buttons */
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: #215E68;
-      color: white;
-      border: none;
-      padding: 14px 32px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 16px -6px rgba(33, 94, 104, 0.3);
-      cursor: pointer;
-    }
-
-    .cta i {
-      transition: transform 0.2s;
-    }
-
-    .cta:hover {
-      background: #1a4b53;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -8px rgba(33, 94, 104, 0.4);
-    }
-
-    .cta:hover i {
-      transform: translateX(4px);
-    }
-
-    /* hero section */
-    .hero {
-      position: relative;
-      padding: clamp(60px, 8vw, 100px) 0;
-      background: linear-gradient(135deg, #215E68 0%, #1a4b53 100%);
-      color: white;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
-      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M10 10 L90 10 L90 90 L10 90 Z" stroke="white" stroke-width="0.5" fill="none"/><path d="M20 20 L80 20 L80 80 L20 80 Z" stroke="white" stroke-width="0.5" fill="none"/><circle cx="50" cy="50" r="15" stroke="white" stroke-width="0.5" fill="none"/></svg>');
-      background-size: 60px;
-    }
-
-    .hero .container {
-      position: relative;
-      max-width: 900px;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      opacity: 0.95;
-      margin-bottom: 32px;
-      max-width: 650px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-    }
-
-    .hero-stat-item {
-      text-align: center;
-    }
-
-    .hero-stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 4px;
-    }
-
-    .hero-stat-label {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    /* sections */
-    .section {
-      padding: 80px 0;
-    }
-
-    .section-light {
-      background: #f8fafc;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #1a2b3c;
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 80px;
-      height: 4px;
-      background: #215E68;
-      border-radius: 2px;
-    }
-
-    .section-subhead {
-      font-size: 1.25rem;
-      color: #4a5b6b;
-      max-width: 700px;
-      margin: 30px 0 40px;
-    }
-
-    /* opportunity grid */
-    .opportunity-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-      margin: 40px 0;
-    }
-
-    .opportunity-stats {
-      display: flex;
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .mini-stat {
-      text-align: left;
-    }
-
-    .mini-stat .number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #215E68;
-      font-family: 'Playfair Display';
-    }
-
-    .mini-stat .label {
-      font-size: 0.9rem;
-      color: #5a6b7c;
-    }
-
-    .opportunity-image {
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 30px 40px -20px rgba(33, 94, 104, 0.3);
-    }
-
-    .opportunity-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-    }
-
-    /* services grid */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin: 40px 0;
-    }
-
-    .service-card {
-      background: white;
-      padding: 36px;
-      border-radius: 30px;
-      border: 1px solid #eef2f6;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #215E68, #4a9eb3);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 40px -20px rgba(33, 94, 104, 0.3);
-      border-color: transparent;
-    }
-
-    .service-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .service-icon {
-      width: 60px;
-      height: 60px;
-      background: #e3f0f5;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-    .service-icon i {
-      width: 32px;
-      height: 32px;
-      color: #215E68;
-    }
-
-    .service-card h3 {
-      font-size: 1.8rem;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 16px;
-    }
-
-    .service-card p {
-      color: #4a5b6b;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .service-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #215E68;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    /* who section */
-    .who-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 30px;
-    }
-
-    .badge {
-      background: white;
-      padding: 16px 24px;
-      border-radius: 60px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
-      border: 1px solid #e2e9f0;
-    }
-
-    .badge i {
-      color: #215E68;
-    }
-
-    .who-image {
-      position: relative;
-    }
-
-    .who-image img {
-      width: 100%;
-      border-radius: 30px;
-      box-shadow: 0 30px 40px -20px rgba(0,0,0,0.2);
-    }
-
-    .experience-tag {
-      position: absolute;
-      bottom: -20px;
-      left: -20px;
-      background: #215E68;
-      color: white;
-      padding: 16px 24px;
-      border-radius: 60px;
-      font-weight: 600;
-      box-shadow: 0 15px 25px -8px rgba(33, 94, 104, 0.4);
-    }
-
-    /* GCC stats */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin: 50px 0;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 36px 24px;
-      border-radius: 28px;
-      text-align: center;
-      border: 1px solid #e2e9f0;
-      transition: all 0.3s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: #215E68;
-      box-shadow: 0 20px 30px -10px rgba(33, 94, 104, 0.2);
-    }
-
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #215E68;
-      font-family: 'Playfair Display';
-      line-height: 1.2;
-    }
-
-    .stat-label {
-      font-size: 1rem;
-      color: #4a5b6b;
-      margin: 12px 0;
-    }
-
-    .stat-source {
-      font-size: 0.9rem;
-      color: #7a8b9c;
-    }
-
-    .stat-source a {
-      color: #215E68;
-      text-decoration: none;
-    }
-
-    /* maturity model */
-    .maturity-model {
-      background: white;
-      padding: 48px;
-      border-radius: 48px;
-      margin: 60px 0;
-      box-shadow: 0 30px 40px -20px rgba(0,0,0,0.1);
-    }
-
-    .model-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    .step {
-      text-align: center;
-      position: relative;
-    }
-
-    .step:not(:last-child)::after {
-      content: '→';
-      position: absolute;
-      right: -15px;
-      top: 30px;
-      font-size: 24px;
-      color: #215E68;
-      opacity: 0.3;
-    }
-
-    .step-number {
-      width: 60px;
-      height: 60px;
-      background: #215E68;
-      color: white;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 0 auto 20px;
-    }
-
-    .step h4 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-
-    .step p {
-      font-size: 0.9rem;
-      color: #6a7b8c;
-    }
-
-    .insight-banner {
-      background: #215E68;
-      color: white;
-      padding: 36px;
-      border-radius: 48px;
-      margin: 40px 0;
-      text-align: center;
-      font-size: 1.3rem;
-    }
-
-    /* about section */
-    .about-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .testimonial-card {
-      background: #215E68;
-      color: white;
-      padding: 40px;
-      border-radius: 60px;
-      margin: 40px 0;
-      position: relative;
-    }
-
-    .testimonial-card::before {
-      content: '"';
-      font-size: 8rem;
-      position: absolute;
-      top: -20px;
-      left: 20px;
-      opacity: 0.1;
-      font-family: serif;
-    }
-
-    .trusted-quote {
-      background: #f0f5fa;
-      padding: 20px 30px;
-      border-radius: 40px;
-      display: inline-block;
-      margin: 20px 0;
-      font-weight: 500;
-    }
-
-    .market-map {
-      background: linear-gradient(145deg, #1a4b53, #2c6b7a);
-      border-radius: 48px;
-      padding: 48px;
-      color: white;
-      margin: 40px 0;
-    }
-
-    .market-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .market-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 1.1rem;
-      padding: 16px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 60px;
-    }
-
-    .market-item i {
-      width: 24px;
-    }
-
-    /* ===== LET'S CONNECT TAB - REDUCED SIZE & NEATLY ALIGNED ===== */
-    .contact-card {
-      background: linear-gradient(135deg, #215E68 0%, #1a4b53 100%);
-      border-radius: 40px;
-      padding: 40px 40px;
-      color: white;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 25px 35px -12px rgba(26, 75, 83, 0.4);
-      border: 1px solid rgba(99, 179, 209, 0.3);
-      max-width: 750px;
-      margin: 0 auto;
-    }
-    
-    .contact-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><circle cx="50" cy="50" r="40" stroke="white" stroke-width="1" fill="none"/><circle cx="50" cy="50" r="20" stroke="white" stroke-width="1" fill="none"/></svg>');
-      background-size: 100px;
-      pointer-events: none;
-    }
-    
-    .contact-profile {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    
-    .contact-profile img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid rgba(255,255,255,0.3);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-    
-    .contact-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
-      color: white;
-      text-align: center;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-    
-    .contact-subtext {
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.95);
-      text-align: center;
-      max-width: 550px;
-      margin: 0 auto 25px;
-      line-height: 1.5;
-    }
-    
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin: 25px 0;
-      flex-wrap: wrap;
-    }
-    
-    .social-link {
-      background: rgba(255,255,255,0.1);
-      padding: 14px 28px;
-      border-radius: 50px;
-      color: white;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid rgba(255,255,255,0.2);
-      transition: all 0.3s ease;
-      font-weight: 500;
-      backdrop-filter: blur(5px);
-      font-size: 0.95rem;
-    }
-    
-    .social-link:hover {
-      background: white !important;
-      color: #215E68 !important;
-      transform: translateY(-2px);
-    }
-    
-    .phone-number-container {
-      display: flex;
-      justify-content: center;
-      margin: 15px 0;
-      min-height: 60px;
-    }
-    
-    .phone-number {
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(8px);
-      padding: 12px 28px;
-      border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.3);
-      display: none;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.2rem;
-      box-shadow: 0 10px 20px -8px rgba(0,0,0,0.2);
-      animation: fadeIn 0.3s ease;
-    }
-    
-    .phone-number a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    
-    .phone-number i {
-      width: 20px;
-      height: 20px;
-      stroke: white;
-    }
-    
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .connect-btn {
-      background: white;
-      color: #215E68;
-      border: none;
-      padding: 14px 36px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 16px -6px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-      margin-top: 10px;
-    }
-    
-    .connect-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -8px rgba(0,0,0,0.3);
-    }
-
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #215E68;
-      color: white;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-      z-index: 100;
-      border: 1px solid rgba(255,255,255,0.2);
-      opacity: 0.9;
-    }
-
-    .back-to-top:hover {
-      background: #1a4b53;
-      transform: translateY(-4px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-      opacity: 1;
-    }
-
-    .back-to-top i {
-      width: 24px;
-      height: 24px;
-      stroke: white;
-      transition: transform 0.2s;
-    }
-
-    .back-to-top:hover i {
-      transform: translateY(-2px);
-    }
-
-    /* footer */
-    .footer {
-      padding: 48px 0 32px;
-      text-align: center;
-      color: #6a7b8c;
-      border-top: 1px solid #e2e9f0;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 30px 0;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: #4a5b6c;
-      text-decoration: none;
-    }
-
-    /* responsive */
-    @media (max-width: 900px) {
-      .opportunity-grid,
-      .who-grid,
-      .model-steps,
-      .market-grid,
-      .services-grid,
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-      .step:not(:last-child)::after { display: none; }
-    }
-
-    @media (max-width: 700px) {
-      .container { padding: 0 24px; }
-      .hero-stats { gap: 20px; }
-      .contact-card { 
-        padding: 30px 20px; 
-        max-width: 100%;
-      }
-      .contact-profile img { width: 80px; height: 80px; }
-      .contact-card h2 { font-size: 2rem; }
-      .contact-subtext { font-size: 1.1rem; }
-      .social-link { padding: 12px 20px !important; font-size: 0.9rem; }
-      .phone-number { font-size: 1rem; padding: 10px 20px; }
-      .connect-btn { padding: 12px 28px; }
-      .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 48px;
-        height: 48px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AskGogo — The AI Chief of Staff For Your Life</title>
+<meta name="description" content="Remembers everything. Reminds you precisely. Syncs your calendar. Manages your lists. All inside Telegram & WhatsApp. 7-day free trial — ₹299/month.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* DARK THEME (default) */
+  :root {
+    --bg: #07070a;
+    --bg-2: #0f0f12;
+    --bg-3: #17171c;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --ink: #f5f5f2;
+    --ink-2: #a8a8a3;
+    --ink-3: #6b6b66;
+    --lime: #b8ff4a;
+    --lime-2: #86e61a;
+    --violet: #7c3aed;
+    --coral: #ff6b35;
+    --blue: #3b82f6;
+    --glow: rgba(184,255,74,0.15);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Geist', system-ui, sans-serif;
+    --mono: 'Geist Mono', monospace;
+    --grain-opacity: 0.04;
+  }
+  /* LIGHT THEME */
+  [data-theme="light"] {
+    --bg: #fafaf8;
+    --bg-2: #ffffff;
+    --bg-3: #f3f3ef;
+    --surface: rgba(0,0,0,0.02);
+    --border: rgba(10,10,15,0.1);
+    --border-hover: rgba(10,10,15,0.2);
+    --ink: #0a0a0f;
+    --ink-2: #3a3a4a;
+    --ink-3: #8888a0;
+    --lime: #5a8f00;
+    --lime-2: #4a7700;
+    --violet: #6d28d9;
+    --coral: #ea580c;
+    --blue: #2563eb;
+    --glow: rgba(90,143,0,0.15);
+    --grain-opacity: 0.02;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: background 0.3s, color 0.3s;
+  }
+  ::selection { background: var(--lime); color: var(--bg); }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 200;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0;
+    z-index: 100;
+    background: rgba(7,7,10,0.8);
+    backdrop-filter: blur(30px) saturate(1.4);
+    -webkit-backdrop-filter: blur(30px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.3s;
+  }
+  [data-theme="light"] nav { background: rgba(250,250,248,0.85); }
+  .nav-left { display: flex; align-items: center; gap: 32px; }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 22px; font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    width: 28px; height: 28px;
+    background: var(--lime);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    color: var(--bg);
+    font-family: var(--sans);
+  }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a {
+    font-size: 13px; color: var(--ink-2); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-right { display: flex; gap: 12px; align-items: center; }
+  .theme-toggle {
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+  .theme-toggle:hover { border-color: var(--lime); color: var(--lime); }
+  .nav-cta {
+    background: var(--lime);
+    color: var(--bg) !important;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover {
+    background: var(--lime-2);
+    transform: scale(1.03);
+  }
+  .nav-ghost {
+    color: var(--ink-2);
+    font-size: 13px;
+    text-decoration: none;
+    padding: 10px 16px;
+  }
+  .nav-ghost:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(184,255,74,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 15% 90%, rgba(124,58,237,0.1) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 40% at 85% 90%, rgba(255,107,53,0.08) 0%, transparent 65%);
+  }
+  [data-theme="light"] .hero-bg {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(90,143,0,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 15% 90%, rgba(109,40,217,0.05) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 40% at 85% 90%, rgba(234,88,12,0.04) 0%, transparent 65%);
+  }
+  .grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 85%);
+    opacity: 0.5;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(184,255,74,0.08);
+    border: 1px solid rgba(184,255,74,0.25);
+    color: var(--lime);
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.05em;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 32px; position: relative; z-index: 1;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--lime); border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 0 4px rgba(184,255,74,0.2);
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 8vw, 104px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    max-width: 1100px;
+    position: relative; z-index: 1;
+    margin-bottom: 28px;
+  }
+  .hero h1 .accent {
+    font-style: italic;
+    font-weight: 400;
+    position: relative;
+    display: inline-block;
+    color: var(--lime);
+  }
+  .hero h1 .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 8px; left: -4px; right: -4px;
+    height: 20%;
+    background: rgba(184,255,74,0.15);
+    z-index: -1;
+    transform: skewX(-4deg);
+  }
+  [data-theme="light"] .hero h1 .accent::after { background: rgba(90,143,0,0.15); }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--ink-2);
+    line-height: 1.5;
+    max-width: 680px;
+    margin-bottom: 40px;
+    position: relative; z-index: 1;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 500; }
+  .hero-actions {
+    display: flex; gap: 12px; align-items: center;
+    flex-wrap: wrap; justify-content: center;
+    position: relative; z-index: 1;
+    margin-bottom: 28px;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--lime);
+    color: var(--bg);
+    padding: 16px 28px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px var(--glow);
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(184,255,74,0.35);
+  }
+  .btn-primary .arrow { transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--ink);
+    font-size: 14px; font-weight: 400;
+    text-decoration: none;
+    padding: 16px 24px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .btn-secondary:hover {
+    border-color: var(--border-hover);
+    background: var(--surface);
+  }
+  .trial-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    position: relative; z-index: 1;
+    margin-bottom: 56px;
+  }
+  .trial-note strong { color: var(--ink-2); font-weight: 500; }
+
+  .channels-strip {
+    display: flex; align-items: center; gap: 32px;
+    flex-wrap: wrap; justify-content: center;
+    position: relative; z-index: 1;
+    padding: 32px 24px;
+    border-top: 1px dashed var(--border);
+    border-bottom: 1px dashed var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .channels-label {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-3); letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .channels-items { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .channel-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .channel-item strong { color: var(--ink); font-weight: 500; }
+  .channel-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .badge-live { background: rgba(184,255,74,0.15); color: var(--lime); }
+  .badge-soon { background: var(--surface); color: var(--ink-3); }
+
+  /* DEMO SECTION */
+  .demo-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, transparent 0%, var(--bg-2) 50%, transparent 100%);
+    position: relative;
+  }
+  .demo-container {
+    max-width: 700px; margin: 0 auto;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.02),
+      0 40px 80px rgba(0,0,0,0.4),
+      0 0 120px rgba(184,255,74,0.05);
+  }
+  [data-theme="light"] .demo-container {
+    box-shadow: 0 40px 80px rgba(0,0,0,0.08), 0 0 120px rgba(90,143,0,0.06);
+  }
+  .demo-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(0,0,0,0.3);
+  }
+  [data-theme="light"] .demo-header { background: var(--surface); }
+  .demo-dots { display: flex; gap: 6px; }
+  .demo-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+  }
+  [data-theme="light"] .demo-dot { background: rgba(0,0,0,0.15); }
+  .demo-title {
+    flex: 1; text-align: center;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-3); letter-spacing: 0.05em;
+  }
+  .demo-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--violet), var(--lime));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .demo-body {
+    padding: 24px 20px;
+    min-height: 440px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .msg {
+    max-width: 82%;
+    padding: 12px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    animation: msgIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .msg-user {
+    background: var(--lime);
+    color: var(--bg);
+    align-self: flex-end;
+    border-bottom-right-radius: 6px;
+    font-weight: 500;
+  }
+  .msg-bot {
+    background: var(--surface);
+    color: var(--ink);
+    align-self: flex-start;
+    border-bottom-left-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .msg-bot strong { color: var(--lime); font-weight: 500; }
+  .msg-time {
+    font-family: var(--mono); font-size: 10px;
+    opacity: 0.5; margin-top: 4px;
+    display: block;
+  }
+  .typing {
+    align-self: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    border-radius: 20px;
+    border-bottom-left-radius: 6px;
+    display: flex; gap: 4px;
+    animation: msgIn 0.5s forwards;
+    opacity: 0;
+  }
+  .typing-dot {
+    width: 6px; height: 6px;
+    background: var(--ink-2); border-radius: 50%;
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+  .demo-controls {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 8px; flex-wrap: wrap;
+    background: rgba(0,0,0,0.2);
+  }
+  [data-theme="light"] .demo-controls { background: var(--surface); }
+  .demo-chip {
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all 0.4s;
+    font-family: var(--sans);
+    display: flex; align-items: center; gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .demo-chip:hover {
+    border-color: var(--lime);
+    color: var(--lime);
+  }
+  .demo-chip.active {
+    background: var(--lime);
+    color: var(--bg);
+    border-color: var(--lime);
+    font-weight: 500;
+  }
+  /* Progress bar on active chip */
+  .demo-chip.active::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px;
+    background: rgba(7,7,10,0.25);
+    width: 100%;
+    animation: progressBar 8s linear;
+  }
+  @keyframes progressBar {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+
+  /* SECTIONS */
+  section { padding: 120px 24px; position: relative; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 20px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; width: 20px; height: 1px;
+    background: var(--lime);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 76px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    max-width: 900px;
+    margin-bottom: 24px;
+  }
+  .section-title em { font-style: italic; color: var(--lime); font-weight: 400; }
+  .section-sub {
+    font-size: 18px; color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 620px; margin-bottom: 64px;
+  }
+
+  /* BENTO */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+  .bento-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+    min-height: 280px;
+    display: flex; flex-direction: column;
+  }
+  .bento-card:hover { border-color: var(--border-hover); }
+  .bento-card.w6 { grid-column: span 6; }
+  .bento-card.w4 { grid-column: span 4; }
+  .bento-card.w3 { grid-column: span 3; }
+  .bento-card.w8 { grid-column: span 8; }
+  .bento-card.w12 { grid-column: span 12; }
+  .bento-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .bento-eyebrow-icon {
+    width: 20px; height: 20px;
+    background: var(--surface);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+  }
+  .bento-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .bento-title em { font-style: italic; color: var(--lime); }
+  .bento-text {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .bento-visual { margin-top: auto; }
+
+  .mem-list { display: flex; flex-direction: column; gap: 6px; }
+  .mem-chip {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+  .mem-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .tag-lime { background: rgba(184,255,74,0.12); color: var(--lime); }
+  .tag-violet { background: rgba(124,58,237,0.15); color: #c4b5fd; }
+  .tag-coral { background: rgba(255,107,53,0.15); color: #fed7aa; }
+  .tag-blue { background: rgba(59,130,246,0.15); color: #93c5fd; }
+  [data-theme="light"] .tag-violet { color: #6d28d9; background: rgba(109,40,217,0.12); }
+  [data-theme="light"] .tag-coral { color: #c2410c; background: rgba(234,88,12,0.12); }
+  [data-theme="light"] .tag-blue { color: #1d4ed8; background: rgba(37,99,235,0.12); }
+
+  .rem-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .rem-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .rem-row:last-child { border-bottom: none; }
+  .rem-emoji { font-size: 18px; }
+  .rem-info { flex: 1; }
+  .rem-msg { color: var(--ink); font-weight: 500; font-size: 13px; }
+  .rem-meta { color: var(--ink-3); font-family: var(--mono); font-size: 10px; margin-top: 2px; }
+  .rem-badge {
+    font-family: var(--mono); font-size: 10px;
+    padding: 3px 8px; border-radius: 100px;
+    background: rgba(184,255,74,0.12); color: var(--lime);
+  }
+
+  .cal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .cal-day {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--ink-3); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+  .cal-event {
+    display: flex; gap: 10px; align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cal-event:last-child { border-bottom: none; }
+  .cal-time { font-family: var(--mono); font-size: 10px; color: var(--ink-3); min-width: 48px; }
+  .cal-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .cal-title { font-size: 13px; color: var(--ink); flex: 1; }
+
+  .list-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .list-title {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-3); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 10px;
+    display: flex; justify-content: space-between;
+  }
+  .list-count { color: var(--lime); }
+  .list-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0; font-size: 13px; color: var(--ink-2);
+  }
+  .list-check {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px; flex-shrink: 0;
+  }
+  .list-check.checked {
+    background: var(--lime); border-color: var(--lime);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bg); font-size: 10px; font-weight: 600;
+  }
+  .list-item.done { text-decoration: line-through; color: var(--ink-3); }
+
+  .voice-bar {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 18px;
+  }
+  .voice-mic {
+    width: 34px; height: 34px;
+    background: var(--lime); color: var(--bg);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .voice-wave { flex: 1; display: flex; align-items: center; gap: 3px; height: 22px; }
+  .wave-bar {
+    flex: 1; background: var(--lime); border-radius: 2px;
+    animation: wave 1.5s ease-in-out infinite; opacity: 0.6;
+  }
+  @keyframes wave { 0%,100% { height: 20%; } 50% { height: 80%; } }
+  .wave-bar:nth-child(1) { animation-delay: 0s; }
+  .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+  .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+  .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+  .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+  .wave-bar:nth-child(6) { animation-delay: 0.3s; }
+  .wave-bar:nth-child(7) { animation-delay: 0.2s; }
+  .wave-bar:nth-child(8) { animation-delay: 0.1s; }
+  .voice-time { font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
+
+  .brief-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .brief-greet {
+    font-family: var(--serif); font-size: 18px; color: var(--ink);
+    margin-bottom: 8px; font-style: italic;
+  }
+  .brief-item {
+    display: flex; gap: 10px; align-items: center;
+    padding: 6px 0; font-size: 13px; color: var(--ink-2);
+  }
+  .brief-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--lime); }
+
+  /* Breathe visual */
+  .breathe-viz {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .breathe-circle {
+    width: 80px; height: 80px;
+    border: 2px solid var(--lime);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 10px;
+    color: var(--lime);
+    animation: breathe 8s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(0.7); }
+    25% { transform: scale(1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(0.7); }
+  }
+  .breathe-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* USE CASES */
+  .usecase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .usecase-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .usecase-card:hover {
+    border-color: var(--lime);
+    transform: translateY(-4px);
+  }
+  .usecase-icon {
+    width: 44px; height: 44px;
+    background: rgba(184,255,74,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .usecase-name {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .usecase-desc { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+
+  /* INTEGRATIONS */
+  .int-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .int-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 16px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 12px; text-align: center;
+    transition: border-color 0.2s;
+  }
+  .int-card:hover { border-color: var(--border-hover); }
+  .int-icon { font-size: 32px; }
+  .int-name { font-size: 13px; color: var(--ink); font-weight: 500; }
+  .int-status {
+    font-family: var(--mono); font-size: 9px;
+    padding: 2px 8px; border-radius: 100px; letter-spacing: 0.06em;
+  }
+  .int-live { background: rgba(184,255,74,0.12); color: var(--lime); }
+  .int-soon { background: var(--surface); color: var(--ink-3); }
+
+  /* COMPARE */
+  .compare-section { background: var(--bg-2); }
+  .compare-wrap {
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--bg);
+    overflow-x: auto;
+  }
+  .compare-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  .compare-table th {
+    padding: 24px; text-align: left;
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .compare-table th.ours {
+    background: rgba(184,255,74,0.08);
+    color: var(--lime);
+  }
+  .compare-table td {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--ink-2);
+    vertical-align: middle;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: var(--surface); }
+  .compare-table .feature { color: var(--ink); font-weight: 500; }
+  .compare-table .ours { color: var(--lime) !important; font-weight: 500; background: rgba(184,255,74,0.03); }
+  .compare-table .losing { color: var(--ink-3) !important; }
+
+  /* PRICING — Memorae-inspired */
+  .pricing-section { background: var(--bg); }
+  .pricing-toggle {
+    display: inline-flex;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px;
+    margin-bottom: 40px;
+  }
+  .toggle-opt {
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--ink-2);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--sans);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .toggle-opt.active {
+    background: var(--lime);
+    color: var(--bg);
+    font-weight: 500;
+  }
+  .save-badge {
+    font-family: var(--mono); font-size: 9px;
+    padding: 2px 6px; border-radius: 4px;
+    background: rgba(184,255,74,0.2); color: var(--lime);
+  }
+  .toggle-opt.active .save-badge {
+    background: rgba(7,7,10,0.15); color: var(--bg);
+  }
+
+  .hero-plan-card {
+    background: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #3b82f6 100%);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 24px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-plan-card::before {
+    content: '';
+    position: absolute;
+    top: 20%; right: -20%;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+  .hero-plan-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-plan-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    position: relative; z-index: 1;
+  }
+  .hero-plan-name {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .hero-trial-badge {
+    display: inline-block;
+    background: #86e61a;
+    color: #0a0a0f;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+    font-family: var(--mono);
+  }
+  .hero-plan-sub {
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+  }
+  .hero-plan-avatar {
+    width: 80px; height: 80px;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, #b8ff4a 40%, #7c3aed 100%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    position: relative; z-index: 1;
+  }
+  .compare-plans {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: underline;
+    margin-top: 16px;
+    display: inline-block;
+    position: relative; z-index: 1;
+  }
+
+  .plan-cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .plan-mini-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .plan-mini-card:hover { border-color: var(--border-hover); }
+  .plan-mini-card.selected {
+    border-color: var(--lime);
+    background: rgba(184,255,74,0.03);
+  }
+  .plan-mini-card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 18px; height: 18px;
+    background: var(--lime);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .plan-mini-popular {
+    background: linear-gradient(135deg, #b8ff4a 0%, #86e61a 100%);
+    color: #0a0a0f;
+  }
+  .plan-mini-popular .plan-mini-name, .plan-mini-popular .plan-mini-price,
+  .plan-mini-popular .plan-mini-period { color: #0a0a0f !important; }
+  .plan-mini-popular-tag {
+    background: #0a0a0f;
+    color: #b8ff4a;
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    display: inline-block;
+    letter-spacing: 0.06em;
+  }
+  .plan-mini-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .plan-mini-price {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1;
+  }
+  .plan-mini-price .cut {
+    font-size: 14px;
+    color: var(--ink-3);
+    text-decoration: line-through;
+    margin-left: 6px;
+  }
+  .plan-mini-period {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+
+  .guarantee-box {
+    background: var(--surface);
+    border: 1px solid rgba(184,255,74,0.3);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 32px;
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .guarantee-icon {
+    width: 28px; height: 28px;
+    background: rgba(184,255,74,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    color: var(--lime);
+    flex-shrink: 0;
+  }
+  .guarantee-box strong { color: var(--ink); font-weight: 500; }
+
+  .features-unlock-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .features-unlock-title em {
+    font-style: italic;
+    color: var(--lime);
+  }
+  .features-unlock-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .unlock-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .unlock-card:hover { border-color: var(--lime); }
+  .unlock-icon {
+    width: 40px; height: 40px;
+    margin: 0 auto 12px;
+    color: var(--lime);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .unlock-name {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .get-started-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  /* QUOTES */
+  .quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .quote-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    display: flex; flex-direction: column;
+  }
+  .quote-stars {
+    color: var(--lime); font-size: 12px;
+    margin-bottom: 20px; letter-spacing: 2px;
+  }
+  .quote-text {
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 400;
+    color: var(--ink); line-height: 1.5;
+    margin-bottom: 24px; flex: 1;
+  }
+  .quote-author {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .author-img {
+    width: 40px; height: 40px; border-radius: 50%;
+    font-family: var(--serif); font-size: 18px;
+    font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+  }
+  .author-name { font-size: 14px; color: var(--ink); font-weight: 500; }
+  .author-role { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
+
+  /* FAQ */
+  .faq-wrap { max-width: 760px; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px;
+    line-height: 1.3;
+  }
+  .faq-plus {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    color: var(--ink-2);
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+  .faq-item.open .faq-plus {
+    background: var(--lime);
+    border-color: var(--lime);
+    color: var(--bg);
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s, padding 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 320px; padding-top: 16px; }
+
+  /* FINAL CTA */
+  .final-cta {
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(184,255,74,0.15) 0%, transparent 60%),
+      var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    padding: 100px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--lime); font-weight: 400; }
+  .final-cta p {
+    font-size: 18px;
+    color: var(--ink-2);
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 80px 24px 40px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .footer-desc {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 320px;
+  }
+  .footer-heading {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .footer-links a {
+    font-size: 14px;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--lime); }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* MOBILE */
+  @media (max-width: 968px) {
+    nav { padding: 12px 16px; }
+    .nav-links { display: none; }
+    .nav-ghost { display: none; }
+    .nav-cta { padding: 8px 16px; font-size: 12px; }
+    section { padding: 80px 20px; }
+    .bento-card.w6, .bento-card.w4, .bento-card.w3, .bento-card.w8 { grid-column: span 12; }
+    .plan-cards-row { grid-template-columns: 1fr; }
+    .features-unlock-grid { grid-template-columns: repeat(2, 1fr); }
+    .quotes-grid { grid-template-columns: 1fr; }
+    .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+    .int-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .compare-table th, .compare-table td { padding: 14px 12px; font-size: 12px; }
+    .hero { padding: 60px 20px 40px; }
+    .hero-plan-top { flex-direction: column; gap: 20px; }
+    .hero-plan-avatar { align-self: flex-end; }
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.d1 { transition-delay: 0.1s; }
+  .reveal.d2 { transition-delay: 0.2s; }
+  .reveal.d3 { transition-delay: 0.3s; }
+</style>
 </head>
-<body id="top">
+<body data-theme="dark">
 
-<!-- navigation -->
-<div class="container">
-  <nav>
-    <div class="logo">AskGogo</div>
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <div class="logo-mark">G</div>
+      AskGogo
+    </a>
     <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#gcc">GCC & India</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#features">Features</a>
+      <a href="#usecases">Use cases</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#compare">vs Memorae</a>
+      <a href="#pricing">Pricing</a>
     </div>
-  </nav>
-</div>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle light/dark">🌙</button>
+    <a href="#pricing" class="nav-ghost">Sign in</a>
+    <a href="https://t.me/askgogo_bot" class="nav-cta">Start free trial →</a>
+  </div>
+</nav>
 
-<!-- hero -->
+<!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <h1>Helping global technology companies enter & scale in India</h1>
-    <p>Enterprise introductions, strategic partnerships, and market access for technology firms expanding into the Indian ecosystem.</p>
-    <a class="cta" href="https://calendar.app.google/LFnyHJjEFV3zxiTH8" target="_blank">Book a conversation <i data-feather="arrow-right"></i></a>
-    <div class="hero-stats">
-      <div class="hero-stat-item"><div class="hero-stat-number">500+</div><div class="hero-stat-label">GCC leaders connected</div></div>
-      <div class="hero-stat-item"><div class="hero-stat-number">1500+</div><div class="hero-stat-label">Enterprise CXOs</div></div>
-      <div class="hero-stat-item"><div class="hero-stat-number">20+</div><div class="hero-stat-label">Years in India Tech Ecosystem</div></div>
+  <div class="hero-bg"></div>
+  <div class="grid-bg"></div>
+
+  <div class="hero-badge">
+    <span class="live-dot"></span>
+    Live on Telegram · WhatsApp launching soon
+  </div>
+
+  <h1>Your AI chief of staff.<br>
+  <span class="accent">Remembers everything,</span><br>
+  runs your entire day.</h1>
+
+  <p class="hero-sub">A private AI that lives inside your chat app. <strong>Remembers facts, fires reminders, syncs your calendar, manages lists, transcribes voice notes, searches the web</strong> — all with a message.</p>
+
+  <div class="hero-actions">
+    <a href="https://t.me/askgogo_bot" class="btn-primary">
+      Start 7-day free trial
+      <span class="arrow">→</span>
+    </a>
+    <a href="#demo" class="btn-secondary">Watch demo ▸</a>
+  </div>
+
+  <div class="trial-note">
+    <strong>No card needed for free plan</strong> · 7-day free trial on Pro · Cancel anytime
+  </div>
+
+  <div class="channels-strip">
+    <span class="channels-label">Works inside</span>
+    <div class="channels-items">
+      <span class="channel-item"><strong>Telegram</strong> <span class="channel-badge badge-live">Live</span></span>
+      <span class="channel-item"><strong>WhatsApp</strong> <span class="channel-badge badge-soon">Soon</span></span>
+      <span class="channel-item"><strong>Web</strong> <span class="channel-badge badge-live">Dashboard</span></span>
+      <span class="channel-item"><strong>Email</strong> <span class="channel-badge badge-soon">Soon</span></span>
     </div>
   </div>
 </section>
 
-<!-- opportunity -->
-<section class="section">
+<!-- DEMO -->
+<section class="demo-section" id="demo">
+  <div class="container" style="text-align: center; margin-bottom: 48px;">
+    <span class="section-label">See it live</span>
+    <h2 class="section-title" style="margin: 0 auto;">Seven <em>superpowers.</em><br>One chat.</h2>
+  </div>
+
+  <div class="demo-container">
+    <div class="demo-header">
+      <div class="demo-dots">
+        <div class="demo-dot"></div>
+        <div class="demo-dot"></div>
+        <div class="demo-dot"></div>
+      </div>
+      <div class="demo-title">@askgogo_bot</div>
+      <div class="demo-avatar">🧠</div>
+    </div>
+    <div class="demo-body" id="demoBody"></div>
+    <div class="demo-controls">
+      <button class="demo-chip active" data-idx="0">🧠 Memory</button>
+      <button class="demo-chip" data-idx="1">⏰ Reminder</button>
+      <button class="demo-chip" data-idx="2">🎤 Voice</button>
+      <button class="demo-chip" data-idx="3">📅 Calendar</button>
+      <button class="demo-chip" data-idx="4">📋 Lists</button>
+      <button class="demo-chip" data-idx="5">📰 Briefing</button>
+      <button class="demo-chip" data-idx="6">🧘 Breathe</button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES BENTO -->
+<section id="features">
   <div class="container">
-    <h2 class="section-title">The Opportunity</h2>
-    <div class="opportunity-grid">
+    <span class="section-label reveal">Everything inside</span>
+    <h2 class="section-title reveal d1">Not a chatbot.<br><em>A second brain.</em></h2>
+    <p class="section-sub reveal d2">AskGogo isn't just AI that chats. It remembers, schedules, connects, and acts — silently running in the background of your favourite messenger.</p>
+
+    <div class="bento">
+      <div class="bento-card w8 reveal">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">🧠</div> 01 · Memory</div>
+        <h3 class="bento-title">Your <em>second brain,</em> always listening.</h3>
+        <p class="bento-text">Tell it any fact and it stores it forever. Phone numbers, birthdays, preferences, login hints, project status, contact details. Instantly recalled when needed.</p>
+        <div class="bento-visual">
+          <div class="mem-list">
+            <div class="mem-chip"><span class="mem-tag tag-violet">Wife</span> Divya's birthday: February 6th 🌹</div>
+            <div class="mem-chip"><span class="mem-tag tag-lime">Work</span> Investor meeting every Thursday 4pm</div>
+            <div class="mem-chip"><span class="mem-tag tag-coral">Health</span> Vitamin D at 8am daily</div>
+            <div class="mem-chip"><span class="mem-tag tag-blue">Project</span> API key expires June 15</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card w4 reveal d1">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">⏰</div> 02 · Reminders</div>
+        <h3 class="bento-title"><em>Precise</em> to the minute.</h3>
+        <p class="bento-text">One-time or recurring. Fires exactly when you need.</p>
+        <div class="bento-visual">
+          <div class="rem-box">
+            <div class="rem-row">
+              <span class="rem-emoji">💊</span>
+              <div class="rem-info">
+                <div class="rem-msg">Take medicine</div>
+                <div class="rem-meta">8:00 AM · daily</div>
+              </div>
+              <span class="rem-badge">🔁</span>
+            </div>
+            <div class="rem-row">
+              <span class="rem-emoji">💐</span>
+              <div class="rem-info">
+                <div class="rem-msg">Divya's birthday flowers</div>
+                <div class="rem-meta">Feb 5, 10 AM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card w4 reveal">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">📅</div> 03 · Calendar</div>
+        <h3 class="bento-title">Google Calendar, <em>2-way sync.</em></h3>
+        <p class="bento-text">"Add meeting Friday 3pm" — creates the event. Events sync back to the bot.</p>
+        <div class="bento-visual">
+          <div class="cal-card">
+            <div class="cal-day">Today · Friday, Apr 18</div>
+            <div class="cal-event">
+              <div class="cal-time">10:00</div>
+              <div class="cal-dot" style="background:var(--violet)"></div>
+              <div class="cal-title">Team standup</div>
+            </div>
+            <div class="cal-event">
+              <div class="cal-time">14:30</div>
+              <div class="cal-dot" style="background:var(--lime)"></div>
+              <div class="cal-title">Investor pitch</div>
+            </div>
+            <div class="cal-event">
+              <div class="cal-time">18:00</div>
+              <div class="cal-dot" style="background:var(--coral)"></div>
+              <div class="cal-title">Dinner with Divya ❤️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card w4 reveal d1">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">📋</div> 04 · Lists</div>
+        <h3 class="bento-title">Shopping, todos, <em>any list.</em></h3>
+        <p class="bento-text">"Add milk to shopping" — instantly updated. Unlimited named lists.</p>
+        <div class="bento-visual">
+          <div class="list-card">
+            <div class="list-title">🛒 Shopping list <span class="list-count">5 items</span></div>
+            <div class="list-item done"><div class="list-check checked">✓</div> Milk</div>
+            <div class="list-item done"><div class="list-check checked">✓</div> Bread</div>
+            <div class="list-item"><div class="list-check"></div> Eggs</div>
+            <div class="list-item"><div class="list-check"></div> Flowers for Divya</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card w4 reveal d2">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">🎤</div> 05 · Voice notes</div>
+        <h3 class="bento-title">Just <em>speak</em> to it.</h3>
+        <p class="bento-text">Record while driving. Whisper AI transcribes. Done.</p>
+        <div class="bento-visual">
+          <div class="voice-bar">
+            <div class="voice-mic">🎤</div>
+            <div class="voice-wave">
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+            </div>
+            <div class="voice-time">0:08</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card w6 reveal">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">📰</div> 06 · Daily briefings</div>
+        <h3 class="bento-title">Your day, <em>summarised at 7am.</em></h3>
+        <p class="bento-text">Every morning — meetings, reminders, tasks, weather. One message, everything you need.</p>
+        <div class="bento-visual">
+          <div class="brief-card">
+            <div class="brief-greet">Good morning, Gogo ☀️</div>
+            <div class="brief-item"><div class="brief-dot"></div> 3 meetings today (next: 10am standup)</div>
+            <div class="brief-item"><div class="brief-dot"></div> 5 reminders pending</div>
+            <div class="brief-item"><div class="brief-dot"></div> Shopping list has 5 items</div>
+            <div class="brief-item"><div class="brief-dot"></div> Bengaluru · 28°C · Clear</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card w6 reveal d1">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">📸</div> 07 · Image + web search</div>
+        <h3 class="bento-title">Photo it. <em>Ask it.</em></h3>
+        <p class="bento-text">Snap your fridge — it builds a shopping list. Ask any question — it searches the web. Send any PDF — it summarises.</p>
+        <div class="bento-visual">
+          <div class="mem-list">
+            <div class="mem-chip"><span class="mem-tag tag-violet">Photo</span> 📷 Fridge scan → 8 items to restock</div>
+            <div class="mem-chip"><span class="mem-tag tag-blue">Search</span> 🔍 "Latest Tesla earnings" → summary</div>
+            <div class="mem-chip"><span class="mem-tag tag-coral">PDF</span> 📄 Contract.pdf → 3 risks flagged</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card w3 reveal">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">🧘</div> 08 · Breathe</div>
+        <h3 class="bento-title"><em>4-4-4-4</em> box breathing.</h3>
+        <p class="bento-text">Guided meditation with sound. Pause. Breathe. Reset.</p>
+        <div class="bento-visual" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div class="breathe-circle" style="width: 60px; height: 60px; font-size: 9px;">breathe in</div>
+        </div>
+      </div>
+
+      <div class="bento-card w3 reveal d1">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">🎭</div> 09 · Persona</div>
+        <h3 class="bento-title">Your <em>tone,</em> your vibe.</h3>
+        <p class="bento-text">Professional. Mentor. Playful friend. You choose.</p>
+      </div>
+
+      <div class="bento-card w3 reveal d2">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">🌍</div> 10 · Multilingual</div>
+        <h3 class="bento-title">Hindi, Kannada,<br>Tamil, Telugu,<br><em>any language.</em></h3>
+        <p class="bento-text">Auto-detects. Replies in yours. India-first.</p>
+      </div>
+
+      <div class="bento-card w3 reveal d3">
+        <div class="bento-eyebrow"><div class="bento-eyebrow-icon">👥</div> 11 · Teams</div>
+        <h3 class="bento-title">Family <em>or work.</em></h3>
+        <p class="bento-text">Shared memories, team reminders, delegation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="container">
+    <span class="section-label reveal">Use cases</span>
+    <h2 class="section-title reveal d1">Built for<br><em>anyone who thinks.</em></h2>
+    <p class="section-sub reveal d2">From entrepreneurs to parents, doctors to students — AskGogo adapts to how you already live.</p>
+
+    <div class="usecase-grid">
+      <div class="usecase-card reveal">
+        <div class="usecase-icon">🚀</div>
+        <div class="usecase-name">Founders</div>
+        <div class="usecase-desc">Investor details, meeting notes, customer context, follow-ups that never slip.</div>
+      </div>
+      <div class="usecase-card reveal d1">
+        <div class="usecase-icon">💼</div>
+        <div class="usecase-name">Sales teams</div>
+        <div class="usecase-desc">Client preferences, deal stages, follow-up reminders, context before every call.</div>
+      </div>
+      <div class="usecase-card reveal d2">
+        <div class="usecase-icon">👨‍👩‍👧</div>
+        <div class="usecase-name">Parents</div>
+        <div class="usecase-desc">School dates, medicine schedules, birthdays, grocery lists — all at your fingertips.</div>
+      </div>
+      <div class="usecase-card reveal d3">
+        <div class="usecase-icon">🩺</div>
+        <div class="usecase-name">Doctors</div>
+        <div class="usecase-desc">Patient follow-ups, prescription alerts, conference reminders, case notes.</div>
+      </div>
+      <div class="usecase-card reveal">
+        <div class="usecase-icon">🎓</div>
+        <div class="usecase-name">Students</div>
+        <div class="usecase-desc">Assignments, exam dates, study schedules, research notes — all in one chat.</div>
+      </div>
+      <div class="usecase-card reveal d1">
+        <div class="usecase-icon">🏠</div>
+        <div class="usecase-name">Realtors</div>
+        <div class="usecase-desc">Client preferences, property showings, follow-up reminders, document checklists.</div>
+      </div>
+      <div class="usecase-card reveal d2">
+        <div class="usecase-icon">💪</div>
+        <div class="usecase-name">Fitness</div>
+        <div class="usecase-desc">Workout reminders, meal plans, progress notes, recovery schedules.</div>
+      </div>
+      <div class="usecase-card reveal d3">
+        <div class="usecase-icon">✈️</div>
+        <div class="usecase-name">Travellers</div>
+        <div class="usecase-desc">Flight times, hotel details, packing lists, currency rates, itineraries.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations" style="background: var(--bg-2);">
+  <div class="container">
+    <span class="section-label reveal">Integrations</span>
+    <h2 class="section-title reveal d1">Connects to<br><em>everything you use.</em></h2>
+    <p class="section-sub reveal d2">AskGogo sits on top of your existing stack. No migration, no new apps — just connect and start.</p>
+
+    <div class="int-grid">
+      <div class="int-card reveal"><div class="int-icon">📅</div><div class="int-name">Google Calendar</div><span class="int-status int-live">Live</span></div>
+      <div class="int-card reveal"><div class="int-icon">💬</div><div class="int-name">Telegram</div><span class="int-status int-live">Live</span></div>
+      <div class="int-card reveal"><div class="int-icon">📱</div><div class="int-name">WhatsApp</div><span class="int-status int-soon">Soon</span></div>
+      <div class="int-card reveal"><div class="int-icon">📧</div><div class="int-name">Gmail</div><span class="int-status int-soon">Soon</span></div>
+      <div class="int-card reveal d1"><div class="int-icon">📊</div><div class="int-name">Notion</div><span class="int-status int-soon">Soon</span></div>
+      <div class="int-card reveal d1"><div class="int-icon">🎙️</div><div class="int-name">Whisper AI</div><span class="int-status int-live">Live</span></div>
+      <div class="int-card reveal d1"><div class="int-icon">🧠</div><div class="int-name">Claude AI</div><span class="int-status int-live">Live</span></div>
+      <div class="int-card reveal d1"><div class="int-icon">📆</div><div class="int-name">Outlook</div><span class="int-status int-soon">Soon</span></div>
+      <div class="int-card reveal d2"><div class="int-icon">🎵</div><div class="int-name">Spotify</div><span class="int-status int-soon">Soon</span></div>
+      <div class="int-card reveal d2"><div class="int-icon">💳</div><div class="int-name">Razorpay</div><span class="int-status int-live">Live</span></div>
+      <div class="int-card reveal d2"><div class="int-icon">🗺️</div><div class="int-name">Google Maps</div><span class="int-status int-soon">Soon</span></div>
+      <div class="int-card reveal d2"><div class="int-icon">⚡</div><div class="int-name">Zapier</div><span class="int-status int-soon">Soon</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare-section" id="compare">
+  <div class="container">
+    <span class="section-label reveal">Honest comparison</span>
+    <h2 class="section-title reveal d1">Why we <em>beat</em><br>Memorae and Notis.</h2>
+    <p class="section-sub reveal d2">We looked at every competitor. Here's exactly where AskGogo wins — with no marketing fluff.</p>
+
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Memorae</th>
+            <th>Notis</th>
+            <th class="ours">AskGogo ⭐</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="feature">AI model</td><td class="losing">ChatGPT</td><td class="losing">ChatGPT</td><td class="ours">Claude Sonnet 4.5</td></tr>
+          <tr><td class="feature">Memory dashboard</td><td class="losing">None</td><td class="losing">Limited</td><td class="ours">Full web dashboard</td></tr>
+          <tr><td class="feature">Recurring reminders</td><td>Basic</td><td>Basic</td><td class="ours">Smart patterns</td></tr>
+          <tr><td class="feature">Voice notes</td><td>Yes</td><td>Yes</td><td class="ours">Whisper AI</td></tr>
+          <tr><td class="feature">Google Calendar</td><td>Yes (laggy)</td><td>Beta</td><td class="ours">Real-time sync</td></tr>
+          <tr><td class="feature">Lists</td><td>Yes</td><td class="losing">No</td><td class="ours">Unlimited lists</td></tr>
+          <tr><td class="feature">Daily briefings</td><td>Supernova only</td><td class="losing">No</td><td class="ours">All paid plans</td></tr>
+          <tr><td class="feature">Image analysis</td><td>Supernova only</td><td class="losing">No</td><td class="ours">All paid plans</td></tr>
+          <tr><td class="feature">Web search</td><td>Supernova only</td><td>Yes</td><td class="ours">All paid plans</td></tr>
+          <tr><td class="feature">Guided breathing</td><td>Yes</td><td class="losing">No</td><td class="ours">Yes · 4-4-4-4 box</td></tr>
+          <tr><td class="feature">India pricing</td><td class="losing">₹300-835/mo</td><td class="losing">₹750+/mo</td><td class="ours">₹149-299/mo</td></tr>
+          <tr><td class="feature">Free tier</td><td class="losing">Trial only</td><td class="losing">None</td><td class="ours">Free forever</td></tr>
+          <tr><td class="feature">Platform</td><td class="losing">WhatsApp only</td><td>Multi</td><td class="ours">Telegram + WA soon</td></tr>
+          <tr><td class="feature">Founder support</td><td class="losing">Unresponsive</td><td>Small team</td><td class="ours">Direct from founder</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="container">
+    <span class="section-label reveal">Early users</span>
+    <h2 class="section-title reveal d1">People who<br><em>won't go back.</em></h2>
+
+    <div class="quotes-grid" style="margin-top: 60px;">
+      <div class="quote-card reveal">
+        <div class="quote-stars">★ ★ ★ ★ ★</div>
+        <p class="quote-text">"I told it my wife's birthday once. Three days before, it reminded me to book dinner. I've never been this prepared."</p>
+        <div class="quote-author">
+          <div class="author-img" style="background: linear-gradient(135deg, #ff6b35, #ff9558);">R</div>
+          <div>
+            <div class="author-name">Rahul M.</div>
+            <div class="author-role">Founder · Bengaluru</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card reveal d1">
+        <div class="quote-stars">★ ★ ★ ★ ★</div>
+        <p class="quote-text">"Replaced three productivity apps with one Telegram bot. My customers think I'm psychic. Worth every rupee."</p>
+        <div class="quote-author">
+          <div class="author-img" style="background: linear-gradient(135deg, #b8ff4a, #86e61a);">P</div>
+          <div>
+            <div class="author-name">Priya S.</div>
+            <div class="author-role">Sales Lead · Hyderabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card reveal d2">
+        <div class="quote-stars">★ ★ ★ ★ ★</div>
+        <p class="quote-text">"Voice notes while driving are pure magic. Records it, transcribes it, sets the reminder. This is what AI should feel like."</p>
+        <div class="quote-author">
+          <div class="author-img" style="background: linear-gradient(135deg, #7c3aed, #c4b5fd);">A</div>
+          <div>
+            <div class="author-name">Aditya K.</div>
+            <div class="author-role">Entrepreneur · Mumbai</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING (Memorae-inspired) -->
+<section id="pricing" class="pricing-section">
+  <div class="container" style="max-width: 720px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="section-label reveal">Pricing</span>
+      <h2 class="section-title reveal d1" style="text-align: center;">Pick your <em>plan.</em></h2>
+    </div>
+
+    <div style="text-align: center;" class="reveal d2">
+      <div class="pricing-toggle">
+        <button class="toggle-opt active" onclick="togglePrice('monthly', this)">Monthly</button>
+        <button class="toggle-opt" onclick="togglePrice('annual', this)">Annual <span class="save-badge">-40%</span></button>
+      </div>
+    </div>
+
+    <!-- Hero plan card -->
+    <div class="hero-plan-card reveal">
+      <div class="hero-plan-top">
+        <div>
+          <div class="hero-plan-label">
+            <span style="display: inline-block; width: 14px; height: 14px; background: rgba(255,255,255,0.2); border-radius: 4px;"></span>
+            OPERATIONAL MEMORY
+          </div>
+          <div class="hero-plan-name" id="heroPlanName">Pro</div>
+          <div class="hero-trial-badge">7 DAYS FREE</div>
+          <div class="hero-plan-sub" id="heroPlanSub">12 months for ₹1,999</div>
+          <a href="#features" class="compare-plans">Compare plans →</a>
+        </div>
+        <div class="hero-plan-avatar">🧠</div>
+      </div>
+    </div>
+
+    <!-- Three plan cards -->
+    <div class="plan-cards-row">
+      <div class="plan-mini-card" onclick="selectPlan(this, 'starter')">
+        <div class="plan-mini-name">Starter</div>
+        <div class="plan-mini-price" id="p1">₹149</div>
+        <div class="plan-mini-period">per month</div>
+      </div>
+      <div class="plan-mini-card plan-mini-popular selected" onclick="selectPlan(this, 'pro')" id="proCard">
+        <div class="plan-mini-name" style="color: #0a0a0f;">Pro</div>
+        <div class="plan-mini-price" id="p2" style="color: #0a0a0f;">₹299 <span class="cut" style="color: rgba(7,7,10,0.5);" id="p2cut">₹499</span></div>
+        <div class="plan-mini-period" style="color: rgba(7,7,10,0.7);">per month</div>
+        <div class="plan-mini-popular-tag">Most popular</div>
+      </div>
+      <div class="plan-mini-card" onclick="selectPlan(this, 'lifetime')">
+        <div class="plan-mini-name">Lifetime</div>
+        <div class="plan-mini-price" id="p3">₹9,999</div>
+        <div class="plan-mini-period">one-time</div>
+      </div>
+    </div>
+
+    <!-- Guarantee box -->
+    <div class="guarantee-box">
+      <div class="guarantee-icon">🛡️</div>
       <div>
-        <p style="font-size:1.3rem; color:#2a3b4c; margin-bottom:30px;">India is one of the fastest‑growing technology ecosystems. Thousands of companies are expanding engineering teams, building Global Capability Centers (GCCs), and launching enterprise partnerships.</p>
-        <div class="opportunity-stats">
-          <div class="mini-stat"><div class="number">60-75%</div><div class="label">Global GCC market share by 2030</div></div>
-          <div class="mini-stat"><div class="number">50M+</div><div class="label">Sq ft GCC office demand</div></div>
-        </div>
+        <strong>14 risk-free days:</strong> 7 days free + 7 days with a money-back guarantee. Try it without paying. We'll refund your money if it's not for you.
       </div>
-      <div class="opportunity-image">
-        <img src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Indian technology professionals">
+    </div>
+
+    <!-- Unlock features -->
+    <h3 class="features-unlock-title">Everything you unlock<br>with <em>Pro</em></h3>
+
+    <div class="features-unlock-grid">
+      <div class="unlock-card">
+        <div class="unlock-icon">⏰</div>
+        <div class="unlock-name">Unlimited reminders</div>
       </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">🧠</div>
+        <div class="unlock-name">Memory everywhere</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">📅</div>
+        <div class="unlock-name">Multi-calendar sync</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">📦</div>
+        <div class="unlock-name">Memory trunk</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">📋</div>
+        <div class="unlock-name">Create & manage lists</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">👥</div>
+        <div class="unlock-name">Friend-to-friend reminders</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">🎤</div>
+        <div class="unlock-name">Voice notes (Whisper)</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">📰</div>
+        <div class="unlock-name">Daily briefings</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">🧘</div>
+        <div class="unlock-name">Guided breathing</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">📸</div>
+        <div class="unlock-name">Image analysis</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">🔍</div>
+        <div class="unlock-name">Web search</div>
+      </div>
+      <div class="unlock-card">
+        <div class="unlock-icon">🌍</div>
+        <div class="unlock-name">Multilingual (Hindi+)</div>
+      </div>
+    </div>
+
+    <div class="get-started-cta">
+      <a href="https://t.me/askgogo_bot" class="btn-primary" style="font-size: 15px;">
+        Start 7-day free trial
+        <span class="arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- services -->
-<section class="section section-light" id="services">
+<!-- FAQ -->
+<section id="faq">
   <div class="container">
-    <h2 class="section-title">What I do</h2>
-    <div class="section-subhead">Strategic GCC advisory · Enterprise access · Partnership development</div>
-    <div class="services-grid">
-      <div class="service-card"><div class="service-icon"><i data-feather="compass"></i></div><h3>GCC Strategy & Assessment</h3><p>Market research, feasibility studies, location analysis for new GCCs entering India.</p><a href="#" class="service-link">Learn more <i data-feather="arrow-right" width="16"></i></a></div>
-      <div class="service-card"><div class="service-icon"><i data-feather="users"></i></div><h3>Enterprise CXO Introductions</h3><p>Connecting companies with CHROs, CTOs and enterprise leaders across India's tech ecosystem.</p><a href="#" class="service-link">Learn more <i data-feather="arrow-right" width="16"></i></a></div>
-      <div class="service-card"><div class="service-icon"><i data-feather="trending-up"></i></div><h3>HR Tech Market Development</h3><p>Supporting HR technology companies introducing platforms to Indian IT and GCCs.</p><a href="#" class="service-link">Learn more <i data-feather="arrow-right" width="16"></i></a></div>
-      <div class="service-card"><div class="service-icon"><i data-feather="git-merge"></i></div><h3>GCC Transformation</h3><p>Moving from cost center to innovation hub - partnership models and ecosystem integration.</p><a href="#" class="service-link">Learn more <i data-feather="arrow-right" width="16"></i></a></div>
+    <span class="section-label reveal">Questions</span>
+    <h2 class="section-title reveal d1">Everything you<br><em>want to know.</em></h2>
+
+    <div class="faq-wrap reveal" style="margin-top: 60px;">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">How does the 7-day free trial work? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Click "Start 7-day free trial" → we verify your card with a tiny ₹1 charge (refunded instantly) → you get FULL Pro access for 7 days. On Day 6, we send a clear reminder that you'll be billed tomorrow. On Day 7, you're charged ₹299 only if you don't cancel. No sneaky charges, ever. Cancel anytime by typing /cancel in the bot.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">How is this different from ChatGPT? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Three big differences: (1) AskGogo uses Claude AI — smarter reasoning and better instruction-following than ChatGPT. (2) It has persistent memory that grows with you — ChatGPT forgets after every conversation. (3) It takes action — fires reminders, syncs calendar, manages lists. ChatGPT just talks.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Is my data private? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Yes, absolutely. Your memories and conversations are stored encrypted in your own dedicated database. We never sell data, never show ads, never share with third parties. You can delete everything with one command (/wipe). GDPR-compliant, security-first architecture.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Do I need to install an app? <div class="faq-plus">+</div></div>
+        <div class="faq-a">No. AskGogo lives inside Telegram (and WhatsApp soon), which you already have. Click the bot link, press Start, and talk naturally. Nothing to install, nothing to learn. It just works.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I connect my Google Calendar? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Yes. On any paid plan, type /calendar and connect your Google account in 10 seconds. Events you create via AskGogo appear in Calendar instantly. Events from Calendar show up in your bot's daily briefing. True two-way sync.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">When will WhatsApp be supported? <div class="faq-plus">+</div></div>
+        <div class="faq-a">WhatsApp launches next month. Meta requires proof of active users before approving Business API — we're in final review. Once live, every existing user gets free WhatsApp access. Follow @askgogo_bot on Telegram for the announcement.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I cancel anytime? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Yes. Type /cancel in the bot or cancel from your web dashboard. You'll keep Pro access until your billing cycle ends, then automatically downgrade to Free plan. All your memories stay intact forever.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- who I work with -->
-<section class="section">
-  <div class="container who-grid">
+<!-- FINAL CTA -->
+<section>
+  <div class="container">
+    <div class="final-cta reveal">
+      <h2>Your second brain.<br><em>One message away.</em></h2>
+      <p>Free to start. 7-day Pro trial available. No credit card for Free plan.</p>
+      <a href="https://t.me/askgogo_bot" class="btn-primary" style="font-size: 16px; padding: 18px 36px;">
+        Start free on Telegram
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
     <div>
-      <h2 class="section-title">Who I work with</h2>
-      <p style="font-size:1.2rem; color:#3a4b5c; margin:30px 0;">Trusted by global technology companies at every stage of their India journey.</p>
-      <div class="badges">
-        <div class="badge"><i data-feather="globe"></i> Global HR tech companies</div>
-        <div class="badge"><i data-feather="briefcase"></i> Enterprise software firms</div>
-        <div class="badge"><i data-feather="grid"></i> GCCs (new & scaling)</div>
-        <div class="badge"><i data-feather="zap"></i> Tech startups</div>
-        <div class="badge"><i data-feather="heart"></i> Consulting partners</div>
+      <div class="footer-brand">
+        <div class="logo-mark">G</div>
+        AskGogo
       </div>
+      <p class="footer-desc">The AI chief of staff for your life. Remembers everything, reminds you precisely, connects your world. Built in Bengaluru.</p>
     </div>
-    <div class="who-image">
-      <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Professional collaboration">
-      <div class="experience-tag"><i data-feather="clock"></i> 20+ years in India Tech Ecosystem</div>
+    <div>
+      <div class="footer-heading">Product</div>
+      <ul class="footer-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#usecases">Use cases</a></li>
+        <li><a href="#integrations">Integrations</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
     </div>
-  </div>
-</section>
-
-<!-- GCC stats -->
-<section class="section section-light" id="gcc">
-  <div class="container">
-    <h2 class="section-title">GCC Momentum in India</h2>
-    <p style="font-size:1.25rem; margin-bottom:30px;">Global capability centres are at the heart of India's transformation.</p>
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-number">1,600+</div><div class="stat-label">GCCs currently</div><div class="stat-source">Projected 2,400+ by 2030 <a href="#">→ CNBC TV18</a></div></div>
-      <div class="stat-card"><div class="stat-number">$46B</div><div class="stat-label">Annual economic value</div><div class="stat-source">Expected $110B by 2030 <a href="#">→ STPI</a></div></div>
-      <div class="stat-card"><div class="stat-number">25%</div><div class="stat-label">of Grade A office inventory</div><div class="stat-source">Driving 40-50% of new demand <a href="#">→ Colliers</a></div></div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="https://askgogo.in">GCC Consulting</a></li>
+        <li><a href="https://linkedin.com/in/goverdhanmd">LinkedIn</a></li>
+        <li><a href="mailto:goverdhan@tipplr.in">goverdhan@tipplr.in</a></li>
+      </ul>
     </div>
-    <div class="maturity-model">
-      <h3 style="font-size:2rem; font-family:'Playfair Display'; text-align:center;">GCC Maturity Model</h3>
-      <div class="model-steps">
-        <div class="step"><div class="step-number">1</div><h4>Outpost</h4><p>Initial setup, cost arbitrage focus</p></div>
-        <div class="step"><div class="step-number">2</div><h4>Center of Excellence</h4><p>Specialized skills, process ownership</p></div>
-        <div class="step"><div class="step-number">3</div><h4>Transformation Hub</h4><p>Innovation, AI pilots, product development</p></div>
-        <div class="step"><div class="step-number">4</div><h4>Global Value Center</h4><p>End-to-end ownership, strategic influence</p></div>
-      </div>
-    </div>
-    <div class="insight-banner">📊 <strong>65% of GCCs</strong> running AI pilots · <strong>45% of office leasing</strong> driven by GCCs</div>
-  </div>
-</section>
-
-<!-- about -->
-<section class="section" id="about">
-  <div class="container about-wrapper">
-    <h2 class="section-title">About Goverdhan (Gogo)</h2>
-    <div class="testimonial-card"><p style="font-size:1.3rem; line-height:1.6;">"I help global technology companies build relationships and scale in the Indian market. My work sits at the intersection of global technology companies, Indian enterprises, HR leaders, and global capability centres."</p></div>
-    <div class="trusted-quote">“Trusted connector between global tech and Indian enterprise — from GCCs to C‑suite.”</div>
-    <div class="market-map">
-      <h4 style="font-size:2rem; font-family:'Playfair Display'; margin-bottom:30px; display:flex; align-items:center; gap:10px; justify-content:center;"><i data-feather="map"></i> India Market Map</h4>
-      <div class="market-grid">
-        <div class="market-item"><i data-feather="map-pin"></i> GCC hubs: Bengaluru · Hyderabad · Pune · Chennai</div>
-        <div class="market-item"><i data-feather="briefcase"></i> 1,500+ enterprises actively expanding</div>
-        <div class="market-item"><i data-feather="users"></i> 1.3M+ GCC professionals</div>
-        <div class="market-item"><i data-feather="trending-up"></i> 12% YoY growth in capability centres</div>
-      </div>
+    <div>
+      <div class="footer-heading">Legal</div>
+      <ul class="footer-links">
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="#terms">Terms of Service</a></li>
+        <li><a href="#refund">Refund Policy</a></li>
+      </ul>
     </div>
   </div>
-</section>
-
-<!-- ===== LET'S CONNECT TAB - REDUCED SIZE & NEATLY ALIGNED ===== -->
-<section class="section" id="contact">
-  <div class="container">
-    <div class="contact-card">
-      <div class="contact-profile">
-        <img src="https://i.postimg.cc/vHqg74y3/Goverdhan-askgogo-pic.jpg" alt="Goverdhan - AskGogo">
-      </div>
-      
-      <h2>Let's connect</h2>
-      
-      <div class="contact-subtext">
-        Exploring India expansion or enterprise partnerships? Let's talk.
-      </div>
-      
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/goverdhanmd" class="social-link" target="_blank" rel="noopener noreferrer">
-          <i data-feather="linkedin" width="18" height="18"></i>
-          LinkedIn
-        </a>
-        
-        <a href="https://calendar.app.google/LFnyHJjEFV3zxiTH8" class="social-link" target="_blank" rel="noopener noreferrer">
-          <i data-feather="calendar" width="18" height="18"></i>
-          Schedule a call
-        </a>
-      </div>
-      
-      <div class="phone-number-container">
-        <div id="phoneNumber" class="phone-number">
-          <i data-feather="phone" width="18" height="18"></i>
-          <a href="tel:+918310441698">+91 83104 41698</a>
-        </div>
-      </div>
-      
-      <div style="display: flex; justify-content: center;">
-        <button id="connectBtn" class="connect-btn">
-          <i data-feather="phone" width="18" height="18"></i>
-          Connect with me
-        </button>
-      </div>
-    </div>
+  <div class="footer-bottom">
+    <span>© 2026 AskGogo · Built in Bengaluru 🇮🇳 with Claude AI</span>
+    <span>All systems operational</span>
   </div>
-</section>
-
-<!-- footer -->
-<footer class="footer container">
-  <div class="logo" style="font-size:2.5rem; margin-bottom:12px;">AskGogo</div>
-  <div>Helping global technology companies enter and scale in India</div>
-  <div class="footer-links">
-    <a href="#services">Services</a>
-    <a href="#gcc">GCC Insights</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <div style="margin-top:28px;">© 2026 · market intelligence & introductions</div>
 </footer>
 
-<!-- Back to Top Arrow Button -->
-<a href="#top" class="back-to-top" aria-label="Back to top">
-  <i data-feather="arrow-up"></i>
-</a>
-
-<!-- feather icons and JavaScript -->
-<script src="https://unpkg.com/feather-icons"></script>
 <script>
-  // Initialize feather icons
-  feather.replace();
-  
-  // Phone number toggle functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const connectBtn = document.getElementById('connectBtn');
-    const phoneNumber = document.getElementById('phoneNumber');
-    
-    if (connectBtn && phoneNumber) {
-      // Initially hide the phone number
-      phoneNumber.style.display = 'none';
-      
-      connectBtn.addEventListener('click', function() {
-        if (phoneNumber.style.display === 'none' || phoneNumber.style.display === '') {
-          phoneNumber.style.display = 'flex';
-          feather.replace(); // Re-render icons
-        } else {
-          phoneNumber.style.display = 'none';
-        }
-      });
-    }
-  });
-  
-  // Smooth scroll for anchor links (including back to top)
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+  // THEME TOGGLE
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.body.setAttribute('data-theme', saved);
+  document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+  function toggleTheme() {
+    const current = document.body.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', next);
+    document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('theme', next);
+  }
+
+  // DEMO scenarios
+  const scenarios = [
+    [
+      { role: 'user', text: "Remember Divya's birthday is February 6th and she loves white roses 🌹", time: '2:14 PM' },
+      { typing: true },
+      { role: 'bot', text: "Got it! 🎂 Saved <strong>two memories</strong>:<br>• Divya's birthday: February 6<br>• Divya loves white roses<br><br>I'll remind you 3 days before and suggest the best florist near you.", time: '2:14 PM' }
+    ],
+    [
+      { role: 'user', text: "Remind me to drink water every 2 hours during work", time: '9:02 AM' },
+      { typing: true },
+      { role: 'bot', text: "✅ Recurring reminder set: <strong>Drink water</strong>.<br>Every 2 hours · 9 AM – 6 PM IST · weekdays only 💧<br><br>Next ping: 11:00 AM.", time: '9:02 AM' }
+    ],
+    [
+      { role: 'user', text: "🎤 Voice note (0:08)", time: '6:45 PM' },
+      { typing: true },
+      { role: 'bot', text: "<em>Heard:</em> \"Remind me to call Divya tomorrow at 9am and review the Q3 deck before\"<br><br>✅ <strong>Two actions done:</strong><br>• Reminder: Call Divya · tomorrow 9am<br>• Reminder: Review Q3 deck · tomorrow 8:45am", time: '6:45 PM' }
+    ],
+    [
+      { role: 'user', text: "Add anniversary dinner with Divya Feb 6th 7pm at The Leela", time: '11:30 AM' },
+      { typing: true },
+      { role: 'bot', text: "📅 <strong>Calendar event created:</strong><br>• Dinner with Divya ❤️<br>• Thu, Feb 6 · 7:00 – 9:00 PM<br>• The Leela, Bengaluru<br><br>Synced to your Google Calendar. I'll remind you 2 hours before.", time: '11:30 AM' }
+    ],
+    [
+      { role: 'user', text: "Add milk, bread and flowers for Divya to shopping list", time: '5:10 PM' },
+      { typing: true },
+      { role: 'bot', text: "🛒 <strong>Shopping list updated</strong> (5 items):<br>• Milk ✓<br>• Bread ✓<br>• Flowers for Divya 💐<br>• Coffee beans<br>• Olive oil<br><br>Say 'show list' anytime.", time: '5:10 PM' }
+    ],
+    [
+      { role: 'user', text: "Morning briefing please", time: '7:00 AM' },
+      { typing: true },
+      { role: 'bot', text: "☀️ <strong>Good morning, Gogo!</strong><br><br>Today, Friday Apr 18:<br>• 3 meetings (next: 10am standup)<br>• 5 reminders pending<br>• Shopping list: 5 items<br>• Bengaluru · 28°C · Clear<br><br>Have a productive day! 💪", time: '7:00 AM' }
+    ],
+    [
+      { role: 'user', text: "I'm feeling overwhelmed, help me breathe", time: '3:22 PM' },
+      { typing: true },
+      { role: 'bot', text: "🧘 <strong>Let's breathe together.</strong><br><br>Box breathing · 4-4-4-4:<br>→ Inhale 4s<br>→ Hold 4s<br>→ Exhale 4s<br>→ Hold 4s<br><br>3 cycles starting now. You've got this. 💚", time: '3:22 PM' }
+    ]
+  ];
+
+  let currentIdx = 0;
+  let autoplayTimer = null;
+  let demoLocked = false;
+
+  async function playScenario(idx) {
+    demoLocked = true;
+    currentIdx = idx;
+    document.querySelectorAll('.demo-chip').forEach(c => c.classList.remove('active'));
+    document.querySelector(`.demo-chip[data-idx="${idx}"]`).classList.add('active');
+    const body = document.getElementById('demoBody');
+    body.innerHTML = '';
+    const scenario = scenarios[idx];
+    for (let i = 0; i < scenario.length; i++) {
+      const item = scenario[i];
+      await new Promise(r => setTimeout(r, i === 0 ? 200 : 700));
+      if (item.typing) {
+        const el = document.createElement('div');
+        el.className = 'typing';
+        el.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+        body.appendChild(el);
+        await new Promise(r => setTimeout(r, 1200));
+        el.remove();
+      } else {
+        const el = document.createElement('div');
+        el.className = `msg msg-${item.role}`;
+        el.innerHTML = `${item.text}<span class="msg-time">${item.time}</span>`;
+        body.appendChild(el);
       }
+    }
+    demoLocked = false;
+  }
+
+  // Auto-advance
+  function startAutoplay() {
+    autoplayTimer = setInterval(() => {
+      if (!demoLocked) {
+        const next = (currentIdx + 1) % scenarios.length;
+        playScenario(next);
+      }
+    }, 8000);
+  }
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    startAutoplay();
+  }
+
+  document.querySelectorAll('.demo-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const idx = parseInt(chip.getAttribute('data-idx'));
+      playScenario(idx);
+      resetAutoplay();
+    });
+  });
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      playScenario(0);
+      startAutoplay();
+    }, 500);
+  });
+
+  // PRICING TOGGLE
+  function togglePrice(type, btn) {
+    document.querySelectorAll('.toggle-opt').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    if (type === 'annual') {
+      document.getElementById('p1').innerHTML = '₹89 <span class="cut">₹149</span>';
+      document.getElementById('p2').innerHTML = '₹166 <span class="cut" style="color: rgba(7,7,10,0.5);">₹299</span>';
+      document.getElementById('p3').innerHTML = '₹9,999';
+      document.getElementById('heroPlanSub').textContent = '12 months for ₹1,999 (save 40%)';
+    } else {
+      document.getElementById('p1').innerHTML = '₹149';
+      document.getElementById('p2').innerHTML = '₹299 <span class="cut" style="color: rgba(7,7,10,0.5);">₹499</span>';
+      document.getElementById('p3').innerHTML = '₹9,999';
+      document.getElementById('heroPlanSub').textContent = '7 days free · then ₹299/month';
+    }
+  }
+
+  function selectPlan(el, planName) {
+    document.querySelectorAll('.plan-mini-card').forEach(c => {
+      if (!c.classList.contains('plan-mini-popular')) c.classList.remove('selected');
+    });
+    el.classList.add('selected');
+    const names = { starter: 'Starter', pro: 'Pro', lifetime: 'Lifetime' };
+    document.getElementById('heroPlanName').textContent = names[planName];
+  }
+
+  // REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 </script>
+
+<!-- PRIVACY POLICY -->
+<section id="privacy" style="background: var(--bg-2);">
+<div class="container" style="max-width: 760px;">
+<span class="section-label">Legal</span>
+<h2 class="section-title">Privacy <em>Policy</em></h2>
+<p style="color: var(--ink-3); margin-bottom: 24px; font-size: 13px;">Last updated: April 19, 2026</p>
+<div style="font-size: 14px; color: var(--ink-2); line-height: 1.8;">
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">1. Data Controller</h3>
+<p>AskGogo is operated by Goverdhan M D, Bengaluru, Karnataka, India. Contact: goverdhan@tipplr.in | +91 83104 41698</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">2. What We Collect</h3>
+<p>We collect only data you explicitly share with the bot: messages, memories, reminders, lists, voice notes, and photos. We also store your Telegram/WhatsApp user ID and display name. We do NOT collect browsing data, location, contacts, or any data beyond what you directly send to AskGogo.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">3. How We Use Your Data</h3>
+<p>Your data is used solely to provide AskGogo services: storing memories, sending reminders, managing lists, syncing calendar events, and generating AI responses. We never sell your data, display advertisements, or share your information with third parties for marketing.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">4. Data Storage and Security</h3>
+<p>All data is stored on Supabase (PostgreSQL) with encryption in transit (TLS 1.2+) and at rest. Voice notes are processed via OpenAI Whisper API and deleted after transcription. AI conversations are processed via Anthropic Claude API with enterprise-grade security.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">5. Third-Party Services</h3>
+<p>AskGogo uses: Telegram Bot API (messaging), Twilio (WhatsApp messaging), Anthropic Claude API (AI), OpenAI Whisper API (voice transcription), Google Calendar API (calendar sync), Supabase (database), Vercel (hosting), Razorpay (payments). Each operates under its own privacy policy.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">6. Data Retention and Deletion</h3>
+<p>Data is retained while your account is active. Delete all data anytime by sending /wipe to the bot. Upon deletion, all memories, conversations, reminders, and lists are permanently removed within 24 hours.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">7. WhatsApp and Telegram Data</h3>
+<p>Messages sent via WhatsApp are processed through Twilio. Messages via Telegram use the Telegram Bot API. We store message content to provide memory and conversation features. We do not access your contacts, call history, or any data beyond messages you send directly to AskGogo.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">8. Google Calendar</h3>
+<p>If you connect Google Calendar, we store only a refresh token. We read and create events as requested. We never modify or delete events without your instruction. Disconnect anytime.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">9. Payments</h3>
+<p>Payments are processed by Razorpay (PCI-DSS Level 1 compliant). AskGogo does not store credit card numbers, bank details, or UPI IDs.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">10. Cookies</h3>
+<p>We use only one essential cookie for theme preference (light/dark mode). No tracking, analytics, or advertising cookies.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">11. Children</h3>
+<p>AskGogo is not intended for users under 13. We do not knowingly collect data from children.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">12. Your Rights</h3>
+<p>You can: access your data (/memory), rectify data, delete data (/wipe), restrict processing, request data portability, and object to processing. Contact goverdhan@tipplr.in to exercise these rights.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">13. Changes</h3>
+<p>We may update this policy. Significant changes are communicated via the bot.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">14. Contact</h3>
+<p>Privacy questions: goverdhan@tipplr.in | +91 83104 41698 | Telegram: @askgogo_bot</p>
+</div>
+</div>
+</section>
+
+<!-- TERMS OF SERVICE -->
+<section id="terms">
+<div class="container" style="max-width: 760px;">
+<span class="section-label">Legal</span>
+<h2 class="section-title">Terms of <em>Service</em></h2>
+<p style="color: var(--ink-3); margin-bottom: 24px; font-size: 13px;">Last updated: April 19, 2026</p>
+<div style="font-size: 14px; color: var(--ink-2); line-height: 1.8;">
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">1. Service</h3>
+<p>AskGogo is an AI-powered personal assistant on Telegram and WhatsApp providing memory storage, reminders, list management, calendar sync, voice transcription, image analysis, and AI conversations.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">2. Acceptance</h3>
+<p>By using AskGogo, you agree to these terms. If you disagree, stop using the service.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">3. Eligibility</h3>
+<p>You must be at least 13 years old. One account per phone number.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">4. Plans and Pricing</h3>
+<p>Free: 20 msgs/day, 10 memories. Starter: Rs 149/month. Pro: Rs 299/month. Lifetime: Rs 9,999 one-time. All prices in INR inclusive of taxes.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">5. Free Trial</h3>
+<p>7-day Pro trial available once per user. No payment required during trial. Auto-downgrades to Free after trial. 24-hour advance notice before trial ends.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">6. Payments</h3>
+<p>Processed by Razorpay. Subscriptions auto-renew. Cancel anytime via /cancel or email. Access continues until billing period ends.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">7. Refunds</h3>
+<p>30-day money-back guarantee on all plans. Email goverdhan@tipplr.in for refunds. Processed within 5-7 business days.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">8. Acceptable Use</h3>
+<p>Do not use for: illegal activities, spam, harassment, storing banking credentials, generating harmful content, or reverse-engineering.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">9. AI Disclaimer</h3>
+<p>AI responses may be inaccurate. Not a substitute for professional medical, legal, or financial advice.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">10. Intellectual Property</h3>
+<p>AskGogo brand and code owned by Goverdhan M D. Your content (memories, messages) remains yours. You grant us license to process it for the service only.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">11. Availability</h3>
+<p>Target 99.9% uptime, not guaranteed. Not liable for missed reminders or outages.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">12. Liability</h3>
+<p>Service provided "as is". Total liability limited to amount paid in last 12 months.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">13. Termination</h3>
+<p>We may suspend accounts violating terms. You can delete your account via /wipe anytime.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">14. Governing Law</h3>
+<p>Laws of India apply. Disputes resolved in Bengaluru, Karnataka courts.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">15. Contact</h3>
+<p>goverdhan@tipplr.in | +91 83104 41698 | Telegram: @askgogo_bot</p>
+</div>
+</div>
+</section>
+
+<!-- REFUND POLICY -->
+<section id="refund" style="background: var(--bg-2);">
+<div class="container" style="max-width: 760px;">
+<span class="section-label">Legal</span>
+<h2 class="section-title">Refund <em>Policy</em></h2>
+<p style="color: var(--ink-3); margin-bottom: 24px; font-size: 13px;">Last updated: April 19, 2026</p>
+<div style="font-size: 14px; color: var(--ink-2); line-height: 1.8;">
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">30-Day Money-Back Guarantee</h3>
+<p>All paid plans come with a full 30-day money-back guarantee. If you are not satisfied with AskGogo for any reason, we will refund your payment in full, no questions asked.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">How to Request a Refund</h3>
+<p>Email goverdhan@tipplr.in with your Telegram username or WhatsApp number and payment reference. Refunds are processed within 5-7 business days to the original payment method via Razorpay.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">Free Trial</h3>
+<p>The 7-day free trial requires no payment. You are automatically moved to the Free plan after the trial with no charges. We send a reminder 24 hours before trial expiry.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">Cancellation</h3>
+<p>Cancel anytime by typing /cancel in the bot or emailing goverdhan@tipplr.in. After cancellation, paid features remain active until the end of your billing period. Your memories and data are preserved permanently on the Free plan.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">Lifetime Plan</h3>
+<p>Lifetime purchases are refundable within 30 days. After 30 days, lifetime plans are non-refundable as they provide permanent access.</p>
+
+<h3 style="font-size: 16px; color: var(--ink); margin: 24px 0 8px; font-weight: 500;">Contact</h3>
+<p>Billing and refund questions: goverdhan@tipplr.in | +91 83104 41698</p>
+</div>
+</div>
+</section>
+
 </body>
 </html>
