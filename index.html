@@ -3,8 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AskGogo — Your AI Personal Assistant (All Indian Languages)</title>
-<meta name="description" content="AI assistant inside WhatsApp & Telegram. Type or send voice notes in Indian languages. Founder Beta pricing starts at ₹99/month.">
+<title>AskGogo — AI WhatsApp Assistant for Reminders, Voice Notes, Memory & Daily Tasks</title>
+<meta name="description" content="AskGogo is an AI personal assistant inside WhatsApp. Set reminders, send voice notes, remember important details, manage lists, get daily briefings, search the web, summarize documents, and work in Indian languages.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://askgogo.in/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AskGogo">
+<meta property="og:title" content="AskGogo — Your AI Assistant Inside WhatsApp">
+<meta property="og:description" content="AskGogo helps you remember, plan, set reminders, manage lists, use voice notes, get briefings, search the web, summarize documents, and work in Indian languages — all inside WhatsApp.">
+<meta property="og:url" content="https://askgogo.in/">
+<meta property="og:image" content="https://askgogo.in/og-image.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AskGogo — AI WhatsApp Assistant">
+<meta name="twitter:description" content="An AI personal assistant inside WhatsApp for reminders, memory, voice notes, lists, briefings, document summaries, web search, and Indian languages.">
+<meta name="twitter:image" content="https://askgogo.in/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AskGogo",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "WhatsApp",
+  "url": "https://askgogo.in/",
+  "description": "AskGogo is an AI personal assistant inside WhatsApp for smart reminders, voice notes, memory, lists, daily briefings, web search, document summaries, calendar support, and Indian languages.",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Lite",
+      "price": "99",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "name": "Starter",
+      "price": "149",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pro",
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "name": "Founder Pro",
+      "price": "499",
+      "priceCurrency": "INR"
+    }
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Goverdhan M D"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AskGogo",
+    "url": "https://askgogo.in/",
+    "email": "support@askgogo.in"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -153,23 +215,7 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);box-shadow:0 1p
 .btn-wa:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(37,211,102,.3)}
 .btn-wa svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
 
-/* SECONDARY = Telegram (subtle) */
-.btn-tg{
-  color:var(--ink2);font-size:13px;
-  padding:14px 20px;border-radius:100px;
-  border:1.5px solid var(--border2);
-  display:inline-flex;align-items:center;gap:7px;
-  transition:border-color .2s,color .2s,background .2s;
-}
-.btn-tg:hover{border-color:var(--tg);color:var(--tg);background:rgba(42,171,238,.05)}
-.btn-tg svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
-
 .trial-note{font-family:var(--mono);font-size:11px;color:var(--ink3)}
-
-/* small telegram note below buttons */
-.tg-note{font-size:12px;color:var(--ink3);margin-top:6px}
-.tg-note a{color:var(--tg);font-weight:500}
-.tg-note a:hover{text-decoration:underline}
 
 /* ══ MARQUEE ══ */
 .marquee-wrap{background:var(--mq-bg);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:20px 0;overflow:hidden}
@@ -444,7 +490,7 @@ footer{padding:52px 20px 30px;border-top:1px solid var(--border)}
   .lang-strip{gap:6px}
   .lang-badge{font-size:11px;padding:4px 10px}
   .hero-btns{flex-direction:column;align-items:center}
-  .btn-wa,.btn-tg{width:100%;max-width:300px;justify-content:center}
+  .btn-wa{width:100%;max-width:300px;justify-content:center}
   .ft-grid{grid-template-columns:1fr}
   .gogo-wrap{width:162px;height:156px}
   .gogo-gif{width:146px;height:146px}
@@ -654,13 +700,20 @@ footer{padding:52px 20px 30px;border-top:1px solid var(--border)}
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Start on WhatsApp — Free
     </a>
-    <a href="https://t.me/askgogo_bot" class="btn-tg">
-      <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-      Telegram
-    </a>
-  </div>
+</div>
   <div class="trial-note">No card needed · 7-day Pro trial · Cancel anytime</div>
-  <div class="tg-note">Also available on <a href="https://t.me/askgogo_bot">Telegram</a> if WhatsApp is unavailable</div>
+</section>
+
+
+<!-- ══ SEO EXPLAINER ══ -->
+<section id="what-is-askgogo" style="background:var(--bg)">
+  <div class="container">
+    <span class="sec-tag rv">What is AskGogo?</span>
+    <h2 class="sec-title rv rv-d1">Your AI assistant inside <em>WhatsApp.</em></h2>
+    <p class="sec-sub rv rv-d2" style="max-width:760px">
+      AskGogo is an AI personal assistant that works inside WhatsApp. It helps you set reminders, remember important details, manage lists, use voice notes, get daily briefings, search the web, summarize documents, track expenses, and stay organized in Indian languages like Kannada, Hindi, Tamil, Telugu, Bengali, Marathi and more.
+    </p>
+  </div>
 </section>
 
 <!-- ══ MARQUEE ══ -->
@@ -768,38 +821,29 @@ footer{padding:52px 20px 30px;border-top:1px solid var(--border)}
 </section>
 
 <!-- ══ PLATFORMS ══ -->
+
+<!-- ══ WHATSAPP-FIRST PLATFORM ══ -->
 <section id="platforms" style="background:var(--bg2)">
   <div class="container">
     <span class="sec-tag rv">Where it lives</span>
-    <h2 class="sec-title rv rv-d1">Works inside apps<br><em>you already use.</em></h2>
-    <p class="sec-sub rv rv-d2">No new app to install. AskGogo lives inside your existing chat apps.</p>
-    <div class="platforms-grid rv">
+    <h2 class="sec-title rv rv-d1">Built for <em>WhatsApp-first India.</em></h2>
+    <p class="sec-sub rv rv-d2">No new app to install. AskGogo lives where your daily life already happens — WhatsApp.</p>
+    <div class="platforms-grid rv" style="grid-template-columns:1fr;max-width:720px">
       <div class="platform-card wa-card">
         <div class="pc-tag">⭐ Recommended for India</div>
         <div class="pc-icon-big">💬</div>
         <div class="pc-pname">WhatsApp</div>
-        <div class="pc-pdesc">India's most-used app. Start chatting with AskGogo the same way you message a friend. No sign-up, no passwords. Just send "Hi AskGogo" and you're in.</div>
+        <div class="pc-pdesc">Start chatting with AskGogo the same way you message a friend. Set reminders, send voice notes, ask questions, create lists, get daily briefings, and keep your memory in one premium WhatsApp assistant.</div>
         <a href="https://api.whatsapp.com/send?phone=15797006612&text=Hi%20AskGogo" class="pc-btn">
-          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--wa-dark)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Open WhatsApp
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--wa-dark)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.052 2C6.555 2 2.077 6.456 2.077 11.93c0 1.751.459 3.459 1.33 4.965L2 22l5.242-1.376c1.455.793 3.093 1.211 4.81 1.211h.004c5.497 0 9.975-4.456 9.975-9.93C22.031 6.456 17.553 2 12.052 2"/></svg>
+          Start on WhatsApp
         </a>
-        <div class="pc-footnote">Tap to open in WhatsApp · Works on any phone</div>
-        <div class="wa-big-bg">💚</div>
-      </div>
-      <div class="platform-card tg-card">
-        <div class="pc-tag">Also available</div>
-        <div class="pc-icon-big">✈️</div>
-        <div class="pc-pname">Telegram</div>
-        <div class="pc-pdesc">Prefer Telegram? AskGogo works there too with the same features. Great if WhatsApp is unavailable or you want a separate space.</div>
-        <a href="https://t.me/askgogo_bot" class="pc-btn">
-          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          Open Telegram
-        </a>
-        <div class="pc-footnote">@askgogo_bot on Telegram</div>
+        <div class="pc-footnote">Fastest experience · WhatsApp-first · Built for Indian users</div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- ══ USE CASES ══ -->
 <section id="usecases">
@@ -904,7 +948,7 @@ footer{padding:52px 20px 30px;border-top:1px solid var(--border)}
     <h2 class="sec-title rv rv-d1">Everything you<br><em>want to know.</em></h2>
     <div class="faq-wrap">
       <div class="faq-item rv" onclick="toggleFaq(this)"><div class="faq-q">Which Indian languages does it support?<div class="faq-plus">+</div></div><div class="faq-a">Kannada, Tamil, Telugu, Bengali, Hindi, Marathi, Gujarati, Malayalam, Punjabi, Odia – and more. Voice notes and text work in all. Auto-detects your language.</div></div>
-      <div class="faq-item rv rv-d1" onclick="toggleFaq(this)"><div class="faq-q">Do I need to install a new app?<div class="faq-plus">+</div></div><div class="faq-a">No! AskGogo works directly inside WhatsApp or Telegram. Nothing to install. Just save the number and start chatting.</div></div>
+      <div class="faq-item rv rv-d1" onclick="toggleFaq(this)"><div class="faq-q">Do I need to install a new app?<div class="faq-plus">+</div></div><div class="faq-a">No! AskGogo works directly inside WhatsApp. Nothing to install. Just save the number and start chatting.</div></div>
       <div class="faq-item rv rv-d2" onclick="toggleFaq(this)"><div class="faq-q">How does the referral program work?<div class="faq-plus">+</div></div><div class="faq-a">Share your unique link from the bot (/refer). When a friend subscribes to Pro, both get 1 month free. Unlimited referrals – stack up to 12 months.</div></div>
       <div class="faq-item rv rv-d3" onclick="toggleFaq(this)"><div class="faq-q">Is my data private?<div class="faq-plus">+</div></div><div class="faq-a">Yes. Encrypted, never sold. Delete everything with /wipe. Data stored on servers in India.</div></div>
       <div class="faq-item rv" onclick="toggleFaq(this)"><div class="faq-q">Can I cancel anytime?<div class="faq-plus">+</div></div><div class="faq-a">Yes. Type /cancel or email support@askgogo.in. You keep Pro access until billing cycle ends, then downgrade to Free.</div></div>
@@ -935,7 +979,7 @@ footer{padding:52px 20px 30px;border-top:1px solid var(--border)}
       <p class="ft-desc">The AI personal assistant for India. Remembers everything, reminds precisely, reads documents, searches the web. Built in Bengaluru 🇮🇳</p>
     </div>
     <div><div class="ft-heading">Product</div><ul class="ft-links"><li><a href="#features">Features</a></li><li><a href="#demo">Live Demo</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#compare">Compare</a></li></ul></div>
-    <div><div class="ft-heading">Company</div><ul class="ft-links"><li><a href="mailto:support@askgogo.in">support@askgogo.in</a></li><li><a href="https://api.whatsapp.com/send?phone=918310441698&text=Hi%20Gogo%2C%20I%20need%20support%20for%20AskGogo" target="_blank" rel="noopener">Chat support</a></li></ul></div>
+    <div><div class="ft-heading">Company</div><ul class="ft-links"><li><a href="mailto:support@askgogo.in">support@askgogo.in</a></li><li><a href="https://api.whatsapp.com/send?phone=918310441698&text=Hi%20Gogo%2C%20I%20need%20support%20for%20AskGogo" target="_blank" rel="noopener">Chat support</a></li><li><a href="https://t.me/askgogo_bot" target="_blank" rel="noopener">Telegram fallback</a></li></ul></div>
     <div><div class="ft-heading">Legal</div><ul class="ft-links"><li><a href="#privacy">Privacy Policy</a></li><li><a href="#terms">Terms of Service</a></li><li><a href="#refund">Refund Policy</a></li></ul></div>
   </div>
   <div class="ft-bottom">© 2026 AskGogo · Made in India with ❤️ · UPI &amp; cards via Razorpay</div>
@@ -943,8 +987,8 @@ footer{padding:52px 20px 30px;border-top:1px solid var(--border)}
 
 <!-- ══ LEGAL ══ -->
 <section id="privacy" style="background:var(--bg2)"><div class="container" style="max-width:700px"><span class="sec-tag">Legal</span><h2 class="sec-title">Privacy <em>Policy</em></h2><p style="color:var(--ink3);margin-bottom:20px;font-size:13px;font-family:var(--mono)">Last updated: April 20, 2026</p><div class="policy-section"><h3>1. Data Controller</h3><p>AskGogo is operated by Goverdhan M D, Bengaluru, Karnataka, India. Contact: support@askgogo.in</p><h3>2. What We Collect</h3><p>Only data you explicitly share: messages, memories, reminders, lists, voice notes, photos, documents.</p><h3>3. How We Use It</h3><p>Solely to provide AskGogo services. Never sold or shared for marketing.</p><h3>4. Storage</h3><p>Supabase (PostgreSQL) with TLS encryption. Data stored on servers in India.</p><h3>5. Deletion</h3><p>Delete all data anytime via /wipe command.</p><h3>6. Contact</h3><p>support@askgogo.in</p></div></div></section>
-<section id="terms"><div class="container" style="max-width:700px"><span class="sec-tag">Legal</span><h2 class="sec-title">Terms of <em>Service</em></h2><p style="color:var(--ink3);margin-bottom:20px;font-size:13px;font-family:var(--mono)">Last updated: April 20, 2026</p><div class="policy-section"><h3>1. Service</h3><p>AI assistant on Telegram and WhatsApp providing memory, reminders, calendar sync, document analysis, web search, expense tracking.</p><h3>2. Plans</h3><p>Free Beta gives basic access. Lite is ₹99/month. Starter is ₹149/month. Pro is ₹299/month. Founder Pro is ₹499/month. Features, fair-use limits, and advanced capabilities vary by plan.</p><h3>3. Trial</h3><p>7-day free Pro trial. No automatic charge.</p><h3>4. Refunds</h3><p>30-day money-back guarantee. Email support@askgogo.in.</p></div></div></section>
-<section id="refund" style="background:var(--bg2)"><div class="container" style="max-width:700px"><span class="sec-tag">Legal</span><h2 class="sec-title">Refund <em>Policy</em></h2><p style="color:var(--ink3);margin-bottom:20px;font-size:13px;font-family:var(--mono)">Last updated: April 20, 2026</p><div class="policy-section"><h3>30-Day Money-Back Guarantee</h3><p>Full refund within 30 days of payment. Email support@askgogo.in with your Telegram username or WhatsApp number.</p><h3>Cancellation</h3><p>Cancel via /cancel or email. Paid features remain until billing period ends.</p></div></div></section>
+<section id="terms"><div class="container" style="max-width:700px"><span class="sec-tag">Legal</span><h2 class="sec-title">Terms of <em>Service</em></h2><p style="color:var(--ink3);margin-bottom:20px;font-size:13px;font-family:var(--mono)">Last updated: April 20, 2026</p><div class="policy-section"><h3>1. Service</h3><p>AI assistant on WhatsApp providing memory, reminders, calendar sync, document analysis, web search, expense tracking, voice notes, and daily briefings.</p><h3>2. Plans</h3><p>Free Beta gives basic access. Lite is ₹99/month. Starter is ₹149/month. Pro is ₹299/month. Founder Pro is ₹499/month. Features, fair-use limits, and advanced capabilities vary by plan.</p><h3>3. Trial</h3><p>7-day free Pro trial. No automatic charge.</p><h3>4. Refunds</h3><p>30-day money-back guarantee. Email support@askgogo.in.</p></div></div></section>
+<section id="refund" style="background:var(--bg2)"><div class="container" style="max-width:700px"><span class="sec-tag">Legal</span><h2 class="sec-title">Refund <em>Policy</em></h2><p style="color:var(--ink3);margin-bottom:20px;font-size:13px;font-family:var(--mono)">Last updated: April 20, 2026</p><div class="policy-section"><h3>30-Day Money-Back Guarantee</h3><p>Full refund within 30 days of payment. Email support@askgogo.in with your WhatsApp number.</p><h3>Cancellation</h3><p>Cancel via /cancel or email. Paid features remain until billing period ends.</p></div></div></section>
 
 
 <!-- Floating Chat Support: premium branded AskGogo GIF button routed privately to Gogo -->
