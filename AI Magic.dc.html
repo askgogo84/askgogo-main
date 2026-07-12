@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>AI Magic — AskGogo AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&amp;family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fafaf8; }
+  a { color: #128C7E; }
+  a:hover { color: #25D366; }
+  @keyframes gogofloat { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-10px) rotate(.5deg); } }
+</style>
+</helmet>
+
+<div style="font-family: 'DM Sans', system-ui, sans-serif; background: #fafaf8; color: #1a1916; line-height: 1.6; overflow-x: hidden" data-screen-label="Superpowers page">
+
+  <dc-import name="SiteNav" hint-size="100%,62px"></dc-import>
+
+  <!-- HEADER -->
+  <header style="padding: 140px 20px 60px; text-align: center; background: radial-gradient(ellipse 80% 55% at 50% 0%, rgba(37,211,102,.10), transparent 70%)">
+    <img src="assets/gogo.gif" alt="Gogo" style="width: 110px; height: 110px; object-fit: contain; mix-blend-mode: multiply; animation: gogofloat 4s ease-in-out infinite">
+    <h1 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(40px, 6.5vw, 80px); font-weight: 700; letter-spacing: -.03em; line-height: .93; margin: 10px 0 16px">AI magic, twelve ways.<br><em style="font-style: italic; color: #128C7E; font-weight: 300">One WhatsApp chat.</em></h1>
+    <p style="font-size: 16.5px; color: #5a5850; max-width: 620px; margin: 0 auto; line-height: 1.7">Every bit of it works by just talking — typed or spoken, in any Indian language. No commands to memorize, no menus to dig through.</p>
+  </header>
+
+  <!-- SUPERPOWER SECTIONS -->
+  <section style="padding: 20px 20px 90px">
+    <div style="max-width: 1060px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+
+      <div id="memory" data-screen-label="Long-term Memory" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">🧠</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Long-term <em style="font-style: italic; color: #128C7E; font-weight: 300">Memory</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">Tell AskGogo once, and it's remembered forever. Birthdays, client preferences, passport numbers, that restaurant your friend recommended — recalled the moment you need it.</p>
+          <div style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: #128C7E">Try: "Remember that Amma's medicines refill every 20 days"</div>
+        </div>
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-left: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #dcf8c6; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500">What was the tile shop guy's quote?</div>
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">From 12 March 🧠 Ravi Tiles quoted ₹78/sq ft for the balcony, ₹92 with installation. His number ends in 4471 — want it?</div>
+        </div>
+      </div>
+
+      <div id="reminders" data-screen-label="Smart Reminders" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-right: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #dcf8c6; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500">Remind me about the electricity bill every month before the 10th</div>
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">Done ⏰ I'll nudge you on the 8th of every month, 9 AM IST. Snooze or mark paid right from the reminder.</div>
+        </div>
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">⏰</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Smart <em style="font-style: italic; color: #128C7E; font-weight: 300">Reminders</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">One-time or recurring — "every Monday at 9am" just works. IST-accurate, snooze-friendly, and persistent enough that things actually get done.</p>
+          <div style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: #128C7E">Try: "Remind me to call the plumber tomorrow at 11"</div>
+        </div>
+      </div>
+
+      <div id="voice" data-screen-label="Voice Notes" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">🎤</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Voice in <em style="font-style: italic; color: #128C7E; font-weight: 300">any language</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">Record in Kannada, Tamil, Telugu, Hindi, Bengali — 99% accuracy. Speak like you'd speak to a friend; AskGogo turns it into action.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <span style="font-size: 11px; padding: 4px 11px; border-radius: 100px; background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.2); color: #128C7E; font-family: 'Fira Code', monospace">ಕನ್ನಡ</span>
+            <span style="font-size: 11px; padding: 4px 11px; border-radius: 100px; background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.2); color: #128C7E; font-family: 'Fira Code', monospace">தமிழ்</span>
+            <span style="font-size: 11px; padding: 4px 11px; border-radius: 100px; background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.2); color: #128C7E; font-family: 'Fira Code', monospace">తెలుగు</span>
+            <span style="font-size: 11px; padding: 4px 11px; border-radius: 100px; background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.2); color: #128C7E; font-family: 'Fira Code', monospace">हिंदी</span>
+            <span style="font-size: 11px; padding: 4px 11px; border-radius: 100px; background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.2); color: #128C7E; font-family: 'Fira Code', monospace">বাংলা</span>
+            <span style="font-size: 11px; padding: 4px 11px; border-radius: 100px; background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.2); color: #128C7E; font-family: 'Fira Code', monospace">मराठी</span>
+            <span style="font-size: 11px; padding: 4px 11px; border-radius: 100px; background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.2); color: #128C7E; font-family: 'Fira Code', monospace">English +4</span>
+          </div>
+        </div>
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-left: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #dcf8c6; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500">🎤 0:09 — "நாளை காலை 7 மணிக்கு ஜிம் நினைவூட்டு"</div>
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">சரி! 💪 Gym reminder set — tomorrow, 7:00 AM. இனிய இரவு!</div>
+        </div>
+      </div>
+
+      <div id="documents" data-screen-label="Documents" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-right: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #dcf8c6; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500">📎 offer-letter.pdf — is this CTC breakup okay?</div>
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">Read it 📄 Fixed is 72% of CTC — healthy. But the variable pays out annually, not quarterly, and notice period is 90 days. Two things worth negotiating.</div>
+        </div>
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">📄</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Document <em style="font-style: italic; color: #128C7E; font-weight: 300">Support</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">PDF, Word, Excel — summarized and risk-analyzed in seconds. Contracts, offer letters, rental agreements, insurance policies: send the file, ask anything.</p>
+          <div style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: #128C7E">Try: forward any PDF and ask "what should I worry about?"</div>
+        </div>
+      </div>
+
+      <div id="expenses" data-screen-label="Expenses and Bill Split" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">💰</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Expenses &amp; <em style="font-style: italic; color: #128C7E; font-weight: 300">Bill Split</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">Snap a receipt and it's auto-logged. Split the Goa trip in one message — AskGogo tracks who owes whom and even drafts the polite nudge.</p>
+          <div style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: #128C7E">Try: "Split ₹4,800 between me, Arjun, Sneha and Dev"</div>
+        </div>
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-left: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #dcf8c6; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500">📸 [dinner receipt photo]</div>
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">Logged 💰 ₹2,340 at Meghana Foods → "Eating out". That's ₹6,120 this month — 20% over your usual. Want a weekly cap reminder?</div>
+        </div>
+      </div>
+
+      <div id="calendar" data-screen-label="Calendar" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-right: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #dcf8c6; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500">Block Thursday 3pm for the dentist, and move my 3:30 standup</div>
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">Done 📅 Dentist added Thu 3–4 PM. Standup moved to 4:15 PM — I checked, everyone's free. Invites updated.</div>
+        </div>
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">📅</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Google <em style="font-style: italic; color: #128C7E; font-weight: 300">Calendar</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">Two-way sync. Create, move and check events by talking naturally — your calendar finally speaks WhatsApp.</p>
+          <div style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: #128C7E">Try: "What does my Thursday look like?"</div>
+        </div>
+      </div>
+
+      <div id="briefings" data-screen-label="Daily Briefings" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">📰</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Daily <em style="font-style: italic; color: #128C7E; font-weight: 300">Briefings</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">One good-morning message with everything that matters: today's calendar, due reminders, weather, and the headlines you care about.</p>
+          <div style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: #128C7E">Arrives every morning at your chosen time</div>
+        </div>
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-left: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 92%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">Good morning, Rahul ☀️ 3 meetings today (first at 10). Electricity bill due tomorrow. 28°C, light rain by evening — carry an umbrella. Nifty opens up 0.4%.</div>
+        </div>
+      </div>
+
+      <div id="search" data-screen-label="Web Search and News" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 24px; overflow: hidden">
+        <div style="background: #eae9e2; padding: 34px 28px; display: flex; flex-direction: column; gap: 9px; justify-content: center; border-right: 1px solid rgba(0,0,0,.06)">
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #dcf8c6; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500">Score? And is it raining in Indiranagar?</div>
+          <div style="max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; background: #fff; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,.06)">🏏 IND 187/3 (18.2 ov) — Gill on 74*. And yes, light drizzle in Indiranagar, clearing by 8 PM.</div>
+        </div>
+        <div style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center">
+          <span style="font-size: 34px; margin-bottom: 14px">🔍</span>
+          <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.02em; line-height: 1.02; margin: 0 0 12px">Web Search <em style="font-style: italic; color: #128C7E; font-weight: 300">&amp; News</em></h2>
+          <p style="font-size: 15px; color: #5a5850; line-height: 1.7; margin: 0 0 16px">Real-time weather, prices, cricket scores, headlines — asked and answered in the same chat, in your language.</p>
+          <div style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: #128C7E">Try: "Best price for OnePlus 13 right now?"</div>
+        </div>
+      </div>
+
+      <!-- Compact grid for remaining four -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+        <div id="lists" style="background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 20px; padding: 28px" style-hover="border-color: #25D366; transform: translateY(-3px)">
+          <span style="font-size: 28px; display: block; margin-bottom: 12px">📋</span>
+          <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 700; margin: 0 0 7px">Any List</h3>
+          <p style="font-size: 13.5px; color: #5a5850; line-height: 1.6; margin: 0">Shopping, todo, packing, groceries — unlimited lists. Add by voice, tick off by message.</p>
+        </div>
+        <div id="images" style="background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 20px; padding: 28px" style-hover="border-color: #25D366; transform: translateY(-3px)">
+          <span style="font-size: 28px; display: block; margin-bottom: 12px">📸</span>
+          <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 700; margin: 0 0 7px">Image Analysis</h3>
+          <p style="font-size: 13.5px; color: #5a5850; line-height: 1.6; margin: 0">Business cards, receipts, posters — snap it and the details are extracted and remembered.</p>
+        </div>
+        <div id="drafts" style="background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 20px; padding: 28px" style-hover="border-color: #25D366; transform: translateY(-3px)">
+          <span style="font-size: 28px; display: block; margin-bottom: 12px">✍️</span>
+          <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 700; margin: 0 0 7px">Follow-ups &amp; Drafts</h3>
+          <p style="font-size: 13.5px; color: #5a5850; line-height: 1.6; margin: 0">LinkedIn posts, tweets, emails and polite payment nudges — drafted in your voice, ready to send.</p>
+        </div>
+        <div id="contacts" style="background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 20px; padding: 28px" style-hover="border-color: #25D366; transform: translateY(-3px)">
+          <span style="font-size: 28px; display: block; margin-bottom: 12px">👥</span>
+          <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 700; margin: 0 0 7px">Contacts &amp; Referrals</h3>
+          <p style="font-size: 13.5px; color: #5a5850; line-height: 1.6; margin: 0">"Who was that CA Nikhil recommended?" Saved contacts with context — plus /refer to earn free months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 90px 20px; background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(37,211,102,.14), transparent 70%), #f2f1ec; text-align: center">
+    <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(32px, 5vw, 60px); font-weight: 700; letter-spacing: -.025em; line-height: .94; margin: 0 0 18px">Try all the AI magic<br><em style="font-style: italic; color: #128C7E; font-weight: 300">free for 7 days.</em></h2>
+    <p style="font-size: 15.5px; color: #5a5850; margin: 0 0 28px">₹0 due today. Cancel with one message.</p>
+    <a href="Try for Free.dc.html" style="background: #25D366; color: #fff; padding: 16px 34px; border-radius: 100px; font-size: 16px; font-weight: 700; display: inline-block; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,.25)" style-hover="transform: translateY(-3px)">Find my plan →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background: #1a1916; color: #a8a49e; padding: 44px 28px">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
+      <a href="Home.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+        <img src="assets/logo.png" alt="" style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 16px; color: #f0ede8; font-weight: 700">AskGogo</span>
+      </a>
+      <span style="font-size: 12px; color: #6a6660">© 2026 AskGogo AI · support@askgogo.in · Made with ☕ in Bengaluru</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>

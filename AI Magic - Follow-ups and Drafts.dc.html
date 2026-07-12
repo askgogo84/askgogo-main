@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Follow-ups & Drafts — AskGogo AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&amp;family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fafaf8; }
+  a { color: #128C7E; }
+  a:hover { color: #25D366; }
+  @keyframes gogofloat { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-10px) rotate(.5deg); } }
+</style>
+</helmet>
+
+<div style="font-family: 'DM Sans', system-ui, sans-serif; background: #fafaf8; color: #1a1916; line-height: 1.6; overflow-x: hidden" data-screen-label="Follow-ups & Drafts">
+  <dc-import name="SiteNav" hint-size="100%,62px"></dc-import>
+
+  <header style="padding: 66px 20px 54px; text-align: center; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,211,102,.11), transparent 68%)">
+    <div style="max-width: 820px; margin: 0 auto">
+      <img src="assets/gogo.gif" alt="Gogo" style="width: 108px; height: 108px; object-fit: contain; mix-blend-mode: multiply; animation: gogofloat 4s ease-in-out infinite">
+      <div style="font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #128C7E; margin: 6px 0 16px">✍️ Follow-ups & drafts</div>
+      <h1 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(40px, 6.5vw, 82px); font-weight: 700; letter-spacing: -.03em; line-height: .92; margin: 0 0 20px">The message,<br>written <em style="font-style: italic; color: #128C7E; font-weight: 300">in your voice.</em></h1>
+      <p style="font-size: 17px; color: #5a5850; line-height: 1.7; margin: 0 auto 28px; max-width: 600px">LinkedIn posts, tweets, emails, polite payment nudges, birthday wishes — AskGogo drafts them the way you'd actually say it, ready to copy and send. Beat the blank screen; you just approve and forward.</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 14px">
+        <a href="https://api.whatsapp.com/send?phone=15797006612&amp;text=Hi%20AskGogo" style="background: #25D366; color: #fff; padding: 15px 30px; border-radius: 100px; font-size: 16px; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,.25)" style-hover="transform: translateY(-3px); box-shadow: 0 14px 36px rgba(37,211,102,.3)"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Try it on WhatsApp</a>
+        <a href="Try for Free.dc.html" style="background: transparent; color: #1a1916; padding: 15px 28px; border-radius: 100px; font-size: 16px; font-weight: 700; text-decoration: none; border: 1.5px solid rgba(0,0,0,.18)" style-hover="border-color: #25D366; color: #128C7E">Start free trial</a>
+      </div>
+      <p style="font-family: 'Fira Code', monospace; font-size: 11px; color: #9a9890; margin: 0">Try saying: "Write a thank-you note to my team"</p>
+    </div>
+  </header>
+
+  <section style="padding: 80px 20px; background: #f2f1ec">
+    <div style="max-width: 1060px; margin: 0 auto">
+      <span style="font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #128C7E; margin-bottom: 16px; display: inline-block">Sound familiar?</span>
+      <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(28px, 4.6vw, 52px); font-weight: 700; letter-spacing: -.025em; line-height: .96; margin: 0 0 42px">The little things that <em style="font-style: italic; color: #128C7E; font-weight: 300">slip through.</em></h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+        <div style="background:#eae9e2;border:1.5px solid rgba(0,0,0,.08);border-radius:20px;padding:26px"><span style="font-size:28px;display:block;margin-bottom:12px">⌨️</span><h3 style="font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 7px;line-height:1.15">Blank-screen freeze</h3><p style="font-size:13.5px;color:#5a5850;line-height:1.6;margin:0">You know what you want to say — the words just won't come out.</p></div>
+        <div style="background:#eae9e2;border:1.5px solid rgba(0,0,0,.08);border-radius:20px;padding:26px"><span style="font-size:28px;display:block;margin-bottom:12px">🙇</span><h3 style="font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 7px;line-height:1.15">Awkward asks</h3><p style="font-size:13.5px;color:#5a5850;line-height:1.6;margin:0">Chasing a payment or following up a lead, without sounding pushy.</p></div>
+        <div style="background:#eae9e2;border:1.5px solid rgba(0,0,0,.08);border-radius:20px;padding:26px"><span style="font-size:28px;display:block;margin-bottom:12px">📢</span><h3 style="font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 7px;line-height:1.15">No time to post</h3><p style="font-size:13.5px;color:#5a5850;line-height:1.6;margin:0">Meant to share that win on LinkedIn. It's been three weeks.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 84px 20px; background: #fafaf8">
+    <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center">
+      <div>
+        <span style="font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #128C7E; margin-bottom: 16px; display: inline-block">How it feels</span>
+        <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(28px, 4.4vw, 48px); font-weight: 700; letter-spacing: -.025em; line-height: .98; margin: 0 0 16px">Just a chat.<br><em style="font-style: italic; color: #128C7E; font-weight: 300">That gets it done.</em></h2>
+        <p style="font-size: 15.5px; color: #5a5850; line-height: 1.7; margin: 0 0 22px">No menus, no forms, no commands to learn. You type or speak the way you already do — AskGogo does the rest, right inside the chat.</p>
+        <a href="Try for Free.dc.html" style="font-size: 14px; font-weight: 700; color: #128C7E; text-decoration: none">See it on your plan →</a>
+      </div>
+      <div style="background: #f2f1ec; border: 1.5px solid rgba(0,0,0,.10); border-radius: 22px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.08)">
+        <div style="background: #25D366; padding: 12px 16px; display: flex; align-items: center; gap: 10px"><div style="position:relative"><img src="assets/logo.png" alt="" style="width: 32px; height: 32px; border-radius: 50%; background: #fff; object-fit: cover"><span style="position:absolute;bottom:0;right:0;width:8px;height:8px;background:#4ade80;border-radius:50%;border:1.5px solid #25D366"></span></div><div><div style="font-size: 13px; font-weight: 700; color: #fff">AskGogo</div><div style="font-size: 10px; color: rgba(255,255,255,.75); font-family: 'Fira Code', monospace">online</div></div></div>
+        <div style="padding: 18px 15px; display: flex; flex-direction: column; gap: 9px; background: #eae9e2; min-height: 300px; justify-content: center">
+              <div style="max-width:82%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.55;background:#dcf8c6;color:#111;align-self:flex-end;border-bottom-right-radius:4px;font-weight:500">Draft a LinkedIn post about us crossing 10,000 users</div>
+              <div style="max-width:82%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.55;background:#fff;color:#111;align-self:flex-start;border-bottom-left-radius:4px;border:1px solid rgba(0,0,0,.06);box-shadow:0 1px 2px rgba(0,0,0,.05)">Drafted ✍️ "10,000 of you now trust us with your day 🙏 When we started, we hoped for 100. Thank you for every reminder, every voice note..." Want it punchier or more humble?</div>
+              <div style="max-width:82%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.55;background:#dcf8c6;color:#111;align-self:flex-end;border-bottom-right-radius:4px;font-weight:500">Perfect. Also a gentle nudge to the client about the pending invoice</div>
+              <div style="max-width:82%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.55;background:#fff;color:#111;align-self:flex-start;border-bottom-left-radius:4px;border:1px solid rgba(0,0,0,.06);box-shadow:0 1px 2px rgba(0,0,0,.05)">"Hi Sir, just a gentle reminder on invoice #204 (₹45,000), due last week. Do let me know if anything's needed 🙏" — send?</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 20px 20px 80px; background: #fafaf8">
+    <div style="max-width: 1000px; margin: 0 auto">
+      <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 700; letter-spacing: -.01em; margin: 0 0 20px">More AskGogo magic</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+        <a href="AI Magic - Web Search and News.dc.html" style="display:flex;align-items:center;gap:12px;background:#fafaf8;border:1.5px solid rgba(0,0,0,.10);border-radius:16px;padding:16px 20px;text-decoration:none" style-hover="border-color:#25D366;transform:translateY(-3px)"><span style="width:40px;height:40px;border-radius:11px;background:rgba(37,211,102,.12);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🔍</span><span style="flex:1"><span style="display:block;font-size:14px;font-weight:700;color:#1a1916">Web Search & News</span><span style="display:block;font-size:12px;color:#9a9890">Explore this magic →</span></span></a>
+        <a href="AI Magic - Contacts and Referrals.dc.html" style="display:flex;align-items:center;gap:12px;background:#fafaf8;border:1.5px solid rgba(0,0,0,.10);border-radius:16px;padding:16px 20px;text-decoration:none" style-hover="border-color:#25D366;transform:translateY(-3px)"><span style="width:40px;height:40px;border-radius:11px;background:rgba(37,211,102,.12);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">👥</span><span style="flex:1"><span style="display:block;font-size:14px;font-weight:700;color:#1a1916">Contacts & Referrals</span><span style="display:block;font-size:12px;color:#9a9890">Explore this magic →</span></span></a>
+        <a href="AI Magic - Daily Briefings.dc.html" style="display:flex;align-items:center;gap:12px;background:#fafaf8;border:1.5px solid rgba(0,0,0,.10);border-radius:16px;padding:16px 20px;text-decoration:none" style-hover="border-color:#25D366;transform:translateY(-3px)"><span style="width:40px;height:40px;border-radius:11px;background:rgba(37,211,102,.12);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📰</span><span style="flex:1"><span style="display:block;font-size:14px;font-weight:700;color:#1a1916">Daily Briefings</span><span style="display:block;font-size:12px;color:#9a9890">Explore this magic →</span></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 96px 20px; background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(37,211,102,.14), transparent 70%), #f2f1ec; text-align: center">
+    <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(32px, 5vw, 62px); font-weight: 700; letter-spacing: -.025em; line-height: .94; margin: 0 0 18px">Try Follow-ups & Drafts<br><em style="font-style: italic; color: #128C7E; font-weight: 300">free for 7 days.</em></h2>
+    <p style="font-size: 15.5px; color: #5a5850; margin: 0 0 28px">₹0 due today · Works in your mother tongue · Cancel anytime</p>
+    <a href="https://api.whatsapp.com/send?phone=15797006612&amp;text=Hi%20AskGogo" style="background: #25D366; color: #fff; padding: 16px 34px; border-radius: 100px; font-size: 16px; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,.25)" style-hover="transform: translateY(-3px)"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Chat on WhatsApp</a>
+  </section>
+
+  <footer style="background: #1a1916; color: #a8a49e; padding: 44px 28px">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
+      <a href="Home.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none"><img src="assets/logo.png" alt="" style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 16px; color: #f0ede8; font-weight: 700">AskGogo</span></a>
+      <span style="font-size: 12px; color: #6a6660">© 2026 AskGogo AI · support@askgogo.in · Made with ☕ in Bengaluru</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>
