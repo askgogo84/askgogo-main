@@ -80,6 +80,7 @@
   [style*="grid-template-columns: 1fr 1.1fr"],
   [style*="grid-template-columns: 1.1fr 1fr"],
   [style*="grid-template-columns: 1.05fr .95fr"],
+  [style*="grid-template-columns: 1.05fr 0.95fr"],
   [style*="grid-template-columns: 1fr 1.15fr"],
   [style*="grid-template-columns: 340px 1fr"],
   [style*="grid-template-columns: 220px 1fr"],
@@ -89,9 +90,21 @@
   }
   /* bento cards: let stacked rows size to their content */
   [style*="grid-auto-rows: 185px"] { grid-auto-rows: auto !important; }
-  /* bento span overrides collapse cleanly in a single column */
-  [style*="grid-column: span"] { grid-column: auto !important; }
-  [style*="grid-row: span"]    { grid-row: auto !important; }
+  /* Clear span placement on bento children so they stack in one column.
+     (React may merge grid-column + grid-row into a grid-area shorthand,
+     so we clear all three on every direct child of the 12-col grid.) */
+  [style*="grid-template-columns: repeat(12, 1fr)"] > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    grid-area: auto !important;
+  }
+  [style*="grid-column: span"],
+  [style*="grid-row: span"],
+  [style*="grid-area: span"] {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    grid-area: auto !important;
+  }
 }
 
 /* ---- Pricing comparison table: scroll instead of squishing ---- */
