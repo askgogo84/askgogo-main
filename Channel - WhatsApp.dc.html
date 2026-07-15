@@ -19,6 +19,76 @@
   a:hover { color: #25D366; }
   @keyframes gogofloat { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-10px) rotate(.5deg); } }
 </style>
+<style id="askgogo-mobile-fix">
+/* ============================================================
+   AskGogo — mobile responsiveness layer  (added 2026-07-15)
+   Pure CSS. Overrides inline styles at mobile widths only.
+   Desktop is untouched. Safe to remove this whole <style> block.
+   ============================================================ */
+
+/* ---- Kill horizontal scroll everywhere ---- */
+@media (max-width: 860px) {
+  html, body { max-width: 100%; overflow-x: hidden; }
+  img { max-width: 100%; }
+}
+
+/* ---- Top nav: collapse to logo + WhatsApp CTA on mobile ---- */
+@media (max-width: 860px) {
+  nav { padding: 8px 12px 8px 16px !important; gap: 10px !important; }
+  /* hide the centre links group (dropdowns are hover-only / break on touch) */
+  nav div[style*="flex: 1"][style*="justify-content: center"] { display: none !important; }
+  /* hide the secondary "Try for free" pill, keep the primary CTA */
+  nav a[href="Try for Free.dc.html"] { display: none !important; }
+  /* compact the WhatsApp button so it always fits */
+  nav a[href*="whatsapp"] { padding: 10px 15px !important; font-size: 13px !important; }
+  /* any dropdown that still mounts must never exceed the screen */
+  [style*="width: 560px"], [style*="width: 320px"] {
+    width: auto !important; max-width: calc(100vw - 28px) !important;
+  }
+}
+
+/* ---- Stack every fixed multi-column grid into one column ---- */
+@media (max-width: 768px) {
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1.1fr"],
+  [style*="grid-template-columns: 1.1fr 1fr"],
+  [style*="grid-template-columns: 1.05fr .95fr"],
+  [style*="grid-template-columns: 1fr 1.15fr"],
+  [style*="grid-template-columns: 340px 1fr"],
+  [style*="grid-template-columns: 220px 1fr"],
+  [style*="grid-template-columns: 2fr 1fr 1fr 1fr"],
+  [style*="grid-template-columns: repeat(12, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* bento cards: let stacked rows size to their content */
+  [style*="grid-auto-rows: 185px"] { grid-auto-rows: auto !important; }
+  /* bento span overrides collapse cleanly in a single column */
+  [style*="grid-column: span"] { grid-column: auto !important; }
+  [style*="grid-row: span"]    { grid-row: auto !important; }
+}
+
+/* ---- Pricing comparison table: scroll instead of squishing ---- */
+@media (max-width: 768px) {
+  table[style*="min-width: 640px"] {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ---- Let tight hero headline (mascot + text) wrap ---- */
+@media (max-width: 768px) {
+  h1 [style*="flex-wrap: nowrap"] { flex-wrap: wrap !important; }
+}
+
+/* ---- Trim oversized section padding for mobile density ---- */
+@media (max-width: 768px) {
+  [style*="padding: 118px 20px 40px"] { padding: 100px 16px 34px !important; } /* hero */
+  [style*="padding: 96px 20px"]       { padding: 56px 18px !important; }       /* sections */
+  [style*="padding: 110px 20px"]      { padding: 62px 18px !important; }       /* final CTA */
+  [style*="padding: 64px 28px 36px"]  { padding: 46px 20px 30px !important; }  /* footer */
+}
+</style>
 </helmet>
 
 <div style="font-family: 'DM Sans', system-ui, sans-serif; background: #fafaf8; color: #1a1916; line-height: 1.6; overflow-x: hidden" data-screen-label="WhatsApp channel">
