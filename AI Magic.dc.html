@@ -277,5 +277,5 @@
   </footer>
 </div>
 </x-dc>
-<!--askgogo-wa-number-patch--><script>(function(){var O="15797006612",N="17605483659";function fix(){var l=document.querySelectorAll('a[href*="'+O+'"]');for(var i=0;i<l.length;i++){l[i].href=l[i].href.split(O).join(N);}}fix();document.addEventListener("DOMContentLoaded",fix);new MutationObserver(fix).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});})();</script></body>
+<!--askgogo-wa-number-patch2--><script>(function(){var N="17605483659";function fix(){var l=document.querySelectorAll('a[href*="whatsapp.com"],a[href*="wa.me"]');for(var i=0;i<l.length;i++){var h=l[i].getAttribute("href")||"";var n=h.replace(/(phone=)\d+/,"$1"+N).replace(/(wa\.me\/)\d+/,"$1"+N);if(n!==h){l[i].setAttribute("href",n);}}}fix();document.addEventListener("DOMContentLoaded",fix);document.addEventListener("click",fix,true);setInterval(fix,1000);new MutationObserver(fix).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});})();</script></body>
 </html>
