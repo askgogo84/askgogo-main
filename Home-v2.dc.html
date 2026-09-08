@@ -69,6 +69,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 @keyframes veilWord{0%,18%{opacity:0;transform:translateY(14px) scale(.96)}34%,66%{opacity:1;transform:none}84%,100%{opacity:0;transform:translateY(-10px) scale(1.02)}}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes thoughtNudge{0%,100%{box-shadow:0 14px 36px rgba(36,27,20,.08),0 0 0 0 rgba(239,122,39,.6);border-color:rgba(239,122,39,.7)}50%{box-shadow:0 14px 36px rgba(36,27,20,.08),0 0 0 14px rgba(239,122,39,0);border-color:rgba(239,122,39,.7)}}
 @keyframes tourBob{0%,100%{transform:translateY(3px);opacity:.45}50%{transform:translateY(-6px);opacity:1}}
 @keyframes fog{0%{transform:translate(0,0) scale(1)}50%{transform:translate(3%,2%) scale(1.08)}100%{transform:translate(-2%,3%) scale(1.03)}}
 @keyframes ringPulse{0%{transform:scale(.92);opacity:.6}100%{transform:scale(1.32);opacity:0}}
@@ -173,7 +174,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
       <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="position:relative;overflow:hidden;aspect-ratio:28/37;width:min(clamp(104px,20vw,360px),24svh)"><img src="/assets/gogo.gif" alt="Gogo" style="position:absolute;left:-94.6%;top:-28.4%;width:285.7%;mix-blend-mode:multiply;pointer-events:none"></div></div>
       <div style="position:absolute;inset:0;transform:translate({{ parX }}px,{{ parY }}px);transition:transform .6s cubic-bezier(.2,.7,.2,1)">
       <sc-for list="{{ thoughts }}" as="t" hint-placeholder-count="8">
-        <button onClick="{{ t.click }}" style="position:absolute;left:{{ t.x }}%;top:{{ t.y }}%;transform:translate(-50%,-50%) scale({{ t.s }});opacity:{{ t.o }};min-height:44px;padding:clamp(8px,.7vw,14px) clamp(14px,1.1vw,22px);border:1px solid {{ t.border }};border-radius:18px;background:{{ t.bg }};color:{{ t.color }};backdrop-filter:blur(10px);box-shadow:0 14px 36px rgba(36,27,20,.08);font-size:clamp(12px,1vw,18px);font-weight:600;line-height:1.3;max-width:{{ t.maxw }};text-align:left;transition:left .55s cubic-bezier(.4,0,.2,1),top .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1),opacity .45s,background .3s,color .3s,border-color .3s" style-hover="border-color:rgba(239,122,39,.5);background:#fff">{{ t.text }}</button>
+        <button onClick="{{ t.click }}" style="position:absolute;left:{{ t.x }}%;top:{{ t.y }}%;transform:translate(-50%,-50%) scale({{ t.s }});opacity:{{ t.o }};min-height:44px;padding:clamp(8px,.7vw,14px) clamp(14px,1.1vw,22px);border:1px solid {{ t.border }};border-radius:18px;background:{{ t.bg }};color:{{ t.color }};backdrop-filter:blur(10px);box-shadow:0 14px 36px rgba(36,27,20,.08);animation:{{ t.anim }};font-size:clamp(12px,1vw,18px);font-weight:600;line-height:1.3;max-width:{{ t.maxw }};text-align:left;transition:left .55s cubic-bezier(.4,0,.2,1),top .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1),opacity .45s,background .3s,color .3s,border-color .3s" style-hover="border-color:rgba(239,122,39,.5);background:#fff">{{ t.text }}</button>
       </sc-for>
       </div>
     </div>
@@ -497,8 +498,9 @@ class Component extends DCLogic {
     const tourSeen = (()=>{ try { return typeof window==='undefined' || !!localStorage.getItem('askgogo_tour_v1'); } catch(e) { return true; } })();
     this.markTour = () => { try { localStorage.setItem('askgogo_tour_v1','1'); } catch(e) {} };
     this.closeTour = () => { this.markTour(); this.setState({tour:false}); };
+    this.tourSeen = tourSeen;
     this.state = {
-      ch: start, veil:false, word:'', menu:false, sound:false, tour: !tourSeen,
+      ch: start, veil:false, word:'', menu:false, sound:false, tour:false,
       mobile: typeof window !== 'undefined' && window.innerWidth < 760, tall:true,
       hint: tourSeen, thoughts: this.pool.slice(0,8).map((text,i)=>({id:i,text,slot:i,phase:'idle'})), cleared:0,
       lang:0, feat:0, plan:2, advisor:null, px:0, py:0,
@@ -545,6 +547,7 @@ class Component extends DCLogic {
     window.addEventListener('touchmove', this.onTM, {passive:false});
     window.addEventListener('touchend', this.onTE, {passive:true});
     this.hintT = setTimeout(()=>this.setState({hint:false}), 4500);
+    if (!this.tourSeen) this.tourT = setTimeout(()=>{ if (this.state.ch===0 && !this.busy) this.setState({tour:true}); }, 1400);
     this.langT = setInterval(()=>{ if (this.state.ch===1) this.setState(s=>({lang:(s.lang+1)%this.langs.length})); }, 2400);
     const fms = (this.props.featureAutoplaySeconds ?? 3) * 1000;
     this.featT = setInterval(()=>{ if (this.state.ch===2 && Date.now()>this.featPause) this.setState(s=>({feat:(s.feat+1)%6})); }, fms);
@@ -556,7 +559,7 @@ class Component extends DCLogic {
     window.removeEventListener('keydown', this.onKey); window.removeEventListener('touchstart', this.onTS);
     window.removeEventListener('touchmove', this.onTM); window.removeEventListener('touchend', this.onTE);
     window.removeEventListener('mousemove', this.onMove);
-    clearTimeout(this.hintT); clearInterval(this.langT); clearInterval(this.featT); clearInterval(this.breathT); clearInterval(this.fadeT);
+    clearTimeout(this.hintT); clearTimeout(this.tourT); clearInterval(this.langT); clearInterval(this.featT); clearInterval(this.breathT); clearInterval(this.fadeT);
     if (this.audio) { this.audio.pause(); }
   }
 
@@ -565,7 +568,7 @@ class Component extends DCLogic {
     const len = 8; let t = n; if (t >= len) t = 0; if (t < 0) t = len - 1;
     if (t === this.state.ch) return;
     this.busy = true;
-    if (this.state.tour) this.markTour();
+    clearTimeout(this.tourT); this.markTour();
     this.setState({veil:true, word:this.words[(t+len-1)%len], hint:false, menu:false, tour:false});
     setTimeout(()=>{ this.setState({ch:t}); this.applyVolume(); }, 520);
     setTimeout(()=>{ this.setState({veil:false}); this.busy=false; this.cool = Date.now()+450; this.acc=0; }, 1750);
@@ -618,9 +621,10 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state, mobile = s.mobile, desktop = !mobile;
     const slots = mobile ? this.slotsM : this.slotsD;
+    const nudge = s.ch===0 && s.cleared===0 && !s.tour && !s.veil;
     const thoughts = s.thoughts.map((t,i)=>{
       const sl = slots[t.slot]; const fly = t.phase==='fly', done = t.phase==='done', nw = t.phase==='new';
-      return { text:t.text, click:()=>this.clickThought(i),
+      return { text:t.text, click:()=>this.clickThought(i), anim: (nudge && i===0 && t.phase==='idle') ? 'thoughtNudge 1.6s ease-in-out infinite' : 'none',
         x: fly ? 50 : sl.x, y: fly ? 50 : sl.y, s: fly ? 0.2 : nw ? 0.5 : 1, o: (fly||nw) ? 0 : 1,
         bg: done ? '#EF7A27' : 'rgba(255,255,255,.8)', color: done ? '#fff' : '#3c3631', border: done ? '#EF7A27' : 'rgba(11,9,8,.1)',
         maxw: mobile ? '128px' : 'clamp(190px,16vw,300px)' };
@@ -638,7 +642,7 @@ class Component extends DCLogic {
     return {
       desktop, mobile, tall:s.tall, desktopTall: desktop && s.tall, links, menu:s.menu, veil:s.veil, word:s.word, hint:s.hint && !s.veil, tour: s.tour && !s.veil, closeTour: this.closeTour,
          tourTitle: mobile ? 'Swipe up to begin.' : 'Scroll to begin.',
-         tourBody: mobile ? 'Up moves on, down goes back — left and right work too. One swipe is one chapter.' : 'Use your wheel or the ↑ ↓ arrow keys. One step is one chapter — the list on the left jumps anywhere.',
+         tourBody: mobile ? 'Up moves on, down goes back — left and right work too. And on this first screen, tap any thought to hand it to Gogo.' : 'Use your wheel or the ↑ ↓ arrow keys. And on this first screen, click any thought to hand it to Gogo.',
       parX: desktop ? s.px : 0, parY: desktop ? s.py : 0,
       hintText: mobile ? 'Swipe up, down or sideways to move through chapters' : 'Scroll or press ↓ to move through chapters',
       chapterLabel: `0${s.ch+1} · ${this.labels[s.ch]}`, chatLabel: mobile ? 'Chat' : 'WhatsApp',
@@ -649,7 +653,7 @@ class Component extends DCLogic {
       rail: this.labels.map((l,i)=>{ const on=i===s.ch; return {n:'0'+(i+1), name:l, go:()=>this.go(i), fg: on ? (dark?'#fff':'#0B0908') : (dark?'#CFC5BD':'#4f4a45'), op: on ? 1 : .55, w: on ? '44px' : '18px', size: on ? 'clamp(22px,1.7vw,30px)' : 'clamp(14px,1vw,17px)'}; }),
       dots: this.labels.map((l,i)=>({label:l, go:()=>this.go(i), h: i===s.ch ? '22px' : '10px', bg: i===s.ch ? '#EF7A27' : (dark ? 'rgba(255,255,255,.35)' : 'rgba(11,9,8,.2)')})),
       is0:s.ch===0, is1:s.ch===1, is2:s.ch===2, is3:s.ch===3, is4:s.ch===4, is5:s.ch===5, is6:s.ch===6, is7:s.ch===7,
-      thoughts, clearedText: s.cleared ? `Gogo has cleared ${s.cleared} little ${s.cleared===1?'thing':'things'}.` : '',
+      thoughts, clearedText: s.cleared ? `Gogo has cleared ${s.cleared} little ${s.cleared===1?'thing':'things'}.` : (nudge ? (mobile ? 'Tap any thought. Gogo will take it.' : 'Click any thought. Gogo will take it.') : ''),
       caps:this.caps, capsLeft:this.caps.slice(0,5), capsRight:this.caps.slice(5),
       langText:this.langs[s.lang][1], langName:this.langs[s.lang][0],
       langChips:this.langs.map((l,i)=>({name:l[0], bg: i===s.lang ? '#0B0908' : 'rgba(255,255,255,.7)', fg: i===s.lang ? '#fff' : '#6b635d'})),
