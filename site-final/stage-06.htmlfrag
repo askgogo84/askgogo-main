@@ -1,0 +1,73 @@
+ba(22,19,15,.16);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">Not now</button></div></sc-if><sc-if value="{{ c.closed }}" hint-placeholder-val="{{ false }}"><button onClick="{{ c.reset }}" style="height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ c.stateFg }}"><span>{{ c.state }}</span><span style="opacity:.6">Undo</span></button></sc-if></div></sc-for>
+    </div>
+    <div style="margin-top:clamp(20px,3vh,32px);padding:clamp(16px,1.6vw,24px);border-radius:20px;background:#FFFFFF;border:1px solid rgba(22,19,15,.08);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px;font-size:13px">
+      <div style="grid-column:1/-1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><b style="font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(20px,1.6vw,26px);letter-spacing:-.01em">Gogo shows its work.</b><span style="font-size:12px;color:#5C554C">Sources and actions only — never a stream of thought.</span></div>
+      <div><small style="display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5C554C">Remembered from</small><b>You told Gogo</b></div>
+      <div><small style="display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5C554C">Checked</small><b>Google Calendar</b></div>
+      <div><small style="display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5C554C">Travel</small><b>CreditIQ · LIVE</b></div>
+      <div><small style="display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5C554C">Created</small><b>3 tasks</b></div>
+      <div><small style="display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5C554C">Waiting for</small><b style="color:#157A6E">Your approval</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 PRICING -->
+<section id="pricing" data-screen-label="13 Pricing" style="position:relative;background:#EFE8DC;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px)">
+  <div style="max-width:1400px;margin:0 auto">
+    <div style="text-align:center;max-width:36em;margin:0 auto clamp(24px,4vh,40px)"><span style="display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E"><i style="width:22px;height:1px;background:#157A6E"></i>13 — Pricing</span><h2 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(38px,4.6vw,78px);line-height:.98;letter-spacing:-.03em;margin:14px 0 12px;text-wrap:balance">Pay for how much Gogo carries. <em>Not how many tokens it consumes.</em></h2>
+      <div style="display:inline-flex;border:1px solid rgba(22,19,15,.14);border-radius:999px;padding:3px;background:#F6F1E8"><button onClick="{{ setMonthly }}" style="height:36px;padding:0 16px;border-radius:999px;background:{{ monthlyBg }};color:{{ monthlyFg }};font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:all .3s">Monthly</button><button onClick="{{ setAnnual }}" style="height:36px;padding:0 16px;border-radius:999px;background:{{ annualBg }};color:{{ annualFg }};font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:all .3s">Annual · save 17%</button></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;align-items:stretch">
+      <sc-for list="{{ plans }}" as="p" hint-placeholder-count="4"><div style="min-width:0;border-radius:22px;background:{{ p.bg }};color:{{ p.fg }};border:1px solid rgba(22,19,15,.08);padding:clamp(18px,1.8vw,26px);display:grid;gap:10px;align-content:start;box-shadow:{{ p.shadow }};position:relative"><sc-if value="{{ p.popular }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:14px;right:14px;padding:5px 9px;border-radius:999px;background:#EF7A27;color:#fff;font-size:9px;font-weight:600;letter-spacing:.12em">MOST POPULAR</span></sc-if><b style="font-family:Newsreader,Georgia,serif;font-weight:400;font-size:26px;letter-spacing:-.02em">{{ p.name }}</b><span style="font-family:Newsreader,Georgia,serif;font-size:18px;color:{{ p.muted }};font-style:italic">{{ p.tagline }}</span><div style="margin-top:6px"><b style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:40px;letter-spacing:-.02em;line-height:1">{{ p.price }}</b><small style="font-size:13px;color:{{ p.muted }}"> {{ p.period }}</small><small style="display:block;font-size:11px;color:{{ p.muted }};margin-top:4px;min-height:1.3em">{{ p.alt }}</small></div><div style="display:grid;gap:5px;font-size:13px;line-height:1.4;color:{{ p.fg }}"><sc-for list="{{ p.features }}" as="f" hint-placeholder-count="7"><div style="display:flex;gap:8px"><span style="color:#157A6E">·</span>{{ f }}</div></sc-for></div><a href="{{ p.href }}" target="_blank" rel="noopener" style="margin-top:8px;height:46px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:{{ p.btnBg }};color:{{ p.btnFg }};font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:transform .25s" style-hover="transform:translateY(-2px)">{{ p.cta }}</a></div></sc-for>
+    </div>
+    <p style="text-align:center;font-size:12px;color:#5C554C;margin:16px 0 0">India pricing, incl. GST. Annual: Essential ₹2,490 · Plus ₹4,990 · Pro ₹9,990 — two months free.</p>
+  </div>
+</section>
+
+<!-- 14 BREATHE -->
+<section id="breathe" ref="{{ ref12 }}" data-screen-label="14 Breathe with Gogo" style="position:relative;min-height:88svh;background:#F6F1E8;display:grid;place-items:center;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px);overflow:hidden;box-sizing:border-box">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(239,122,39,.14),transparent 55%);pointer-events:none;transform:scale({{ br.glow }});transition:transform 4s cubic-bezier(.35,.05,.25,1)"></div>
+  <div style="position:relative;display:grid;justify-items:center;gap:clamp(28px,5vh,56px);text-align:center;width:100%">
+    <div style="transform:scale({{ br.orb }});transition:transform 4s cubic-bezier(.35,.05,.25,1)"><dc-import name="Gogo" state="breathing" size="{{ brSize }}" show-status="{{ false }}" animate="{{ anim }}" hint-size="220px,220px"></dc-import></div>
+    <div style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(30px,4.2vw,64px);line-height:1.05;letter-spacing:-.03em;max-width:18em;min-height:2.2em;display:grid;place-items:center;text-wrap:balance">{{ br.text }}</div>
+    <span style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E;opacity:{{ br.subO }};transition:opacity 1s">14 — Breathe with Gogo</span>
+  </div>
+</section>
+
+<!-- 15 LIGHTER -->
+<section id="lighter" data-screen-label="15 Your mind, lighter" style="background:#F6F1E8;padding:0 clamp(18px,4vw,56px) clamp(48px,7vh,88px);text-align:center">
+  <div style="max-width:1440px;margin:0 auto;padding-top:clamp(40px,6vh,72px);border-top:1px solid rgba(22,19,15,.1);display:grid;justify-items:center;gap:18px">
+    <dc-import name="Gogo" state="calm" size="88" show-status="{{ false }}" animate="{{ anim }}" hint-size="88px,88px"></dc-import>
+    <h2 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(48px,6.4vw,116px);line-height:.94;letter-spacing:-.035em;margin:0;text-wrap:balance">Your mind, <em style="color:#157A6E">lighter.</em></h2>
+    <p style="font-size:clamp(16px,1.15vw,19px);line-height:1.5;color:#5C554C;max-width:26em;margin:0;text-wrap:pretty">Tell Gogo what matters. Gogo will help carry the rest.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px"><a href="{{ links.whatsapp }}" target="_blank" rel="noopener" style="height:54px;display:inline-flex;align-items:center;padding:0 26px;border-radius:999px;background:#157A6E;color:#F6F1E8;font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:transform .25s" style-hover="transform:translateY(-2px);color:#F6F1E8">Meet Gogo</a><a href="{{ links.dashboard }}" target="_blank" rel="noopener" style="height:54px;display:inline-flex;align-items:center;padding:0 22px;border-radius:999px;border:1px solid rgba(22,19,15,.18);font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase" style-hover="border-color:#16130F">Open dashboard</a></div>
+    <a href="#top" style="height:44px;display:inline-flex;align-items:center;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5C554C">Begin again ↑</a>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C554C"><a href="{{ links.privacy }}" target="_blank" rel="noopener">Privacy</a><a href="{{ links.terms }}" target="_blank" rel="noopener">Terms</a><a href="{{ links.refunds }}" target="_blank" rel="noopener">Refunds</a><a href="{{ links.learn }}" target="_blank" rel="noopener">Learn with Gogo</a><span>© AskGogo · askgogo.in</span></div>
+  </div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;speed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.5,&quot;max&quot;:2.5,&quot;step&quot;:0.1,&quot;unit&quot;:&quot;×&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Sequences&quot;},&quot;autoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sequences&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sequences&quot;},&quot;showArcInNav&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Navigation&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.seq = [
+      {dur:[900,1500,650,650,650,650,650,4800,1200]},                        // 0 hero
+      {dur:[1400,500,500,500,500,500,500,500,500,500,500,500,3600]},         // 1 inside your head (11 items)
+      {dur:[700,700,700,700,700,900,1300,4200,1200]},                         // 2 memory
+      {dur:[700,700,700,700,700,700,700,900,3800,1200]},                      // 3 agent
+      {dur:[700,700,900,900,900,1400,2600,1600,0]},                           // 4 travel (7 prepared, 8 approval)
+      {dur:[900,1300,1400,1100,1100,1100,1200,3600,1200]},                    // 5 background
+      {dur:[900,700,700,700,3600,1200]},                                      // 6 daily
+      {dur:[900,500,500,500,500,500,500,500,500,2200,3800,1200]},             // 7 goals
+      {dur:[700,700,700,700,700,700,700,700,3200,1000]},                      // 8 connect
+      {dur:[900,1200,1200,1500,1400,1600,3200,1000]},                         // 9 everywhere
+      {dur:[1200,900,900,900,900,3400,1000]},                                 // 10 voice
+      {dur:[1400,1400,3400,3600,1600,3800,1400]},                             // 11 secure
+      {dur:[3600,4000,4000,4000,4000,4000,4600]},                             // 12 breathe
+    ];
+    const n = this.seq.length;
+    this.state = { step:Array(n).fill(0), inView:Array(n).fill(false), elapsed:Array(n).fill(0), approval:false, approved:false, forgotten:{}, priv:{}, perm:{}, pmGogo:'approval', threeCols:true, arc:0, narrow:false, menu:false, sound:false, annual:false, rm:false };
+    this.els = [];
+    for (let i=0;i<n;i++) this['ref'+i] = (el)=>{ this.els[i]=el; if (el && this.io) this.io.observe(el); };
+    this.evGridRef = (el)=>{ this.evGrid = el; if (el && this.ro) this.ro.o
