@@ -1,0 +1,111 @@
+bserve(el); };
+    this.links = { whatsapp:'https://api.whatsapp.com/send?phone=17605483659&text=Hi%20Gogo', dashboard:'https://app.askgogo.in/dashboard/home', upgrade:'https://app.askgogo.in/upgrade', learn:'https://app.askgogo.in/dashboard/learn', privacy:'https://askgogo.in/privacy', terms:'https://askgogo.in/terms', refunds:'https://askgogo.in/refunds' };
+    this.chapters = [['top','Meet Gogo'],['overwhelmed','Inside your head'],['remembers','Gogo Memory'],['acts','Gogo Agent'],['travel','Gogo Travel'],['continues','Background Gogo'],['daily','Daily Gogo'],['goals','Goals & Ideas'],['connect','Connect your world'],['everywhere','Everywhere'],['voice','Voice'],['control','Secure Computer'],['permission','Approvals'],['pricing','Pricing'],['breathe','Breathe'],['lighter','Your mind, lighter']];
+  }
+  componentDidMount() {
+    const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq) { this.setState({rm: mq.matches}); this.mqH = (e)=>this.setState({rm:e.matches}); mq.addEventListener && mq.addEventListener('change', this.mqH); }
+    if (window.IntersectionObserver) {
+      this.io = new IntersectionObserver((ents)=>{
+        const inView = this.state.inView.slice();
+        ents.forEach(e=>{ const i=this.els.indexOf(e.target); if (i>=0) inView[i]=e.isIntersecting; });
+        this.setState({inView, arc:this.currentArc()});
+      }, {threshold:.2});
+      this.els.forEach(el=>el && this.io.observe(el));
+    } else this.setState({inView:this.state.inView.map(()=>true)});
+    const measure = ()=>{ const narrow = window.innerWidth < 640; if (narrow !== this.state.narrow) this.setState({narrow}); const g=this.evGrid; if (!g) return; const three = getComputedStyle(g).gridTemplateColumns.split(' ').length===3; if (three !== this.state.threeCols) this.setState({threeCols:three}); };
+    if (window.ResizeObserver) { this.ro = new ResizeObserver(measure); if (this.evGrid) this.ro.observe(this.evGrid); }
+    window.addEventListener('resize', measure); this.measure = measure; requestAnimationFrame(measure);
+    this.onKey = (e)=>{
+      if (this.state.menu) { if (e.key==='Escape') this.setState({menu:false}); return; }
+      if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+      if (e.key==='ArrowDown' || e.key==='PageDown') { e.preventDefault(); this.jump(1); }
+      if (e.key==='ArrowUp' || e.key==='PageUp') { e.preventDefault(); this.jump(-1); }
+    };
+    window.addEventListener('keydown', this.onKey);
+    this.onScroll = ()=>{ if (this.scrRaf) return; this.scrRaf = requestAnimationFrame(()=>{ this.scrRaf=0; const a=this.currentArc(); if (a!==this.state.arc) this.setState({arc:a}); }); };
+    window.addEventListener('scroll', this.onScroll, {passive:true});
+    this.audio = new Audio('assets/focus.ogg'); this.audio.loop = true; this.audio.volume = 0;
+    this.last = performance.now();
+    this.t = setInterval(()=>this.tick(), 100);
+  }
+  componentWillUnmount() { clearInterval(this.t); clearInterval(this.fadeT); if (this.io) this.io.disconnect(); if (this.ro) this.ro.disconnect(); window.removeEventListener('resize', this.measure); window.removeEventListener('keydown', this.onKey); window.removeEventListener('scroll', this.onScroll); if (this.audio) this.audio.pause(); }
+  sections() { return Array.from(document.querySelectorAll('section[id]')); }
+  currentArc() { let arc = this.state.arc, best = Infinity; this.els.forEach((el,i)=>{ if (!el) return; const top = el.getBoundingClientRect().top; const d = Math.abs(top - window.innerHeight*.3); if (top <= window.innerHeight*.6 && d < best) { best = d; arc = i; } }); return arc; }
+  jump(dir) {
+    const secs = this.sections(); const y = window.scrollY + 61; let idx = 0;
+    secs.forEach((s,i)=>{ if (s.offsetTop <= y + 2) idx = i; });
+    const target = secs[Math.max(0, Math.min(secs.length-1, idx+dir))];
+    if (target) window.scrollTo({top: target.offsetTop - 60, behavior: this.state.rm ? 'auto' : 'smooth'});
+  }
+  fadeTo(v, then) { clearInterval(this.fadeT); this.fadeT = setInterval(()=>{ const a=this.audio; const d=v-a.volume; if (Math.abs(d)<0.02) { a.volume=v; clearInterval(this.fadeT); then && then(); return; } a.volume = Math.max(0, Math.min(1, a.volume + d*0.12)); }, 60); }
+  toggleSound = ()=>{ if (!this.audio) return; if (this.state.sound) { this.setState({sound:false}); this.fadeTo(0, ()=>this.audio.pause()); } else { this.setState({sound:true}, ()=>this.audio.play().then(()=>this.fadeTo(.35)).catch(()=>this.setState({sound:false}))); } };
+  tick() {
+    const now = performance.now(), dt = (now-this.last) * (this.props.speed ?? 1); this.last = now;
+    if (this.props.autoplay === false || this.state.rm) return;
+    const step = this.state.step.slice(), el = this.state.elapsed.slice(); let changed=false;
+    for (let i=0;i<this.seq.length;i++) {
+      if (!this.state.inView[i]) continue;
+      if (i===4 && (this.state.approval || step[4] >= this.seq[4].dur.length-1)) continue;
+      if (i===11 && this.manualSc) continue;
+      el[i] += dt;
+      const d = this.seq[i].dur[step[i]];
+      if (d === 0) continue;
+      if (el[i] >= d) { el[i] = 0; step[i] = (step[i]+1) % this.seq[i].dur.length; changed = true;
+        if (i===4 && step[4] === this.seq[4].dur.length-1) this.setState({approval:true, approved:false});
+      }
+    }
+    if (changed) this.setState({step, elapsed:el}); else this.setState({elapsed:el});
+  }
+  setStep(i, n) { const step=this.state.step.slice(), el=this.state.elapsed.slice(); step[i]=n; el[i]=0; this.setState({step, elapsed:el}); }
+  renderVals() {
+    const S = this.state; const rm = S.rm || !!this.props.reduceMotion;
+    const st = (i) => rm ? this.seq[i].dur.length-1 : S.step[i];
+    const v = (on, dy=14) => ({o: on ? 1 : 0, y: on ? 0 : dy});
+    const anim = !rm;
+    // HERO
+    const h = st(0);
+    const chipData = [['Memory','Aisle seat · Axis points · BLR home',''],['Flights','BLR → DXB · from ₹28,450','LIVE'],['Hotels','14 stays under budget','LIVE'],['Your points','41,200 Axis · worth ~₹12k','EST.'],['Calendar','12–17 Mar is clear',''],['Tasks','Visa · packing · SIM',''],['Weather','29° · dry all week',''],['Passport','Valid till Mar 2033 ✓',''],['Trip Brief','3 options · under ₹1.5L · nothing booked','']];
+    const chips = chipData.map((c,i)=>{ const on = h >= 2 + Math.floor(i/2); const brief = i===8; return {label:c[0], value:c[1], tag: c[2]==='LIVE' ? '#157A6E' : (brief ? '#8FE3CF' : '#5C554C'), col: brief ? '1 / -1' : 'auto', bg: brief ? '#16130F' : '#FFFFFF', fg: brief ? '#F6F1E8' : '#16130F', o: on ? 1 : 0, y: on ? 0 : 18, s: on ? 1 : .92}; });
+    const hero = { think:{o: (h>=1 && h<7) ? 1 : 0}, thinkText: h<2 ? 'Gogo is thinking' : 'Gogo is assembling your trip', chips, reply: v(h>=7) };
+    const heroGogo = h<1 ? 'listening' : h<7 ? 'thinking' : 'found';
+    // INSIDE YOUR HEAD
+    const o = st(1);
+    const frag = ['reply to Rahul','renew insurance','Mom\'s appointment','Mumbai flight','passport','school form','birthday','hotel','bill','presentation','follow up'];
+    const pos = S.narrow ? [[26,8],[70,6],[74,22],[22,26],[78,40],[24,46],[76,60],[26,64],[72,78],[28,84],[50,94]] : [[14,12],[50,8],[86,14],[8,40],[92,42],[20,64],[80,66],[36,30],[64,32],[14,88],[86,88]];
+    const items = frag.map((t,i)=>{ const absorbed = o===12 || o > i+1; return {text:t, x: absorbed ? 50 : pos[i][0], y: absorbed ? 50 : pos[i][1], s: absorbed ? .2 : 1, o: absorbed ? 0 : 1, dur:(4+(i%4))+'s', delay:'-'+(i*.7)+'s'}; });
+    const left = o===0 ? 11 : Math.max(0, 11 - (o-1));
+    const ow = { items, text: o===12 ? 'Give it to Gogo.' : 'Life shouldn\'t depend on remembering every little thing.', color: o===12 ? '#157A6E' : '#16130F', count: left ? `${left} things you were carrying` : 'Nothing left to carry' };
+    const owGogo = o===0 ? 'listening' : o===12 ? 'calm' : 'remembering';
+    // MEMORY
+    const m = st(2);
+    const mem = [['Travel','You prefer aisle seats.','You told Gogo · 2 Sep'],['Family','Dad\'s doctor is Dr Rao.','From a voice note · 14 Aug'],['People','Srinivas doesn\'t eat mushrooms.','You told Gogo · 21 Jul'],['Travel','You usually fly from Bengaluru.','Noticed from 6 bookings'],['Documents','Your passport expires in March.','From a scanned PDF · 3 Jun'],['Schedule','Your Monday mornings are packed.','Noticed from Calendar']];
+    const cards = mem.map((c,i)=>{ const on = m >= i; const used = m >= 7 && (i===2 || i===5); const gone = !!S.forgotten[i]; const pv = !!S.priv[i];
+      return {tag: pv ? c[0]+' · private' : c[0], text:c[1], src:c[2], tagFg: used ? '#157A6E' : '#5C554C', bg: used ? '#E6F3F0' : '#FFFFFF', border: used ? 'rgba(21,122,110,.4)' : 'rgba(22,19,15,.08)', o: on && !gone ? 1 : 0, x: on ? 0 : 24, h: gone ? '0px' : '220px', privBg: pv ? '#16130F' : 'transparent', privFg: pv ? '#F6F1E8' : '#16130F',
+        correct:()=>{}, priv:()=>this.setState(s=>({priv:{...s.priv,[i]:!s.priv[i]}})), forget:()=>this.setState(s=>({forgotten:{...s.forgotten,[i]:true}}))}; });
+    const me = { cards, a:v(m>=7), restore:()=>this.setState({forgotten:{}}), restoreO: Object.keys(S.forgotten).length ? 1 : 0 };
+    const meGogo = m<6 ? 'remembering' : m===6 ? 'thinking' : 'found';
+    // AGENT
+    const a = st(3);
+    const actSteps = [['Checked your calendar','Calendar'],['Read the thread from Priya','Gmail'],['Found the attached agenda','Drive'],['Created 2 tasks','Tasks'],['Reminder set for 07:30','Reminders'],['Prepared the meeting brief','Artifact'],['Travel time: 38 min at 09:00','Maps'],['Prepared a calendar change','Calendar']];
+    const steps = actSteps.map((s,i)=>{ const done = a > i; const cur = a === i; return {text:s[0], src:s[1], bg: cur ? '#F6F1E8' : 'transparent', fg: done||cur ? '#16130F' : 'rgba(22,19,15,.38)', dot: done ? '#157A6E' : cur ? '#EF7A27' : 'rgba(22,19,15,.15)', glow: cur ? '0 0 12px rgba(239,122,39,.8)' : 'none', srcFg: done||cur ? '#157A6E' : 'rgba(22,19,15,.3)'}; });
+    const ac = { steps, done: v(a>=8) };
+    const acGogo = a<1 ? 'thinking' : a<8 ? 'acting' : 'done';
+    const loopNames = ['Tell Gogo','Remember','Plan','Act','Ask when needed','Keep working','Come back','Remember the result'];
+    const loopIdx = a<1 ? 0 : a<2 ? 1 : a<4 ? 2 : a<8 ? 3 : 4;
+    const loop = loopNames.map((n,i)=>({name:n, bg: i===loopIdx ? '#16130F' : 'transparent', fg: i===loopIdx ? '#F6F1E8' : '#5C554C'}));
+    // TRAVEL
+    const t = st(4); const ap = S.approval, done = S.approved; const prepared = t>=7 || ap;
+    const tl = ['Planned','Checked','Prepared','Waiting for you','Completed'].map((n,i)=>{ const filled = done ? true : i<3; const cur = !done && i===3; return {name:n, bar: filled ? '#8FE3CF' : cur ? '#F6F1E8' : 'rgba(246,241,232,.18)', fg: filled||cur ? '#F6F1E8' : '#B9B0A3'}; });
+    const tr = { cash:v(t>=1), pts:v(t>=2), l1:v(t>=3,8), l2:v(t>=4,8), l3:v(t>=4,8), rec:v(t>=5), btn:v(t>=6), showBtn: !prepared, prepared,
+      prepare:()=>{ this.setStep(4,7); clearTimeout(this.apT); this.apT = setTimeout(()=>this.setState({approval:true, approved:false}), 1400); },
+      approve:()=>this.setState({approved:true}), notNow:()=>{ this.setState({approval:false, approved:false}); this.setStep(4,6); },
+      approvalOn: ap, pending: ap && !done, completed: ap && done, timeline: tl };
+    const trGogo = t<5 ? 'thinking' : 'found';
+    const trApGogo = done ? 'done' : 'approval', trApLabel = done ? 'Approved · done' : 'Waiting for approval', trApSub = done ? 'Saved to Gogo Memory' : 'Nothing is booked yet';
+    // BACKGROUND
+    const b = st(5); const night = b>=2 && b<7;
+    const clocks = ['22:40','22:40','22:40','23:55','02:15','04:30','06:05','07:10','07:10'];
+    const vals = ['₹24,900','₹24,300','₹23,880','₹21,640'];
+    const checks = vals.map((x,i)=>{ const on = b >= 3+i; const hit = i===3 && on; return {v: on ? x : '· · ·', fg: hit ? '#0E1614' : on ? '#F6F1E8' : 'rgba(246,241,232,.35)', bg: hit ? '#8FE3CF' : 'transparent'}; });
+    const others = [['09:00','Application opened — status changed to “under review”.'],
