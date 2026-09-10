@@ -1,0 +1,75 @@
+"72px,72px"></dc-import>
+              <div style="font-family:Newsreader,Georgia,serif;font-size:48px;font-weight:300;letter-spacing:-.03em;line-height:1">{{ bg.clock }}</div>
+              <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px"><sc-for list="{{ bg.checks }}" as="c" hint-placeholder-count="4"><span style="padding:5px 9px;border-radius:999px;border:1px solid rgba(246,241,232,.14);font-size:10px;letter-spacing:.06em;color:{{ c.fg }};background:{{ c.bg }};transition:all .5s;white-space:nowrap">{{ c.v }}</span></sc-for></div>
+              <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8FE3CF;white-space:nowrap">Background Gogo · watching</div>
+            </div>
+          </div>
+          <div style="position:absolute;left:10px;right:10px;top:62px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.97);color:#16130F;box-shadow:0 18px 50px rgba(20,16,10,.22);opacity:{{ bg.notif.o }};transform:translateY({{ bg.notif.y }}px);transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1)">
+            <div style="display:flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.08em;color:#5C554C"><dc-import name="Gogo" state="found" size="24" show-status="{{ false }}" animate="{{ anim }}" hint-size="24px,24px"></dc-import>GOGO · WHATSAPP<span style="margin-left:auto;font-weight:500">07:10</span></div>
+            <div style="margin-top:8px;font-size:13px;line-height:1.4">The fare dropped to <b>₹21,640</b>. ₹3,200 lower than yesterday.</div>
+            <div style="display:flex;gap:6px;margin-top:10px"><span style="padding:7px 12px;border-radius:999px;background:#157A6E;color:#F6F1E8;font-size:11px;font-weight:600;letter-spacing:.06em">PREPARE IT</span><span style="padding:7px 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14);font-size:11px;font-weight:600;letter-spacing:.06em">KEEP WATCHING</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 DAILY GOGO -->
+<section id="daily" ref="{{ ref6 }}" data-screen-label="06 Daily Gogo" style="position:relative;background:#EFE8DC;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px)">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,5vw,96px);align-items:center">
+    <div style="min-width:0">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E"><i style="width:22px;height:1px;background:#157A6E"></i>06 — Daily Gogo</span>
+      <h2 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(40px,4.8vw,84px);line-height:.98;letter-spacing:-.03em;margin:14px 0 18px;text-wrap:balance">Wake up to <em>what matters.</em></h2>
+      <p style="font-size:clamp(16px,1.15vw,19px);line-height:1.55;color:#5C554C;max-width:30em;margin:0;text-wrap:pretty">Not a dashboard of widgets. One quiet brief, already thought through.</p>
+    </div>
+    <div style="min-width:0;border-radius:24px;background:#FFFFFF;border:1px solid rgba(22,19,15,.08);box-shadow:0 30px 80px rgba(40,32,20,.1);padding:clamp(18px,1.8vw,28px);display:grid;gap:14px;font-size:clamp(14px,1.05vw,16px)">
+      <div style="display:flex;align-items:center;gap:12px"><dc-import name="Gogo" state="{{ dyGogo }}" size="44" animate="{{ anim }}" hint-size="44px,44px"></dc-import><div><b style="display:block;font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(24px,2vw,32px);letter-spacing:-.02em;line-height:1">Good morning.</b><span style="font-size:13px;color:#5C554C">3 things need you today.</span></div></div>
+      <div style="display:grid;gap:8px">
+        <sc-for list="{{ dy.items }}" as="d" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:#F6F1E8;opacity:{{ d.o }};transform:translateY({{ d.y }}px);transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1)"><small style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ d.tagFg }};line-height:1.3">{{ d.tag }}</small><div><b style="display:block;font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(17px,1.3vw,21px);letter-spacing:-.01em">{{ d.title }}</b><small style="font-size:12px;color:#5C554C">{{ d.sub }}</small></div></div></sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#E6F3F0;opacity:{{ dy.done.o }};transform:translateY({{ dy.done.y }}px);transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1)"><span style="font-family:Newsreader,Georgia,serif;font-size:clamp(17px,1.3vw,21px);line-height:1.3">I already prepared your investor meeting brief.</span><span style="margin-left:auto;padding:6px 10px;border-radius:999px;background:#16130F;color:#F6F1E8;font-size:10px;font-weight:600;letter-spacing:.1em;white-space:nowrap">OPEN BRIEF</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 GOALS + IDEAS + ARTIFACTS -->
+<section id="goals" ref="{{ ref7 }}" data-screen-label="07 Gogo Goals & Ideas" style="position:relative;background:#F6F1E8;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px)">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,5vw,96px);align-items:center">
+    <div style="min-width:0;order:2">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E"><i style="width:22px;height:1px;background:#157A6E"></i>07 — Gogo Goals · Gogo Ideas</span>
+      <h2 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(40px,4.8vw,84px);line-height:.98;letter-spacing:-.03em;margin:14px 0 18px;text-wrap:balance">Gogo thinks <em>beyond today.</em></h2>
+      <p style="font-size:clamp(16px,1.15vw,19px);line-height:1.55;color:#5C554C;max-width:30em;margin:0 0 22px;text-wrap:pretty">A goal becomes a living plan. Months later, Gogo still notices what you'd have missed.</p>
+      <small style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5C554C;margin-bottom:8px">Gogo Artifacts — work becomes objects, not long chats</small>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:12px;font-weight:600"><span style="padding:8px 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14)">Mumbai Work Trip Brief</span><span style="padding:8px 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14)">Investor Tracker</span><span style="padding:8px 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14)">Meeting Brief</span><span style="padding:8px 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14)">Research Brief</span><span style="padding:8px 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14)">Application Tracker</span><span style="padding:8px 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14)">Comparison</span><span style="padding:8px 12px;border-radius:999px;background:#16130F;color:#F6F1E8">Goal Plan</span></div>
+    </div>
+    <div style="min-width:0;order:1;border-radius:24px;background:#FFFFFF;border:1px solid rgba(22,19,15,.08);box-shadow:0 30px 80px rgba(40,32,20,.1);padding:clamp(18px,1.8vw,28px);display:grid;gap:14px;font-size:clamp(14px,1.05vw,16px)">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><dc-import name="Gogo" state="{{ goGogo }}" size="44" animate="{{ anim }}" hint-size="44px,44px"></dc-import><div style="max-width:82%;padding:12px 16px;border-radius:18px 18px 4px 18px;background:#16130F;color:#F6F1E8">I want to launch my company in India before December.</div></div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+        <sc-for list="{{ go.parts }}" as="p" hint-placeholder-count="8"><div style="padding:10px 8px;border-radius:12px;background:{{ p.bg }};color:{{ p.fg }};font-size:11px;font-weight:600;text-align:center;transition:all .5s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.name }}</div></sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#5C554C;opacity:{{ go.wait.o }};transition:opacity .6s"><i style="flex:1;height:1px;background:rgba(22,19,15,.12)"></i>Weeks pass · Background Gogo watching<i style="flex:1;height:1px;background:rgba(22,19,15,.12)"></i></div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px;border-radius:16px;background:#E6F3F0;opacity:{{ go.idea.o }};transform:translateY({{ go.idea.y }}px);transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1)"><dc-import name="Gogo" state="found" size="40" animate="{{ anim }}" hint-size="40px,40px"></dc-import><div><small style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E">Gogo Idea</small><span style="display:block;font-family:Newsreader,Georgia,serif;font-size:clamp(17px,1.3vw,21px);line-height:1.3;margin-top:3px">The accelerator you've been tracking just opened applications.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 CONNECT YOUR WORLD -->
+<section id="connect" ref="{{ ref8 }}" data-screen-label="08 Connect your world" style="position:relative;background:#EFE8DC;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px)">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,5vw,96px);align-items:center">
+    <div style="min-width:0">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E"><i style="width:22px;height:1px;background:#157A6E"></i>08 — Connect your world</span>
+      <h2 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(40px,4.8vw,84px);line-height:.98;letter-spacing:-.03em;margin:14px 0 18px;text-wrap:balance">Gogo works with <em>what you already use.</em></h2>
+      <p style="font-size:clamp(16px,1.15vw,19px);line-height:1.55;color:#5C554C;max-width:30em;margin:0 0 20px;text-wrap:pretty">One mission moves through your apps. Information flows in, actions flow back — and Gogo asks before anything leaves.</p>
+      <div style="display:grid;gap:6px;font-size:clamp(14px,1.05vw,16px)">
+        <sc-for list="{{ cn.story }}" as="s" hint-placeholder-count="5"><div style="display:flex;gap:10px;align-items:baseline;color:{{ s.fg }};transition:color .4s"><span style="font-size:11px;font-weight:600;letter-spacing:.1em;color:#157A6E;width:16px;flex:none">{{ s.n }}</span>{{ s.text }}</div></sc-for>
+      </div>
+    </div>
+    <div style="min-width:0;display:grid;gap:6px;justify-items:center">
+      <sc-for list="{{ cn.nodes }}" as="n" hint-placeholder-count="8"><div style="display:grid;gap:6px;justify-items:center;width:100%"><div style="display:flex;align-items:center;gap:10px;width:min(100%,360px);padding:10px 14px;border-radius:999px;background:{{ n.bg }};color:{{ n.fg }};border:1px solid {{ n.border }};box-shadow:{{ n.shadow }};transition:all .5s;font-size:13px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:{{ n.dot }};flex:none"></span>{{ n.name }}<span style="margin-left:auto;font-size:10px;letter-spacing:.1em;font-weight:600;color:{{ n.tagFg }}">{{ n.tag }}</span></div><i style="display:{{ n.arrow }};width:1px;height:10px;background:rgba(22,19,15,.2)"></i></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- 09 EVERYWHERE -->
+<section id="everywhere" ref="{{ ref9 }}" data-screen-label="09 Everywhere" style="position:relative;background:#0E1614;color:#F6F1E8;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px);overflow:hidden">
