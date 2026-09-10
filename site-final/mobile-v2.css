@@ -1,185 +1,146 @@
-/* AskGogo mobile-first story mode. Desktop remains untouched. */
+/* AskGogo mobile-first vertical story. Desktop remains untouched. */
 @media (max-width: 759px) {
   html, body {
-    height: 100%;
-    overflow: hidden !important;
-    overscroll-behavior: none;
+    min-height: 100%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: auto;
+    scroll-behavior: smooth;
   }
 
   [data-screen-label="AskGogo FINAL"] {
-    width: 100vw !important;
-    height: 100dvh !important;
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-behavior: smooth !important;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none !important;
-    touch-action: pan-x pan-y;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+    touch-action: pan-y !important;
   }
 
-  [data-screen-label="AskGogo FINAL"]::-webkit-scrollbar,
-  [data-screen-label="AskGogo FINAL"] > section::-webkit-scrollbar {
-    display: none;
-  }
-
+  /* Keep the website nav familiar and lightweight on mobile, like Muse. */
   [data-screen-label="AskGogo FINAL"] > div:first-of-type {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
+    position: sticky !important;
     top: 0 !important;
+    left: auto !important;
+    right: auto !important;
     width: 100% !important;
     z-index: 180 !important;
     box-sizing: border-box !important;
   }
 
+  /* Chapters stay in one continuous vertical story. Visual separation comes from
+     breathing room, background changes in the original design and a quiet divider. */
   [data-screen-label="AskGogo FINAL"] > section {
-    flex: 0 0 100vw !important;
-    width: 100vw !important;
+    width: 100% !important;
     max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
+    height: auto !important;
+    min-height: auto !important;
     box-sizing: border-box !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    scroll-snap-align: start !important;
-    scroll-snap-stop: always !important;
-    padding: 76px 16px 58px !important;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    padding-top: clamp(58px, 8vh, 82px) !important;
+    padding-bottom: clamp(62px, 9vh, 94px) !important;
+    scroll-margin-top: 62px;
+    border-top: 1px solid rgba(22,19,15,.07);
+  }
+
+  [data-screen-label="AskGogo FINAL"] > section:first-of-type {
+    border-top: 0;
+  }
+
+  /* Give the emotional opening and closing moments a little more breathing room. */
+  #top,
+  #overwhelmed,
+  #breathe {
+    min-height: 88svh !important;
+  }
+
+  #top {
+    align-content: start !important;
+    padding-top: clamp(48px, 7vh, 70px) !important;
   }
 
   [data-screen-label="AskGogo FINAL"] > section h1 {
-    font-size: clamp(48px, 15vw, 68px) !important;
+    font-size: clamp(50px, 15vw, 72px) !important;
     line-height: .94 !important;
     margin-bottom: 14px !important;
   }
 
   [data-screen-label="AskGogo FINAL"] > section h2 {
-    font-size: clamp(36px, 11vw, 52px) !important;
+    font-size: clamp(38px, 11vw, 56px) !important;
     line-height: .98 !important;
     margin-top: 10px !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
 
   [data-screen-label="AskGogo FINAL"] > section p[style*="font-size:clamp"] {
-    font-size: 14px !important;
-    line-height: 1.42 !important;
+    font-size: 15px !important;
+    line-height: 1.48 !important;
   }
 
   [data-screen-label="AskGogo FINAL"] > section [style*="gap:clamp(28px"] {
-    gap: 18px !important;
-  }
-
-  #top {
-    align-content: start !important;
-    padding-top: 86px !important;
+    gap: 20px !important;
   }
 
   #top > div:first-child [style*="margin-bottom:22px"] {
     margin-bottom: 10px !important;
   }
 
-  /* Hero is a taste, not a wall of detail, on mobile. */
-  #top [style*="grid-template-columns:repeat(auto-fill"] > div:nth-child(n+5) {
+  /* The hero remains rich, but avoids becoming a tall wall of micro-cards. */
+  #top [style*="grid-template-columns:repeat(auto-fill"] > div:nth-child(n+7) {
     display: none !important;
   }
 
   #top [aria-label="Scroll"] {
-    display: none !important;
-  }
-
-  /* Keep the Background Gogo phone demo compact enough to scan in one chapter. */
-  #continues [style*="width:min(100%,300px)"] {
-    width: min(100%, 210px) !important;
-    border-radius: 32px !important;
-  }
-
-  /* Pricing becomes a horizontal card chooser instead of four stacked cards. */
-  #pricing > div > div:nth-child(2) {
     display: flex !important;
-    grid-template-columns: none !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    scroll-snap-type: x mandatory !important;
-    gap: 10px !important;
-    padding: 2px 7vw 8px !important;
-    margin-left: -16px !important;
-    margin-right: -16px !important;
-    scrollbar-width: none !important;
-    -webkit-overflow-scrolling: touch;
   }
 
-  #pricing > div > div:nth-child(2)::-webkit-scrollbar {
-    display: none;
+  /* Keep Background Gogo's phone demo proportionate on a narrow screen. */
+  #continues [style*="width:min(100%,300px)"] {
+    width: min(100%, 240px) !important;
+    border-radius: 34px !important;
+  }
+
+  /* Pricing remains vertical so the entire site has one consistent scroll language.
+     Cards are tightened rather than becoming a nested sideways carousel. */
+  #pricing > div > div:nth-child(2) {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    overflow: visible !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   #pricing > div > div:nth-child(2) > div {
-    flex: 0 0 84vw !important;
-    scroll-snap-align: center !important;
+    width: 100% !important;
     padding: 18px !important;
+    box-sizing: border-box !important;
   }
 
   #pricing > div > p:last-child {
-    font-size: 10.5px !important;
-    line-height: 1.35 !important;
-    margin-top: 8px !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    margin-top: 10px !important;
   }
 
-  #breathe {
-    overflow: hidden !important;
+  /* Stronger visual chapter hand-off without introducing UI controls. */
+  #remembers,
+  #travel,
+  #daily,
+  #voice,
+  #trust,
+  #pricing {
+    box-shadow: inset 0 18px 40px rgba(22,19,15,.018);
   }
 
+  /* The previous swipe controller is intentionally hidden if cached markup survives. */
   .gogo-mobile-story-nav {
-    position: fixed;
-    z-index: 175;
-    left: 50%;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 190px;
-    justify-content: space-between;
-    padding: 7px 8px;
-    border: 1px solid rgba(22,19,15,.10);
-    border-radius: 999px;
-    background: rgba(246,241,232,.90);
-    color: #16130F;
-    box-shadow: 0 12px 36px rgba(22,19,15,.12);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-  }
-
-  .gogo-mobile-story-nav button {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    border: 1px solid rgba(22,19,15,.10);
-    background: rgba(255,255,255,.72);
-    color: #16130F;
-    font-size: 16px;
-  }
-
-  .gogo-mobile-story-nav .gogo-story-count {
-    min-width: 86px;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: .10em;
-    text-transform: uppercase;
-    color: #5C554C;
-    white-space: nowrap;
+    display: none !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) and (max-width: 759px) {
-  [data-screen-label="AskGogo FINAL"] {
-    scroll-behavior: auto !important;
-    scroll-snap-type: x proximity !important;
-  }
+  html, body { scroll-behavior: auto !important; }
 }
