@@ -1,0 +1,70 @@
+['12:30','An appointment slot became available at Dr Rao\'s clinic.'],['MON','Price changed on the laptop you\'re watching.'],['FRI','Deadline approaching: passport renewal in 30 days.']].map((x,i)=>({t:x[0], text:x[1], o: b >= i+2 ? 1 : .35}));
+    const bg = { fg: night ? '#F6F1E8' : '#16130F', muted: night ? '#B9C4C0' : '#5C554C', accent: night ? '#8FE3CF' : '#157A6E', stars: night ? 1 : 0, g:v(b>=1), dark: night ? 1 : 0, clock: clocks[b] || '07:10', checks, notif: v(b>=7, -12), others };
+    // DAILY
+    const d = st(6);
+    const dy = { items: [['10:00','Investor call','Brief prepared · 3 talking points','#157A6E'],['Reminder','Passport renewal','Expires in March · form drafted','#5C554C'],['Gogo noticed','Mumbai fare dropped ₹2,300','Same dates you asked about','#EF7A27']].map((x,i)=>({tag:x[0], title:x[1], sub:x[2], tagFg:x[3], ...v(d>=i+1)})), done: v(d>=4) };
+    const dyGogo = d<4 ? 'calm' : 'found';
+    // GOALS
+    const g = st(7);
+    const partNames = ['Plan','Research','Tasks','Deadlines','People','Documents','Follow-ups','Watches'];
+    const go = { parts: partNames.map((n,i)=>({name:n, bg: g >= i+1 ? '#16130F' : '#F6F1E8', fg: g >= i+1 ? '#F6F1E8' : 'rgba(22,19,15,.4)'})), wait:{o: g>=9 ? 1 : 0}, idea: v(g>=10) };
+    const goGogo = g<1 ? 'listening' : g<9 ? 'acting' : g<10 ? 'watching' : 'found';
+    // CONNECT
+    const c = st(8);
+    const nodeData = [['WhatsApp','You: “Reply to Priya with the agenda.”'],['Gogo Memory','Priya · investor · prefers short emails'],['Gmail','Email arrives · thread read'],['Google Calendar','Thursday 10:00 confirmed'],['Drive','Agenda-v3.pdf found'],['Contacts','priya@… verified'],['CreditIQ','Travel · LIVE fare check'],['Browser','Reply prepared · asks before sending']];
+    const cn = { nodes: nodeData.map((n,i)=>{ const on = c >= i; const cur = c === i; return {name:n[0], tag: on ? n[1] : '', bg: cur ? '#16130F' : on ? '#FFFFFF' : 'transparent', fg: cur ? '#F6F1E8' : on ? '#16130F' : 'rgba(22,19,15,.4)', border: on ? 'rgba(22,19,15,.1)' : 'rgba(22,19,15,.12)', shadow: cur ? '0 14px 40px rgba(40,32,20,.14)' : 'none', dot: cur ? '#EF7A27' : on ? '#157A6E' : 'rgba(22,19,15,.15)', tagFg: cur ? '#8FE3CF' : '#5C554C', arrow: i<7 ? 'block' : 'none'}; }),
+      story: [['1','Email arrives'],['2','Gogo reads the context'],['3','Finds the related Drive file'],['4','Checks Calendar'],['5','Prepares the reply — and asks before sending']].map((s,i)=>({n:s[0], text:s[1], fg: c >= [2,2,4,3,7][i] ? '#16130F' : 'rgba(22,19,15,.4)'})) };
+    // EVERYWHERE
+    const e = st(9);
+    const bars = Array.from({length:22},(_,i)=>({dur:(0.8+(i%5)*0.13).toFixed(2)+'s', delay:'-'+((i*0.11)%1).toFixed(2)+'s', op: i%3===0 ? .55 : 1}));
+    const glow = 'inset 0 0 0 1px rgba(143,227,207,.5),0 0 60px rgba(47,174,152,.25)';
+    const ev = { m2:v(e>=1), m3:v(e>=2), m4:v(e>=3), m5:v(e>=4), m6:v(e>=5), bars, c1:{glow: e<=1 ? glow : 'none'}, c2:{glow: (e===2||e===3) ? glow : 'none'}, c3:{glow: e>=4 ? glow : 'none'}, dotX: e<=1 ? 16 : e<=3 ? 50 : 84, threadDisplay: S.threeCols ? 'block' : 'none' };
+    // VOICE
+    const vs = st(10);
+    const vo = { bars: Array.from({length:26},(_,i)=>({dur:(0.7+(i%6)*0.11).toFixed(2)+'s', delay:'-'+((i*0.09)%1).toFixed(2)+'s', op: vs<1 ? (i%3===0 ? .5 : 1) : .25})),
+      steps: [['Understood — Kannada, Dad\'s report','Voice'],['Saved · Documents · Family · private','Gogo Memory'],['Follow-up found: 24 Sep, Dr Rao','From the PDF'],['Reminder prepared · 22 Sep 09:00','Reminders']].map((s,i)=>{ const on = vs >= i+1; const cur = vs === i+1; return {text:s[0], src:s[1], bg: cur ? '#F6F1E8' : 'transparent', fg: on ? '#16130F' : 'rgba(22,19,15,.38)', dot: on ? (cur ? '#EF7A27' : '#157A6E') : 'rgba(22,19,15,.15)', srcFg: on ? '#157A6E' : 'rgba(22,19,15,.3)'}; }) };
+    const voGogo = vs<1 ? 'listening' : vs<5 ? 'acting' : 'done';
+    // SECURE
+    const s = st(11);
+    const sc = { f1: s>=1 ? 'Ananya Iyer' : (s===0 ? 'Ananya I' : ''), f1b: s===0 ? '#EF7A27' : 'rgba(22,19,15,.1)', f2: s>=2 ? 'GX7Q4M' : (s===1 ? 'GX7' : ''), f2b: s===1 ? '#EF7A27' : 'rgba(22,19,15,.1)', f3: s>=5 ? '14A · aisle (your preference)' : '', f3b: s===5 ? '#EF7A27' : 'rgba(22,19,15,.1)',
+      status: ['Filling passenger name…','Entering booking reference…','Login required — your turn','You\'re in control. Gogo paused.','Thanks. Continuing check-in…','Choosing your usual aisle seat…','Done.'][s],
+      statusDot: (s===2||s===3) ? '#5C554C' : s===6 ? '#2FAE6A' : '#EF7A27',
+      mode: (s===2||s===3) ? 'SECURE MODE' : 'SANDBOXED', modeFg: (s===2||s===3) ? '#16130F' : '#157A6E',
+      wall: s===2, priv: s===3, done: s===6, pw: Array.from({length:8},(_,i)=> i<6 ? 1 : .2),
+      s1: (s<=1||s>=4) ? '#16130F' : 'rgba(22,19,15,.3)', s2: (s===2||s===3) ? '#157A6E' : 'rgba(22,19,15,.3)', s3: s>=4 ? '#157A6E' : 'rgba(22,19,15,.3)',
+      takeOver:()=>{ this.manualSc=true; this.setStep(11,3); clearTimeout(this.mT); this.mT=setTimeout(()=>{this.manualSc=false;}, 12000); }, handBack:()=>{ this.manualSc=false; this.setStep(11,4); } };
+    const scGogo = s<2 ? 'acting' : s<4 ? 'secure' : s===4 ? 'listening' : s===5 ? 'acting' : 'done';
+    // APPROVALS
+    const permData = [['Send email','Reply to Priya with the agenda','To priya@… · 2 attachments'],['Change calendar','Move standup to 09:30','Thursday · 4 attendees notified'],['Book flight','BLR → DXB · ₹28,450','Axis card ending 4471'],['Pay ₹6,420','Electricity · BESCOM','Due tomorrow · autopay off'],['Share document','Passport scan → Dubai hotel','Expires after 24h']];
+    const anyApproved = Object.values(S.perm).some(x=>x==='approved');
+    const pm = { cards: permData.map((c,i)=>{ const p = S.perm[i]; const closed = !!p; const ok = p==='approved'; return {action:c[0], title:c[1], sub:c[2], open:!closed, closed, bg: ok ? '#16130F' : '#FFFFFF', fg: ok ? '#F6F1E8' : '#16130F', tagFg: ok ? '#8FE3CF' : '#157A6E', subFg: ok ? '#B9B0A3' : '#5C554C', state: ok ? 'Completed · 10:42' : 'Parked · Not now', stateFg: ok ? '#8FE3CF' : '#5C554C',
+        approve:()=>{ this.setState(s=>({perm:{...s.perm,[i]:'approved'}, pmGogo:'acting'})); clearTimeout(this.pmT); this.pmT = setTimeout(()=>{ this.setState({pmGogo:'done'}); this.pmT = setTimeout(()=>this.setState({pmGogo:'approval'}), 2200); }, 1400); },
+        notNow:()=>this.setState(s=>({perm:{...s.perm,[i]:'parked'}})), reset:()=>this.setState(s=>{ const p={...s.perm}; delete p[i]; return {perm:p}; })}; }),
+      timeline: ['Planned','Checked','Prepared','Waiting for you','Completed'].map((n,i)=>{ const filled = anyApproved ? true : i<3; const cur = !anyApproved && i===3; return {name:n, bar: filled ? '#157A6E' : cur ? '#16130F' : 'rgba(22,19,15,.15)', fg: filled||cur ? '#16130F' : 'rgba(22,19,15,.4)'}; }) };
+    // PRICING
+    const annual = S.annual;
+    const planData = [
+      ['Gogo Free','Meet Gogo.','₹0','₹0','',['Core memory','Tasks, lists, reminders','Limited Gogo conversations','Limited WhatsApp','Basic Daily Gogo'],'Meet Gogo',false],
+      ['Gogo Essential','Let Gogo help.','₹249','₹2,490','₹2,490 / year · save ₹498',['More memory','WhatsApp + Calendar','Light connected apps','Live travel search','Light Agent missions','Daily / light Background Gogo'],'Let Gogo help',false],
+      ['Gogo Plus','Let Gogo work.','₹499','₹4,990','₹4,990 / year · save ₹998',['Everything in Essential','Full Gogo Agent missions','Gmail · Calendar · Drive · Contacts','Background Gogo · Goals · Ideas','Live flights + hotels · cash vs points','Voice · Artifacts','Some Secure Computer capacity'],'Let Gogo work',true],
+      ['Gogo Pro','Let Gogo handle it.','₹999','₹9,990','₹9,990 / year · save ₹1,998',['Everything in Plus','Higher Agent capacity','More Background Gogo · Goals · voice','More Secure Computer','Priority execution','Advanced travel · booking preparation','Priority new Gogo abilities'],'Let Gogo handle it',false]
+    ];
+    const plans = planData.map(p=>{ const pop = p[7]; const free = p[0]==='Gogo Free'; return {name:p[0], tagline:p[1], price: annual ? p[3] : p[2], period: free ? '' : (annual ? '/ year' : '/ month'), alt: free ? 'No card needed' : (annual ? 'Two months free vs monthly' : p[4]), features:p[5], cta:p[6], popular:pop, href: free ? this.links.whatsapp : this.links.upgrade,
+      bg: pop ? '#16130F' : '#FFFFFF', fg: pop ? '#F6F1E8' : '#16130F', muted: pop ? '#B9B0A3' : '#5C554C', shadow: pop ? '0 30px 80px rgba(20,16,10,.22)' : 'none', btnBg: pop ? '#157A6E' : '#16130F', btnFg:'#F6F1E8'}; });
+    // BREATHE
+    const r = st(12);
+    const texts = ['You don\'t need to hold everything in your head.','Breathe in.','Breathe out.','Breathe in.','Breathe out.','Gogo\'s got it.','Gogo\'s got it.'];
+    const inh = r===1||r===3, exh = r===2||r===4;
+    const br = { text: texts[r], orb: inh ? 1.18 : exh ? .9 : 1, glow: inh ? 1.4 : exh ? .9 : 1, subO: (r===0||r>=5) ? 1 : 0 };
+    const arcNames = ['','Inside your head','Gogo Memory','Gogo Agent','Gogo Travel','Background Gogo','Daily Gogo','Goals & Ideas','Connect','Everywhere','Voice','Secure Computer','Breathe'];
+    const refs = {}; for (let i=0;i<this.seq.length;i++) refs['ref'+i] = this['ref'+i];
+    return Object.assign({ anim, hero, heroGogo, heroGogoLabel: heroGogo==='listening' ? 'Gogo · listening' : heroGogo==='thinking' ? 'Gogo · thinking' : 'Gogo · found something', ow, owGogo, owSize: S.narrow ? 72 : 104, me, meGogo, ac, acGogo, loop, tr, trGogo, trApGogo, trApLabel, trApSub, bg, dy, dyGogo, go, goGogo, cn, ev, vo, voGogo, sc, scGogo, pm, pmGogo:S.pmGogo, plans, br, brSize: S.narrow ? 160 : 220,
+      links:this.links, evGridRef:this.evGridRef, arcLabel: arcNames[S.arc] || '', navArcDisplay: ((this.props.showArcInNav ?? true) && !S.narrow) ? 'inline' : 'none',
+      menu:S.menu, openMenu:()=>this.setState({menu:true}), closeMenu:()=>this.setState({menu:false}), menuChapters: this.chapters.map((c,i)=>({href:'#'+c[0], name:c[1], n:String(i).padStart(2,'0')})),
+      toggleSound:this.toggleSound, soundBg: S.sound ? '#16130F' : 'transparent', soundFg: S.sound ? '#F6F1E8' : '#16130F', soundDot: S.sound ? '#2FAE6A' : '#B9B0A3', soundDisplay: S.narrow ? 'none' : 'inline-flex', dashDisplay: S.narrow ? 'none' : 'inline-flex',
+      setMonthly:()=>this.setState({annual:false}), setAnnual:()=>this.setState({annual:true}), monthlyBg: annual ? 'transparent' : '#16130F', monthlyFg: annual ? '#16130F' : '#F6F1E8', annualBg: annual ? '#16130F' : 'transparent', annualFg: annual ? '#F6F1E8' : '#16130F' }, refs);
+  }
+}
+</script>
+</body>
+</html>
