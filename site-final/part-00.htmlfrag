@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AskGogo — Meet Gogo, your personal AI agent</title>
+<meta name="description" content="Meet Gogo — your personal AI that remembers, plans, acts and keeps working when you're away. Memory, agent missions, background work, travel intelligence and approvals in one Gogo.">
+<link rel="canonical" href="https://askgogo.in/">
+<meta name="theme-color" content="#F6F1E8">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AskGogo">
+<meta property="og:url" content="https://askgogo.in/">
+<meta property="og:title" content="Meet Gogo — Your personal AI agent">
+<meta property="og:description" content="Gogo remembers, plans, acts — and keeps working when you're away.">
+<meta property="og:image" content="https://askgogo.in/og-image-v2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AskGogo — Meet Gogo, your personal AI agent">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meet Gogo — Your personal AI agent">
+<meta name="twitter:description" content="Gogo remembers, plans, acts — and keeps working when you're away.">
+<meta name="twitter:image" content="https://askgogo.in/og-image-v2.png">
+<script>
+window.__resources = {
+  "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/vendor/react.production.min.js",
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/vendor/react-dom.production.min.js"
+};
+</script>
+<script src="/support-v2.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F1E8;color:#16130F;font-family:Onest,system-ui,sans-serif;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html,body{scroll-behavior:auto}}
+a{color:inherit;text-decoration:none}a:hover{color:#157A6E}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0;margin:0}
+@keyframes wave{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes starDrift{0%{transform:translateY(0)}100%{transform:translateY(-8px)}}
+@keyframes drift{0%,100%{margin-top:0}50%{margin-top:-8px}}
+@keyframes cue{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="position:relative;background:#F6F1E8;color:#16130F;font-family:Onest,system-ui,sans-serif;overflow-x:clip" data-screen-label="AskGogo FINAL">
+
+<!-- NAV -->
+<div style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px clamp(16px,4vw,56px);background:rgba(246,241,232,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(22,19,15,.06)">
+  <a href="#top" style="display:flex;align-items:center;gap:8px;font-family:Newsreader,Georgia,serif;font-size:22px;letter-spacing:-.01em;white-space:nowrap"><dc-import name="Gogo" state="calm" size="30" show-status="{{ false }}" animate="{{ anim }}" hint-size="30px,30px"></dc-import>AskGogo</a>
+  <div style="display:flex;align-items:center;gap:8px;flex:none">
+    <span style="display:{{ navArcDisplay }};font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5C554C;white-space:nowrap;margin-right:6px">{{ arcLabel }}</span>
+    <button onClick="{{ toggleSound }}" aria-label="Toggle sound" style="height:40px;padding:0 12px;border-radius:999px;border:1px solid rgba(22,19,15,.14);background:{{ soundBg }};color:{{ soundFg }};display:{{ soundDisplay }};align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:all .3s"><i style="width:6px;height:6px;border-radius:50%;background:{{ soundDot }}"></i>Sound</button>
+    <a href="{{ links.dashboard }}" target="_blank" rel="noopener" style="display:{{ dashDisplay }};height:40px;align-items:center;padding:0 14px;border-radius:999px;border:1px solid rgba(22,19,15,.14);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap" style-hover="border-color:#16130F">Open dashboard</a>
+    <a href="{{ links.whatsapp }}" target="_blank" rel="noopener" style="flex:none;white-space:nowrap;height:40px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;background:#16130F;color:#F6F1E8;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:background .3s" style-hover="background:#157A6E;color:#F6F1E8">Talk to Gogo</a>
+    <button onClick="{{ openMenu }}" aria-label="Menu" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(22,19,15,.14);display:grid;place-items:center;gap:0;flex:none"><i style="display:block;width:16px;height:1.5px;background:#16130F;box-shadow:0 5px 0 #16130F,0 -5px 0 #16130F"></i></button>
+  </div>
+</div>
+
+<!-- MENU -->
+<sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:190;background:rgba(14,22,20,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fadeIn .3s ease both"></div>
+<div style="position:fixed;z-index:200;top:10px;right:10px;bottom:10px;width:min(440px,calc(100% - 20px));border-radius:24px;background:#16130F;color:#F6F1E8;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 100px rgba(0,0,0,.4);animation:slideIn .4s cubic-bezier(.2,.8,.2,1) both;overflow:auto">
+  <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8FE3CF">One Gogo. Everywhere.</span><button onClick="{{ closeMenu }}" aria-label="Close" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,241,232,.2);font-size:20px">×</button></div>
+  <div style="display:grid;border-top:1px solid rgba(246,241,232,.12)">
+    <sc-for list="{{ menuChapters }}" as="m" hint-placeholder-count="12"><a href="{{ m.href }}" onClick="{{ closeMenu }}" style="display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:4px 2px;border-bottom:1px solid rgba(246,241,232,.12);font-family:Newsreader,Georgia,serif;font-size:20px;color:#F6F1E8;transition:padding-left .3s,color .3s" style-hover="color:#8FE3CF;padding-left:8px">{{ m.name }}<span style="font-family:Onest,sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;color:#8A9490">{{ m.n }}</span></a></sc-for>
+  </div>
+  <div style="display:grid;gap:8px;font-size:13px">
+    <a href="{{ links.dashboard }}" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;min-height:40px;align-items:center;color:#F6F1E8">Open dashboard<span style="color:#8A9490">app.askgogo.in</span></a>
+    <a href="{{ links.learn }}" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;min-height:40px;align-items:center;color:#F6F1E8">Learn with Gogo<span style="color:#8A9490">app</span></a>
+    <a href="{{ links.whatsapp }}" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;min-height:40px;align-items:center;color:#F6F1E8">Talk to Gogo<span style="color:#8A9490">WhatsApp</span></a>
+  </div>
+  <div style="margin-top:auto;display:flex;gap:14px;flex-wrap:wrap;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8A9490"><a href="{{ links.privacy }}" target="_blank" rel="noopener">Privacy</a><a href="{{ links.terms }}" target="_blank" rel="noopener">Terms</a><a href="{{ links.refunds }}" target="_blank" rel="noopener">Refunds</a></div>
+</div>
+</sc-if>
+
+<!-- 00 HERO -->
+<section id="top" ref="{{ ref0 }}" data-screen-label="00 Hero" style="position:relative;min-height:calc(100svh - 60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,5vw,96px);align-items:center;padding:clamp(36px,6vh,100px) clamp(18px,4vw,56px) clamp(64px,8vh,110px);max-width:1440px;margin:0 auto;box-sizing:border-box">
+  <div style="min-width:0">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px"><dc-import name="Gogo" state="{{ heroGogo }}" size="72" animate="{{ anim }}" hint-size="72px,72px"></dc-import><span style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#157A6E">{{ heroGogoLabel }}</span></div>
+    <h1 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(60px,9vw,148px);line-height:.92;letter-spacing:-.035em;margin:0 0 20px">Meet Gogo.</h1>
+    <p style="font-family:Newsreader,Georgia,serif;font-size:clamp(22px,2.2vw,34px);line-height:1.25;letter-spacing:-.01em;max-width:20em;margin:0 0 14px;text-wrap:pretty">Your personal AI that remembers, plans, acts — <em style="color:#157A6E">and keeps working when you're away.</em></p>
+    <p style="font-size:clamp(15px,1.1vw,18px);color:#5C554C;margin:0 0 30px">You don't need to keep it all in your head.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <a id="meet" href="{{ links.whatsapp }}" target="_blank" rel="noopener" style="height:54px;display:inline-flex;align-items:center;padding:0 26px;border-radius:999px;background:#157A6E;color:#F6F1E8;font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 14px 40px rgba(21,122,110,.28);transition:transform .25s" style-hover="transform:translateY(-2px);color:#F6F1E8">Meet Gogo</a>
+      <a href="#acts" style="height:54px;display:inline-flex;align-items:center;gap:10px;padding:0 22px;border-radius:999px;border:1px solid rgba(22,19,15,.18);font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:border-color .25s" style-hover="border-color:#16130F"><i style="display:block;width:0;height:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent"></i>Watch Gogo work</a>
+    </div>
+  </div>
+  <div style="min-width:0;position:relative;display:grid;gap:12px;font-size:clamp(14px,1.05vw,17px);line-height:1.45">
+    <div style="position:absolute;inset:-12% -8%;background:radial-gradient(ellipse at 60% 40%,rgba(239,122,39,.14),transparent 60%);filter:blur(30px);pointer-events:none"></div>
+    <div style="position:relative;max-width:88%;margin-left:auto;padding:14px 18px;border-radius:22px 22px 6px 22px;background:#16130F;color:#F6F1E8">Plan my Dubai trip next month. Use my points if they're worth more than cash. Keep it under ₹1.5 lakh.</div>
+    <div style="position:relative;display:flex;align-items:center;gap:10px;height:24px;color:#5C554C;font-size:.9em;opacity:{{ hero.think.o }};transition:opacity .5s"><i style="display:block;width:8px;height:8px;border-radius:50%;background:#EF7A27"></i>{{ hero.thinkText }}</div>
+    <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px">
+      <sc-for list="{{ hero.chips }}" as="c" hint-placeholder-count="9"><div style="grid-column:{{ c.col }};min-width:0;padding:10px 12px;border-radius:14px;background:{{ c.bg }};color:{{ c.fg }};border:1px solid rgba(22,19,15,.08);box-shadow:0 8px 24px rgba(40,32,20,.06);opacity:{{ c.o }};transform:translateY({{ c.y }}px) scale({{ c.s }});transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1)"><small style="display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:{{ c.tag }}">{{ c.label }}</small><b style="display:block;font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(15px,1.1vw,18px);line-height:1.15;margin-top:3px;letter-spacing:-.01em;text-wrap:pretty">{{ c.value }}</b></div></sc-for>
+    </div>
+    <div style="position:relative;max-width:92%;padding:14px 18px;border-radius:22px 22px 22px 6px;background:#FFFFFF;border:1px solid rgba(22,19,15,.08);box-shadow:0 14px 40px rgba(40,32,20,.08);opacity:{{ hero.reply.o }};transform:translateY({{ hero.reply.y }}px);transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.2,1)">
+      <small style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E;margin-bottom:6px">Gogo · Found something</small>
+      <div style="font-family:Newsreader,Georgia,serif;font-size:clamp(18px,1.4vw,23px);line-height:1.25;letter-spacing:-.01em">3 good options found. <span style="color:#5C554C">I haven't booked anything.</span> Want me to prepare the best one?</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><a href="#travel" style="height:40px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;background:#157A6E;color:#F6F1E8;font-size:13px;font-weight:600" style-hover="color:#F6F1E8">Prepare the best one</a><a href="#travel" style="height:40px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;border:1px solid rgba(22,19,15,.14);font-size:13px;font-weight:600">Show all three</a></div>
+    </div>
+  </div>
+  <a href="#overwhelmed" aria-label="Scroll" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#5C554C"><span>Scroll</span><i style="display:block;width:1px;height:22px;background:currentColor;animation:cue 2s ease-in-out infinite"></i></a>
+</section>
+
+<!-- 01 INSIDE YOUR HEAD -->
+<section id="overwhelmed" ref="{{ ref1 }}" data-screen-label="01 Inside your head" style="position:relative;background:#EFE8DC;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px);overflow:hidden">
+  <div style="max-width:1100px;margin:0 auto;text-align:center">
+    <span style="display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E"><i style="width:22px;height:1px;background:#157A6E"></i>01 — Inside your head</span>
+    <h2 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(44px,6.4vw,112px);line-height:.94;letter-spacing:-.035em;margin:14px auto 0;max-width:12ch;text-wrap:balance">You're remembering <em>too much.</em></h2>
+    <div style="position:relative;height:clamp(300px,46svh,500px);margin:clamp(16px,3vh,32px) auto 0;max-width:900px">
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"><dc-import name="Gogo" state="{{ owGogo }}" size="{{ owSize }}" animate="{{ anim }}" hint-size="96px,96px"></dc-import></div>
+      <sc-for list="{{ ow.items }}" as="f" hint-placeholder-count="11"><div style="position:absolute;left:{{ f.x }}%;top:{{ f.y }}%;transform:translate(-50%,-50%) scale({{ f.s }});opacity:{{ f.o }};padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(22,19,15,.08);box-shadow:0 8px 24px rgba(40,32,20,.07);font-size:clamp(12px,.95vw,15px);font-weight:500;color:#3A342D;white-space:nowrap;transition:left .9s cubic-bezier(.4,0,.2,1),top .9s cubic-bezier(.4,0,.2,1),transform .9s cubic-bezier(.4,0,.2,1),opacity .7s;animation:drift {{ f.dur }} ease-in-out {{ f.delay }} infinite">{{ f.text }}</div></sc-for>
+    </div>
+    <p style="font-family:Newsreader,Georgia,serif;font-size:clamp(22px,2.4vw,38px);line-height:1.2;letter-spacing:-.01em;margin:clamp(12px,2vh,24px) auto 0;max-width:22em;min-height:2.4em;text-wrap:balance;color:{{ ow.color }};transition:color .8s">{{ ow.text }}</p>
+    <span style="display:block;margin-top:8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5C554C">{{ ow.count }}</span>
+  </div>
+</section>
+
+<!-- 02 SECOND BRAIN -->
+<section id="remembers" ref="{{ ref2 }}" data-screen-label="02 Gogo Memory" style="position:relative;background:#F6F1E8;padding:clamp(56px,8vh,112px) clamp(18px,4vw,56px)">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(28px,5vw,96px);align-items:center">
+    <div style="min-width:0">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#157A6E"><i style="width:22px;height:1px;background:#157A6E"></i>02 — Gogo Memory</span>
+      <h2 style="font-family:Newsreader,Georgia,serif;font-weight:300;font-size:clamp(40px,4.8vw,84px);line-height:.98;letter-spacing:-.03em;margin:14px 0 18px;text-wrap:balance">Gogo remembers <em>what matters.</em></h2>
+      <p style="font-size:clamp(16px,1.15vw,19px);line-height:1.55;color:#5C554C;max-width:30em;margin:0 0 22px;text-wrap:pretty">Memory builds quietly from ordinary conversation — then gets used without you asking twice.</p>
+      <div style="display:grid;gap:10px;font-size:clamp(14px,1.05vw,17px);line-height:1.45;max-width:36em">
+        <div style="max-width:90%;margin-left:auto;padding:12px 16px;border-radius:18px 18px 4px 18px;background:#16130F;color:#F6F1E8">Plan dinner with Srinivas.</div>
+        <div style="display:flex;gap:10px;align-items:flex-start;opacity:{{ me.a.o }};transform:translateY({{ me.a.y }}px);transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1)"><dc-import name="Gogo" state="{{ meGogo }}" size="40" animate="{{ anim }}" hint-size="40px,40px"></dc-import><div style="min-width:0;padding:12px 16px;border-radius:4px 18px 18px 18px;background:#FFFFFF;border:1px solid rgba(22,19,15,.08);box-shadow:0 10px 30px rgba(40,32,20,.06)">I found three places near Indiranagar. <span style="color:#157A6E">I excluded mushrooms</span> and <span style="color:#157A6E">kept Monday evening free</span>.<div style="display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C554C"><span>Remembered from · <b style="color:#16130F">You told Gogo · 2 Sep</b></span><span>Checked · <b style="color:#16130F">Gogo Memory</b></span></div></div></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:22px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5C554C"><span>Remember</span><span>Correct</span><span>Private</span><span>Forget</span><span style="color:#157A6E">— always yours</span></div>
