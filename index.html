@@ -45,6 +45,10 @@ html,body{margin:0;min-height:100%;background:#F6F1E8;color:#16130F;font-family:
     if(responses.some(r=>!r.ok))throw new Error('final_site_part_missing');
     let html=(await Promise.all(responses.map(r=>r.text()))).join('');
     html=html.replaceAll('Srinivas','Divya').replaceAll('Priya','Divya').replaceAll('priya@','divya@');
+    html=html.replaceAll('/favicon.ico','/gogo-character-mark-v1.svg')
+      .replaceAll('/favicon-32x32.png','/gogo-character-mark-v1.svg')
+      .replaceAll('/favicon-16x16.png','/gogo-character-mark-v1.svg')
+      .replaceAll('/apple-touch-icon.png','/gogo-character-app-icon-v1.png');
     html=html.replaceAll('https://askgogo.in/og-image-v2.png','https://askgogo.in/askgogo-gogo-character-og-20260911.png');
     html=html.replaceAll('https://askgogo.in/askgogo-whatsapp-premium-20260911c.png','https://askgogo.in/askgogo-gogo-character-og-20260911.png');
     html=html.replace('</head>','<link rel="stylesheet" href="/site-final/mobile-v2.css"></head>');
