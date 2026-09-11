@@ -7,24 +7,24 @@
 <meta name="description" content="Meet Gogo — your personal AI that remembers, plans, acts and keeps working when you're away. One Gogo across WhatsApp, web, memory, agent missions and background work.">
 <link rel="canonical" href="https://askgogo.in/">
 <meta name="theme-color" content="#F6F1E8">
-<link rel="icon" type="image/svg+xml" href="/askgogo-favicon-20260911.svg">
-<link rel="shortcut icon" type="image/svg+xml" href="/askgogo-favicon-20260911.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/gogo-character-mark-v1.svg">
+<link rel="shortcut icon" type="image/svg+xml" href="/gogo-character-mark-v1.svg">
+<link rel="apple-touch-icon" href="/gogo-character-app-icon-v1.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AskGogo">
 <meta property="og:url" content="https://askgogo.in/">
 <meta property="og:title" content="Meet Gogo — Your personal AI agent">
 <meta property="og:description" content="Your mind, lighter. Gogo remembers, plans, acts — and keeps working when you're away.">
-<meta property="og:image" content="https://askgogo.in/askgogo-whatsapp-premium-20260911c.png">
-<meta property="og:image:secure_url" content="https://askgogo.in/askgogo-whatsapp-premium-20260911c.png">
+<meta property="og:image" content="https://askgogo.in/askgogo-gogo-character-og-20260911.png">
+<meta property="og:image:secure_url" content="https://askgogo.in/askgogo-gogo-character-og-20260911.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AskGogo — Your second brain on WhatsApp">
+<meta property="og:image:alt" content="Meet Gogo — Your personal AI agent">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Meet Gogo — Your personal AI agent">
 <meta name="twitter:description" content="Your mind, lighter. Gogo remembers, plans, acts — and keeps working when you're away.">
-<meta name="twitter:image" content="https://askgogo.in/askgogo-whatsapp-premium-20260911c.png">
+<meta name="twitter:image" content="https://askgogo.in/askgogo-gogo-character-og-20260911.png">
 <style>
 html,body{margin:0;min-height:100%;background:#F6F1E8;color:#16130F;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 #boot{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center;box-sizing:border-box}
@@ -45,7 +45,8 @@ html,body{margin:0;min-height:100%;background:#F6F1E8;color:#16130F;font-family:
     if(responses.some(r=>!r.ok))throw new Error('final_site_part_missing');
     let html=(await Promise.all(responses.map(r=>r.text()))).join('');
     html=html.replaceAll('Srinivas','Divya').replaceAll('Priya','Divya').replaceAll('priya@','divya@');
-    html=html.replaceAll('https://askgogo.in/og-image-v2.png','https://askgogo.in/askgogo-whatsapp-premium-20260911c.png');
+    html=html.replaceAll('https://askgogo.in/og-image-v2.png','https://askgogo.in/askgogo-gogo-character-og-20260911.png');
+    html=html.replaceAll('https://askgogo.in/askgogo-whatsapp-premium-20260911c.png','https://askgogo.in/askgogo-gogo-character-og-20260911.png');
     html=html.replace('</head>','<link rel="stylesheet" href="/site-final/mobile-v2.css"></head>');
     html=html.replace('</body>',`<script>document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href="#top"]'):null;if(!a||!/begin again/i.test(a.textContent||''))return;e.preventDefault();history.replaceState(null,'','/');var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,left:0,behavior:reduced?'auto':'smooth'});});<\/script></body>`);
     document.open();document.write(html);document.close();
