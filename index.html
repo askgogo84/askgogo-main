@@ -16,8 +16,8 @@
 <meta property="og:url" content="https://askgogo.in/">
 <meta property="og:title" content="Meet Gogo — Your personal AI agent">
 <meta property="og:description" content="Your mind, lighter. Gogo remembers, plans, acts — and keeps working when you're away.">
-<meta property="og:image" content="https://askgogo.in/og-image-v2.png?rev=20260911b">
-<meta property="og:image:secure_url" content="https://askgogo.in/og-image-v2.png?rev=20260911b">
+<meta property="og:image" content="https://askgogo.in/askgogo-whatsapp-premium-20260911c.png">
+<meta property="og:image:secure_url" content="https://askgogo.in/askgogo-whatsapp-premium-20260911c.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Meet Gogo — Your personal AI agent">
 <meta name="twitter:description" content="Your mind, lighter. Gogo remembers, plans, acts — and keeps working when you're away.">
-<meta name="twitter:image" content="https://askgogo.in/og-image-v2.png?rev=20260911b">
+<meta name="twitter:image" content="https://askgogo.in/askgogo-whatsapp-premium-20260911c.png">
 <style>
 html,body{margin:0;min-height:100%;background:#F6F1E8;color:#16130F;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 #boot{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center;box-sizing:border-box}
@@ -37,15 +37,18 @@ html,body{margin:0;min-height:100%;background:#F6F1E8;color:#16130F;font-family:
 <noscript><div style="max-width:46rem;margin:4rem auto;padding:1.5rem"><h1>Meet Gogo.</h1><p>Your personal AI that remembers, plans, acts and keeps working when you're away.</p><p><a href="https://api.whatsapp.com/send?phone=17605483659&amp;text=Hi%20Gogo">Talk to Gogo</a> · <a href="https://app.askgogo.in/dashboard/home">Open dashboard</a></p></div></noscript>
 <script>
 (async()=>{
+  if (location.pathname === '/dashboard' || location.hash === '#top') {
+    history.replaceState(null,'','/');
+  }
   const parts=['/site-final/part-00.htmlfrag','/site-final/stage-01.htmlfrag','/site-final/stage-02.htmlfrag','/site-final/stage-03.htmlfrag','/site-final/stage-04.htmlfrag','/site-final/stage-05.htmlfrag','/site-final/stage-06.htmlfrag','/site-final/stage-07.htmlfrag','/site-final/stage-08.htmlfrag'];
   try{
     const responses=await Promise.all(parts.map(p=>fetch(p,{cache:'no-store'})));
     if(responses.some(r=>!r.ok))throw new Error('final_site_part_missing');
     let html=(await Promise.all(responses.map(r=>r.text()))).join('');
     html=html.replaceAll('Srinivas','Divya').replaceAll('Priya','Divya').replaceAll('priya@','divya@');
-    html=html.replaceAll('https://askgogo.in/og-image-v2.png','https://askgogo.in/og-image-v2.png?rev=20260911b');
+    html=html.replaceAll('https://askgogo.in/og-image-v2.png','https://askgogo.in/askgogo-whatsapp-premium-20260911c.png');
     html=html.replace('</head>','<link rel="stylesheet" href="/site-final/mobile-v2.css"></head>');
-    html=html.replace('</body>',`<script>document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href="#top"]'):null;if(!a||!/begin again/i.test(a.textContent||''))return;e.preventDefault();var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,left:0,behavior:reduced?'auto':'smooth'});});<\/script></body>`);
+    html=html.replace('</body>',`<script>document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href="#top"]'):null;if(!a||!/begin again/i.test(a.textContent||''))return;e.preventDefault();history.replaceState(null,'','/');var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,left:0,behavior:reduced?'auto':'smooth'});});<\/script></body>`);
     document.open();document.write(html);document.close();
   }catch(e){
     console.error('AskGogo final site load failed',e);
