@@ -1,5 +1,9 @@
 {
+  "redirects": [
+    { "source": "/dashboard", "destination": "/", "permanent": false }
+  ],
   "rewrites": [
+    { "source": "/askgogo-whatsapp-premium-20260911c.png", "destination": "/og-image-v2.png" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
