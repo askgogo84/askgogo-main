@@ -43,7 +43,9 @@ html,body{margin:0;min-height:100%;background:#F6F1E8;color:#16130F;font-family:
     if(responses.some(r=>!r.ok))throw new Error('final_site_part_missing');
     let html=(await Promise.all(responses.map(r=>r.text()))).join('');
     html=html.replaceAll('Srinivas','Divya').replaceAll('Priya','Divya').replaceAll('priya@','divya@');
+    html=html.replaceAll('https://askgogo.in/og-image-v2.png','https://app.askgogo.in/askgogo-og.png?rev=20260911');
     html=html.replace('</head>','<link rel="stylesheet" href="/site-final/mobile-v2.css"></head>');
+    html=html.replace('</body>',`<script>document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href="#top"]'):null;if(!a||!/begin again/i.test(a.textContent||''))return;e.preventDefault();var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,left:0,behavior:reduced?'auto':'smooth'});});<\/script></body>`);
     document.open();document.write(html);document.close();
   }catch(e){
     console.error('AskGogo final site load failed',e);
