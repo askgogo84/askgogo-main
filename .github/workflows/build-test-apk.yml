@@ -1,0 +1,45 @@
+name: Build AskGogo Test APK
+
+on:
+  push:
+    branches:
+      - mobile/test-apk-20260916
+    paths:
+      - 'android-test/**'
+      - '.github/workflows/build-test-apk.yml'
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Build debug APK
+        working-directory: android-test
+        run: gradle :app:assembleDebug --stacktrace
+
+      - name: Rename APK
+        run: cp android-test/app/build/outputs/apk/debug/app-debug.apk AskGogo-Test-0.1.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AskGogo-Test-APK
+          path: AskGogo-Test-0.1.apk
+          if-no-files-found: error
+          retention-days: 14
