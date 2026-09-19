@@ -1,9 +1,64 @@
 {
   "redirects": [
-    { "source": "/dashboard", "destination": "/", "permanent": false }
+    {
+      "source": "/dashboard",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/pricing",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/Pricing.dc.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/Home.dc.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/Home-v2.dc.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/plans/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/start/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/Try%20for%20Free/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/AI%20Magic/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/Channel/:path*",
+      "destination": "/",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/askgogo-whatsapp-premium-20260911c.png", "destination": "/og-image-v2.png" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/askgogo-whatsapp-premium-20260911c.png",
+      "destination": "/og-image-v2.png"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

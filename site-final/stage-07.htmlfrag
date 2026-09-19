@@ -1,6 +1,6 @@
 bserve(el); };
-    this.links = { whatsapp:'https://api.whatsapp.com/send?phone=17605483659&text=Hi%20Gogo', dashboard:'https://app.askgogo.in/dashboard/home', upgrade:'https://app.askgogo.in/upgrade', learn:'https://app.askgogo.in/dashboard/learn', privacy:'https://askgogo.in/privacy', terms:'https://askgogo.in/terms', refunds:'https://askgogo.in/refunds' };
-    this.chapters = [['top','Meet Gogo'],['overwhelmed','Inside your head'],['remembers','Gogo Memory'],['acts','Gogo Agent'],['travel','Gogo Travel'],['continues','Background Gogo'],['daily','Daily Gogo'],['goals','Goals & Ideas'],['connect','Connect your world'],['everywhere','Everywhere'],['voice','Voice'],['control','Secure Computer'],['permission','Approvals'],['pricing','Pricing'],['breathe','Breathe'],['lighter','Your mind, lighter']];
+    this.links = { whatsapp:'#join-gogo', dashboard:'https://app.askgogo.in/dashboard/home', upgrade:'https://app.askgogo.in/upgrade', learn:'https://app.askgogo.in/dashboard/learn', privacy:'https://askgogo.in/privacy', terms:'https://askgogo.in/terms', refunds:'https://askgogo.in/refunds' };
+    this.chapters = [['top','Meet Gogo'],['overwhelmed','Inside your head'],['remembers','Gogo Memory'],['acts','Gogo Agent'],['travel','Gogo Travel'],['continues','Background Gogo'],['daily','Daily Gogo'],['goals','Goals & Ideas'],['connect','Connect your world'],['everywhere','Everywhere'],['voice','Voice'],['control','Secure Computer'],['permission','Approvals'],['breathe','Breathe'],['lighter','Your mind, lighter']];
   }
   componentDidMount() {
     const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
