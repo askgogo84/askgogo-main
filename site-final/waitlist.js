@@ -88,6 +88,14 @@
       if (e.target.closest('[data-close]')) closeSheet();
     });
 
+    // Shield the form's own submit control from any page-level click handlers
+    // installed by the assembled Claude Design runtime. Stop propagation only;
+    // do NOT prevent default, so the browser still fires the form submit event.
+    form.addEventListener('click', e => {
+      const submitButton = e.target.closest('button[type="submit"]');
+      if (submitButton) e.stopPropagation();
+    }, true);
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       root.querySelectorAll('.gogo-error').forEach(x => x.textContent = '');
