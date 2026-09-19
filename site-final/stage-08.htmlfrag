@@ -41,16 +41,6 @@
         approve:()=>{ this.setState(s=>({perm:{...s.perm,[i]:'approved'}, pmGogo:'acting'})); clearTimeout(this.pmT); this.pmT = setTimeout(()=>{ this.setState({pmGogo:'done'}); this.pmT = setTimeout(()=>this.setState({pmGogo:'approval'}), 2200); }, 1400); },
         notNow:()=>this.setState(s=>({perm:{...s.perm,[i]:'parked'}})), reset:()=>this.setState(s=>{ const p={...s.perm}; delete p[i]; return {perm:p}; })}; }),
       timeline: ['Planned','Checked','Prepared','Waiting for you','Completed'].map((n,i)=>{ const filled = anyApproved ? true : i<3; const cur = !anyApproved && i===3; return {name:n, bar: filled ? '#157A6E' : cur ? '#16130F' : 'rgba(22,19,15,.15)', fg: filled||cur ? '#16130F' : 'rgba(22,19,15,.4)'}; }) };
-    // PRICING
-    const annual = S.annual;
-    const planData = [
-      ['Gogo Free','Meet Gogo.','₹0','₹0','',['Core memory','Tasks, lists, reminders','Limited Gogo conversations','Limited WhatsApp','Basic Daily Gogo'],'Meet Gogo',false],
-      ['Gogo Essential','Let Gogo help.','₹249','₹2,490','₹2,490 / year · save ₹498',['More memory','WhatsApp + Calendar','Light connected apps','Live travel search','Light Agent missions','Daily / light Background Gogo'],'Let Gogo help',false],
-      ['Gogo Plus','Let Gogo work.','₹499','₹4,990','₹4,990 / year · save ₹998',['Everything in Essential','Full Gogo Agent missions','Gmail · Calendar · Drive · Contacts','Background Gogo · Goals · Ideas','Live flights + hotels · cash vs points','Voice · Artifacts','Some Secure Computer capacity'],'Let Gogo work',true],
-      ['Gogo Pro','Let Gogo handle it.','₹999','₹9,990','₹9,990 / year · save ₹1,998',['Everything in Plus','Higher Agent capacity','More Background Gogo · Goals · voice','More Secure Computer','Priority execution','Advanced travel · booking preparation','Priority new Gogo abilities'],'Let Gogo handle it',false]
-    ];
-    const plans = planData.map(p=>{ const pop = p[7]; const free = p[0]==='Gogo Free'; return {name:p[0], tagline:p[1], price: annual ? p[3] : p[2], period: free ? '' : (annual ? '/ year' : '/ month'), alt: free ? 'No card needed' : (annual ? 'Two months free vs monthly' : p[4]), features:p[5], cta:p[6], popular:pop, href: free ? this.links.whatsapp : this.links.upgrade,
-      bg: pop ? '#16130F' : '#FFFFFF', fg: pop ? '#F6F1E8' : '#16130F', muted: pop ? '#B9B0A3' : '#5C554C', shadow: pop ? '0 30px 80px rgba(20,16,10,.22)' : 'none', btnBg: pop ? '#157A6E' : '#16130F', btnFg:'#F6F1E8'}; });
     // BREATHE
     const r = st(12);
     const texts = ['You don\'t need to hold everything in your head.','Breathe in.','Breathe out.','Breathe in.','Breathe out.','Gogo\'s got it.','Gogo\'s got it.'];
@@ -58,11 +48,10 @@
     const br = { text: texts[r], orb: inh ? 1.18 : exh ? .9 : 1, glow: inh ? 1.4 : exh ? .9 : 1, subO: (r===0||r>=5) ? 1 : 0 };
     const arcNames = ['','Inside your head','Gogo Memory','Gogo Agent','Gogo Travel','Background Gogo','Daily Gogo','Goals & Ideas','Connect','Everywhere','Voice','Secure Computer','Breathe'];
     const refs = {}; for (let i=0;i<this.seq.length;i++) refs['ref'+i] = this['ref'+i];
-    return Object.assign({ anim, hero, heroGogo, heroGogoLabel: heroGogo==='listening' ? 'Gogo · listening' : heroGogo==='thinking' ? 'Gogo · thinking' : 'Gogo · found something', ow, owGogo, owSize: S.narrow ? 72 : 104, me, meGogo, ac, acGogo, loop, tr, trGogo, trApGogo, trApLabel, trApSub, bg, dy, dyGogo, go, goGogo, cn, ev, vo, voGogo, sc, scGogo, pm, pmGogo:S.pmGogo, plans, br, brSize: S.narrow ? 160 : 220,
+    return Object.assign({ anim, hero, heroGogo, heroGogoLabel: heroGogo==='listening' ? 'Gogo · listening' : heroGogo==='thinking' ? 'Gogo · thinking' : 'Gogo · found something', ow, owGogo, owSize: S.narrow ? 72 : 104, me, meGogo, ac, acGogo, loop, tr, trGogo, trApGogo, trApLabel, trApSub, bg, dy, dyGogo, go, goGogo, cn, ev, vo, voGogo, sc, scGogo, pm, pmGogo:S.pmGogo, br, brSize: S.narrow ? 160 : 220,
       links:this.links, evGridRef:this.evGridRef, arcLabel: arcNames[S.arc] || '', navArcDisplay: ((this.props.showArcInNav ?? true) && !S.narrow) ? 'inline' : 'none',
       menu:S.menu, openMenu:()=>this.setState({menu:true}), closeMenu:()=>this.setState({menu:false}), menuChapters: this.chapters.map((c,i)=>({href:'#'+c[0], name:c[1], n:String(i).padStart(2,'0')})),
-      toggleSound:this.toggleSound, soundBg: S.sound ? '#16130F' : 'transparent', soundFg: S.sound ? '#F6F1E8' : '#16130F', soundDot: S.sound ? '#2FAE6A' : '#B9B0A3', soundDisplay: S.narrow ? 'none' : 'inline-flex', dashDisplay: S.narrow ? 'none' : 'inline-flex',
-      setMonthly:()=>this.setState({annual:false}), setAnnual:()=>this.setState({annual:true}), monthlyBg: annual ? 'transparent' : '#16130F', monthlyFg: annual ? '#16130F' : '#F6F1E8', annualBg: annual ? '#16130F' : 'transparent', annualFg: annual ? '#F6F1E8' : '#16130F' }, refs);
+      toggleSound:this.toggleSound, soundBg: S.sound ? '#16130F' : 'transparent', soundFg: S.sound ? '#F6F1E8' : '#16130F', soundDot: S.sound ? '#2FAE6A' : '#B9B0A3', soundDisplay: S.narrow ? 'none' : 'inline-flex', dashDisplay: S.narrow ? 'none' : 'inline-flex' }, refs);
   }
 }
 </script>
