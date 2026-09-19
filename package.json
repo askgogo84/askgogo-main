@@ -1,6 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "test": "node scripts/verify-share-preview.mjs && node scripts/verify-waitlist-submit.mjs"
+    "test": "node scripts/verify-share-preview.mjs && node scripts/verify-waitlist-submit.mjs && node scripts/verify-waitlist-submit-capture.mjs"
   }
 }
