@@ -72,7 +72,7 @@
   <a class="back" href="/">← Back to AskGogo</a>
   <div class="eyebrow">Legal</div>
   <h1>Privacy policy</h1>
-  <p class="stamp">Last updated 16 August 2026</p>
+  <p class="stamp">Last updated 19 September 2026</p>
 
   <p>This policy explains what personal data AskGogo collects, why we collect it, who we share it with, and the control you have over it.</p>
 
@@ -94,7 +94,7 @@
     <tr><td>Account</td><td>Your WhatsApp phone number, your name if you tell us, your timezone, and your email if you give one</td><td>To identify your account and deliver messages to you</td></tr>
     <tr><td>Message content</td><td>The messages you send AskGogo, including text, voice notes and images</td><td>To understand your request and answer it</td></tr>
     <tr><td>Things you create</td><td>Reminders, lists, notes, expenses, saved links and documents</td><td>These are the service — we store them so you can retrieve them</td></tr>
-    <tr><td>Connected accounts</td><td>Data from Google Calendar or Gmail, if you choose to connect them</td><td>To show your schedule and act on your instructions</td></tr>
+    <tr><td>Connected accounts</td><td>Data from Google Calendar, Gmail, Google Contacts and Google Drive, if you choose to connect them</td><td>To show relevant private context and carry out the requests you make</td></tr>
     <tr><td>Usage</td><td>Counts of actions you take, and error logs</td><td>To enforce plan limits and to fix faults</td></tr>
     <tr><td>Payment</td><td>Subscription status and transaction references</td><td>To run your subscription</td></tr>
   </table>
@@ -126,7 +126,7 @@
     <tr><td>Meta Platforms</td><td>Delivering messages over WhatsApp</td></tr>
     <tr><td>Supabase</td><td>Database and file storage</td></tr>
     <tr><td>Vercel</td><td>Hosting the application</td></tr>
-    <tr><td>Google</td><td>Calendar and mail, only if you connect them</td></tr>
+    <tr><td>Google</td><td>Calendar, Gmail, Contacts and Drive, only if you connect the relevant Google access</td></tr>
     <tr><td>Razorpay</td><td>Payments</td></tr>
     <tr><td>Anthropic and OpenAI</td><td>Generating replies to your messages</td></tr>
   </table>
@@ -135,7 +135,13 @@
 
   <h2>Google user data</h2>
 
-  <p>If you connect Google Calendar or Gmail, AskGogo's use of information received from Google APIs follows the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including its Limited Use requirements. We use that data only to provide the features you asked for. We do not use it for advertising, we do not sell it, and we do not let humans read it except with your explicit permission, to resolve a fault you have reported, or where the law requires it. You can disconnect Google at any time from your account settings or from your Google account permissions page.</p>
+  <p>If you connect Google Calendar, Gmail, Google Contacts or Google Drive, AskGogo's use of information received from Google Workspace APIs follows the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including its Limited Use requirements. We request Google access only for user-facing AskGogo features you choose to use.</p>
+
+  <p>We do not sell Google user data, use it for advertising, determine credit-worthiness from it, or use it to create, train or improve a generalized machine-learning or artificial-intelligence model. When limited Google context is sent to an AI service provider, it is sent only as necessary to produce the specific AskGogo response or action you requested, subject to our provider safeguards and this policy.</p>
+
+  <p>We do not let humans read Google user data except with your explicit permission for specific data, where necessary to investigate security or abuse, or where required by law. Authentication material such as one-time codes and account-recovery or magic-login links is filtered from email context before AskGogo uses it.</p>
+
+  <p>You can disconnect Google Workspace by telling Gogo to disconnect or unlink Google/Gmail, or from your Google Account permissions. Disconnecting removes the stored Google access and refresh tokens from AskGogo and AskGogo attempts to revoke the Google authorization. AskGogo does not maintain a separate long-term copy of your Gmail inbox, Google Contacts or Google Drive. Workspace results are fetched on demand for the request you make. If you explicitly ask Gogo to save information or a document into AskGogo, that saved AskGogo content follows the retention rules below.</p>
 
   <h2>How long we keep it</h2>
 
