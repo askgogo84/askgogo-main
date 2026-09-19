@@ -152,9 +152,18 @@
 
   function isJoinTrigger(a) {
     if (!a) return false;
+    // Never intercept the waitlist form's own submit button. The old label-based
+    // fallback matched its text "Join Gogo", called preventDefault(), reopened
+    // the already-open sheet, and therefore prevented the form submit event from
+    // ever firing. Only explicit waitlist triggers or anchor navigation belong
+    // to this global click interceptor.
+    if (a.matches('button[type="submit"]')) return false;
     const href = a.getAttribute('href') || '';
     const label = (a.textContent || '').trim();
-    return a.hasAttribute('data-gogo-waitlist') || href === '#join-gogo' || WA_RE.test(href) || /^(join gogo|meet gogo|talk to gogo)$/i.test(label);
+    return a.hasAttribute('data-gogo-waitlist') ||
+      href === '#join-gogo' ||
+      WA_RE.test(href) ||
+      (a.tagName === 'A' && /^(join gogo|meet gogo|talk to gogo)$/i.test(label));
   }
 
   document.addEventListener('click', e => {
