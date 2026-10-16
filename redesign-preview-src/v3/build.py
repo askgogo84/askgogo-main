@@ -52,6 +52,10 @@ def build():
  addEventListener('hashchange',show);show();})();
 </script>'''
     doc=doc.replace('</body>',router+f'<script>\n{esc(site)}\n</script>\n<script>\n{esc(home)}\n</script>\n<script>\n{esc(pages)}\n</script>\n</body>')
+    import base64,glob
+    for img in glob.glob(f'{HERE}/assets/*.jpg'):
+        name=os.path.basename(img);b64=base64.b64encode(open(img,'rb').read()).decode()
+        doc=doc.replace(f'src="assets/{name}"',f'src="data:image/jpeg;base64,{b64}"')
     open(f'{OUT}/preview-single-file.html','w',encoding='utf-8').write(doc)
     print('built',len(PAGES),'pages ->',OUT)
 if __name__=='__main__':build()
