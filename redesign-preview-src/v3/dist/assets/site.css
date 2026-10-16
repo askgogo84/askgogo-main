@@ -415,6 +415,6 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 .founders{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px}
 .founders li{display:flex;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:16px}
 .founders .fn{font-weight:500;min-width:160px}
-.blr.photo{width:min(720px,100%)}
+.blr.photo{width:min(560px,100%);margin-bottom:36px}
 .blr.photo img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:var(--shadow)}
 :root.mode-dark .blr.photo img{filter:brightness(.9)}
