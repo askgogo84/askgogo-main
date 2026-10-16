@@ -1,5 +1,52 @@
 (()=>{
-document.body.insertAdjacentHTML('beforeend',"<div class=\"sheet\" hidden=\"\" id=\"sheet-waitlist\">\n<div class=\"bd\" data-close=\"\"></div>\n<div aria-labelledby=\"wl-title\" aria-modal=\"true\" class=\"panel\" role=\"dialog\">\n<button aria-label=\"Close\" class=\"icon-btn x\" data-close=\"\" type=\"button\"><svg aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path d=\"M6 6l12 12M18 6 6 18\"></path></svg></button>\n<div data-form=\"\">\n<p class=\"label\">Join Waitlist</p>\n<h2 id=\"wl-title\">Be among the first.</h2>\n<p class=\"intro\">Leave your email and WhatsApp number. We will tell you when your access is ready.</p>\n<form id=\"wl-form\" novalidate=\"\">\n<div class=\"field\"><label for=\"wl-email\">Email</label><input aria-describedby=\"wl-email-err\" autocomplete=\"email\" id=\"wl-email\" placeholder=\"you@example.com\" type=\"email\"/><span class=\"err\" id=\"wl-email-err\"></span></div>\n<div class=\"field\"><label for=\"wl-phone\">WhatsApp number</label>\n<div class=\"phone-row\"><select aria-label=\"Country code\" id=\"wl-country\"><option value=\"IN\">+91 India</option><option value=\"AE\">+971 UAE</option></select><input aria-describedby=\"wl-phone-err\" autocomplete=\"tel-national\" id=\"wl-phone\" inputmode=\"numeric\" placeholder=\"98765 43210\" type=\"tel\"/></div>\n<span class=\"err\" id=\"wl-phone-err\"></span></div>\n<label class=\"check\"><input id=\"wl-optin\" type=\"checkbox\"/> <span>Send me access updates on WhatsApp.</span></label>\n<button class=\"btn btn-solid\" type=\"submit\">Join Waitlist</button>\n<p class=\"fine2\">No spam. No WhatsApp messages unless you opt in.</p>\n</form>\n</div>\n<div class=\"done-state\" data-done=\"\" hidden=\"\"><div class=\"tick\">\u2713</div><h2>You are on the list.</h2><p class=\"intro\">We will write when your access is ready. Preview only: nothing was sent.</p><button class=\"btn btn-solid\" data-close=\"\" style=\"margin-top:22px\" type=\"button\">Done</button></div>\n</div>\n</div>\n<div class=\"sheet\" hidden=\"\" id=\"sheet-access\">\n<div class=\"bd\" data-close=\"\"></div>\n<div aria-labelledby=\"ea-title\" aria-modal=\"true\" class=\"panel\" role=\"dialog\">\n<button aria-label=\"Close\" class=\"icon-btn x\" data-close=\"\" type=\"button\"><svg aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path d=\"M6 6l12 12M18 6 6 18\"></path></svg></button>\n<div data-form=\"\">\n<p class=\"label\">Request Early Access</p>\n<h2 id=\"ea-title\">Tell us about your team.</h2>\n<p class=\"intro\">For companies interested in SecondBrain for Business. We reply within a few working days.</p>\n<form id=\"ea-form\" novalidate=\"\">\n<div class=\"two\">\n<div class=\"field\"><label for=\"ea-name\">Your name</label><input aria-describedby=\"ea-name-err\" autocomplete=\"name\" id=\"ea-name\"/><span class=\"err\" id=\"ea-name-err\"></span></div>\n<div class=\"field\"><label for=\"ea-company\">Company</label><input aria-describedby=\"ea-company-err\" autocomplete=\"organization\" id=\"ea-company\"/><span class=\"err\" id=\"ea-company-err\"></span></div>\n</div>\n<div class=\"field\"><label for=\"ea-email\">Work email</label><input aria-describedby=\"ea-email-err\" autocomplete=\"email\" id=\"ea-email\" placeholder=\"you@company.com\" type=\"email\"/><span class=\"err\" id=\"ea-email-err\"></span></div>\n<div class=\"field\"><label for=\"ea-phone\">WhatsApp number</label>\n<div class=\"phone-row\"><select aria-label=\"Country code\" id=\"ea-country\"><option value=\"IN\">+91 India</option><option value=\"AE\">+971 UAE</option></select><input aria-describedby=\"ea-phone-err\" autocomplete=\"tel-national\" id=\"ea-phone\" inputmode=\"numeric\" placeholder=\"98765 43210\" type=\"tel\"/></div>\n<span class=\"err\" id=\"ea-phone-err\"></span></div>\n<div class=\"field\"><label for=\"ea-size\">Team size</label><select id=\"ea-size\"><option value=\"\">Choose</option><option value=\"1-10\">1\u201310</option><option value=\"11-50\">11\u201350</option><option value=\"51-200\">51\u2013200</option><option value=\"201-1000\">201\u20131,000</option><option value=\"1000-plus\">1,000+</option></select><span class=\"err\" id=\"ea-size-err\"></span></div>\n<div class=\"field\"><label for=\"ea-use\">What would you hand off first?</label><textarea aria-describedby=\"ea-use-err\" id=\"ea-use\" maxlength=\"500\" placeholder=\"For example: chasing vendor invoices every month\" rows=\"3\"></textarea><span class=\"err\" id=\"ea-use-err\"></span></div>\n<label class=\"check\"><input id=\"ea-consent\" type=\"checkbox\"/> <span>AskGogo may contact me about early access by email or WhatsApp. See the <a href=\"https://askgogo.in/privacy/\" rel=\"noopener\" target=\"_blank\">Privacy Policy</a>.</span></label>\n<span class=\"err\" id=\"ea-consent-err\"></span>\n<button class=\"btn btn-solid\" type=\"submit\">Request Early Access</button>\n</form>\n</div>\n<div class=\"done-state\" data-done=\"\" hidden=\"\"><div class=\"tick\">\u2713</div><h2>Request received.</h2><p class=\"intro\">We will be in touch within a few working days. Preview only: nothing was sent.</p><button class=\"btn btn-solid\" data-close=\"\" style=\"margin-top:22px\" type=\"button\">Done</button></div>\n</div>\n</div>");
+document.body.insertAdjacentHTML('beforeend',`<div class="sheet" hidden="" id="sheet-waitlist">
+<div class="bd" data-close=""></div>
+<div aria-labelledby="wl-title" aria-modal="true" class="panel" role="dialog">
+<button aria-label="Close" class="icon-btn x" data-close="" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+<div data-form="">
+<p class="label">Join Waitlist</p>
+<h2 id="wl-title">Be among the first.</h2>
+<p class="intro">Leave your email and WhatsApp number. We will tell you when your access is ready.</p>
+<form id="wl-form" novalidate="">
+<div class="field"><label for="wl-email">Email</label><input aria-describedby="wl-email-err" autocomplete="email" id="wl-email" placeholder="you@example.com" type="email"/><span class="err" id="wl-email-err"></span></div>
+<div class="field"><label for="wl-phone">WhatsApp number</label>
+<div class="phone-row"><select aria-label="Country code" id="wl-country"><option value="IN">+91 India</option><option value="AE">+971 UAE</option></select><input aria-describedby="wl-phone-err" autocomplete="tel-national" id="wl-phone" inputmode="numeric" placeholder="98765 43210" type="tel"/></div>
+<span class="err" id="wl-phone-err"></span></div>
+<label class="check"><input id="wl-optin" type="checkbox"/> <span>Send me access updates on WhatsApp.</span></label>
+<button class="btn btn-solid" type="submit">Join Waitlist</button>
+<p class="fine2">No spam. No WhatsApp messages unless you opt in.</p>
+</form>
+</div>
+<div class="done-state" data-done="" hidden=""><div class="tick">✓</div><h2>You are on the list.</h2><p class="intro">We will write when your access is ready. Preview only: nothing was sent.</p><button class="btn btn-solid" data-close="" style="margin-top:22px" type="button">Done</button></div>
+</div>
+</div>
+<div class="sheet" hidden="" id="sheet-access">
+<div class="bd" data-close=""></div>
+<div aria-labelledby="ea-title" aria-modal="true" class="panel" role="dialog">
+<button aria-label="Close" class="icon-btn x" data-close="" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+<div data-form="">
+<p class="label">Request Early Access</p>
+<h2 id="ea-title">Tell us about your team.</h2>
+<p class="intro">For companies interested in SecondBrain for Business. We reply within a few working days.</p>
+<form id="ea-form" novalidate="">
+<div class="two">
+<div class="field"><label for="ea-name">Your name</label><input aria-describedby="ea-name-err" autocomplete="name" id="ea-name"/><span class="err" id="ea-name-err"></span></div>
+<div class="field"><label for="ea-company">Company</label><input aria-describedby="ea-company-err" autocomplete="organization" id="ea-company"/><span class="err" id="ea-company-err"></span></div>
+</div>
+<div class="field"><label for="ea-email">Work email</label><input aria-describedby="ea-email-err" autocomplete="email" id="ea-email" placeholder="you@company.com" type="email"/><span class="err" id="ea-email-err"></span></div>
+<div class="field"><label for="ea-phone">WhatsApp number</label>
+<div class="phone-row"><select aria-label="Country code" id="ea-country"><option value="IN">+91 India</option><option value="AE">+971 UAE</option></select><input aria-describedby="ea-phone-err" autocomplete="tel-national" id="ea-phone" inputmode="numeric" placeholder="98765 43210" type="tel"/></div>
+<span class="err" id="ea-phone-err"></span></div>
+<div class="field"><label for="ea-size">Team size</label><select id="ea-size"><option value="">Choose</option><option value="1-10">1–10</option><option value="11-50">11–50</option><option value="51-200">51–200</option><option value="201-1000">201–1,000</option><option value="1000-plus">1,000+</option></select><span class="err" id="ea-size-err"></span></div>
+<div class="field"><label for="ea-use">What would you hand off first?</label><textarea aria-describedby="ea-use-err" id="ea-use" maxlength="500" placeholder="For example: chasing vendor invoices every month" rows="3"></textarea><span class="err" id="ea-use-err"></span></div>
+<label class="check"><input id="ea-consent" type="checkbox"/> <span>AskGogo may contact me about early access by email or WhatsApp. See the <a href="https://askgogo.in/privacy/" rel="noopener" target="_blank">Privacy Policy</a>.</span></label>
+<span class="err" id="ea-consent-err"></span>
+<button class="btn btn-solid" type="submit">Request Early Access</button>
+</form>
+</div>
+<div class="done-state" data-done="" hidden=""><div class="tick">✓</div><h2>Request received.</h2><p class="intro">We will be in touch within a few working days. Preview only: nothing was sent.</p><button class="btn btn-solid" data-close="" style="margin-top:22px" type="button">Done</button></div>
+</div>
+</div>`);
 /* ---------- theme: light by default, visitor's choice remembered ---------- */
 const KEY='askgogo-theme',root=document.documentElement;
 function readTheme(){try{return localStorage.getItem(KEY)}catch(e){return null}}
