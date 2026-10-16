@@ -63,11 +63,32 @@ function wirePhone(inp,sel){const ph={'91':'98765 43210','971':'50 123 4567','1'
 wirePhone($('#wl-phone'),$('#wl-country'));wirePhone($('#ea-phone'),$('#ea-country'));
 function finish(form){const s=form.closest('.sheet');$('[data-form]',s).hidden=true;const d=$('[data-done]',s);d.hidden=false;Gogo.mountAll(d);$('button',d).focus()}
 const firstInvalid=form=>{const x=$('[aria-invalid=true]',form);x&&x.focus()};
+/* Submission. In the preview build (no AG_LIVE) nothing is sent. In the live build the waitlist API receives
+   { country, phone, email, whatsapp_opt_in, source, company } where company is the honeypot and must stay empty. */
+const LIVE=!!window.AG_LIVE, API='https://app.askgogo.in/api/waitlist';
+const ISO={'91':'IN','971':'AE','1':'US','44':'GB','65':'SG','966':'SA','61':'AU','49':'DE'};
+function payload(cc,raw,email,optin,source){const d=String(raw).replace(/\D/g,'');
+  const intl=cc!=='91'&&cc!=='971';
+  return {country:ISO[cc]||'XX',phone:intl?(cc==='other'?'+'+d:'+'+cc+d):d,email,whatsapp_opt_in:!!optin,source:String(source||'site').toLowerCase().replace(/[^a-z0-9-]/g,'-').slice(0,32),company:''}}
+async function send(form,body,btnLabel){
+  const s=form.closest('.sheet'),status=$('[data-status]',s),btn=$('button[type=submit]',form);
+  if(!LIVE){finish(form);return}
+  status.textContent='';btn.disabled=true;const t=btn.textContent;btn.textContent='Sending…';
+  try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok){const er=data.errors||{};
+      if(body.country!=='IN'&&body.country!=='AE'&&(er.phone||er.country)){status.textContent='We can take Indian and UAE numbers on the site today. For other countries, write to support@askgogo.in and we will add you by hand.';return}
+      if(er.phone)setErr(form.id.slice(0,2)+'-phone-err',er.phone);if(er.email)setErr(form.id.slice(0,2)+'-email-err',er.email);
+      if(!er.phone&&!er.email)status.textContent='Please check your details and try again.';return}
+    finish(form)}
+  catch(e){status.textContent='We could not send that just now. Please try again.'}
+  finally{btn.disabled=false;btn.textContent=t}}
 $('#wl-form').addEventListener('submit',e=>{
   e.preventDefault();const v=id=>$('#'+id).value.trim(),cc=v('wl-country');
   const ok=[setErr('wl-email-err',EMAIL.test(v('wl-email'))?'':'Enter a valid email address.'),
             setErr('wl-phone-err',phoneOk(cc,v('wl-phone'))?'':phoneMsg(cc))].every(Boolean);
-  ok?finish(e.target):firstInvalid(e.target);
+  if(!ok)return firstInvalid(e.target);
+  send(e.target,payload(cc,v('wl-phone'),v('wl-email'),$('#wl-optin').checked,e.target.closest('.sheet').dataset.source));
 });
 $('#ea-form').addEventListener('submit',e=>{
   e.preventDefault();const v=id=>$('#'+id).value.trim(),cc=v('ea-country');
@@ -78,7 +99,9 @@ $('#ea-form').addEventListener('submit',e=>{
             setErr('ea-size-err',v('ea-size')?'':'Choose a team size.'),
             setErr('ea-use-err',v('ea-use').length>=10?'':'Tell us in a sentence what you would hand off first.'),
             setErr('ea-consent-err',$('#ea-consent').checked?'':'Please agree so we can contact you.')].every(Boolean);
-  ok?finish(e.target):firstInvalid(e.target);
+  if(!ok)return firstInvalid(e.target);
+  /* Until POST /api/early-access exists, team requests go to the waitlist API with source early-access-<cta>. Name, company, team size and use case are not stored yet. */
+  send(e.target,payload(cc,v('ea-phone'),v('ea-email'),true,'early-access-'+(e.target.closest('.sheet').dataset.source||'site')));
 });
 
 /* ---------- motion gates ---------- */

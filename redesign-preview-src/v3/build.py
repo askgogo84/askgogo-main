@@ -58,4 +58,34 @@ def build():
         doc=doc.replace(f'src="assets/{name}"',f'src="data:image/jpeg;base64,{b64}"')
     open(f'{OUT}/preview-single-file.html','w',encoding='utf-8').write(doc)
     print('built',len(PAGES),'pages ->',OUT)
-if __name__=='__main__':build()
+
+def build_live():
+    """Production build: assets under assets/site/, indexable, canonical and share tags, forms posting to the live API."""
+    LIVE=os.path.join(HERE,'live');BASE='https://askgogo.in/'
+    if os.path.isdir(LIVE):shutil.rmtree(LIVE)
+    shutil.copytree(f'{HERE}/assets',f'{LIVE}/assets/site')
+    today=__import__('datetime').date.today().isoformat()
+    urls=[]
+    for key,(out,title,desc,script) in PAGES.items():
+        root='../'*out.count('/');url=BASE+out.replace('index.html','')
+        doc=render(key,root).replace(f'{root}assets/',f'{root}assets/site/')
+        doc=doc.replace('<meta name="robots" content="noindex,nofollow,noarchive">\n','')
+        og=f"""<link rel="canonical" href="{url}">
+<link rel="icon" type="image/svg+xml" href="/gogo-character-mark-v1.svg">
+<link rel="apple-touch-icon" href="/gogo-character-app-icon-v1.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="AskGogo"><meta property="og:url" content="{url}">
+<meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
+<meta property="og:image" content="{BASE}askgogo-gogo-character-og-20260911.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="{BASE}askgogo-gogo-character-og-20260911.png">
+<script>window.AG_LIVE=true</script>
+"""
+        doc=doc.replace('<meta name="theme-color" content="#FFFFFF">','<meta name="theme-color" content="#FFFFFF">\n'+og)
+        doc=doc.replace('<!-- AskGogo marketing redesign v3: DESIGN PREVIEW ONLY. Not production. Forms are simulated and send nothing. -->\n','')
+        for legal in ('privacy','terms','refund'):doc=doc.replace(f'href="https://askgogo.in/{legal}/" target="_blank" rel="noopener"',f'href="{root}{legal}/"')
+        p=f'{LIVE}/{out}';os.makedirs(os.path.dirname(p),exist_ok=True);open(p,'w',encoding='utf-8').write(doc);urls.append(url)
+    open(f'{LIVE}/robots.txt','w').write(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}sitemap.xml\n')
+    open(f'{LIVE}/sitemap.xml','w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n' for u in urls)+'</urlset>\n')
+    print('live build ->',LIVE)
+if __name__=='__main__':
+    build()
+    if '--live' in sys.argv:build_live()
