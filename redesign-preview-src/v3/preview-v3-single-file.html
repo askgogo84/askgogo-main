@@ -5,8 +5,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>AskGogo — Less prompting. More living.</title>
-<meta name="description" content="A personal AI on WhatsApp that remembers the details and follows everyday tasks through, with your approval before payments, bookings or messages. Private beta.">
+<title>AskGogo v3 preview</title>
+<meta name="description" content="Design preview, all pages in one file.">
 <meta name="theme-color" content="#FFFFFF">
 <script>try{if(localStorage.getItem('askgogo-theme')==='dark')document.documentElement.classList.add('mode-dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,7 +108,7 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 .scene.d{bottom:10%;right:5%;--r:-2deg;animation-delay:-2s}
 @keyframes float{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
 .hero-foot{position:relative;border-top:1px solid var(--line);padding-block:20px;text-align:center}
-.hero-foot p{font-family:var(--serif);font-size:19px;color:var(--ink-2)}
+.hero-foot p{font-size:15px;color:var(--ink-2);letter-spacing:.01em}
 .scenes-mobile{display:none}
 @container (max-width:1020px){
   .scene{display:none}
@@ -151,11 +151,10 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 .mem .src{font-size:11.5px;color:var(--ink-3);margin-top:4px}
 .mem b{font-weight:500}
 .beat-ctl{margin-top:22px;display:flex;justify-content:center}
-@container (max-width:900px){.beats{grid-template-columns:minmax(0,1fr);gap:8px}.joint{transform:rotate(90deg);height:28px}.beat{min-height:0}}
+@container (max-width:900px){.beats{grid-template-columns:minmax(0,1fr);gap:8px;margin-top:32px}.joint{transform:rotate(90deg);height:28px}.beat{min-height:0;padding:18px}.beats.playing .beat{opacity:.72}.beats.playing .beat.on{opacity:1}.beat .viz{justify-content:flex-start}.beat [data-gogo]{width:60px;height:60px}}
 
 /* story */
 .story{margin-top:48px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:start}
-@container (max-width:900px){.story{grid-template-columns:minmax(0,1fr);gap:24px}}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .tab{font:500 14.5px/1 var(--sans);color:var(--ink-2);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:0 16px;min-height:42px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .tab:hover{color:var(--ink);border-color:var(--ink-3)}
@@ -318,9 +317,10 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 @keyframes gogoLean{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-4deg)}}
 @keyframes gogoOrbit{to{transform:rotate(360deg)}}
 @keyframes gogoGlow{0%,100%{opacity:.75}50%{opacity:1}}
-@keyframes gogoMemory{0%{transform:translate(28px,-34px) scale(1);opacity:0}15%{opacity:1}70%{transform:translate(2px,4px) scale(.55);opacity:.9}100%{transform:translate(0,8px) scale(.1);opacity:0}}
+@keyframes gogoMemory{0%{transform:translate(0,-8px) scale(1);opacity:0}15%,55%{transform:translate(0,0) scale(1);opacity:1}85%{transform:translate(-45px,62px) scale(.4);opacity:.8}100%{transform:translate(-45px,66px) scale(.1);opacity:0}}
 @keyframes gogoSpark{0%,100%{transform:scale(0);opacity:0}20%,60%{transform:scale(1);opacity:1}}
 @keyframes gogoWave{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-14deg)}}
+@keyframes gogoScan{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-2px)}}
 @keyframes gogoSway{0%,100%{transform:rotate(0deg)}50%{transform:rotate(5deg)}}
 .gogo-eyes{transform-box:fill-box;transform-origin:center;transition:transform .12s ease}
 .blink .gogo-eyes{transform:scaleY(.12)}
@@ -333,6 +333,95 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
 
+@container (max-width:900px){.story{grid-template-columns:minmax(0,1fr);gap:12px}.tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-block:4px;margin-inline:-16px;padding-inline:16px;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}.tab{flex:none;min-height:38px;font-size:14px}.chat{min-height:0;border-radius:20px}.msgs{padding:14px 12px;min-height:220px}.ctl .grow{display:none}.ctl{justify-content:space-between}.ctl .icon-btn{width:38px;height:38px}}
+/* ---------- inner pages ---------- */
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.narrow{max-width:720px}
+.phero{padding-block:72px 64px}
+.phero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center}
+.phero h1{font-size:clamp(38px,5.2cqi,64px);letter-spacing:-.035em;line-height:1.04;margin-top:14px;max-width:16ch}
+.phero .lede{margin-top:20px;color:var(--ink-2);font-size:clamp(17px,1.45cqi,19px);max-width:46ch}
+.phero .ctas{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.phero .fine{margin-top:14px;font-size:13.5px;color:var(--ink-3)}
+.phero-art{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.mcard.mini{width:260px;padding:14px;animation:float 7s ease-in-out infinite}
+.mcard.mini .v{font-size:15.5px}
+@container (max-width:900px){.phero{padding-block:48px 40px}.phero-grid{grid-template-columns:minmax(0,1fr);gap:28px}.phero-art{flex-direction:row;justify-content:flex-start;gap:16px}.phero-art [data-size]{width:96px!important;height:96px!important}.mcard.mini{animation:none}.phero h1{max-width:none}}
+.bubble.gg{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:6px;align-self:flex-start}
+.two-col{margin-top:40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.col-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px}
+.col-card>[data-gogo]{width:72px;height:72px;margin-bottom:16px}
+.col-card h3{font-size:24px;margin-top:10px}
+.col-card>p{margin-top:12px;color:var(--ink-2);font-size:15.5px}
+.ticks{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+.ticks li{padding-left:24px;position:relative;font-size:15px}
+.ticks li::before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:999px;background:var(--accent)}
+@container (max-width:760px){.two-col{grid-template-columns:minmax(0,1fr)}.col-card{padding:22px}}
+.princ{margin-top:40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pr{border:1px solid var(--line);border-radius:20px;padding:22px 24px;background:var(--card)}
+.pr [data-gogo]{width:48px;height:48px;margin-bottom:12px}
+.pr h3{font-size:19px}
+.pr p{margin-top:8px;color:var(--ink-2);font-size:15px}
+@container (max-width:640px){.princ{grid-template-columns:minmax(0,1fr)}}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:5px 12px;margin-bottom:16px}
+.status .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+/* workflow */
+.wf{list-style:none;margin:48px auto 0;padding:0;max-width:760px;display:grid;gap:0}
+.wstep{display:grid;grid-template-columns:72px minmax(0,1fr);gap:20px;position:relative;padding-bottom:36px}
+.wstep::before{content:"";position:absolute;left:35px;top:72px;bottom:0;width:2px;background:var(--line-2)}
+.wstep:last-child::before{display:none}
+.wg{width:72px;height:72px}
+.wk{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
+.wstep h3{font-size:22px;margin-top:6px;letter-spacing:-.015em}
+.wcard{margin-top:14px;background:var(--card);border:1px solid var(--line-2);border-radius:16px;padding:14px 16px;max-width:460px;font-size:14.5px}
+.wcard .kk{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.wcard .v{margin-top:6px;font-weight:500}
+.wcard.draft .v{font-weight:400;color:var(--ink)}
+.wcard .meta{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.wcard .rows{margin-top:8px;display:grid;gap:6px}
+.wcard .rows div{display:flex;justify-content:space-between;gap:12px}
+.wcard .rows span:first-child{color:var(--ink-2);flex:none}
+.wcard .rows span:last-child{text-align:right;min-width:0;overflow-wrap:anywhere}
+.wcard .acts{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.wcard .fake{font:500 12.5px/1 var(--sans);padding:8px 12px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.wcard .fake.dark{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.wcard.approval{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.wstep.rise{opacity:0;transform:translateY(12px)}
+.wstep.rise.go{animation:none;opacity:1;transform:none;transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
+@container (max-width:640px){.wstep{grid-template-columns:48px minmax(0,1fr);gap:14px;padding-bottom:28px}.wstep::before{left:23px;top:48px}.wg{width:48px;height:48px}.wstep h3{font-size:19px}.wcard{padding:12px 14px;font-size:14px}}
+.roles.static{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:36px}
+.roles.static .role{position:static;transform:none;opacity:1;width:auto;box-shadow:none}
+@container (max-width:900px){.roles.static{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:460px){.roles.static{grid-template-columns:minmax(0,1fr)}}
+/* journal reading */
+.list.reading a{grid-template-columns:56px minmax(0,1fr) 120px;padding-block:28px}
+.list.reading h3{font-size:clamp(26px,2.6cqi,34px)}
+.list.reading p{font-size:16px}
+.rmeta{display:none;font-size:13px;color:var(--ink-3);margin-top:6px}
+@container (max-width:640px){.rmeta{display:block}}
+/* essay */
+.article{padding-block:56px 48px}
+.ah{max-width:680px;margin-inline:auto}
+.back{display:inline-block;font-size:14px;color:var(--ink-2);text-decoration:none;margin-bottom:28px}
+.back:hover{color:var(--ink)}
+.vig{display:block;width:64px;height:64px;margin-bottom:18px}
+.ah .meta{font-size:13.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.ah h1{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;font-size:clamp(36px,4.6cqi,56px);line-height:1.1;margin-top:12px}
+.ah .dek{margin-top:18px;font-size:clamp(18px,1.6cqi,21px);color:var(--ink-2);line-height:1.5}
+.prose{max-width:680px;margin:40px auto 0;font-size:18px;line-height:1.72;color:var(--ink)}
+.prose p{margin-top:1.1em}
+.prose p:first-child{margin-top:0}
+.prose h2{font-size:24px;letter-spacing:-.02em;margin-top:2em;line-height:1.25}
+.prose h2+p{margin-top:.6em}
+.prose strong,.prose b{font-weight:500}
+.end{max-width:680px;margin:48px auto 0;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+@container (max-width:640px){.article{padding-block:32px 36px}.prose{font-size:17px;line-height:1.7;margin-top:28px}}
+.closing-s{background:var(--soft);border-top:1px solid var(--line)}
+.prose blockquote{margin:1.4em 0;padding:4px 0 4px 20px;border-left:2px solid var(--accent);color:var(--ink);font-size:19px;line-height:1.55}
+.prose ul{padding-left:22px;margin:1em 0}
+.prose li{margin-top:.5em}
+
+.pg>main{display:block}
 </style>
 <script>
 /* Gogo character renderer for the marketing site.
@@ -357,29 +446,29 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
     const A=(a)=>`style="transform-box:fill-box;transform-origin:center;animation:${a}"`;
     let s=`<svg class="gogo-svg" viewBox="0 0 120 120" width="100%" height="100%" style="overflow:visible;display:block" aria-hidden="true" focusable="false">
 <defs><radialGradient id="${id}b" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFBF3"/><stop offset=".6" stop-color="#F3E7D3"/><stop offset="1" stop-color="#E4D3B9"/></radialGradient>
-<radialGradient id="${id}c" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFB06A" stop-opacity=".6"/><stop offset=".55" stop-color="#EF7A27" stop-opacity=".26"/><stop offset="1" stop-color="#EF7A27" stop-opacity="0"/></radialGradient>
+<radialGradient id="${id}c" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFB06A" stop-opacity=".55"/><stop offset=".6" stop-color="#EF7A27" stop-opacity=".18"/><stop offset="1" stop-color="#EF7A27" stop-opacity="0"/></radialGradient>
 <radialGradient id="${id}h" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#4A2E20"/><stop offset="1" stop-color="#2C1A13"/></radialGradient></defs>`;
     if(state==='thinking')s+=`<g ${A('gogoOrbit 6s linear infinite')}><circle cx="60" cy="16" r="3.2" fill="#EF7A27"/><circle cx="104" cy="60" r="2.4" fill="#EF7A27" fill-opacity=".7"/><circle cx="18" cy="72" r="1.8" fill="#EF7A27" fill-opacity=".5"/></g>`;
     s+=`<g class="gogo-body" style="transform-box:fill-box;transform-origin:center 90%;animation:${ANIM[state]};${state==='sleeping'?'opacity:.82':''}">
 <g fill="url(#${id}h)" stroke="${hairStroke}" stroke-width="1.6"><circle cx="24" cy="52" r="9"/><circle cx="28" cy="40" r="10.5"/><circle cx="38" cy="30" r="11"/><circle cx="51" cy="23" r="11.5"/><circle cx="66" cy="22" r="12"/><circle cx="81" cy="28" r="11"/><circle cx="92" cy="39" r="10.5"/><circle cx="96" cy="52" r="9"/><circle cx="60" cy="32" r="13"/><circle cx="44" cy="40" r="10"/><circle cx="78" cy="38" r="10"/></g>
 <path d="M60 34 C84 34 100 52 101 76 C102 100 84 113 60 113 C36 113 18 100 19 76 C20 52 36 34 60 34Z" fill="url(#${id}b)" stroke="${bodyStroke}" stroke-width="1.5"/>
-<circle cx="60" cy="92" r="23" fill="url(#${id}c)" style="animation:gogoGlow ${state==='remembering'||state==='found'?'1.6s':state==='sleeping'?'9s':'4s'} ease-in-out infinite"/>
+<ellipse cx="60" cy="103" rx="24" ry="9" fill="url(#${id}c)" style="animation:gogoGlow ${state==='remembering'||state==='found'?'1.6s':state==='sleeping'?'9s':'4s'} ease-in-out infinite"/>
 <circle cx="42" cy="72" r="4.5" fill="#EF7A27" fill-opacity=".18"/><circle cx="78" cy="72" r="4.5" fill="#EF7A27" fill-opacity=".18"/>
 <g class="gogo-eyes">`;
     if(eyes==='closed')s+=`<path d="M43 63 q5 4 10 0 M67 63 q5 4 10 0" fill="none" stroke="#2C1A13" stroke-width="2.6" stroke-linecap="round"/>`;
-    if(eyes==='open'||eyes==='up'){const y=eyes==='up'?60:64,r=state==='listening'?3.8:3.3;
-      s+=`<g class="gogo-pupils"><circle cx="48" cy="${y}" r="${r}" fill="#2C1A13"/><circle cx="72" cy="${y}" r="${r}" fill="#2C1A13"/><circle cx="49.2" cy="${y-1.2}" r="1" fill="#FFFBF3"/><circle cx="73.2" cy="${y-1.2}" r="1" fill="#FFFBF3"/></g>`;}
+    if(eyes==='open'||eyes==='up'){const y=eyes==='up'?60:64,r=state==='listening'?3.8:3.3,sx=state==='acting'?2.2:0;
+      s+=`<g class="gogo-pupils"><circle cx="${48+sx}" cy="${y}" r="${r}" fill="#2C1A13"/><circle cx="${72+sx}" cy="${y}" r="${r}" fill="#2C1A13"/><circle cx="${49.2+sx}" cy="${y-1.2}" r="1" fill="#FFFBF3"/><circle cx="${73.2+sx}" cy="${y-1.2}" r="1" fill="#FFFBF3"/></g>`;}
     if(eyes==='happy')s+=`<path d="M43 65 q5 -5 10 0 M67 65 q5 -5 10 0" fill="none" stroke="#2C1A13" stroke-width="2.6" stroke-linecap="round"/><path d="M55 74 q5 3 10 0" fill="none" stroke="#2C1A13" stroke-width="2" stroke-linecap="round" stroke-opacity=".7"/>`;
     if(eyes==='flat')s+=`<path d="M44 64 h8 M68 64 h8" fill="none" stroke="#2C1A13" stroke-width="2.6" stroke-linecap="round"/>`;
     if(eyes==='half')s+=`<circle cx="48" cy="64" r="3.2" fill="#2C1A13"/><circle cx="72" cy="64" r="3.2" fill="#2C1A13"/><path d="M43 61 h10 M67 61 h10" stroke="#F3E7D3" stroke-width="3.2" stroke-linecap="round"/>`;
     s+=`</g>`;
     if(state==='breathing'||(state==='calm'&&o.hands))s+=`<ellipse cx="30" cy="98" rx="7" ry="5" fill="#F3E7D3" stroke="#E4D3B9"/><ellipse cx="90" cy="98" rx="7" ry="5" fill="#F3E7D3" stroke="#E4D3B9"/>`;
-    if(state==='acting')s+=`<ellipse cx="96" cy="72" rx="6" ry="7.5" fill="#F3E7D3" stroke="#E4D3B9" style="transform-box:fill-box;transform-origin:bottom center;animation:gogoWave 1.2s ease-in-out infinite"/>`;
-    if(state==='approval')s+=`<g ${A('gogoBob 3s ease-in-out infinite')}><rect x="38" y="86" width="44" height="28" rx="6" fill="#fff" stroke="#E4D3B9" stroke-width="1.2"/><rect x="44" y="93" width="22" height="3" rx="1.5" fill="#2C1A13" fill-opacity=".75"/><rect x="44" y="100" width="14" height="3" rx="1.5" fill="#2C1A13" fill-opacity=".35"/><circle cx="73" cy="100" r="5" fill="#EF7A27"/><path d="M70.5 100 l2 2 l3.5 -4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+    if(state==='acting')s+=`<g style="transform-box:fill-box;transform-origin:bottom center;animation:gogoScan 2.4s ease-in-out infinite"><ellipse cx="97" cy="74" rx="6" ry="7" fill="#F3E7D3" stroke="#E4D3B9"/><circle cx="107" cy="52" r="9" fill="#fff" fill-opacity=".6" stroke="#2C1A13" stroke-width="2.4"/><path d="M101 59 l-4.5 7" stroke="#2C1A13" stroke-width="3" stroke-linecap="round"/></g>`;
+    if(state==='approval')s+=`<ellipse cx="97" cy="70" rx="6" ry="7.5" fill="#F3E7D3" stroke="#E4D3B9"/><g ${A('gogoBob 3s ease-in-out infinite')}><rect x="38" y="86" width="44" height="28" rx="6" fill="#fff" stroke="#E4D3B9" stroke-width="1.2"/><rect x="44" y="93" width="22" height="3" rx="1.5" fill="#2C1A13" fill-opacity=".75"/><rect x="44" y="100" width="14" height="3" rx="1.5" fill="#2C1A13" fill-opacity=".35"/><circle cx="73" cy="100" r="5" fill="#EF7A27"/><path d="M71.4 98.6 a1.7 1.7 0 1 1 2.3 1.6 q-.7 .3 -.7 1.1 M73 103.2 v.2" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></g>`;
     s+=`</g>`;
-    if(state==='remembering')s+=`<g ${A('gogoMemory 3.2s cubic-bezier(.4,0,.2,1) infinite')}><rect x="48" y="72" width="24" height="14" rx="4" fill="#fff" stroke="#EF7A27" stroke-width="1.2"/><rect x="52" y="77" width="12" height="2.2" rx="1" fill="#EF7A27"/><rect x="52" y="81" width="8" height="2.2" rx="1" fill="#2C1A13" fill-opacity=".3"/></g>`;
+    if(state==='remembering')s+=`<g ${A('gogoMemory 3.2s cubic-bezier(.4,0,.2,1) infinite')}><circle cx="92" cy="30" r="1.4" fill="#EF7A27" fill-opacity=".5"/><circle cx="97" cy="22" r="1.8" fill="#EF7A27" fill-opacity=".7"/><rect x="92" y="2" width="26" height="15" rx="4" fill="#fff" stroke="#EF7A27" stroke-width="1.2"/><rect x="96" y="7" width="14" height="2.2" rx="1" fill="#EF7A27"/><rect x="96" y="11.5" width="9" height="2.2" rx="1" fill="#2C1A13" fill-opacity=".3"/></g>`;
     if(state==='found')s+=`<g ${A('gogoSpark 3s ease-in-out infinite')}><path d="M98 18 l2.5 6 l6 2.5 l-6 2.5 l-2.5 6 l-2.5 -6 l-6 -2.5 l6 -2.5Z" fill="#EF7A27"/></g>`;
-    if(state==='done')s+=`<circle cx="98" cy="96" r="11" fill="#2FAE6A" stroke="${ring}" stroke-width="3"/><path d="M92.5 96 l4 4 l7.5 -8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+    if(state==='done')s+=`<path d="M22 20 l1.5 3.5 l3.5 1.5 l-3.5 1.5 l-1.5 3.5 l-1.5 -3.5 l-3.5 -1.5 l3.5 -1.5Z" fill="#EF7A27" fill-opacity=".6"/><circle cx="98" cy="96" r="11" fill="#2FAE6A" stroke="${ring}" stroke-width="3"/><path d="M92.5 96 l4 4 l7.5 -8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
     return s+`</svg>`;
   }
   /* Mount: <span data-gogo="listening" data-size="120" data-hands></span> */
@@ -395,6 +484,7 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 
 </script>
 
+
 </head>
 <body data-page="home">
 <a class="skip" href="#main">Skip to content</a>
@@ -402,12 +492,12 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 
 <header class="hdr" id="hdr">
   <div class="wrap">
-    <a class="mark" href="./" aria-label="AskGogo home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <a class="mark" href="#home" aria-label="AskGogo home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
     <nav class="nav" aria-label="Primary">
-      <a href="../secondbrain/" data-later>SecondBrain</a>
-      <a href="../business/" data-later>Business</a>
-      <a href="../journal/" data-later>Journal</a>
-      <a href="../about/" data-later>About</a>
+      <a href="#secondbrain" data-r="secondbrain">SecondBrain</a>
+      <a href="#business" data-r="business">Business</a>
+      <a href="#journal" data-r="journal">Journal</a>
+      <a href="#about" data-r="about">About</a>
     </nav>
     <div class="tools">
       <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
@@ -424,7 +514,7 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 
 <div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-label="Menu">
   <div class="top">
-    <a class="mark" href="./"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <a class="mark" href="#home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
     <div class="tools">
       <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -434,7 +524,7 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
     </div>
   </div>
   <nav aria-label="Mobile">
-    <a href="./">Home</a><a href="../secondbrain/" data-later>SecondBrain</a><a href="../business/" data-later>Business</a><a href="../journal/" data-later>Journal</a><a href="../about/" data-later>About</a>
+    <a href="#home">Home</a><a href="#secondbrain" data-r="secondbrain">SecondBrain</a><a href="#business" data-r="business">Business</a><a href="#journal" data-r="journal">Journal</a><a href="#about" data-r="about">About</a>
   </nav>
   <div class="ctas">
     <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="menu">Join Waitlist</button>
@@ -442,7 +532,7 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
   </div>
 </div>
 
-<main id="main">
+<div class="pg" data-pg="home" hidden><main id="main">
 
 <!-- 1. HERO -->
 <section class="hero" aria-labelledby="h-home" id="hero">
@@ -474,7 +564,7 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
       <p class="cap"><span data-gogo="watching"></span>Reminder set for the day before</p>
     </div>
   </div>
-  <div class="hero-foot"><p>Memory. Action. Continuity.</p></div>
+  <div class="hero-foot"><p>Remembers the details. Acts with your approval. Shows you the result.</p></div>
 </section>
 
 <!-- 2. MEET GOGO -->
@@ -575,7 +665,7 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
       <div class="intro">
         <p class="label">AskGogo for Business</p>
         <h2 id="h-biz">A Gogo for the work your team repeats.</h2>
-        <p>Shared company memory, workflows that run end to end, approvals at the steps that matter, and a result you can check.</p>
+        <p>Shared company memory, work carried through end to end, approval at the steps that matter, and a result you can check.</p>
         <button class="btn btn-solid" type="button" data-open="access" data-cta="home-business">Request Early Access</button>
         <p class="fine">Illustrative workflows we are exploring with early teams.</p>
       </div>
@@ -592,11 +682,11 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
 <!-- 6. JOURNAL -->
 <section class="s" aria-labelledby="h-journal" id="journal">
   <div class="wrap">
-    <div class="head-row"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="../journal/" data-later>All essays <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="head-row"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="#journal" data-r="journal">All essays <span class="arrow" aria-hidden="true">→</span></a></div>
     <div class="list">
-      <a href="../journal/finish-the-work/" data-later><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most AI hands back homework. The useful part is the last mile.</p></div><span class="when">14 Oct 2026</span></a>
-      <a href="../journal/memory-is-the-product/" data-later><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Provenance, correction, scope and expiry: what it takes to remember well.</p></div><span class="when">2 Oct 2026</span></a>
-      <a href="../journal/autonomy-you-can-check/" data-later><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Reliable agents come from planning, boundaries and checking the result.</p></div><span class="when">22 Sep 2026</span></a>
+      <a href="#essay-finish-the-work"><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task.</p></div><span class="when">14 Oct 2026</span></a>
+      <a href="#essay-memory-is-the-product"><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire.</p></div><span class="when">2 Oct 2026</span></a>
+      <a href="#essay-autonomy-you-can-check"><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result.</p></div><span class="when">22 Sep 2026</span></a>
     </div>
   </div>
 </section>
@@ -615,16 +705,474 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
   </div>
 </section>
 
+</main></div><div class="pg" data-pg="secondbrain" hidden><main id="main">
+
+<section class="phero" aria-labelledby="h-sb">
+  <div class="wrap">
+    <div class="phero-grid">
+      <div>
+        <p class="label">SecondBrain by AskGogo</p>
+        <h1 id="h-sb">A memory that works for you.</h1>
+        <p class="lede">SecondBrain is the memory layer under AskGogo. It keeps what you share, with a note of where it came from, and brings it back when it matters. For one person, or for a whole company.</p>
+        <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="sb-hero">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="sb-hero" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div>
+        <p class="fine">In private development · The personal edition arrives first, inside AskGogo</p>
+      </div>
+      <div class="phero-art" aria-hidden="true">
+        <span data-gogo="remembering" data-size="150"></span>
+        <div class="mcard mini">
+          <p class="kk">Remembered</p>
+          <p class="v">Electricity bill · due Thu 5 Nov</p>
+          <div class="src"><span data-gogo="calm"></span><span>From the bill you sent · 16 Oct</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s soft" aria-labelledby="h-sb-how" id="sb-how">
+  <div class="wrap">
+    <div class="sh center-h">
+      <p class="label">Illustrative preview</p>
+      <h2 id="h-sb-how">Share it once. Ask for it whenever.</h2>
+      <p>A document goes in. A memory with its source comes out. Later, you ask in plain words and get the fact back, with where it came from.</p>
+    </div>
+    <div class="beats" id="sb-beats">
+      <div class="beat" data-beat>
+        <p class="n">You share</p>
+        <div class="viz" style="flex-direction:column;align-items:flex-end;gap:8px">
+          <div class="bubble me">Here is this month’s electricity bill</div>
+          <div class="file"><span class="fi">PDF</span>electricity-bill-oct.pdf</div>
+        </div>
+        <p class="cap">A bill, a ticket, a voice note or a forwarded message on WhatsApp.</p>
+      </div>
+      <div class="joint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="beat" data-beat>
+        <p class="n">SecondBrain keeps</p>
+        <div class="viz"><span data-gogo="remembering" aria-hidden="true"></span><div class="mem"><b>Electricity bill · ₹2,340 (example)</b><br>Due Thu 5 Nov · BESCOM<div class="src">From the PDF you sent · 16 Oct</div></div></div>
+        <p class="cap">The useful facts are kept, each with its source and date.</p>
+      </div>
+      <div class="joint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="beat" data-beat>
+        <p class="n">You ask, later</p>
+        <div class="viz" style="flex-direction:column;align-items:stretch;gap:8px">
+          <div class="bubble me" style="align-self:flex-end">When is the electricity bill due?</div>
+          <div class="bubble gg">Thu 5 Nov, ₹2,340. From the bill you sent on 16 Oct. Want a reminder the day before?</div>
+        </div>
+        <p class="cap">The answer, with where it came from. Nothing guessed is presented as known.</p>
+      </div>
+    </div>
+    <div class="beat-ctl"><button class="btn btn-ghost btn-sm" type="button" id="sb-replay"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>Replay</button></div>
+    <p class="note">An illustration with example details. Amounts and dates are not real.</p>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-sb-who">
+  <div class="wrap">
+    <div class="sh"><p class="label">Two editions</p><h2 id="h-sb-who">For you, and for your company.</h2></div>
+    <div class="two-col">
+      <div class="col-card">
+        <span data-gogo="remembering" aria-hidden="true"></span>
+        <p class="label">Personal</p>
+        <h3>Everything you meant to remember.</h3>
+        <p>Send a ticket, a bill or a voice note on WhatsApp. SecondBrain files it, links it to the right trip, person or deadline, and brings it back when it matters.</p>
+        <ul class="ticks">
+          <li>Documents you can find by asking</li>
+          <li>Preferences learned from ordinary conversation</li>
+          <li>Morning briefings from your calendar and mail</li>
+          <li>Reminders that know the context, not just the time</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <span data-gogo="secure" aria-hidden="true"></span>
+        <p class="label">Enterprise</p>
+        <h3>What your company knows, in one place.</h3>
+        <p>Decisions, vendor terms, customer history and the way things are done usually live in a few people’s heads. SecondBrain makes that knowledge shared, permissioned and usable by agents.</p>
+        <ul class="ticks">
+          <li>Shared memory with roles and access controls</li>
+          <li>Sources attached to every answer</li>
+          <li>Agents that act on company memory, with approvals</li>
+          <li>A record of what was done and why</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s soft" aria-labelledby="h-sb-pr">
+  <div class="wrap">
+    <div class="sh"><p class="label">Principles</p><h2 id="h-sb-pr">How SecondBrain treats what it knows.</h2></div>
+    <div class="princ">
+      <div class="pr"><h3>Provenance</h3><p>Every remembered fact carries its source: you said it, a document showed it, or a calendar confirmed it. Nothing guessed is presented as known.</p></div>
+      <div class="pr"><h3>Correction</h3><p>You can see what is remembered and change it. When you remove a memory, it is removed, not hidden.</p></div>
+      <div class="pr"><h3>Scope</h3><p>Personal memory stays personal. Company memory follows the company’s permissions. The two never mix by default.</p></div>
+      <div class="pr"><h3>Expiry</h3><p>A flight ends, a gate code changes, an offer lapses. Facts are allowed to age out instead of being acted on after they stop being true.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-sb-close">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div>
+      <p class="status"><span class="dot" aria-hidden="true"></span>In private development</p>
+      <h2 id="h-sb-close">The personal edition arrives first, inside AskGogo.</h2>
+      <p>Companies can request early access to help shape the enterprise edition.</p>
+      <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="sb-close">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="sb-close" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div>
+    </div>
+  </div>
+</section>
+
 </main>
+</div><div class="pg" data-pg="business" hidden><main id="main">
+
+<section class="phero" aria-labelledby="h-biz">
+  <div class="wrap">
+    <div class="phero-grid">
+      <div>
+        <p class="label">AskGogo for Business</p>
+        <h1 id="h-biz">Agents that know how your company works.</h1>
+        <p class="lede">Shared company memory, work carried through end to end, approval at the steps that matter, and a result you can check.</p>
+        <div class="ctas"><button class="btn btn-solid" type="button" data-open="access" data-cta="biz-hero">Request Early Access</button></div>
+        <p class="fine">Early access for a small number of teams · We reply within a few working days</p>
+      </div>
+      <div class="phero-art" aria-hidden="true">
+        <span data-gogo="approval" data-size="150"></span>
+        <div class="mcard mini">
+          <p class="kk" style="color:var(--accent-ink)">Needs approval</p>
+          <p class="v">Send payment reminder</p>
+          <div class="src"><span data-gogo="calm"></span><span>Invoice INV-2041 (example) · 14 days overdue</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s soft" aria-labelledby="h-wf" id="workflow">
+  <div class="wrap">
+    <div class="sh center-h">
+      <p class="label">Illustrative workflow</p>
+      <h2 id="h-wf">One workflow, step by step: invoice follow-ups.</h2>
+      <p>What a Gogo does with a recurring piece of work, where it stops to ask, and what counts as done.</p>
+    </div>
+    <ol class="wf" id="wf">
+      <li class="wstep" data-rise>
+        <span class="wg" data-gogo="watching" aria-hidden="true"></span>
+        <div class="wbody">
+          <p class="wk">1 · Notices</p>
+          <h3>An invoice goes 14 days past due.</h3>
+          <div class="wcard"><p class="kk">From your accounts system</p><p class="v">INV-2041 · ₹1,24,000 · Acme Supplies (example)</p><p class="meta">Due Fri 2 Oct · 14 days overdue on Fri 16 Oct</p></div>
+        </div>
+      </li>
+      <li class="wstep" data-rise>
+        <span class="wg" data-gogo="remembering" aria-hidden="true"></span>
+        <div class="wbody">
+          <p class="wk">2 · Remembers</p>
+          <h3>It uses what the company already knows.</h3>
+          <div class="wcard"><p class="kk">Company memory</p><p class="v">Acme Supplies · accounts contact: Priya · net 30 · prefers email · last reply 2 Oct</p><p class="meta">From the vendor record and past threads</p></div>
+        </div>
+      </li>
+      <li class="wstep" data-rise>
+        <span class="wg" data-gogo="thinking" aria-hidden="true"></span>
+        <div class="wbody">
+          <p class="wk">3 · Drafts</p>
+          <h3>It writes the reminder in your company’s tone.</h3>
+          <div class="wcard draft"><p class="kk">Draft</p><p class="v">Hi Priya, a gentle reminder that INV-2041 for ₹1,24,000 was due on 2 Oct. Could you share an expected payment date? Thanks.</p></div>
+        </div>
+      </li>
+      <li class="wstep" data-rise>
+        <span class="wg" data-gogo="approval" aria-hidden="true"></span>
+        <div class="wbody">
+          <p class="wk">4 · Waits for approval</p>
+          <h3>Nothing leaves the company without a yes.</h3>
+          <div class="wcard approval"><p class="kk" style="color:var(--accent-ink)">Needs approval · Finance</p><div class="rows"><div><span>Send to</span><span>accounts@acme.example</span></div><div><span>Attach</span><span>INV-2041.pdf</span></div><div><span>Copy</span><span>finance@yourco.example</span></div></div><div class="acts" aria-hidden="true"><span class="fake dark">Approve and send</span><span class="fake">Edit</span></div><p class="meta">Illustrative: the approver sees the full message before it goes.</p></div>
+        </div>
+      </li>
+      <li class="wstep" data-rise>
+        <span class="wg" data-gogo="acting" aria-hidden="true"></span>
+        <div class="wbody">
+          <p class="wk">5 · Sends and follows up</p>
+          <h3>It tracks the reply and chases again if needed.</h3>
+          <div class="wcard"><p class="kk">Timeline</p><div class="rows"><div><span>Sent</span><span>Fri 16 Oct, 10:12</span></div><div><span>Reply</span><span>Mon 19 Oct · “Processing this week”</span></div><div><span>Next check</span><span>Fri 23 Oct</span></div></div></div>
+        </div>
+      </li>
+      <li class="wstep" data-rise>
+        <span class="wg" data-gogo="done" aria-hidden="true"></span>
+        <div class="wbody">
+          <p class="wk">6 · Verified result</p>
+          <h3>Done means the money arrived and the record says so.</h3>
+          <div class="wcard result"><p class="kk" style="color:var(--ok-ink)">Done</p><p class="v">Payment received · INV-2041 closed</p><div class="rows"><div><span>Received</span><span>Thu 22 Oct</span></div><div><span>Reference</span><span>UTR-7F3K21 (example)</span></div></div><p style="margin-top:10px"><span class="ok-badge"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 6.5l2.2 2.2L9.5 3.8"/></svg>Matched in the accounts system (illustrative)</span></p></div>
+        </div>
+      </li>
+    </ol>
+    <p class="note">An illustration with example names, amounts and dates. Work that cannot be verified is flagged for a person instead of being marked complete.</p>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-pillars">
+  <div class="wrap">
+    <div class="sh"><p class="label">What it rests on</p><h2 id="h-pillars">Four parts, each one checkable.</h2></div>
+    <div class="princ">
+      <div class="pr"><h3>Shared company memory</h3><p>Policies, past decisions, vendor and customer history in one permissioned memory. People and agents draw on the same source, and every answer shows where it came from.</p></div>
+      <div class="pr"><h3>Work carried through</h3><p>Hand off recurring work end to end: chasing invoices, onboarding vendors, scheduling across teams, following up on open requests. Agents work through email, calendars and web portals.</p></div>
+      <div class="pr"><h3>Approvals</h3><p>You decide which actions run on their own and which wait for a person. Payments, external messages and commitments go to the right approver with full context.</p></div>
+      <div class="pr"><h3>Verification</h3><p>Each workflow ends with evidence: a confirmation, a reply, a changed record. Work that cannot be verified is flagged for a person instead of being marked complete.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s soft" aria-labelledby="h-roles">
+  <div class="wrap">
+    <div class="sh"><p class="label">Where teams start</p><h2 id="h-roles">The work your team repeats.</h2><p>Illustrative workflows we are exploring with early teams.</p></div>
+    <div class="roles static">
+      <div class="role"><span data-gogo="acting" aria-hidden="true"></span><div><p class="rt">Invoice follow-ups</p><p class="rd">Polite reminders until each invoice is paid, with replies tracked.</p></div></div>
+      <div class="role"><span data-gogo="watching" aria-hidden="true"></span><div><p class="rt">Vendor onboarding</p><p class="rd">Collects documents and details, and flags what is missing.</p></div></div>
+      <div class="role"><span data-gogo="thinking" aria-hidden="true"></span><div><p class="rt">Scheduling</p><p class="rd">Finds times across calendars and confirms with everyone.</p></div></div>
+      <div class="role"><span data-gogo="found" aria-hidden="true"></span><div><p class="rt">Shared company knowledge</p><p class="rd">Answers from your own policies and history, with sources.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-biz-close">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div>
+      <h2 id="h-biz-close">Tell us what you would hand off first.</h2>
+      <p>We are working with a small number of early teams in India and the UAE. We reply within a few working days.</p>
+      <div class="ctas"><button class="btn btn-solid" type="button" data-open="access" data-cta="biz-close">Request Early Access</button></div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div><div class="pg" data-pg="journal" hidden><main id="main">
+
+<section class="phero" aria-labelledby="h-journal">
+  <div class="wrap">
+    <div class="phero-grid">
+      <div>
+        <p class="label">Journal</p>
+        <h1 id="h-journal">Notes on building an assistant that finishes the work.</h1>
+        <p class="lede">Essays from the team building AskGogo, on memory, autonomy and what it takes to finish a task.</p>
+      </div>
+      <div class="phero-art" aria-hidden="true"><span data-gogo="thinking" data-size="150"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-essays" style="padding-top:0;border-top:0">
+  <div class="wrap">
+    <h2 id="h-essays" class="visually-hidden">Essays</h2>
+    <div class="list reading">
+      <a href="#essay-finish-the-work"><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task.</p><p class="rmeta">7 min read · 14 Oct 2026</p></div><span class="when">14 Oct 2026</span></a>
+      <a href="#essay-memory-is-the-product"><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire.</p><p class="rmeta">6 min read · 2 Oct 2026</p></div><span class="when">2 Oct 2026</span></a>
+      <a href="#essay-autonomy-you-can-check"><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result.</p><p class="rmeta">7 min read · 22 Sep 2026</p></div><span class="when">22 Sep 2026</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="s soft" aria-labelledby="h-j-close">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div>
+      <h2 id="h-j-close">Private beta. Access by invitation.</h2>
+      <p>We are opening AskGogo in small groups across India and the UAE.</p>
+      <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="journal-close">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="journal-close" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div><div class="pg" data-pg="about" hidden><main id="main">
+
+<section class="phero" aria-labelledby="h-about">
+  <div class="wrap">
+    <div class="phero-grid">
+      <div>
+        <p class="label">About</p>
+        <h1 id="h-about">Built in Bengaluru, for the way people here live.</h1>
+        <p class="lede">We think the next useful step for AI is not a better answer. It is a finished task.</p>
+      </div>
+      <div class="phero-art" aria-hidden="true"><span data-gogo="listening" data-size="150" data-blink></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-why" style="padding-top:0;border-top:0">
+  <div class="wrap narrow">
+    <h2 id="h-why" class="visually-hidden">Why we are building this</h2>
+    <div class="prose">
+      <p>Daily life in India runs on OTP logins, appointment portals, utility websites and long WhatsApp threads. That is a lot of small, repetitive work. An assistant that carries it, carefully and with your permission, gives people real time back.</p>
+      <p>AskGogo is in private beta and opens to new people in small groups as the product earns it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s soft" aria-labelledby="h-founder">
+  <div class="wrap narrow">
+    <p class="label">Founder</p>
+    <h2 id="h-founder" style="margin-top:12px">Goverdhan Mandyam Dommane</h2>
+    <div class="prose" style="margin-top:16px">
+      <p>Goverdhan has spent his career building consumer technology companies in India, including one that was acquired. He started AskGogo to build the assistant he wanted for himself: one that remembers, acts and finishes the job.</p>
+    </div>
+    <p style="margin-top:18px"><a class="tlink" href="https://www.linkedin.com/in/goverdhanmd" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true">↗</span></a></p>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-hold">
+  <div class="wrap">
+    <div class="sh"><p class="label">What we hold ourselves to</p><h2 id="h-hold">Four commitments.</h2></div>
+    <div class="princ">
+      <div class="pr"><span data-gogo="done" aria-hidden="true"></span><h3>Finish, then report</h3><p>We judge ourselves by completed tasks with evidence, not by how good a reply sounds.</p></div>
+      <div class="pr"><span data-gogo="approval" aria-hidden="true"></span><h3>Ask before it matters</h3><p>Payments, bookings and messages to other people wait for your approval.</p></div>
+      <div class="pr"><span data-gogo="remembering" aria-hidden="true"></span><h3>Your memory is yours</h3><p>You can see and correct what AskGogo remembers. We do not sell personal data.</p></div>
+      <div class="pr"><span data-gogo="found" aria-hidden="true"></span><h3>Local by default</h3><p>Searches, bookings and services are chosen for where you live, in rupees or dirhams, on the sites you actually use.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s soft" aria-labelledby="h-contact">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div>
+      <h2 id="h-contact">Get in touch.</h2>
+      <p>For press, partnerships or anything else, write to <a href="mailto:support@askgogo.in">support@askgogo.in</a>.</p>
+      <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="about-close">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="about-close" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div><div class="pg" data-pg="essay-finish-the-work" hidden><main id="main">
+<article class="article" aria-labelledby="h-essay">
+  <div class="wrap">
+    <header class="ah">
+      <a class="back" href="#journal" data-r="journal">← Journal</a>
+      <span class="vig" data-gogo="done" aria-hidden="true"></span>
+      <p class="meta">Essay · 7 min read · 14 Oct 2026</p><h1 id="h-essay">Why an assistant should finish the work.</h1><p class="dek">Most assistants stop at advice. The useful part is finishing the task, and that is where an assistant should spend its effort.</p>
+    </header>
+    <div class="prose">
+<p>Ask most AI assistants to renew your vehicle insurance and you will get a tidy answer. It will list a few insurers, explain what a no-claim bonus is, and suggest you compare quotes before the policy lapses. All of it is correct, and none of it renews the insurance.</p>
+<p>The work is still yours. You still open three websites, type the registration number three times, wait for an OTP, discover that one site wants the previous policy number, find that policy in your email, pay, download the PDF and put it somewhere you will remember. The assistant handled the part that took two minutes. You handled the part that took forty.</p>
+<h2>Where the time actually goes</h2>
+<p>When we looked at the tasks people sent to AskGogo, the pattern was consistent. Deciding what to do was rarely the hard part. People knew they needed a service appointment, a refund, a visa slot or a follow-up email. What they lacked was the time and patience for the steps in between: forms, logins, waiting, checking back.</p>
+<p>An answer does not remove those steps. It describes them. So we set a different bar: an assistant should be measured by tasks completed, not questions answered.</p>
+<blockquote>A good answer describes the work. A good assistant does it, then shows you the receipt.</blockquote>
+<h2>Finishing takes three things</h2>
+<p>Completing real tasks is harder than answering questions, and it rests on three capabilities that each have to work.</p>
+<ul>
+<li><strong>Memory.</strong> To book your car service without twenty questions, the assistant needs to know which car, which service centre and that you prefer mornings. Without memory, every task starts with an interview.</li>
+<li><strong>Autonomy.</strong> It has to operate the same websites and inboxes you do: sign in, fill the form, handle the OTP prompt by asking you for the code, and carry on.</li>
+<li><strong>Judgement about when to stop.</strong> Finishing does not mean doing everything alone. Paying, booking and messaging someone else are steps where the assistant should pause and ask, with the details in front of you.</li>
+</ul>
+<p>Take away any one of these and you are back to advice. Memory without autonomy produces a well-informed list. Autonomy without memory produces a stream of questions. Either without judgement produces something you cannot trust.</p>
+<h2>What done means</h2>
+<p>We define a task as done only when there is evidence the world changed: a booking reference, a calendar entry, a sent email in the thread, a saved receipt. If the assistant cannot observe that result, the task is not done, and it should say so plainly.</p>
+<p>That standard is stricter than it sounds. Websites time out. Payment pages fail silently. A form accepts input and then quietly drops it. An assistant that reports success because it clicked the final button will be wrong often enough that you stop relying on it. One that checks the outcome earns the right to be handed the next task.</p>
+<h2>Why this matters more in India</h2>
+<p>Much of daily life here runs through portals that were not built for convenience: logins by mobile number and OTP, government appointment systems, utility sites with their own logic. WhatsApp is where people already manage their lives. An assistant that lives there and can handle the portal on your behalf, asking you only for the OTP and the final yes, removes a real and recurring cost.</p>
+<p>That is the assistant we are building. It does not try to be impressive in conversation. It tries to leave you with fewer open loops at the end of the day than you had at the start.</p>
+</div>
+    <div class="end">
+      <a class="tlink" href="#journal" data-r="journal">All essays</a>
+      <div class="ctas"><button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="essay-finish-the-work">Join Waitlist</button></div>
+    </div>
+  </div>
+</article>
+<section class="s closing-s" aria-labelledby="h-close-finish-the-work">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div><h2 id="h-close-finish-the-work">Private beta. Access by invitation.</h2><p>We are opening AskGogo in small groups across India and the UAE.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="essay-close">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="essay-close" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div></div>
+  </div>
+</section>
+</main></div><div class="pg" data-pg="essay-memory-is-the-product" hidden><main id="main">
+<article class="article" aria-labelledby="h-essay">
+  <div class="wrap">
+    <header class="ah">
+      <a class="back" href="#journal" data-r="journal">← Journal</a>
+      <span class="vig" data-gogo="remembering" aria-hidden="true"></span>
+      <p class="meta">Essay · 6 min read · 2 Oct 2026</p><h1 id="h-essay">Memory is the product.</h1><p class="dek">An assistant that forgets you between conversations cannot act for you. Memory that is kept well changes what it can be trusted to do.</p>
+    </header>
+    <div class="prose">
+<p>Most chat assistants begin every conversation from nothing. You explain that you are vegetarian, that your father's follow-up is in November, that you fly out of Bengaluru, and the next day you explain it again. The model is capable. It simply has no past with you.</p>
+<p>That limits more than convenience. Without memory, an assistant cannot act on your behalf, because acting well depends on knowing your context. Booking a table means knowing who is coming and what they eat. Paying a bill means knowing which account it comes from. Reminding you of a deadline is only useful if it knows the deadline exists.</p>
+<h2>Remembering is easy. Remembering well is not.</h2>
+<p>Storing everything a person says is trivial. The hard part is deciding what a fact means, how sure we are of it, and when it stops being true. We think about memory in four properties.</p>
+<ul>
+<li><strong>Provenance.</strong> Every fact should carry where it came from. "You told me on 2 September" is different from "a document suggested it", and both differ from a guess. When the assistant uses a fact, it should be able to show its source.</li>
+<li><strong>Correction.</strong> People change their minds and their circumstances. Memory has to be visible and editable, and forgetting has to be real: deleted means gone, not hidden.</li>
+<li><strong>Scope.</strong> What you tell your personal assistant should not appear in a shared workspace, and company knowledge should follow company permissions. Memory needs boundaries as clear as file permissions.</li>
+<li><strong>Expiry.</strong> Many facts have a shelf life. A flight lands, an address changes, an offer ends. A memory system that never lets facts age will eventually act on something stale, with confidence.</li>
+</ul>
+<blockquote>The test of memory is not recall. It is whether the assistant uses the right fact at the right moment, without being asked twice.</blockquote>
+<h2>Memory should be used quietly</h2>
+<p>The best use of memory rarely announces itself. When you ask for a restaurant on Friday and the options already exclude mushrooms and keep Monday evening free, memory has done its job. When you ask "what was that hotel?" on the web and get the one you sent on WhatsApp on Tuesday night, it has done its job across surfaces.</p>
+<p>We also think an assistant should be restrained about what it shows of its memory. Pointing to the source of a fact helps you trust it. Narrating everything it knows about you does not.</p>
+<h2>Memory as the base layer</h2>
+<p>This is why memory sits underneath everything in AskGogo, and why we are developing it as its own layer, SecondBrain. Reminders, briefings, documents, travel and browser tasks all read from it and write back to it. A task that finishes leaves the memory slightly better informed, so the next task needs fewer questions.</p>
+<p>Over months, that compounding is the difference between a tool you use and an assistant you rely on.</p>
+</div>
+    <div class="end">
+      <a class="tlink" href="#journal" data-r="journal">All essays</a>
+      <div class="ctas"><button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="essay-memory-is-the-product">Join Waitlist</button></div>
+    </div>
+  </div>
+</article>
+<section class="s closing-s" aria-labelledby="h-close-memory-is-the-product">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div><h2 id="h-close-memory-is-the-product">Private beta. Access by invitation.</h2><p>We are opening AskGogo in small groups across India and the UAE.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="essay-close">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="essay-close" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div></div>
+  </div>
+</section>
+</main></div><div class="pg" data-pg="essay-autonomy-you-can-check" hidden><main id="main">
+<article class="article" aria-labelledby="h-essay">
+  <div class="wrap">
+    <header class="ah">
+      <a class="back" href="#journal" data-r="journal">← Journal</a>
+      <span class="vig" data-gogo="approval" aria-hidden="true"></span>
+      <p class="meta">Essay · 7 min read · 22 Sep 2026</p><h1 id="h-essay">Autonomy you can check.</h1><p class="dek">Agent demos look effortless. Daily use is where they break. Reliable autonomy comes from plain disciplines: plan the task, set the limits, check the result.</p>
+    </header>
+    <div class="prose">
+<p>An agent that books a flight in a demo video and an agent you would let book your flight are different things. The first needs to succeed once. The second needs to succeed on a slow Tuesday, on a site that changed its layout last week, with your card and your name on the line.</p>
+<p>When autonomous agents fail in practice, they tend to fail in a few recognisable ways. They stop halfway and report success. They act confidently on a wrong assumption. They loop on a page they do not understand. Or they do something consequential that nobody approved.</p>
+<h2>Plan first, then act</h2>
+<p>Before an agent touches a website, it should know what finished looks like and what the steps are likely to be. A plan makes failures visible: if step three was "choose a slot" and the agent is now on a payment page, something went wrong.</p>
+<p>Small operational rules matter here more than clever models. One we learned the hard way: on most shopping and booking sites, sign in first, then add to the cart. Many sites let you build a cart as a guest and then ask you to log in at checkout, which can empty the cart or lose the saved address. Signing in first avoids a whole class of failures.</p>
+<h2>Draw the boundary before you need it</h2>
+<p>Some actions are cheap to undo and some are not. Reading a page, filling a form and searching for options can run on their own. Paying, booking, cancelling and sending a message to another person should wait for a yes, with the exact details shown: the amount, the date, the recipient.</p>
+<blockquote>Autonomy is not the absence of approvals. It is knowing exactly which steps need one.</blockquote>
+<p>Credentials deserve their own boundary. Passwords and card details belong in a vault that the agent can use without the model ever seeing them. When a site asks for a one-time password, the agent should ask you for it in the chat, use it, and move on.</p>
+<h2>Check the result</h2>
+<p>The final click is not the end of a task. The end is evidence that the task worked: a confirmation number on the page, a confirmation email in the inbox, an event on the calendar. An agent should look for that evidence before it tells you anything is done.</p>
+<p>When it cannot find the evidence, the honest report is "I could not confirm this", along with what it saw. That is less satisfying than "Done!", and far more useful.</p>
+<h2>Know when to hand over</h2>
+<p>Some tasks will not complete. A site blocks automated access, a form needs a document you have not shared, an option requires a judgement only you can make. A reliable agent recognises this early and hands over cleanly, with a direct link to the page and a summary of where it stopped, instead of trying the same thing ten times.</p>
+<p>None of this is glamorous. It is the difference between an agent that impresses you once and one you hand the next task to without thinking about it.</p>
+</div>
+    <div class="end">
+      <a class="tlink" href="#journal" data-r="journal">All essays</a>
+      <div class="ctas"><button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="essay-autonomy-you-can-check">Join Waitlist</button></div>
+    </div>
+  </div>
+</article>
+<section class="s closing-s" aria-labelledby="h-close-autonomy-you-can-check">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div><h2 id="h-close-autonomy-you-can-check">Private beta. Access by invitation.</h2><p>We are opening AskGogo in small groups across India and the UAE.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="essay-close">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="essay-close" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div></div>
+  </div>
+</section>
+</main></div>
 
 <footer class="ftr">
   <div class="wrap">
     <div class="grid">
-      <div><a class="mark" href="./"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta in India and the UAE.</p></div>
-      <div><h4>Explore</h4><ul><li><a href="../secondbrain/" data-later>SecondBrain</a></li><li><a href="../business/" data-later>Business</a></li><li><a href="../journal/" data-later>Journal</a></li><li><a href="../about/" data-later>About</a></li></ul></div>
+      <div><a class="mark" href="#home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta in India and the UAE.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#secondbrain" data-r="secondbrain">SecondBrain</a></li><li><a href="#business" data-r="business">Business</a></li><li><a href="#journal" data-r="journal">Journal</a></li><li><a href="#about" data-r="about">About</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="https://askgogo.in/privacy/" target="_blank" rel="noopener">Privacy</a></li><li><a href="https://askgogo.in/terms/" target="_blank" rel="noopener">Terms</a></li><li><a href="https://askgogo.in/refund/" target="_blank" rel="noopener">Refunds</a></li></ul></div>
     </div>
-    <div class="base"><span>© 2026 AskGogo Technologies</span><span>Memory. Action. Continuity.</span></div>
+    <div class="base"><span>© 2026 AskGogo Technologies</span><span>Remembers. Asks. Finishes.</span></div>
   </div>
 </footer>
 </div>
@@ -681,17 +1229,19 @@ h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;line-height:1.08;text-w
   </div>
 </div>
 <script>
+(function(){const show=()=>{let k=(location.hash||'#home').slice(1);if(!document.querySelector('.pg[data-pg="'+k+'"]'))k='home';
+ document.querySelectorAll('.pg').forEach(p=>p.hidden=p.dataset.pg!==k);document.body.dataset.page=k;
+ document.querySelectorAll('.nav a,.drawer nav a').forEach(a=>{const r=a.dataset.r;const on=r===k||(r==='journal'&&k.startsWith('essay'));on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+ const d=document.getElementById('drawer');if(d&&!d.hidden){d.hidden=true;document.getElementById('menu-open').setAttribute('aria-expanded','false')}
+ scrollTo(0,0);window.dispatchEvent(new Event('ag:page'))};
+ addEventListener('hashchange',show);show();})();
+</script><script>
 (()=>{
 const root=document.documentElement;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-
-/* ---------- characters ---------- */
-// Clone the hero task scenes into the mobile grid before mounting.
-const sm=$('.scenes-mobile');
-if(sm)$$('[data-scene]').forEach(n=>{const c=n.cloneNode(true);c.removeAttribute('data-scene');sm.appendChild(c)});
+window.AG={$,$$,reduced,root};
 Gogo.mountAll();
-
 /* ---------- theme ---------- */
 const KEY='askgogo-theme';
 function readTheme(){try{return localStorage.getItem(KEY)}catch(e){return null}}
@@ -699,9 +1249,9 @@ function applyTheme(t){
   root.classList.toggle('mode-dark',t==='dark');
   $$('.theme-btn').forEach(b=>{b.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
     b.querySelector('.i-moon').toggleAttribute('hidden',t==='dark');b.querySelector('.i-sun').toggleAttribute('hidden',t!=='dark')});
-  Gogo.mountAll(); ambient&&ambient.recolor(); story&&story.refreshGogo();
+  Gogo.mountAll(); (AG.onTheme||[]).forEach(f=>f(t));
 }
-let ambient=null, story=null;
+AG.onTheme=[];
 applyTheme(readTheme()==='dark'?'dark':'light');
 document.addEventListener('click',e=>{
   if(!e.target.closest('.theme-btn'))return;
@@ -717,16 +1267,8 @@ const drawer=$('#drawer'),mo=$('#menu-open');
 function closeDrawer(silent){if(drawer.hidden)return;drawer.hidden=true;mo.setAttribute('aria-expanded','false');if(!silent)mo.focus()}
 mo.onclick=()=>{drawer.hidden=false;mo.setAttribute('aria-expanded','true');$('nav a',drawer).focus()};
 $('#menu-close').onclick=()=>closeDrawer();
-
-/* Pages not yet carried over in this review build */
-let toastT;
-document.addEventListener('click',e=>{
-  const a=e.target.closest('[data-later]');if(!a)return;e.preventDefault();
-  let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');
-    t.style.cssText='position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:90;background:var(--ink);color:var(--on-ink);padding:12px 16px;border-radius:12px;font-size:14px;max-width:calc(100% - 32px);text-align:center';document.body.appendChild(t)}
-  t.textContent='This review covers Home. The other pages follow once Home is approved.';t.hidden=false;
-  clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600);
-});
+const PAGE=document.body.dataset.page||'';
+$$('.nav a,.drawer nav a').forEach(a=>{const r=a.dataset.r;const on=r===PAGE||(r==='journal'&&PAGE.startsWith('essay'));on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
 
 /* ---------- sheets (mock forms) ---------- */
 let opener=null;
@@ -776,13 +1318,34 @@ const gate=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle(
 $$('main > section, .hdr').forEach(s=>gate.observe(s));
 function onceVisible(el,fn,th=.35){const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();fn()}},{threshold:th});io.observe(el)}
 
-/* ---------- hero Gogo: blink, gaze, a one-time hello ---------- */
-const heroG=$('[data-hero]');
-function blinkLoop(el){
+
+AG.onceVisible=onceVisible;
+/* blink helper for any character with open eyes */
+AG.blinkLoop=function(el){if(!el)return;
   const tick=()=>{if(!reduced.matches&&!document.hidden&&!el.closest('.paused')){const svg=$('svg',el);if(svg&&$('.gogo-pupils',svg)){svg.classList.add('blink');setTimeout(()=>svg.classList.remove('blink'),150)}}
     setTimeout(tick,3800+Math.random()*2400)};
-  setTimeout(tick,2200);
+  setTimeout(tick,2200)};
+$$('[data-blink]').forEach(AG.blinkLoop);
+/* arrival for below-fold blocks */
+if(!reduced.matches&&'IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('go');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  $$('.sh,.beats,.story,.trust,.list,.closing,[data-rise]').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('rise');io.observe(el)}});
 }
+})();
+
+</script>
+<script>
+(()=>{
+const {$,$$,reduced,root,onceVisible,blinkLoop}=AG;
+
+/* clone the hero task scenes into the mobile grid */
+const sm=$('.scenes-mobile');
+if(sm)$$('[data-scene]').forEach(n=>{const c=n.cloneNode(true);c.removeAttribute('data-scene');sm.appendChild(c)});
+Gogo.mountAll(sm);
+let ambient=null, story=null;
+AG.onTheme.push(()=>{ambient&&ambient.recolor();story&&story.refreshGogo()});
+/* ---------- hero Gogo: blink, gaze, a one-time hello ---------- */
+const heroG=$('[data-hero]');
 if(heroG){
   blinkLoop(heroG);
   let greeted=false;
@@ -799,40 +1362,46 @@ if(heroG){
 }
 
 /* ---------- Meet Gogo beats ---------- */
-const beats=$('#beats'),beatEls=$$('[data-beat]',beats);let beatT=[];
-function playBeats(){
-  beatT.forEach(clearTimeout);beatT=[];
-  if(reduced.matches){beats.classList.remove('playing');return}
-  beats.classList.add('playing');beatEls.forEach(b=>b.classList.remove('on'));
-  beatEls.forEach((b,i)=>beatT.push(setTimeout(()=>{beatEls.forEach(x=>x.classList.remove('on'));b.classList.add('on')},300+i*1400)));
-  beatT.push(setTimeout(()=>{beats.classList.remove('playing');beatEls.forEach(x=>x.classList.remove('on'))},300+beatEls.length*1400+600));
-}
-onceVisible(beats,playBeats,.4);
-$('#beats-replay').onclick=playBeats;
+const beats=$('#beats'),beatEls=$$('[data-beat]',beats);
+const beatSeq=(function(){
+  let k=-1,t=null,active=false,offscreen=false;
+  const paused=()=>offscreen||document.hidden;
+  function show(n){beatEls.forEach((b,i)=>b.classList.toggle('on',i===n))}
+  function step(){clearTimeout(t);if(!active||paused())return;
+    k++;if(k>=beatEls.length){active=false;beats.classList.remove('playing');show(-1);return}
+    show(k);t=setTimeout(step,1400)}
+  function play(){clearTimeout(t);if(reduced.matches){beats.classList.remove('playing');show(-1);return}
+    active=true;k=-1;beats.classList.add('playing');t=setTimeout(step,300)}
+  new IntersectionObserver(es=>{offscreen=!es[0].isIntersecting;if(offscreen)clearTimeout(t);else if(active)t=setTimeout(step,400)},{threshold:.2}).observe(beats);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(t);else if(active)t=setTimeout(step,400)});
+  return{play};
+})();
+onceVisible(beats,beatSeq.play,.4);
+$('#beats-replay').onclick=beatSeq.play;
 
 /* ---------- See how Gogo works ---------- */
 const STORIES={
   car:[
     {st:'listening',label:'Listening',what:'Gogo reads the request.',add:[{me:'Get my car serviced before the Mysuru drive on Saturday.'}]},
-    {st:'remembering',label:'Remembering',what:'It uses what you told it before.',add:[{mem:{k:'Remembered',v:'Your hatchback · usual service centre in Rajajinagar · mornings preferred',src:'You told Gogo on WhatsApp · 2 Sep'}}]},
+    {st:'remembering',label:'Remembering',what:'It uses what you told it earlier.',add:[{mem:{k:'Remembered',v:'Your hatchback · usual service centre in Rajajinagar · mornings preferred',src:'You told Gogo on WhatsApp · 2 Sep'}}]},
     {st:'thinking',label:'Planning',what:'It works out the deadline.',add:[{gg:'The drive is on Sat 24 Oct, so the service needs to finish by Fri 23 Oct. I’ll look for a morning slot.'}]},
     {st:'acting',label:'Searching',what:'It checks the centre’s open morning slots.',add:[{gg:'Found Thu 22 Oct, 9:30 am, with pickup from home.'}]},
     {st:'approval',label:'Waiting for approval',what:'Nothing is booked until you say yes.',gate:true,add:[{approval:{k:'Needs your approval',rows:[['Service','General service'],['When','Thu 22 Oct, 9:30 am'],['Pickup','From home'],['Payment','Pay at the centre']],yes:'Approve booking',no:'Not now'}}]},
-    {st:'done',label:'Verified result',what:'Done, with proof attached.',add:[{result:{k:'Confirmed',v:'Car service booked',rows:[['Confirmation','SVC-48213 (example)'],['Reminder','Wed 21 Oct, 7:00 pm']],badge:'Confirmed by the service centre'}}]}
+    {st:'done',label:'Verified result',what:'Done, with the confirmation.',add:[{result:{k:'Confirmed',v:'Car service booked',rows:[['Confirmation','SVC-48213 (example)'],['Reminder','Wed 21 Oct, 7:00 pm']],badge:'Confirmed by the service centre'}}]}
   ],
   receipt:[
     {st:'listening',label:'Listening',what:'Gogo reads the request.',add:[{me:'Find the receipt for the washing machine I bought.'}]},
     {st:'remembering',label:'Remembering',what:'It recalls what you shared earlier.',add:[{mem:{k:'Remembered',v:'Washing machine receipt · PDF',src:'You shared it on WhatsApp · Thu 12 Mar 2026'}}]},
     {st:'thinking',label:'Searching',what:'It checks your saved documents.',add:[{gg:'One match in your saved receipts.'}]},
-    {st:'done',label:'Verified result',what:'The file itself, not a description of it.',add:[{file:'receipt-washing-machine.pdf · 1 page'},{gg:'Here it is. Nothing to approve: I only read your own saved files.'}]}
+    {st:'done',label:'Verified result',what:'It sends the file.',add:[{file:'receipt-washing-machine.pdf · 1 page'},{gg:'Here it is. No approval needed: this only reads your own saved files.'}]}
   ],
   travel:[
     {st:'listening',label:'Listening',what:'Gogo reads the request.',add:[{me:'Compare ways to get to Goa on Sat 14 Nov. Morning, under ₹6,000.'}]},
-    {st:'remembering',label:'Remembering',what:'It uses your saved preferences.',add:[{mem:{k:'Remembered',v:'Flies from Bengaluru · prefers aisle seats',src:'You told Gogo · 2 Sep'}}]},
+    {st:'remembering',label:'Remembering',what:'It uses your saved preferences.',add:[{mem:{k:'Remembered',v:'Flies from Bengaluru · prefers window seats',src:'Corrected by you · 9 Oct'}}]},
     {st:'acting',label:'Searching',what:'It checks options for that morning.',add:[{gg:'Checking flights and buses for Sat 14 Nov…'}]},
-    {st:'found',label:'Comparing',what:'It lays out the trade-offs.',add:[{cmp:{k:'Options · example fares',rows:[['Flight 06:10 → 07:20','₹4,850',1],['Flight 09:40 → 10:55','₹5,600',0],['Overnight bus, Fri 21:00','₹1,900',0]]}}]},
-    {st:'approval',label:'Waiting for approval',what:'Nothing is booked until you say yes.',gate:true,add:[{approval:{k:'Needs your approval',rows:[['Flight','06:10 → 07:20, Sat 14 Nov'],['Fare','₹4,850 (example)'],['Seat','Aisle'],['Traveller','Your saved details']],yes:'Approve booking',no:'Not now'}}]},
-    {st:'done',label:'Verified result',what:'Done, with proof attached.',add:[{result:{k:'Confirmed',v:'Flight booked',rows:[['Booking ref','GX7Q4M (example)'],['Check-in reminder','Fri 13 Nov, 06:10']],badge:'E-ticket saved to your trip'}}]}
+    {st:'found',label:'Comparing',what:'It shows the options side by side.',add:[{cmp:{k:'Options · example fares',rows:[['Flight 06:10 → 07:20','₹4,850',1],['Flight 09:40 → 10:55','₹5,600',0],['Overnight bus, Fri 21:00','₹1,900',0]]}}]},
+    {st:'approval',label:'Waiting for approval',what:'Nothing is booked until you say yes.',gate:true,add:[{approval:{k:'Needs your approval',rows:[['Flight','06:10 → 07:20, Sat 14 Nov'],['Fare','₹4,850 (example)'],['Seat','Window'],['Traveller','Your saved details']],yes:'Approve booking',no:'Not now'}}]},
+    {st:'done',label:'Verified result',what:'Done, with the confirmation.',add:[{result:{k:'Confirmed',v:'Flight booked',rows:[['Booking ref','GX7Q4M (example)'],['Check-in reminder','Fri 13 Nov, 06:10']],badge:'E-ticket saved to your trip'}}]}
   ]
 };
 const ICON_OK='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 6.5l2.2 2.2L9.5 3.8"/></svg>';
@@ -869,18 +1438,21 @@ story=(function(){
     msgs.innerHTML=h;
     if(!animateLast)$$('.msg',msgs).forEach(m=>m.style.animation='none');
     else{const all=$$('.msg',msgs),n=S[i].add.length+(declined?1:0);all.slice(0,all.length-n).forEach(m=>m.style.animation='none')}
-    dots.innerHTML=S.map((x,j)=>`<button type="button" aria-label="Step ${j+1}: ${x.label}" ${j===i?'aria-current="step"':''} class="${j<i?'past':''}" data-step="${j}"></button>`).join('');
+    const gi=S.findIndex(x=>x.gate),locked=j=>gi>=0&&j>gi&&(declined||!decision);
+    dots.innerHTML=S.map((x,j)=>`<button type="button" aria-label="Step ${j+1}: ${x.label}${locked(j)?' (needs approval first)':''}" ${j===i?'aria-current="step"':''} ${locked(j)?'disabled':''} class="${j<i?'past':''}" data-step="${j}"></button>`).join('');
     const waiting=s.gate&&!decision;
     next.disabled=i>=S.length-1||waiting||declined; prev.disabled=i===0;
     hint.textContent=waiting?'Waiting for your approval in the chat.':declined||i===S.length-1?'End of example. Replay or pick another.':(playing?'Plays step by step. Pauses while you hover or focus.':'Paused. Use the arrows to step through.');
     setPlayIcon();
   }
-  function schedule(){clearTimeout(timer);if(!playing||hover||reduced.matches)return;
+  let offscreen=false;
+  function schedule(){clearTimeout(timer);if(!playing||hover||offscreen||document.hidden||reduced.matches)return;
     const S=steps();if(i>=S.length-1||declined||(S[i].gate&&!decision)){playing=false;setPlayIcon();render(false);return}
     timer=setTimeout(()=>{i++;render(true);schedule()},2600)}
   function go(j,anim){clearTimeout(timer);const S=steps();
     // Moving back past the approval step clears the decision.
     const g=S.findIndex(x=>x.gate);if(g>=0&&j<=g){decision=null;declined=false}
+    if(g>=0&&j>g&&(declined||!decision))j=g; // the verified result is only reachable through approval
     i=Math.max(0,Math.min(S.length-1,j));render(anim);schedule()}
   function setStory(k){key=k;decision=null;declined=false;
     $$('[data-story]').forEach(t=>{const on=t.dataset.story===k;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on)panel.setAttribute('aria-labelledby',t.id)});
@@ -905,6 +1477,8 @@ story=(function(){
   panel.addEventListener('pointerleave',()=>{hover=false;schedule()});
   panel.addEventListener('focusin',()=>{hover=true;clearTimeout(timer)});
   panel.addEventListener('focusout',e=>{if(!panel.contains(e.relatedTarget)){hover=false;schedule()}});
+  new IntersectionObserver(es=>{offscreen=!es[0].isIntersecting;offscreen?clearTimeout(timer):schedule()},{threshold:.15}).observe(panel);
+  document.addEventListener('visibilitychange',()=>{document.hidden?clearTimeout(timer):schedule()});
   render(false);
   onceVisible(panel,()=>{started=true;if(!reduced.matches&&!userPaused){playing=true;render(false);schedule()}},.45);
   return{refreshGogo:()=>render(false)};
@@ -921,7 +1495,6 @@ const tviz=$('#tviz'),titems=$$('[data-trust]');
 function showTrust(n){titems.forEach((t,ix)=>{const on=ix===n;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1});tviz.setAttribute('aria-labelledby',titems[n].id);tviz.innerHTML=TRUST[n]();Gogo.mountAll(tviz)}
 titems.forEach((t,ix)=>{t.onclick=()=>showTrust(ix);t.onkeydown=e=>{let n=null;if(e.key==='ArrowDown'||e.key==='ArrowRight')n=(ix+1)%3;if(e.key==='ArrowUp'||e.key==='ArrowLeft')n=(ix+2)%3;if(n!==null){e.preventDefault();titems[n].focus();showTrust(n)}}});
 showTrust(0);
-const _mountAll=Gogo.mountAll;
 
 /* ---------- Business cards settle in ---------- */
 const biz=$('#bizstage');
@@ -955,11 +1528,26 @@ function makeAmbient(canvas){
 }
 const cv=$('#ambient');if(cv){ambient=makeAmbient(cv);ambient.recolor()}
 
-/* arrival for below-fold blocks */
-if(!reduced.matches&&'IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('go');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
-  $$('.sh,.beats,.story,.trust,.list,.closing').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('rise');io.observe(el)}});
+})();
+
+</script>
+<script>
+/* Inner pages: SecondBrain beats. Everything else on these pages is CSS plus the shared chrome in site.js. */
+(()=>{
+const {$,$$,reduced,onceVisible}=AG;
+function beatSeq(beats,replay){
+  const els=$$('[data-beat]',beats);let k=-1,t=null,active=false,offscreen=false;
+  const paused=()=>offscreen||document.hidden;
+  const show=n=>els.forEach((b,i)=>b.classList.toggle('on',i===n));
+  function step(){clearTimeout(t);if(!active||paused())return;k++;
+    if(k>=els.length){active=false;beats.classList.remove('playing');show(-1);return}
+    show(k);t=setTimeout(step,1600)}
+  function play(){clearTimeout(t);if(reduced.matches){beats.classList.remove('playing');show(-1);return}active=true;k=-1;beats.classList.add('playing');t=setTimeout(step,300)}
+  new IntersectionObserver(es=>{offscreen=!es[0].isIntersecting;if(offscreen)clearTimeout(t);else if(active)t=setTimeout(step,400)},{threshold:.2}).observe(beats);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(t);else if(active)t=setTimeout(step,400)});
+  onceVisible(beats,play,.4);if(replay)replay.onclick=play;
 }
+const sb=$('#sb-beats');if(sb)beatSeq(sb,$('#sb-replay'));
 })();
 
 </script>

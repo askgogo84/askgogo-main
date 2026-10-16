@@ -1,105 +1,14 @@
 (()=>{
-const root=document.documentElement;
-const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const {$,$$,reduced,root,onceVisible,blinkLoop}=AG;
 
-/* ---------- characters ---------- */
-// Clone the hero task scenes into the mobile grid before mounting.
+/* clone the hero task scenes into the mobile grid */
 const sm=$('.scenes-mobile');
 if(sm)$$('[data-scene]').forEach(n=>{const c=n.cloneNode(true);c.removeAttribute('data-scene');sm.appendChild(c)});
-Gogo.mountAll();
-
-/* ---------- theme ---------- */
-const KEY='askgogo-theme';
-function readTheme(){try{return localStorage.getItem(KEY)}catch(e){return null}}
-function applyTheme(t){
-  root.classList.toggle('mode-dark',t==='dark');
-  $$('.theme-btn').forEach(b=>{b.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
-    b.querySelector('.i-moon').toggleAttribute('hidden',t==='dark');b.querySelector('.i-sun').toggleAttribute('hidden',t!=='dark')});
-  Gogo.mountAll(); ambient&&ambient.recolor(); story&&story.refreshGogo();
-}
+Gogo.mountAll(sm);
 let ambient=null, story=null;
-applyTheme(readTheme()==='dark'?'dark':'light');
-document.addEventListener('click',e=>{
-  if(!e.target.closest('.theme-btn'))return;
-  const next=root.classList.contains('mode-dark')?'light':'dark';
-  try{localStorage.setItem(KEY,next)}catch(err){}
-  applyTheme(next);
-});
-
-/* ---------- header, drawer ---------- */
-const hdr=$('#hdr');
-addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
-const drawer=$('#drawer'),mo=$('#menu-open');
-function closeDrawer(silent){if(drawer.hidden)return;drawer.hidden=true;mo.setAttribute('aria-expanded','false');if(!silent)mo.focus()}
-mo.onclick=()=>{drawer.hidden=false;mo.setAttribute('aria-expanded','true');$('nav a',drawer).focus()};
-$('#menu-close').onclick=()=>closeDrawer();
-
-/* Pages not yet carried over in this review build */
-let toastT;
-document.addEventListener('click',e=>{
-  const a=e.target.closest('[data-later]');if(!a)return;e.preventDefault();
-  let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');
-    t.style.cssText='position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:90;background:var(--ink);color:var(--on-ink);padding:12px 16px;border-radius:12px;font-size:14px;max-width:calc(100% - 32px);text-align:center';document.body.appendChild(t)}
-  t.textContent='This review covers Home. The other pages follow once Home is approved.';t.hidden=false;
-  clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600);
-});
-
-/* ---------- sheets (mock forms) ---------- */
-let opener=null;
-function openSheet(id,btn){closeDrawer(true);const s=$('#sheet-'+id);$('[data-form]',s).hidden=false;$('[data-done]',s).hidden=true;s.hidden=false;opener=btn;s.dataset.source=btn?.dataset.cta||'site';setTimeout(()=>$('input',s)?.focus(),30)}
-function closeSheet(s){s.hidden=true;opener?.focus?.()}
-document.addEventListener('click',e=>{
-  const o=e.target.closest('[data-open]');if(o){e.preventDefault();openSheet(o.dataset.open,o);return}
-  const c=e.target.closest('[data-close]');if(c)closeSheet(c.closest('.sheet'));
-});
-document.addEventListener('keydown',e=>{
-  const s=$('.sheet:not([hidden])')||(!drawer.hidden?drawer:null);if(!s)return;
-  if(e.key==='Escape'){s===drawer?closeDrawer():closeSheet(s);return}
-  if(e.key!=='Tab')return;
-  const f=$$('button,a[href],input,select,textarea',s).filter(x=>x.offsetParent!==null);if(!f.length)return;
-  const a=f[0],b=f[f.length-1];
-  if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}
-});
-const EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const phoneOk=(cc,raw)=>{const d=String(raw).replace(/\D/g,'');return cc==='IN'?/^[6-9]\d{9}$/.test(d):/^5\d{8}$/.test(d)};
-const phoneMsg=cc=>cc==='IN'?'Enter a 10-digit Indian mobile number starting with 6, 7, 8 or 9.':'Enter a 9-digit UAE mobile number starting with 5.';
-function setErr(id,msg){const el=$('#'+id),inp=$('#'+id.replace(/-err$/,''));el.textContent=msg||'';if(inp)inp.setAttribute('aria-invalid',msg?'true':'false');return !msg}
-function wirePhone(inp,sel){inp.addEventListener('input',()=>{inp.value=inp.value.replace(/\D/g,'').slice(0,sel.value==='AE'?9:10)});sel.addEventListener('change',()=>{inp.placeholder=sel.value==='AE'?'50 123 4567':'98765 43210'})}
-wirePhone($('#wl-phone'),$('#wl-country'));wirePhone($('#ea-phone'),$('#ea-country'));
-function finish(form){const s=form.closest('.sheet');$('[data-form]',s).hidden=true;const d=$('[data-done]',s);d.hidden=false;Gogo.mountAll(d);$('button',d).focus()}
-const firstInvalid=form=>{const x=$('[aria-invalid=true]',form);x&&x.focus()};
-$('#wl-form').addEventListener('submit',e=>{
-  e.preventDefault();const v=id=>$('#'+id).value.trim(),cc=v('wl-country');
-  const ok=[setErr('wl-email-err',EMAIL.test(v('wl-email'))?'':'Enter a valid email address.'),
-            setErr('wl-phone-err',phoneOk(cc,v('wl-phone'))?'':phoneMsg(cc))].every(Boolean);
-  ok?finish(e.target):firstInvalid(e.target);
-});
-$('#ea-form').addEventListener('submit',e=>{
-  e.preventDefault();const v=id=>$('#'+id).value.trim(),cc=v('ea-country');
-  const ok=[setErr('ea-name-err',v('ea-name').length>=2?'':'Enter your name.'),
-            setErr('ea-company-err',v('ea-company').length>=2?'':'Enter your company name.'),
-            setErr('ea-email-err',EMAIL.test(v('ea-email'))?'':'Enter a valid work email.'),
-            setErr('ea-phone-err',phoneOk(cc,v('ea-phone'))?'':phoneMsg(cc)),
-            setErr('ea-size-err',v('ea-size')?'':'Choose a team size.'),
-            setErr('ea-use-err',v('ea-use').length>=10?'':'Tell us in a sentence what you would hand off first.'),
-            setErr('ea-consent-err',$('#ea-consent').checked?'':'Please agree so we can contact you.')].every(Boolean);
-  ok?finish(e.target):firstInvalid(e.target);
-});
-
-/* ---------- motion gates ---------- */
-document.addEventListener('visibilitychange',()=>root.classList.toggle('hidden-tab',document.hidden));
-const gate=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('paused',!e.isIntersecting)),{rootMargin:'80px'});
-$$('main > section, .hdr').forEach(s=>gate.observe(s));
-function onceVisible(el,fn,th=.35){const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();fn()}},{threshold:th});io.observe(el)}
-
+AG.onTheme.push(()=>{ambient&&ambient.recolor();story&&story.refreshGogo()});
 /* ---------- hero Gogo: blink, gaze, a one-time hello ---------- */
 const heroG=$('[data-hero]');
-function blinkLoop(el){
-  const tick=()=>{if(!reduced.matches&&!document.hidden&&!el.closest('.paused')){const svg=$('svg',el);if(svg&&$('.gogo-pupils',svg)){svg.classList.add('blink');setTimeout(()=>svg.classList.remove('blink'),150)}}
-    setTimeout(tick,3800+Math.random()*2400)};
-  setTimeout(tick,2200);
-}
 if(heroG){
   blinkLoop(heroG);
   let greeted=false;
@@ -116,40 +25,46 @@ if(heroG){
 }
 
 /* ---------- Meet Gogo beats ---------- */
-const beats=$('#beats'),beatEls=$$('[data-beat]',beats);let beatT=[];
-function playBeats(){
-  beatT.forEach(clearTimeout);beatT=[];
-  if(reduced.matches){beats.classList.remove('playing');return}
-  beats.classList.add('playing');beatEls.forEach(b=>b.classList.remove('on'));
-  beatEls.forEach((b,i)=>beatT.push(setTimeout(()=>{beatEls.forEach(x=>x.classList.remove('on'));b.classList.add('on')},300+i*1400)));
-  beatT.push(setTimeout(()=>{beats.classList.remove('playing');beatEls.forEach(x=>x.classList.remove('on'))},300+beatEls.length*1400+600));
-}
-onceVisible(beats,playBeats,.4);
-$('#beats-replay').onclick=playBeats;
+const beats=$('#beats'),beatEls=$$('[data-beat]',beats);
+const beatSeq=(function(){
+  let k=-1,t=null,active=false,offscreen=false;
+  const paused=()=>offscreen||document.hidden;
+  function show(n){beatEls.forEach((b,i)=>b.classList.toggle('on',i===n))}
+  function step(){clearTimeout(t);if(!active||paused())return;
+    k++;if(k>=beatEls.length){active=false;beats.classList.remove('playing');show(-1);return}
+    show(k);t=setTimeout(step,1400)}
+  function play(){clearTimeout(t);if(reduced.matches){beats.classList.remove('playing');show(-1);return}
+    active=true;k=-1;beats.classList.add('playing');t=setTimeout(step,300)}
+  new IntersectionObserver(es=>{offscreen=!es[0].isIntersecting;if(offscreen)clearTimeout(t);else if(active)t=setTimeout(step,400)},{threshold:.2}).observe(beats);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(t);else if(active)t=setTimeout(step,400)});
+  return{play};
+})();
+onceVisible(beats,beatSeq.play,.4);
+$('#beats-replay').onclick=beatSeq.play;
 
 /* ---------- See how Gogo works ---------- */
 const STORIES={
   car:[
     {st:'listening',label:'Listening',what:'Gogo reads the request.',add:[{me:'Get my car serviced before the Mysuru drive on Saturday.'}]},
-    {st:'remembering',label:'Remembering',what:'It uses what you told it before.',add:[{mem:{k:'Remembered',v:'Your hatchback · usual service centre in Rajajinagar · mornings preferred',src:'You told Gogo on WhatsApp · 2 Sep'}}]},
+    {st:'remembering',label:'Remembering',what:'It uses what you told it earlier.',add:[{mem:{k:'Remembered',v:'Your hatchback · usual service centre in Rajajinagar · mornings preferred',src:'You told Gogo on WhatsApp · 2 Sep'}}]},
     {st:'thinking',label:'Planning',what:'It works out the deadline.',add:[{gg:'The drive is on Sat 24 Oct, so the service needs to finish by Fri 23 Oct. I’ll look for a morning slot.'}]},
     {st:'acting',label:'Searching',what:'It checks the centre’s open morning slots.',add:[{gg:'Found Thu 22 Oct, 9:30 am, with pickup from home.'}]},
     {st:'approval',label:'Waiting for approval',what:'Nothing is booked until you say yes.',gate:true,add:[{approval:{k:'Needs your approval',rows:[['Service','General service'],['When','Thu 22 Oct, 9:30 am'],['Pickup','From home'],['Payment','Pay at the centre']],yes:'Approve booking',no:'Not now'}}]},
-    {st:'done',label:'Verified result',what:'Done, with proof attached.',add:[{result:{k:'Confirmed',v:'Car service booked',rows:[['Confirmation','SVC-48213 (example)'],['Reminder','Wed 21 Oct, 7:00 pm']],badge:'Confirmed by the service centre'}}]}
+    {st:'done',label:'Verified result',what:'Done, with the confirmation.',add:[{result:{k:'Confirmed',v:'Car service booked',rows:[['Confirmation','SVC-48213 (example)'],['Reminder','Wed 21 Oct, 7:00 pm']],badge:'Confirmed by the service centre'}}]}
   ],
   receipt:[
     {st:'listening',label:'Listening',what:'Gogo reads the request.',add:[{me:'Find the receipt for the washing machine I bought.'}]},
     {st:'remembering',label:'Remembering',what:'It recalls what you shared earlier.',add:[{mem:{k:'Remembered',v:'Washing machine receipt · PDF',src:'You shared it on WhatsApp · Thu 12 Mar 2026'}}]},
     {st:'thinking',label:'Searching',what:'It checks your saved documents.',add:[{gg:'One match in your saved receipts.'}]},
-    {st:'done',label:'Verified result',what:'The file itself, not a description of it.',add:[{file:'receipt-washing-machine.pdf · 1 page'},{gg:'Here it is. Nothing to approve: I only read your own saved files.'}]}
+    {st:'done',label:'Verified result',what:'It sends the file.',add:[{file:'receipt-washing-machine.pdf · 1 page'},{gg:'Here it is. No approval needed: this only reads your own saved files.'}]}
   ],
   travel:[
     {st:'listening',label:'Listening',what:'Gogo reads the request.',add:[{me:'Compare ways to get to Goa on Sat 14 Nov. Morning, under ₹6,000.'}]},
-    {st:'remembering',label:'Remembering',what:'It uses your saved preferences.',add:[{mem:{k:'Remembered',v:'Flies from Bengaluru · prefers aisle seats',src:'You told Gogo · 2 Sep'}}]},
+    {st:'remembering',label:'Remembering',what:'It uses your saved preferences.',add:[{mem:{k:'Remembered',v:'Flies from Bengaluru · prefers window seats',src:'Corrected by you · 9 Oct'}}]},
     {st:'acting',label:'Searching',what:'It checks options for that morning.',add:[{gg:'Checking flights and buses for Sat 14 Nov…'}]},
-    {st:'found',label:'Comparing',what:'It lays out the trade-offs.',add:[{cmp:{k:'Options · example fares',rows:[['Flight 06:10 → 07:20','₹4,850',1],['Flight 09:40 → 10:55','₹5,600',0],['Overnight bus, Fri 21:00','₹1,900',0]]}}]},
-    {st:'approval',label:'Waiting for approval',what:'Nothing is booked until you say yes.',gate:true,add:[{approval:{k:'Needs your approval',rows:[['Flight','06:10 → 07:20, Sat 14 Nov'],['Fare','₹4,850 (example)'],['Seat','Aisle'],['Traveller','Your saved details']],yes:'Approve booking',no:'Not now'}}]},
-    {st:'done',label:'Verified result',what:'Done, with proof attached.',add:[{result:{k:'Confirmed',v:'Flight booked',rows:[['Booking ref','GX7Q4M (example)'],['Check-in reminder','Fri 13 Nov, 06:10']],badge:'E-ticket saved to your trip'}}]}
+    {st:'found',label:'Comparing',what:'It shows the options side by side.',add:[{cmp:{k:'Options · example fares',rows:[['Flight 06:10 → 07:20','₹4,850',1],['Flight 09:40 → 10:55','₹5,600',0],['Overnight bus, Fri 21:00','₹1,900',0]]}}]},
+    {st:'approval',label:'Waiting for approval',what:'Nothing is booked until you say yes.',gate:true,add:[{approval:{k:'Needs your approval',rows:[['Flight','06:10 → 07:20, Sat 14 Nov'],['Fare','₹4,850 (example)'],['Seat','Window'],['Traveller','Your saved details']],yes:'Approve booking',no:'Not now'}}]},
+    {st:'done',label:'Verified result',what:'Done, with the confirmation.',add:[{result:{k:'Confirmed',v:'Flight booked',rows:[['Booking ref','GX7Q4M (example)'],['Check-in reminder','Fri 13 Nov, 06:10']],badge:'E-ticket saved to your trip'}}]}
   ]
 };
 const ICON_OK='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 6.5l2.2 2.2L9.5 3.8"/></svg>';
@@ -186,18 +101,21 @@ story=(function(){
     msgs.innerHTML=h;
     if(!animateLast)$$('.msg',msgs).forEach(m=>m.style.animation='none');
     else{const all=$$('.msg',msgs),n=S[i].add.length+(declined?1:0);all.slice(0,all.length-n).forEach(m=>m.style.animation='none')}
-    dots.innerHTML=S.map((x,j)=>`<button type="button" aria-label="Step ${j+1}: ${x.label}" ${j===i?'aria-current="step"':''} class="${j<i?'past':''}" data-step="${j}"></button>`).join('');
+    const gi=S.findIndex(x=>x.gate),locked=j=>gi>=0&&j>gi&&(declined||!decision);
+    dots.innerHTML=S.map((x,j)=>`<button type="button" aria-label="Step ${j+1}: ${x.label}${locked(j)?' (needs approval first)':''}" ${j===i?'aria-current="step"':''} ${locked(j)?'disabled':''} class="${j<i?'past':''}" data-step="${j}"></button>`).join('');
     const waiting=s.gate&&!decision;
     next.disabled=i>=S.length-1||waiting||declined; prev.disabled=i===0;
     hint.textContent=waiting?'Waiting for your approval in the chat.':declined||i===S.length-1?'End of example. Replay or pick another.':(playing?'Plays step by step. Pauses while you hover or focus.':'Paused. Use the arrows to step through.');
     setPlayIcon();
   }
-  function schedule(){clearTimeout(timer);if(!playing||hover||reduced.matches)return;
+  let offscreen=false;
+  function schedule(){clearTimeout(timer);if(!playing||hover||offscreen||document.hidden||reduced.matches)return;
     const S=steps();if(i>=S.length-1||declined||(S[i].gate&&!decision)){playing=false;setPlayIcon();render(false);return}
     timer=setTimeout(()=>{i++;render(true);schedule()},2600)}
   function go(j,anim){clearTimeout(timer);const S=steps();
     // Moving back past the approval step clears the decision.
     const g=S.findIndex(x=>x.gate);if(g>=0&&j<=g){decision=null;declined=false}
+    if(g>=0&&j>g&&(declined||!decision))j=g; // the verified result is only reachable through approval
     i=Math.max(0,Math.min(S.length-1,j));render(anim);schedule()}
   function setStory(k){key=k;decision=null;declined=false;
     $$('[data-story]').forEach(t=>{const on=t.dataset.story===k;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on)panel.setAttribute('aria-labelledby',t.id)});
@@ -222,6 +140,8 @@ story=(function(){
   panel.addEventListener('pointerleave',()=>{hover=false;schedule()});
   panel.addEventListener('focusin',()=>{hover=true;clearTimeout(timer)});
   panel.addEventListener('focusout',e=>{if(!panel.contains(e.relatedTarget)){hover=false;schedule()}});
+  new IntersectionObserver(es=>{offscreen=!es[0].isIntersecting;offscreen?clearTimeout(timer):schedule()},{threshold:.15}).observe(panel);
+  document.addEventListener('visibilitychange',()=>{document.hidden?clearTimeout(timer):schedule()});
   render(false);
   onceVisible(panel,()=>{started=true;if(!reduced.matches&&!userPaused){playing=true;render(false);schedule()}},.45);
   return{refreshGogo:()=>render(false)};
@@ -238,7 +158,6 @@ const tviz=$('#tviz'),titems=$$('[data-trust]');
 function showTrust(n){titems.forEach((t,ix)=>{const on=ix===n;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1});tviz.setAttribute('aria-labelledby',titems[n].id);tviz.innerHTML=TRUST[n]();Gogo.mountAll(tviz)}
 titems.forEach((t,ix)=>{t.onclick=()=>showTrust(ix);t.onkeydown=e=>{let n=null;if(e.key==='ArrowDown'||e.key==='ArrowRight')n=(ix+1)%3;if(e.key==='ArrowUp'||e.key==='ArrowLeft')n=(ix+2)%3;if(n!==null){e.preventDefault();titems[n].focus();showTrust(n)}}});
 showTrust(0);
-const _mountAll=Gogo.mountAll;
 
 /* ---------- Business cards settle in ---------- */
 const biz=$('#bizstage');
@@ -272,9 +191,4 @@ function makeAmbient(canvas){
 }
 const cv=$('#ambient');if(cv){ambient=makeAmbient(cv);ambient.recolor()}
 
-/* arrival for below-fold blocks */
-if(!reduced.matches&&'IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('go');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
-  $$('.sh,.beats,.story,.trust,.list,.closing').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('rise');io.observe(el)}});
-}
 })();

@@ -12,8 +12,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap">
-<link rel="stylesheet" href="assets/home.css">
+<link rel="stylesheet" href="assets/site.css">
 <script src="assets/gogo.js"></script>
+<script src="assets/site.js" defer></script>
 <script src="assets/home.js" defer></script>
 </head>
 <body data-page="home">
@@ -22,12 +23,12 @@
 
 <header class="hdr" id="hdr">
   <div class="wrap">
-    <a class="mark" href="./" aria-label="AskGogo home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <a class="mark" href="" aria-label="AskGogo home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
     <nav class="nav" aria-label="Primary">
-      <a href="../secondbrain/" data-later>SecondBrain</a>
-      <a href="../business/" data-later>Business</a>
-      <a href="../journal/" data-later>Journal</a>
-      <a href="../about/" data-later>About</a>
+      <a href="secondbrain/" data-r="secondbrain">SecondBrain</a>
+      <a href="business/" data-r="business">Business</a>
+      <a href="journal/" data-r="journal">Journal</a>
+      <a href="about/" data-r="about">About</a>
     </nav>
     <div class="tools">
       <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
@@ -44,7 +45,7 @@
 
 <div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-label="Menu">
   <div class="top">
-    <a class="mark" href="./"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <a class="mark" href=""><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
     <div class="tools">
       <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -54,7 +55,7 @@
     </div>
   </div>
   <nav aria-label="Mobile">
-    <a href="./">Home</a><a href="../secondbrain/" data-later>SecondBrain</a><a href="../business/" data-later>Business</a><a href="../journal/" data-later>Journal</a><a href="../about/" data-later>About</a>
+    <a href="">Home</a><a href="secondbrain/" data-r="secondbrain">SecondBrain</a><a href="business/" data-r="business">Business</a><a href="journal/" data-r="journal">Journal</a><a href="about/" data-r="about">About</a>
   </nav>
   <div class="ctas">
     <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="menu">Join Waitlist</button>
@@ -94,7 +95,7 @@
       <p class="cap"><span data-gogo="watching"></span>Reminder set for the day before</p>
     </div>
   </div>
-  <div class="hero-foot"><p>Memory. Action. Continuity.</p></div>
+  <div class="hero-foot"><p>Remembers the details. Acts with your approval. Shows you the result.</p></div>
 </section>
 
 <!-- 2. MEET GOGO -->
@@ -195,7 +196,7 @@
       <div class="intro">
         <p class="label">AskGogo for Business</p>
         <h2 id="h-biz">A Gogo for the work your team repeats.</h2>
-        <p>Shared company memory, workflows that run end to end, approvals at the steps that matter, and a result you can check.</p>
+        <p>Shared company memory, work carried through end to end, approval at the steps that matter, and a result you can check.</p>
         <button class="btn btn-solid" type="button" data-open="access" data-cta="home-business">Request Early Access</button>
         <p class="fine">Illustrative workflows we are exploring with early teams.</p>
       </div>
@@ -212,11 +213,11 @@
 <!-- 6. JOURNAL -->
 <section class="s" aria-labelledby="h-journal" id="journal">
   <div class="wrap">
-    <div class="head-row"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="../journal/" data-later>All essays <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="head-row"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="journal/" data-r="journal">All essays <span class="arrow" aria-hidden="true">→</span></a></div>
     <div class="list">
-      <a href="../journal/finish-the-work/" data-later><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most AI hands back homework. The useful part is the last mile.</p></div><span class="when">14 Oct 2026</span></a>
-      <a href="../journal/memory-is-the-product/" data-later><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Provenance, correction, scope and expiry: what it takes to remember well.</p></div><span class="when">2 Oct 2026</span></a>
-      <a href="../journal/autonomy-you-can-check/" data-later><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Reliable agents come from planning, boundaries and checking the result.</p></div><span class="when">22 Sep 2026</span></a>
+      <a href="journal/finish-the-work/"><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task.</p></div><span class="when">14 Oct 2026</span></a>
+      <a href="journal/memory-is-the-product/"><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire.</p></div><span class="when">2 Oct 2026</span></a>
+      <a href="journal/autonomy-you-can-check/"><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result.</p></div><span class="when">22 Sep 2026</span></a>
     </div>
   </div>
 </section>
@@ -240,11 +241,11 @@
 <footer class="ftr">
   <div class="wrap">
     <div class="grid">
-      <div><a class="mark" href="./"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta in India and the UAE.</p></div>
-      <div><h4>Explore</h4><ul><li><a href="../secondbrain/" data-later>SecondBrain</a></li><li><a href="../business/" data-later>Business</a></li><li><a href="../journal/" data-later>Journal</a></li><li><a href="../about/" data-later>About</a></li></ul></div>
+      <div><a class="mark" href=""><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta in India and the UAE.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="secondbrain/" data-r="secondbrain">SecondBrain</a></li><li><a href="business/" data-r="business">Business</a></li><li><a href="journal/" data-r="journal">Journal</a></li><li><a href="about/" data-r="about">About</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="https://askgogo.in/privacy/" target="_blank" rel="noopener">Privacy</a></li><li><a href="https://askgogo.in/terms/" target="_blank" rel="noopener">Terms</a></li><li><a href="https://askgogo.in/refund/" target="_blank" rel="noopener">Refunds</a></li></ul></div>
     </div>
-    <div class="base"><span>© 2026 AskGogo Technologies</span><span>Memory. Action. Continuity.</span></div>
+    <div class="base"><span>© 2026 AskGogo Technologies</span><span>Remembers. Asks. Finishes.</span></div>
   </div>
 </footer>
 </div>
