@@ -1,4 +1,14 @@
 (()=>{
+document.getElementById('site').insertAdjacentHTML('beforeend',`<footer class="ftr" id="ftr">
+<div class="wrap">
+<div class="grid">
+<div><a class="mark" href="/">askgogo<b>.</b></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta in India and the UAE.</p></div>
+<div><h4>Explore</h4><ul><li><a href="/secondbrain/">SecondBrain</a></li><li><a href="/business/">Business</a></li><li><a href="/journal/">Journal</a></li><li><a href="/about/">About</a></li></ul></div>
+<div><h4>Legal</h4><ul><li><a href="https://askgogo.in/privacy/" rel="noopener" target="_blank">Privacy</a></li><li><a href="https://askgogo.in/terms/" rel="noopener" target="_blank">Terms</a></li><li><a href="https://askgogo.in/refund/" rel="noopener" target="_blank">Refunds</a></li></ul></div>
+</div>
+<div class="base"><span>© 2026 AskGogo Technologies</span><span>Memory. Action. Continuity.</span></div>
+</div>
+</footer>`);
 document.body.insertAdjacentHTML('beforeend',`<div class="sheet" hidden="" id="sheet-waitlist">
 <div class="bd" data-close=""></div>
 <div aria-labelledby="wl-title" aria-modal="true" class="panel" role="dialog">
