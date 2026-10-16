@@ -49,10 +49,17 @@ document.addEventListener('keydown',e=>{
   if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}
 });
 const EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const phoneOk=(cc,raw)=>{const d=String(raw).replace(/\D/g,'');return cc==='IN'?/^[6-9]\d{9}$/.test(d):/^5\d{8}$/.test(d)};
-const phoneMsg=cc=>cc==='IN'?'Enter a 10-digit Indian mobile number starting with 6, 7, 8 or 9.':'Enter a 9-digit UAE mobile number starting with 5.';
+/* International numbers (E.164: country code plus 6 to 14 digits). India and the UAE keep their stricter checks.
+   The live API currently accepts only +91 and +971; the backend change is tracked separately. */
+const phoneOk=(cc,raw)=>{const d=String(raw).replace(/\D/g,'');
+  if(cc==='91')return /^[6-9]\d{9}$/.test(d);if(cc==='971')return /^5\d{8}$/.test(d);
+  if(cc==='other')return /^\+?[1-9]\d{7,14}$/.test(String(raw).replace(/[\s-]/g,''));
+  return d.length>=6&&d.length<=14};
+const phoneMsg=cc=>cc==='91'?'Enter a 10-digit Indian mobile number starting with 6, 7, 8 or 9.':cc==='971'?'Enter a 9-digit UAE mobile number starting with 5.':cc==='other'?'Enter the full number with the country code, for example +33 6 12 34 56 78.':'Enter the mobile number without the country code.';
 function setErr(id,msg){const el=$('#'+id),inp=$('#'+id.replace(/-err$/,''));el.textContent=msg||'';if(inp)inp.setAttribute('aria-invalid',msg?'true':'false');return !msg}
-function wirePhone(inp,sel){inp.addEventListener('input',()=>{inp.value=inp.value.replace(/\D/g,'').slice(0,sel.value==='AE'?9:10)});sel.addEventListener('change',()=>{inp.placeholder=sel.value==='AE'?'50 123 4567':'98765 43210'})}
+function wirePhone(inp,sel){const ph={'91':'98765 43210','971':'50 123 4567','1':'415 555 0132','44':'7700 900123',other:'+33 6 12 34 56 78'};
+  const fix=()=>{const o=sel.value==='other';inp.value=o?inp.value.replace(/[^\d+\s]/g,''):inp.value.replace(/\D/g,'').slice(0,sel.value==='91'?10:sel.value==='971'?9:14)};
+  inp.addEventListener('input',fix);sel.addEventListener('change',()=>{inp.placeholder=ph[sel.value]||'Mobile number';fix()})}
 wirePhone($('#wl-phone'),$('#wl-country'));wirePhone($('#ea-phone'),$('#ea-country'));
 function finish(form){const s=form.closest('.sheet');$('[data-form]',s).hidden=true;const d=$('[data-done]',s);d.hidden=false;Gogo.mountAll(d);$('button',d).focus()}
 const firstInvalid=form=>{const x=$('[aria-invalid=true]',form);x&&x.focus()};

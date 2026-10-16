@@ -1,14 +1,41 @@
 <main id="main">
 
-<section class="phero" aria-labelledby="h-about">
+<section class="phero about-hero" aria-labelledby="h-about">
   <div class="wrap">
-    <div class="phero-grid">
-      <div>
-        <p class="label">About</p>
-        <h1 id="h-about">Built in Bengaluru, for the way people here live.</h1>
-        <p class="lede">We think the next useful step for AI is not a better answer. It is a finished task.</p>
-      </div>
-      <div class="phero-art" aria-hidden="true"><span data-gogo="listening" data-size="150" data-blink></span></div>
+    <figure class="blr" aria-label="Line illustration of Bengaluru: the Vidhana Soudha with rain trees in front">
+      <svg viewBox="0 0 560 300" role="img" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <!-- sun -->
+          <circle cx="430" cy="78" r="22" fill="var(--accent)" stroke="none" opacity=".9"/>
+          <!-- Vidhana Soudha: central dome -->
+          <path d="M280 80 v-14"/><circle cx="280" cy="63" r="3" fill="currentColor" stroke="none"/>
+          <path d="M248 112 a32 32 0 0 1 64 0"/>
+          <path d="M242 112 h76 M246 112 v18 h68 v-18"/>
+          <!-- upper storey with columns -->
+          <path d="M214 130 h132 v12 h-132z"/>
+          <path d="M222 142 v40 M236 142 v40 M250 142 v40 M264 142 v40 M280 142 v40 M296 142 v40 M310 142 v40 M324 142 v40 M338 142 v40"/>
+          <path d="M210 182 h140"/>
+          <!-- side pavilions with small domes -->
+          <path d="M150 150 a18 18 0 0 1 36 0 M146 150 h44 M150 150 v32 M186 150 v32 M160 160 v22 M176 160 v22"/>
+          <path d="M374 150 a18 18 0 0 1 36 0 M370 150 h44 M374 150 v32 M410 150 v32 M384 160 v22 M400 160 v22"/>
+          <!-- main base, steps -->
+          <path d="M120 182 h320 v30 h-320z"/>
+          <path d="M130 194 v18 M146 194 v18 M162 194 v18 M178 194 v18 M194 194 v18 M366 194 v18 M382 194 v18 M398 194 v18 M414 194 v18 M430 194 v18"/>
+          <path d="M240 194 h80 v18 M256 212 v-12 h48 v12"/>
+          <path d="M100 212 h360 M90 222 h380 M80 232 h400"/>
+          <!-- rain trees -->
+          <path d="M58 232 v-36 M58 196 c-30 4 -46 -16 -40 -38 c4 -22 36 -30 54 -16 c22 -14 54 -4 52 20 c2 22 -16 36 -44 32" />
+          <path d="M506 232 v-40 M506 192 c-28 6 -48 -12 -44 -34 c2 -20 30 -32 50 -20 c20 -12 50 -2 50 22 c2 20 -14 36 -40 30" />
+          <!-- ground -->
+          <path d="M20 250 h520" stroke-opacity=".5"/>
+        </g>
+      </svg>
+      <figcaption>Bengaluru</figcaption>
+    </figure>
+    <div class="about-head">
+      <p class="label">About</p>
+      <h1 id="h-about">Built in Bengaluru, for the way people here live.</h1>
+      <p class="lede">We think the next useful step for AI is not a better answer. It is a finished task.</p>
     </div>
   </div>
 </section>
@@ -25,12 +52,16 @@
 
 <section class="s soft" aria-labelledby="h-founder">
   <div class="wrap narrow">
-    <p class="label">Founder</p>
-    <h2 id="h-founder" style="margin-top:12px">Goverdhan Mandyam Dommane</h2>
+    <p class="label">Founders</p>
+    <h2 id="h-founder" style="margin-top:12px">Goverdhan M D, Srinivas J and Mathew Varkey</h2>
     <div class="prose" style="margin-top:16px">
-      <p>Goverdhan has spent his career building consumer technology companies in India, including one that was acquired. He started AskGogo to build the assistant he wanted for himself: one that remembers, acts and finishes the job.</p>
+      <p>Between us, we have spent our careers building consumer technology companies in India, including one that was acquired. We started AskGogo to build the assistant we wanted for ourselves: one that remembers, acts and finishes the job.</p>
     </div>
-    <p style="margin-top:18px"><a class="tlink" href="https://www.linkedin.com/in/goverdhanmd" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true">↗</span></a></p>
+    <ul class="founders">
+      <li><span class="fn">Goverdhan M D</span><a class="tlink" href="https://www.linkedin.com/in/goverdhanmd" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true">↗</span></a></li>
+      <li><span class="fn">Srinivas J</span></li>
+      <li><span class="fn">Mathew Varkey</span></li>
+    </ul>
   </div>
 </section>
 
