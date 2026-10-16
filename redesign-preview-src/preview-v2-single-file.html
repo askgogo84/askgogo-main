@@ -1,0 +1,911 @@
+<title>AskGogo Site Redesign</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap">
+<style>
+/* Layout: white page, one centred hero, then a single left-aligned reading column. Type and space do the work. */
+:root{
+  --bg:#FFFFFF; --surface:#F7F7F6; --ink:#1C1C1E; --ink-2:#66666B; --ink-3:#76767A;
+  --line:#ECECEE; --line-2:#DCDCDF; --accent:#56694F; --accent-wash:#EEF1EC; --on-ink:#FFFFFF;
+  --field:28,28,30; /* ambient line colour as rgb */ --field-a:.075;
+  --sans:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --wide:1120px; --measure:62ch;
+}
+:root.mode-dark{
+  --bg:#0E0E0F; --surface:#17171A; --ink:#EDEDEE; --ink-2:#A1A1A6; --ink-3:#8C8C91;
+  --line:#222226; --line-2:#323237; --accent:#A9BBA0; --accent-wash:#1C211B; --on-ink:#0E0E0F;
+  --field:237,237,238; --field-a:.07; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .35s ease,color .35s ease}
+em,i{font-style:normal}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--sans);font-weight:500;letter-spacing:-.025em;line-height:1.08;text-wrap:balance}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:0}
+
+/* ---------- review bar (not part of the site) ---------- */
+.review{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#1C1C1E;color:#F2F2F3;
+  padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font:500 12px/1.2 var(--sans);letter-spacing:.02em}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#1C1C1E}
+.review .grp{display:flex;gap:4px}
+.review button,.review a{font:inherit;color:#F2F2F3;background:transparent;border:1px solid rgba(242,242,243,.25);border-radius:999px;padding:6px 12px;min-height:32px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.review [aria-pressed="true"],.review [aria-current="true"]{background:#F2F2F3;color:#1C1C1E}
+.review .note{opacity:.65;font-weight:400}
+@media (max-width:640px){.review .vp,.review .note{display:none}}
+
+.stage.phone{background:#E9E9EB;padding-block:24px}
+:root.mode-dark .stage.phone{background:#050506}
+.site{container-type:inline-size;margin-inline:auto;background:var(--bg);transition:background .35s ease}
+.stage.phone .site{width:390px;max-width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px var(--line-2)}
+
+.wrap{max-width:var(--wide);margin-inline:auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.label{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--rb,48px));z-index:20;background:var(--bg);transition:background .35s ease,box-shadow .3s}
+.hdr.scrolled{box-shadow:0 1px 0 var(--line)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.mark{font-weight:600;font-size:19px;letter-spacing:-.03em;text-decoration:none;display:inline-flex;align-items:baseline}
+.mark b{color:var(--accent);font-weight:600}
+.nav{display:flex;gap:2px}
+.nav a{font-size:14.5px;color:var(--ink-2);text-decoration:none;padding:8px 12px;border-radius:999px;transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="page"]{color:var(--ink)}
+.tools{display:flex;align-items:center;gap:6px}
+.icon-btn{width:40px;height:40px;display:inline-grid;place-items:center;border:0;background:transparent;color:var(--ink-2);border-radius:999px;cursor:pointer;transition:color .2s,background .2s}
+.icon-btn:hover{color:var(--ink);background:var(--surface)}
+.icon-btn svg{width:18px;height:18px}
+.menu-btn{display:none}
+@container (max-width:860px){.nav,.tools .btn{display:none}.menu-btn{display:inline-grid}.icon-btn{width:44px;height:44px}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;font:500 15px/1 var(--sans);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .25s cubic-bezier(.2,.7,.2,1),background .2s,color .2s,border-color .2s}
+.btn-solid{background:var(--ink);color:var(--on-ink)}
+.btn-solid:hover{transform:translateY(-1px)}
+.btn-solid:active{transform:none}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{min-height:40px;padding:0 16px;font-size:14px}
+.arrow{display:inline-block;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.btn:hover .arrow,.tlink:hover .arrow{transform:translate(2px,-2px)}
+.tlink{color:var(--ink);text-decoration:none;font-weight:500;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s ease;padding-bottom:2px}
+.tlink:hover{background-size:100% 1px}
+
+.drawer{position:fixed;inset:0;z-index:70;background:var(--bg);display:flex;flex-direction:column;
+  padding-block:calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-bottom,0px) + 24px);
+  padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.drawer .top{display:flex;justify-content:space-between;align-items:center;height:56px}
+.drawer nav{display:flex;flex-direction:column;margin-top:28px}
+.drawer nav a{font-size:30px;font-weight:500;letter-spacing:-.02em;text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line)}
+.drawer .ctas{margin-top:auto;display:grid;gap:10px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;
+  -webkit-mask-image:radial-gradient(ellipse 60% 55% at 50% 48%,transparent 30%,#000 85%);mask-image:radial-gradient(ellipse 60% 55% at 50% 48%,transparent 30%,#000 85%)}
+.hero .wrap{position:relative;min-height:min(84svh,820px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-block:96px 64px}
+.hero h1{font-size:clamp(44px,6.6cqi,84px);letter-spacing:-.035em;line-height:1.02;margin-top:22px}
+.hero .lede{margin-top:24px;color:var(--ink-2);font-size:clamp(17px,1.5cqi,19px);max-width:40ch}
+.hero .btn{margin-top:36px}
+.hero .fine{margin-top:16px;font-size:13.5px;color:var(--ink-3)}
+.hero .fine a{color:var(--ink-2)}
+.hero-foot{position:relative;border-top:1px solid var(--line);padding-block:22px;text-align:center}
+.hero-foot p{font-family:var(--serif);font-size:19px;color:var(--ink-2)}
+@container (max-width:640px){.hero .wrap{min-height:min(76svh,680px);padding-block:72px 48px}}
+
+/* ---------- sections ---------- */
+.s{padding-block:120px}
+.s + .s{border-top:1px solid var(--line)}
+@container (max-width:640px){.s{padding-block:76px}}
+.lead p{max-width:36ch;font-size:clamp(19px,1.9cqi,22px);line-height:1.5;color:var(--ink-2)}
+.lead p + p{margin-top:18px}
+.lead p:first-child{font-size:clamp(26px,3cqi,36px);line-height:1.25;letter-spacing:-.02em;color:var(--ink);font-weight:500;max-width:24ch}
+
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
+@container (max-width:860px){.split{grid-template-columns:minmax(0,1fr);gap:36px}}
+.split h2{font-size:clamp(32px,3.8cqi,48px);margin-top:16px}
+.split .sub{margin-top:16px;color:var(--ink-2);max-width:36ch}
+
+.run .ask{font-family:var(--serif);font-size:clamp(24px,2.6cqi,30px);line-height:1.25;padding-bottom:22px;border-bottom:1px solid var(--line-2)}
+.run .ask small{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.row{display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;padding-block:16px;border-bottom:1px solid var(--line)}
+.row time{font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums;padding-top:2px}
+.row p{color:var(--ink)}
+.row p span{display:block;color:var(--ink-2);font-size:14.5px;margin-top:2px}
+.row.wait p::after{content:"Waiting for you";display:inline-block;margin-left:10px;font-size:12px;color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:1px 9px;vertical-align:2px}
+.row.done p{color:var(--accent)}
+.run .foot{padding-top:14px;font-size:13px;color:var(--ink-3)}
+
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px}
+.trio h3{font-family:var(--serif);font-weight:400;font-size:34px;letter-spacing:0;line-height:1.1}
+.trio p{margin-top:14px;color:var(--ink-2);font-size:15.5px}
+@container (max-width:860px){.trio{grid-template-columns:minmax(0,1fr);gap:40px}}
+
+.head-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:end}
+.head-row h2{font-size:clamp(30px,3.4cqi,42px);margin-top:12px;max-width:20ch}
+.list{margin-top:36px;border-top:1px solid var(--line-2)}
+.list a{display:grid;grid-template-columns:132px minmax(0,1fr) 24px;gap:24px;align-items:baseline;padding-block:26px;border-bottom:1px solid var(--line);text-decoration:none}
+.list .when{font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.list h3{font-family:var(--serif);font-weight:400;letter-spacing:0;font-size:clamp(24px,2.4cqi,30px);line-height:1.15;transition:color .2s}
+.list p{margin-top:6px;color:var(--ink-2);font-size:15px;max-width:60ch}
+.list .go{color:var(--ink-3);transition:transform .3s cubic-bezier(.2,.7,.2,1),color .2s}
+.list a:hover .go{transform:translateX(4px);color:var(--ink)}
+@container (max-width:640px){.list a{grid-template-columns:minmax(0,1fr)}.list .go{display:none}.list a{gap:6px}}
+
+.closing{text-align:center}
+.closing h2{font-size:clamp(36px,4.6cqi,58px);letter-spacing:-.03em}
+.closing p{margin:18px auto 0;color:var(--ink-2);max-width:44ch}
+.closing .ctas{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px 20px;justify-content:center;align-items:center}
+
+/* inner page heads */
+.phead{padding-block:112px 80px;border-bottom:1px solid var(--line)}
+.phead h1{font-size:clamp(42px,5.8cqi,74px);letter-spacing:-.033em;margin-top:18px;max-width:16ch;line-height:1.03}
+.phead .lede{margin-top:22px;color:var(--ink-2);font-size:clamp(17px,1.5cqi,19px);max-width:50ch}
+.phead .ctas{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+@container (max-width:640px){.phead{padding-block:72px 56px}}
+
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:72px}
+.duo h2{font-size:clamp(26px,2.8cqi,34px);margin-top:12px}
+.duo p{margin-top:14px;color:var(--ink-2)}
+.duo ul{list-style:none;margin:24px 0 0;padding:0}
+.duo li{padding-block:12px;border-top:1px solid var(--line);font-size:15.5px}
+@container (max-width:760px){.duo{grid-template-columns:minmax(0,1fr);gap:56px}}
+
+.defs{border-top:1px solid var(--line-2)}
+.defs > div{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:32px;padding-block:30px;border-bottom:1px solid var(--line)}
+.defs h3{font-size:21px;letter-spacing:-.015em}
+.defs p{color:var(--ink-2);max-width:58ch}
+@container (max-width:700px){.defs > div{grid-template-columns:minmax(0,1fr);gap:8px}}
+
+.founder{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:32px;border-top:1px solid var(--line-2);padding-top:30px}
+.founder .name{font-family:var(--serif);font-size:34px;line-height:1.1}
+.founder p{color:var(--ink-2);max-width:52ch}
+.founder p + p{margin-top:16px}
+@container (max-width:700px){.founder{grid-template-columns:minmax(0,1fr);gap:12px}}
+
+.manifesto p{font-family:var(--serif);font-size:clamp(28px,3.4cqi,42px);line-height:1.2;max-width:22ch}
+.manifesto p + p{margin-top:22px;font-family:var(--sans);font-size:18px;line-height:1.65;color:var(--ink-2);max-width:56ch}
+
+/* journal */
+.feature{display:block;text-decoration:none;padding-block:72px 64px;border-bottom:1px solid var(--line)}
+.feature .when{font-size:13px;color:var(--ink-3)}
+.feature h2{font-family:var(--serif);font-weight:400;letter-spacing:-.005em;font-size:clamp(38px,5cqi,64px);line-height:1.05;margin-top:16px;max-width:18ch}
+.feature p{margin-top:18px;color:var(--ink-2);max-width:56ch;font-size:17px}
+.feature .tlink{display:inline-block;margin-top:26px}
+
+/* article */
+.article{padding-block:96px 120px}
+.article header{max-width:var(--measure);margin-inline:auto}
+.article .meta{font-size:13px;color:var(--ink-3)}
+.article h1{font-family:var(--serif);font-weight:400;letter-spacing:-.005em;font-size:clamp(40px,5.2cqi,64px);line-height:1.04;margin-top:18px}
+.article .dek{margin-top:20px;font-size:clamp(18px,1.7cqi,20px);color:var(--ink-2);line-height:1.5}
+.prose{max-width:var(--measure);margin:56px auto 0;font-size:18px;line-height:1.75}
+.prose p + p{margin-top:22px}
+.prose h2{font-size:24px;letter-spacing:-.018em;margin:52px 0 14px}
+.prose blockquote{margin:40px 0;padding:0;font-family:var(--serif);font-size:clamp(26px,2.8cqi,32px);line-height:1.25;color:var(--ink)}
+.prose ul{padding-left:20px;margin:20px 0}
+.prose li + li{margin-top:10px}
+.prose strong{font-weight:600}
+.article .end{max-width:var(--measure);margin:64px auto 0;padding-top:28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+@container (max-width:640px){.article{padding-block:60px 84px}.prose{font-size:17px;margin-top:40px}}
+
+/* footer */
+.ftr{border-top:1px solid var(--line);padding-block:56px 36px}
+.ftr .grid{display:grid;grid-template-columns:minmax(0,2fr) repeat(2,minmax(0,1fr));gap:40px}
+.ftr .tag{margin-top:12px;color:var(--ink-2);font-size:14px;max-width:32ch}
+.ftr h4{margin:0 0 12px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ftr ul{list-style:none;margin:0;padding:0}
+.ftr ul a{display:inline-block;padding:6px 0;font-size:14px;color:var(--ink-2);text-decoration:none}
+.ftr ul a:hover{color:var(--ink)}
+.ftr .base{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:13px;color:var(--ink-3)}
+@container (max-width:700px){.ftr .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ftr .grid > div:first-child{grid-column:1/-1}}
+
+/* sheets */
+.sheet{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px}
+.sheet .bd{position:absolute;inset:0;background:rgba(10,10,12,.32);animation:fade .25s ease both}
+.sheet .panel{position:relative;width:min(520px,100%);max-height:calc(100% - 32px);overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:34px;animation:up .35s cubic-bezier(.2,.7,.2,1) both}
+@keyframes up{from{transform:translateY(12px);opacity:.6}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet h2{font-size:28px;letter-spacing:-.025em;margin-top:8px}
+.sheet .intro{margin-top:10px;color:var(--ink-2);font-size:15px}
+.sheet form{margin-top:24px;display:grid;gap:16px}
+.field{display:grid;gap:6px}
+.field label{font-size:13.5px;font-weight:500}
+.field .opt{color:var(--ink-3);font-weight:400}
+.field input,.field select,.field textarea{height:auto;font:16px/1.4 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px;width:100%;transition:border-color .2s,background .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ink);background:var(--bg)}
+.field [aria-invalid="true"]{border-color:#B4412F}
+.phone-row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-2)}
+.check input{width:20px;height:20px;margin-top:1px;accent-color:var(--ink);flex:none}
+.err{font-size:13px;color:#B4412F}
+:root.mode-dark .err{color:#EB9A8C}
+:root.mode-dark .field [aria-invalid="true"]{border-color:#EB9A8C}
+.x{position:absolute;top:12px;right:12px}
+.fine2{font-size:12.5px;color:var(--ink-3)}
+.fine2 a{color:var(--ink-2)}
+.done-state h2{margin-top:18px}
+.done-state .tick{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--accent)}
+@media (max-width:520px){.sheet{place-items:end center;padding:0}.sheet .panel{border-radius:18px 18px 0 0;max-height:92%;padding:28px 20px calc(24px + env(safe-area-inset-bottom,0px))}.two{grid-template-columns:minmax(0,1fr)}}
+
+/* inventory (review only) */
+.inv{padding-block:64px 96px}
+.inv h1{font-size:clamp(34px,4.6cqi,52px);letter-spacing:-.03em;margin-top:12px}
+.inv h2{font-size:24px;letter-spacing:-.018em;margin:56px 0 16px}
+.inv .wrap > p{color:var(--ink-2);max-width:72ch;margin-top:14px}
+.tbl{overflow-x:auto;border-top:1px solid var(--line-2)}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+.tbl th{font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--line)}
+.tbl td{padding:12px 14px 12px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+.tbl td:first-child{color:var(--ink);font-weight:500}
+.tbl code,.inv code{font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--ink)}
+.chip{font-size:11.5px;font-weight:500;letter-spacing:.04em;padding:2px 9px;border-radius:999px;border:1px solid var(--line-2);white-space:nowrap}
+.chip.new{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.chip.cut{color:var(--ink)}
+.inv ol,.inv ul{color:var(--ink-2);max-width:74ch;padding-left:20px}
+.inv li + li{margin-top:8px}
+.inv li b{color:var(--ink);font-weight:600}
+pre.code{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;font:12.5px/1.6 ui-monospace,Menlo,Consolas,monospace;color:var(--ink);max-width:100%}
+
+/* arrival: resting state is visible; only below-fold blocks rise in */
+.rise.go{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:.3;transform:translateY(12px)}to{opacity:1;transform:none}}
+.page{animation:fade .45s ease both}
+@media (prefers-reduced-motion:reduce){.rise.go,.page,.sheet .panel,.sheet .bd{animation:none}.btn,.arrow,.list .go,body,.site{transition:none}}
+</style>
+
+<div class="review" role="region" aria-label="Preview controls, not part of the site">
+  <span>AskGogo · preview v2</span>
+  <div class="grp vp" role="group" aria-label="Viewport">
+    <button type="button" id="vp-desktop" aria-pressed="true">Desktop</button>
+    <button type="button" id="vp-phone" aria-pressed="false">Phone 390</button>
+  </div>
+  <div class="grp">
+    <a href="#home" id="rv-site" aria-current="true">Site</a>
+    <a href="#inventory" id="rv-inv">Inventory &amp; API proposal</a>
+  </div>
+  <span class="note">For approval. Forms validate but send nothing here.</span>
+</div>
+
+<div class="stage" id="stage"><div class="site" id="site">
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="mark" href="#home" aria-label="AskGogo home">askgogo<b>.</b></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#secondbrain" data-r="secondbrain">SecondBrain</a>
+      <a href="#business" data-r="business">Business</a>
+      <a href="#journal" data-r="journal">Journal</a>
+      <a href="#about" data-r="about">About</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+      </button>
+      <button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="header">Join Waitlist</button>
+      <button class="icon-btn menu-btn" type="button" id="menu-open" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 9h16M4 15h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <a class="mark" href="#home">askgogo<b>.</b></a>
+    <div class="tools">
+      <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" type="button" id="menu-close" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#home">Home</a><a href="#secondbrain">SecondBrain</a><a href="#business">Business</a><a href="#journal">Journal</a><a href="#about">About</a>
+  </nav>
+  <div class="ctas">
+    <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="menu">Join Waitlist</button>
+    <button class="btn btn-ghost" type="button" data-open="access" data-cta="menu">Request Early Access</button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ================= HOME ================= -->
+<div class="page" data-page="home">
+  <section class="hero" aria-labelledby="h-home">
+    <canvas id="ambient" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="label">A different kind of personal AI</p>
+      <h1 id="h-home">Less prompting.<br>More living.</h1>
+      <p class="lede">An AI that remembers your world, understands what matters, and gets things done.</p>
+      <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="home-hero">Join Waitlist <span class="arrow" aria-hidden="true">↗</span></button>
+      <p class="fine">Private beta · Access by invitation</p>
+    </div>
+    <div class="hero-foot"><p>Memory. Action. Continuity.</p></div>
+  </section>
+
+  <section class="s lead">
+    <div class="wrap">
+      <p>AskGogo knows what is on your plate, and does something about it.</p>
+      <p>It lives in WhatsApp, so there is nothing to install and nothing new to learn. You write to it the way you would write to a capable friend.</p>
+      <p>It keeps track of the small things that fill a day: the bill due on the fifth, the visa appointment, the receipt you will need in March. When a task needs a website, a form or a follow-up, it does that part too, and checks with you before it pays, sends or books.</p>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap split">
+      <div>
+        <p class="label">How a task runs</p>
+        <h2>One request, followed to the end.</h2>
+        <p class="sub">Most assistants stop at an answer. AskGogo keeps going until there is a result you can check, and pauses at the one step that needs you.</p>
+      </div>
+      <div class="run rise">
+        <p class="ask"><small>Example · WhatsApp</small>Get my car serviced before the Mysuru drive on the 25th.</p>
+        <div class="row"><time>09:12</time><p>Understood the deadline<span>The drive is on Saturday, so the service must finish by Friday.</span></p></div>
+        <div class="row"><time>09:12</time><p>Used what it already knew<span>Your car, your usual service centre, mornings only.</span></p></div>
+        <div class="row"><time>09:14</time><p>Signed in and found a slot<span>Thursday 23 Oct, 9:30 am, with pickup.</span></p></div>
+        <div class="row wait"><time>09:15</time><p>Asked before booking</p></div>
+        <div class="row done"><time>09:21</time><p>Booked and confirmed<span>Reference saved. Reminder set for Wednesday evening.</span></p></div>
+        <p class="foot">An illustration of the intended flow.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap trio">
+      <div class="rise"><h3>Memory</h3><p>Tell it once. Your preferences, people, places and documents stay with you, each with a note of where it came from. Correct anything, or make it forget.</p></div>
+      <div class="rise"><h3>Action</h3><p>It handles the steps you would rather not: sign-ins, forms, follow-ups. Payments, bookings and messages to other people wait for your yes.</p></div>
+      <div class="rise"><h3>Continuity</h3><p>It keeps working when you put the phone down, and the same assistant picks up on the web. A task is done only when there is proof it worked.</p></div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap">
+      <div class="head-row"><div><p class="label">Journal</p><h2>Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="#journal">All essays <span class="arrow" aria-hidden="true">→</span></a></div>
+      <div class="list" data-list="3"></div>
+    </div>
+  </section>
+
+  <section class="s closing">
+    <div class="wrap">
+      <h2>Private beta. Access by invitation.</h2>
+      <p>We are opening AskGogo in small groups across India and the UAE.</p>
+      <div class="ctas">
+        <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="home-closing">Join Waitlist</button>
+        <a class="tlink" href="#business" data-open="access" data-cta="home-closing">For teams: Request Early Access</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SECONDBRAIN ================= -->
+<div class="page" data-page="secondbrain" hidden>
+  <section class="phead"><div class="wrap">
+    <p class="label">SecondBrain by AskGogo</p>
+    <h1>A memory that works for you.</h1>
+    <p class="lede">SecondBrain is the intelligence layer underneath AskGogo. It keeps what you know, connects it to what you are doing, and puts it to use without being asked twice. For one person, or for a whole company.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="sb-hero">Join Waitlist</button><a class="tlink" href="#business" data-open="access" data-cta="sb-hero">For teams: Request Early Access</a></div>
+  </div></section>
+
+  <section class="s"><div class="wrap duo">
+    <div class="rise">
+      <p class="label">Personal</p>
+      <h2>Everything you meant to remember.</h2>
+      <p>Send a ticket, a bill or a voice note on WhatsApp. SecondBrain files it, links it to the right trip, person or deadline, and brings it back when it matters.</p>
+      <ul><li>Documents you can find by asking</li><li>Preferences learned from ordinary conversation</li><li>Morning briefings from your calendar and mail</li><li>Reminders that know the context, not just the time</li></ul>
+    </div>
+    <div class="rise">
+      <p class="label">Enterprise</p>
+      <h2>What your company knows, in one place.</h2>
+      <p>Decisions, vendor terms, customer history and the way things are done usually live in a few people's heads. SecondBrain makes that knowledge shared, permissioned and usable by agents.</p>
+      <ul><li>Shared memory with roles and access controls</li><li>Sources attached to every answer</li><li>Agents that act on company memory, with approvals</li><li>A record of what was done and why</li></ul>
+    </div>
+  </div></section>
+
+  <section class="s"><div class="wrap">
+    <p class="label">Principles</p>
+    <h2 style="font-size:clamp(30px,3.4cqi,42px);margin:12px 0 40px;max-width:20ch">How SecondBrain treats what it knows.</h2>
+    <div class="defs">
+      <div class="rise"><h3>Provenance</h3><p>Every remembered fact carries its source: you said it, a document showed it, or a calendar confirmed it. Nothing guessed is presented as known.</p></div>
+      <div class="rise"><h3>Correction</h3><p>You can see what is remembered, change it, mark it private, or delete it. Deleting removes the fact rather than hiding it.</p></div>
+      <div class="rise"><h3>Scope</h3><p>Personal memory stays personal. Company memory follows the company's permissions. The two never mix by default.</p></div>
+      <div class="rise"><h3>Expiry</h3><p>A flight ends, a gate code changes, an offer lapses. Facts are allowed to age out instead of being acted on after they stop being true.</p></div>
+    </div>
+  </div></section>
+
+  <section class="s closing"><div class="wrap">
+    <h2>SecondBrain is in private development.</h2>
+    <p>The personal edition arrives first, inside AskGogo. Companies can request early access to shape the enterprise edition.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="sb-closing">Join Waitlist</button><a class="tlink" href="#business" data-open="access" data-cta="sb-closing">For teams: Request Early Access</a></div>
+  </div></section>
+</div>
+
+<!-- ================= BUSINESS ================= -->
+<div class="page" data-page="business" hidden>
+  <section class="phead"><div class="wrap">
+    <p class="label">AskGogo for Business</p>
+    <h1>Agents that know how your company works.</h1>
+    <p class="lede">Shared company memory, autonomous workflows, approvals at the steps that matter, and verification at the end of each one.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="access" data-cta="biz-hero">Request Early Access</button></div>
+  </div></section>
+
+  <section class="s"><div class="wrap">
+    <div class="defs">
+      <div class="rise"><h3>Shared company memory</h3><p>Policies, past decisions, vendor and customer history in one permissioned memory. People and agents draw on the same source, and every answer shows where it came from.</p></div>
+      <div class="rise"><h3>Autonomous workflows</h3><p>Hand off recurring work end to end: chasing invoices, onboarding vendors, scheduling across teams, following up on open requests. Agents work through email, calendars and web portals.</p></div>
+      <div class="rise"><h3>Approvals</h3><p>You decide which actions run on their own and which wait for a person. Payments, external messages and commitments go to the right approver with full context.</p></div>
+      <div class="rise"><h3>Verification</h3><p>Each workflow ends with evidence: a confirmation, a reply, a changed record. Work that cannot be verified is flagged for a person instead of being marked complete.</p></div>
+    </div>
+  </div></section>
+
+  <section class="s closing"><div class="wrap">
+    <h2>We are working with a small number of early teams.</h2>
+    <p>Tell us what you would hand off first. We reply within a few working days.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="access" data-cta="biz-closing">Request Early Access</button></div>
+  </div></section>
+</div>
+
+<!-- ================= JOURNAL ================= -->
+<div class="page" data-page="journal" hidden>
+  <section class="phead"><div class="wrap">
+    <p class="label">Journal</p>
+    <h1>Notes on assistants that do the work.</h1>
+    <p class="lede">Essays from the team building AskGogo, on memory, autonomy and what it takes to finish a task.</p>
+  </div></section>
+  <div class="wrap">
+    <a class="feature" href="#finish-the-work">
+      <p class="when">Essay · 7 min read · 14 Oct 2026</p>
+      <h2>Why an assistant should finish the work.</h2>
+      <p>Most AI hands back homework: a list of links, a draft, a set of steps. The useful part is the last mile, and that is where an assistant should spend its effort.</p>
+      <span class="tlink">Read the essay <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+    <div class="list" data-list="rest" style="margin-top:0;border-top:0"></div>
+    <div style="height:104px"></div>
+  </div>
+</div>
+
+<!-- ================= ESSAYS ================= -->
+<article class="page article" data-page="finish-the-work" hidden>
+  <div class="wrap">
+    <header><p class="meta">Essay · 7 min read · 14 Oct 2026 · AskGogo team</p><h1>Why an assistant should finish the work.</h1><p class="dek">Most AI hands back homework. The useful part is the last mile, and that is where an assistant should spend its effort.</p></header>
+    <div class="prose">
+      <p>Ask most AI assistants to renew your vehicle insurance and you will get a tidy answer. It will list a few insurers, explain what a no-claim bonus is, and suggest you compare quotes before the policy lapses. All of it is correct, and none of it renews the insurance.</p>
+      <p>The work is still yours. You still open three websites, type the registration number three times, wait for an OTP, discover that one site wants the previous policy number, find that policy in your email, pay, download the PDF and put it somewhere you will remember. The assistant handled the part that took two minutes. You handled the part that took forty.</p>
+      <h2>Where the time actually goes</h2>
+      <p>When we looked at the tasks people sent to AskGogo, the pattern was consistent. Deciding what to do was rarely the hard part. People knew they needed a service appointment, a refund, a visa slot or a follow-up email. What they lacked was the time and patience for the steps in between: forms, logins, waiting, checking back.</p>
+      <p>An answer does not remove those steps. It describes them. So we set a different bar: an assistant should be measured by tasks completed, not questions answered.</p>
+      <blockquote>A good answer describes the work. A good assistant does it, then shows you the receipt.</blockquote>
+      <h2>Finishing takes three things</h2>
+      <p>Completing real tasks is harder than answering questions, and it rests on three capabilities that each have to work.</p>
+      <ul>
+        <li><strong>Memory.</strong> To book your car service without twenty questions, the assistant needs to know which car, which service centre and that you prefer mornings. Without memory, every task starts with an interview.</li>
+        <li><strong>Autonomy.</strong> It has to operate the same websites and inboxes you do: sign in, fill the form, handle the OTP prompt by asking you for the code, and carry on.</li>
+        <li><strong>Judgement about when to stop.</strong> Finishing does not mean doing everything alone. Paying, booking and messaging someone else are steps where the assistant should pause and ask, with the details in front of you.</li>
+      </ul>
+      <p>Take away any one of these and you are back to homework. Memory without autonomy produces a well-informed list. Autonomy without memory produces a stream of questions. Either without judgement produces something you cannot trust.</p>
+      <h2>What done means</h2>
+      <p>We define a task as done only when there is evidence the world changed: a booking reference, a calendar entry, a sent email in the thread, a saved receipt. If the assistant cannot observe that result, the task is not done, and it should say so plainly.</p>
+      <p>That standard is stricter than it sounds. Websites time out. Payment pages fail silently. A form accepts input and then quietly drops it. An assistant that reports success because it clicked the final button will be wrong often enough that you stop relying on it. One that checks the outcome earns the right to be handed the next task.</p>
+      <h2>Why this matters more in India</h2>
+      <p>Much of daily life here runs through portals that were not built for convenience: logins by mobile number and OTP, government appointment systems, utility sites with their own logic. WhatsApp is where people already manage their lives. An assistant that lives there and can handle the portal on your behalf, asking you only for the OTP and the final yes, removes a real and recurring cost.</p>
+      <p>That is the assistant we are building. It does not try to be impressive in conversation. It tries to leave you with fewer open loops at the end of the day than you had at the start.</p>
+    </div>
+    <div class="end"><a href="#journal" style="text-decoration:none;color:var(--ink-2)">← All essays</a><button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="article-finish">Join Waitlist</button></div>
+  </div>
+</article>
+
+<article class="page article" data-page="memory-is-the-product" hidden>
+  <div class="wrap">
+    <header><p class="meta">Essay · 6 min read · 2 Oct 2026 · AskGogo team</p><h1>Memory is the product.</h1><p class="dek">An assistant that forgets you between conversations is a search box with manners. Persistent memory changes what an assistant can be trusted to do.</p></header>
+    <div class="prose">
+      <p>Most chat assistants begin every conversation from nothing. You explain that you are vegetarian, that your father's follow-up is in November, that you fly out of Bengaluru, and the next day you explain it again. The model is capable. It simply has no past with you.</p>
+      <p>That limits more than convenience. Without memory, an assistant cannot act on your behalf, because acting well depends on knowing your context. Booking a table means knowing who is coming and what they eat. Paying a bill means knowing which account it comes from. Reminding you of a deadline is only useful if it knows the deadline exists.</p>
+      <h2>Remembering is easy. Remembering well is not.</h2>
+      <p>Storing everything a person says is trivial. The hard part is deciding what a fact means, how sure we are of it, and when it stops being true. We think about memory in four properties.</p>
+      <ul>
+        <li><strong>Provenance.</strong> Every fact should carry where it came from. "You told me on 2 September" is different from "a document suggested it", and both differ from a guess. When the assistant uses a fact, it should be able to show its source.</li>
+        <li><strong>Correction.</strong> People change their minds and their circumstances. Memory has to be visible and editable, and forgetting has to be real: deleted means gone, not hidden.</li>
+        <li><strong>Scope.</strong> What you tell your personal assistant should not appear in a shared workspace, and company knowledge should follow company permissions. Memory needs boundaries as clear as file permissions.</li>
+        <li><strong>Expiry.</strong> Many facts have a shelf life. A flight lands, an address changes, an offer ends. A memory system that never lets facts age will eventually act on something stale, with confidence.</li>
+      </ul>
+      <blockquote>The test of memory is not recall. It is whether the assistant uses the right fact at the right moment, without being asked twice.</blockquote>
+      <h2>Memory should be used quietly</h2>
+      <p>The best use of memory rarely announces itself. When you ask for a restaurant on Friday and the options already exclude mushrooms and keep Monday evening free, memory has done its job. When you ask "what was that hotel?" on the web and get the one you sent on WhatsApp on Tuesday night, it has done its job across surfaces.</p>
+      <p>We also think an assistant should be restrained about what it shows of its memory. Pointing to the source of a fact helps you trust it. Narrating everything it knows about you does not.</p>
+      <h2>Memory as the base layer</h2>
+      <p>This is why memory sits underneath everything in AskGogo, and why we are developing it as its own layer, SecondBrain. Reminders, briefings, documents, travel and browser tasks all read from it and write back to it. A task that finishes leaves the memory slightly better informed, so the next task needs fewer questions.</p>
+      <p>Over months, that compounding is the difference between a tool you use and an assistant you rely on.</p>
+    </div>
+    <div class="end"><a href="#journal" style="text-decoration:none;color:var(--ink-2)">← All essays</a><button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="article-memory">Join Waitlist</button></div>
+  </div>
+</article>
+
+<article class="page article" data-page="autonomy-you-can-check" hidden>
+  <div class="wrap">
+    <header><p class="meta">Essay · 7 min read · 22 Sep 2026 · AskGogo team</p><h1>Autonomy you can check.</h1><p class="dek">Agent demos look effortless. Daily use is where they break. Reliable autonomy comes from boring disciplines: planning, boundaries, and checking the result.</p></header>
+    <div class="prose">
+      <p>An agent that books a flight in a demo video and an agent you would let book your flight are different things. The first needs to succeed once. The second needs to succeed on a slow Tuesday, on a site that changed its layout last week, with your card and your name on the line.</p>
+      <p>When autonomous agents fail in practice, they tend to fail in a few recognisable ways. They stop halfway and report success. They act confidently on a wrong assumption. They loop on a page they do not understand. Or they do something consequential that nobody approved.</p>
+      <h2>Plan first, then act</h2>
+      <p>Before an agent touches a website, it should know what finished looks like and what the steps are likely to be. A plan makes failures visible: if step three was "choose a slot" and the agent is now on a payment page, something went wrong.</p>
+      <p>Small operational rules matter here more than clever models. One we learned the hard way: on most shopping and booking sites, sign in first, then add to the cart. Many sites let you build a cart as a guest and then ask you to log in at checkout, which can empty the cart or lose the saved address. Signing in first avoids a whole class of failures.</p>
+      <h2>Draw the boundary before you need it</h2>
+      <p>Some actions are cheap to undo and some are not. Reading a page, filling a form and searching for options can run on their own. Paying, booking, cancelling and sending a message to another person should wait for a yes, with the exact details shown: the amount, the date, the recipient.</p>
+      <blockquote>Autonomy is not the absence of approvals. It is knowing exactly which steps need one.</blockquote>
+      <p>Credentials deserve their own boundary. Passwords and card details belong in a vault that the agent can use without the model ever seeing them. When a site asks for a one-time password, the agent should ask you for it in the chat, use it, and move on.</p>
+      <h2>Check the result</h2>
+      <p>The final click is not the end of a task. The end is evidence that the task worked: a confirmation number on the page, a confirmation email in the inbox, an event on the calendar. An agent should look for that evidence before it tells you anything is done.</p>
+      <p>When it cannot find the evidence, the honest report is "I could not confirm this", along with what it saw. That is less satisfying than "Done!", and far more useful.</p>
+      <h2>Know when to hand over</h2>
+      <p>Some tasks will not complete. A site blocks automated access, a form needs a document you have not shared, an option requires a judgement only you can make. A reliable agent recognises this early and hands over cleanly, with a direct link to the page and a summary of where it stopped, instead of trying the same thing ten times.</p>
+      <p>None of this is glamorous. It is the difference between an agent that impresses you once and one you hand the next task to without thinking about it.</p>
+    </div>
+    <div class="end"><a href="#journal" style="text-decoration:none;color:var(--ink-2)">← All essays</a><button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="article-autonomy">Join Waitlist</button></div>
+  </div>
+</article>
+
+<!-- ================= ABOUT ================= -->
+<div class="page" data-page="about" hidden>
+  <section class="phead"><div class="wrap">
+    <p class="label">About</p>
+    <h1>Built in Bengaluru, for the way people here live.</h1>
+  </div></section>
+  <section class="s manifesto"><div class="wrap">
+    <p>We think the next useful step for AI is not a better answer. It is a finished task.</p>
+    <p>Daily life in India runs on OTP logins, appointment portals, utility websites and long WhatsApp threads. That is a lot of small, repetitive work. An assistant that carries it, carefully and with your permission, gives people real time back. AskGogo is in private beta and opens to new people in small groups as the product earns it.</p>
+  </div></section>
+  <section class="s"><div class="wrap">
+    <div class="founder rise">
+      <p class="label">Founder</p>
+      <div>
+        <p class="name" style="color:var(--ink)">Goverdhan Mandyam Dommane</p>
+        <p style="margin-top:12px">Goverdhan has spent his career building consumer technology companies in India, including one that was acquired. He started AskGogo to build the assistant he wanted for himself: one that remembers, acts and finishes the job.</p>
+        <p><a class="tlink" href="https://www.linkedin.com/in/goverdhanmd" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true">↗</span></a></p>
+      </div>
+    </div>
+  </div></section>
+  <section class="s"><div class="wrap">
+    <p class="label">What we hold ourselves to</p>
+    <div class="defs" style="margin-top:28px">
+      <div class="rise"><h3>Finish, then report</h3><p>We judge ourselves by completed tasks with evidence, not by how good a reply sounds.</p></div>
+      <div class="rise"><h3>Ask before it matters</h3><p>Payments, bookings and messages to other people wait for your approval.</p></div>
+      <div class="rise"><h3>Your memory is yours</h3><p>You can see, correct and delete what AskGogo remembers. We do not sell personal data.</p></div>
+      <div class="rise"><h3>Local by default</h3><p>Searches, bookings and services are chosen for where you live, in rupees or dirhams, on the sites you actually use.</p></div>
+    </div>
+  </div></section>
+  <section class="s closing"><div class="wrap">
+    <h2>Get in touch.</h2>
+    <p>For press, partnerships or anything else, write to <span style="color:var(--ink);user-select:all">support@askgogo.in</span>.</p>
+    <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="about">Join Waitlist</button><a class="tlink" href="#business" data-open="access" data-cta="about">For teams: Request Early Access</a></div>
+  </div></section>
+</div>
+
+<!-- ================= INVENTORY (review only) ================= -->
+<div class="page inv" data-page="inventory" hidden>
+  <div class="wrap">
+    <p class="label">For review · not part of the site</p>
+    <h1>Inventory, changes and API proposal</h1>
+    <p>Preview v2, reworked from your 16 Oct notes. Nothing has been built, branched or deployed.</p>
+
+    <h2>What changed from v1</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Your note</th><th>What v2 does</th></tr></thead>
+      <tbody>
+        <tr><td>Clean white default, manual light/dark toggle</td><td>White by default for every visitor. Sun/moon button in the header and menu. The choice is saved in the visitor's browser and applied before first paint in the real build, so there is no flash</td></tr>
+        <tr><td>Remove the network hero</td><td>Removed. The hero now has very faint contour lines that drift slowly, like a breeze over water. Near the pointer they bend gently. They fade out behind the text. With reduced motion they stay still</td></tr>
+        <tr><td>Charcoal, soft gray, one subtle accent</td><td>Charcoal text, two grays, and one muted green used only for the full stop in the wordmark, the "Booked" step and focus rings</td></tr>
+        <tr><td>Sans with selective serif accents, no font switch</td><td>Instrument Sans for everything; Instrument Serif (upright only) for the tagline line, the three pillars, essay titles and quotes. Font switch removed</td></tr>
+        <tr><td>Fewer cards, icons and decoration</td><td>No cards anywhere. Only two icons (theme, menu). Pill tags and mono labels removed. The task example is plain rows</td></tr>
+        <tr><td>Business form, no data in button labels</td><td>Form asks for name, company, work email, WhatsApp, team size, first use case and consent. It needs the API extension below before it can go live</td></tr>
+        <tr><td>Founder on About</td><td>Goverdhan Mandyam Dommane, one paragraph, LinkedIn link. No team, funding or company details</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Pages</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Page</th><th>Sections</th></tr></thead>
+      <tbody>
+        <tr><td>Home</td><td>Hero, statement, one task followed to the end, Memory · Action · Continuity, three essays, closing</td></tr>
+        <tr><td>SecondBrain</td><td>Head, Personal and Enterprise, four principles, closing</td></tr>
+        <tr><td>Business</td><td>Head, four definitions, closing. One button: Request Early Access</td></tr>
+        <tr><td>Journal</td><td>Head, featured essay, list. Three essays, each 900–1,000 words</td></tr>
+        <tr><td>About</td><td>Head, manifesto, founder, four commitments, contact</td></tr>
+        <tr><td>Legal</td><td>/privacy, /terms, /refund kept as they are, restyled header and footer only</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Removed from the live site</h2>
+    <ul>
+      <li><b>Stealth leaks:</b> "Open dashboard" in the header, footer and closing chapter; "Already have access? Open dashboard" in the waitlist sheet; the dashboard link in the no-JavaScript fallback; "Learn with Gogo".</li>
+      <li><b>Chapters cut:</b> Travel with live fares and card points, the Voice demo built on a hospital report, Breathe, the sound toggle and its 1.1 MB audio file, the chapter rail and swipe tour.</li>
+      <li><b>Old URLs:</b> 22 legacy .dc.html pages redirect to the nearest new page.</li>
+    </ul>
+
+    <h2>API extension proposal: early access</h2>
+    <p>This is for the app repo, gogo-memory-os, and needs your separate approval. The marketing site would only call it. The existing <code>/api/waitlist</code> stays as it is.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Item</th><th>Proposal</th></tr></thead>
+      <tbody>
+        <tr><td>Endpoint</td><td><code>POST /api/early-access</code>, same CORS rules as the waitlist (askgogo.in and www.askgogo.in only), 4 KB body limit, JSON in and out</td></tr>
+        <tr><td>Fields</td><td><code>name</code> 2–80 chars · <code>company_name</code> 2–120 · <code>work_email</code> valid, lowercased, max 254 · <code>country</code> IN or AE · <code>phone</code> normalised with the existing <code>normalisePhone</code> · <code>team_size</code> one of 1-10, 11-50, 51-200, 201-1000, 1000-plus · <code>first_use_case</code> 10–500 chars · <code>consent</code> must be true · <code>source</code> placement tag, same rule as today</td></tr>
+        <tr><td>Bot trap</td><td>A hidden field named <code>website</code>. If filled, the API replies with success and writes nothing. (The waitlist's trap is named <code>company</code>, which is why the real company field is called <code>company_name</code>.)</td></tr>
+        <tr><td>Consent</td><td>Stores <code>consent_version</code> and <code>consented_at</code>. Wording: "AskGogo may contact me about early access by email or WhatsApp. See the Privacy Policy."</td></tr>
+        <tr><td>Duplicates</td><td>Unique on work email. A repeat request updates the record and returns the same success reply, so nobody can tell whether an email already applied</td></tr>
+        <tr><td>Abuse</td><td>Per-IP rate limit (5 per 10 minutes), length caps, plain text only, no HTML stored</td></tr>
+        <tr><td>Errors</td><td><code>400 {ok:false, errors:{field: message}}</code> with the messages shown in the form, <code>413</code> for oversize, <code>500 {ok:false, error:"server_error"}</code></td></tr>
+      </tbody>
+    </table></div>
+    <pre class="code">create table early_access_requests (
+  id               uuid primary key default gen_random_uuid(),
+  name             text not null,
+  company_name     text not null,
+  work_email       text not null unique,
+  phone_e164       text not null,
+  country          text not null check (country in ('IN','AE')),
+  team_size        text not null check (team_size in ('1-10','11-50','51-200','201-1000','1000-plus')),
+  first_use_case   text not null,
+  consent_version  text not null,
+  consented_at     timestamptz not null default now(),
+  source           text not null,
+  created_at       timestamptz not null default now(),
+  updated_at       timestamptz not null default now()
+);
+alter table early_access_requests enable row level security;  -- service role only, no public policies</pre>
+
+    <h2>Things to know</h2>
+    <ul>
+      <li><b>LinkedIn link.</b> It comes from the profile you gave me (linkedin.com/in/goverdhanmd). I can't open LinkedIn from here, so please tap it once to confirm it's right.</li>
+      <li><b>Founder line.</b> "Built consumer technology companies in India, including one that was acquired" is based on what you have told me before. Edit it if you'd rather say less.</li>
+      <li><b>Preview testing.</b> Both APIs accept requests only from askgogo.in, so the forms can't post from a Vercel preview link. The build includes a local test with a stand-in API.</li>
+      <li><b>Wajo mobile study.</b> Done at 375px for home. Their heroes are centred, about 36px headlines on phones, with a lot of white space. v2 follows that.</li>
+    </ul>
+
+    <h2>After you approve</h2>
+    <ol>
+      <li>Branch <code>redesign/editorial-site</code> in askgogo-main. Static pages, one CSS file, one small JS file, new vercel.json with redirects, tests for the stealth audit, waitlist submit and theme persistence.</li>
+      <li>Checks at 1440px and 375px in both themes: link crawl, HTML validation, Lighthouse mobile, accessibility scan.</li>
+      <li>Draft PR with the Vercel preview link. No merge or deploy without your approval. The API extension is a separate PR in gogo-memory-os, only if you approve it.</li>
+    </ol>
+  </div>
+</div>
+
+</main>
+
+<footer class="ftr" id="ftr">
+  <div class="wrap">
+    <div class="grid">
+      <div><a class="mark" href="#home">askgogo<b>.</b></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta in India and the UAE.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#secondbrain">SecondBrain</a></li><li><a href="#business">Business</a></li><li><a href="#journal">Journal</a></li><li><a href="#about">About</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#home" data-legal>Privacy</a></li><li><a href="#home" data-legal>Terms</a></li><li><a href="#home" data-legal>Refunds</a></li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 AskGogo Technologies</span><span>Memory. Action. Continuity.</span></div>
+  </div>
+</footer>
+
+</div></div>
+
+<!-- Waitlist sheet -->
+<div class="sheet" id="sheet-waitlist" hidden>
+  <div class="bd" data-close></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="wl-title">
+    <button class="icon-btn x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div data-form>
+      <p class="label">Join Waitlist</p>
+      <h2 id="wl-title">Be among the first.</h2>
+      <p class="intro">Leave your email and WhatsApp number. We will tell you when your access is ready.</p>
+      <form id="wl-form" novalidate>
+        <div class="field"><label for="wl-email">Email</label><input id="wl-email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="wl-email-err"><span class="err" id="wl-email-err"></span></div>
+        <div class="field"><label for="wl-phone">WhatsApp number</label>
+          <div class="phone-row"><select id="wl-country" aria-label="Country code"><option value="IN">+91 India</option><option value="AE">+971 UAE</option></select><input id="wl-phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" aria-describedby="wl-phone-err"></div>
+          <span class="err" id="wl-phone-err"></span></div>
+        <label class="check"><input id="wl-optin" type="checkbox"> <span>Send me access updates on WhatsApp.</span></label>
+        <button class="btn btn-solid" type="submit">Join Waitlist</button>
+        <p class="fine2">No spam. No WhatsApp messages unless you opt in.</p>
+      </form>
+    </div>
+    <div class="done-state" data-done hidden><div class="tick">✓</div><h2>You are on the list.</h2><p class="intro">We will write when your access is ready. Preview only: nothing was sent.</p><button class="btn btn-solid" type="button" data-close style="margin-top:22px">Done</button></div>
+  </div>
+</div>
+
+<!-- Early access sheet -->
+<div class="sheet" id="sheet-access" hidden>
+  <div class="bd" data-close></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="ea-title">
+    <button class="icon-btn x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div data-form>
+      <p class="label">Request Early Access</p>
+      <h2 id="ea-title">Tell us about your team.</h2>
+      <p class="intro">For companies interested in SecondBrain for Business. We reply within a few working days.</p>
+      <form id="ea-form" novalidate>
+        <div class="two">
+          <div class="field"><label for="ea-name">Your name</label><input id="ea-name" autocomplete="name" aria-describedby="ea-name-err"><span class="err" id="ea-name-err"></span></div>
+          <div class="field"><label for="ea-company">Company</label><input id="ea-company" autocomplete="organization" aria-describedby="ea-company-err"><span class="err" id="ea-company-err"></span></div>
+        </div>
+        <div class="field"><label for="ea-email">Work email</label><input id="ea-email" type="email" autocomplete="email" placeholder="you@company.com" aria-describedby="ea-email-err"><span class="err" id="ea-email-err"></span></div>
+        <div class="field"><label for="ea-phone">WhatsApp number</label>
+            <div class="phone-row"><select id="ea-country" aria-label="Country code"><option value="IN">+91 India</option><option value="AE">+971 UAE</option></select><input id="ea-phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" aria-describedby="ea-phone-err"></div>
+            <span class="err" id="ea-phone-err"></span></div>
+          <div class="field"><label for="ea-size">Team size</label><select id="ea-size"><option value="">Choose</option><option value="1-10">1–10</option><option value="11-50">11–50</option><option value="51-200">51–200</option><option value="201-1000">201–1,000</option><option value="1000-plus">1,000+</option></select><span class="err" id="ea-size-err"></span></div>
+        <div class="field"><label for="ea-use">What would you hand off first?</label><textarea id="ea-use" rows="3" maxlength="500" placeholder="For example: chasing vendor invoices every month" aria-describedby="ea-use-err"></textarea><span class="err" id="ea-use-err"></span></div>
+        <label class="check"><input id="ea-consent" type="checkbox"> <span>AskGogo may contact me about early access by email or WhatsApp. See the <a href="#home" data-legal>Privacy Policy</a>.</span></label>
+        <span class="err" id="ea-consent-err"></span>
+        <button class="btn btn-solid" type="submit">Request Early Access</button>
+      </form>
+    </div>
+    <div class="done-state" data-done hidden><div class="tick">✓</div><h2>Request received.</h2><p class="intro">We will be in touch within a few working days. Preview only: nothing was sent.</p><button class="btn btn-solid" type="button" data-close style="margin-top:22px">Done</button></div>
+  </div>
+</div>
+
+<script>
+(()=>{
+/* ---------- theme: light by default, visitor's choice remembered ---------- */
+const KEY='askgogo-theme',root=document.documentElement;
+function readTheme(){try{return localStorage.getItem(KEY)}catch(e){return null}}
+function applyTheme(t){
+  root.classList.toggle('mode-dark',t==='dark');
+  document.querySelectorAll('.theme-btn').forEach(b=>{
+    b.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
+    b.querySelector('.i-moon').toggleAttribute('hidden',t==='dark');b.querySelector('.i-sun').toggleAttribute('hidden',t!=='dark');});
+  ambient&&ambient.recolor();
+}
+let ambient=null;
+applyTheme(readTheme()==='dark'?'dark':'light');
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.theme-btn'))return;
+  const next=root.classList.contains('mode-dark')?'light':'dark';
+  try{localStorage.setItem(KEY,next)}catch(err){}
+  applyTheme(next);
+});
+
+const ESSAYS=[
+ {slug:'finish-the-work',t:'Why an assistant should finish the work.',d:'Most AI hands back homework. The useful part is the last mile.',date:'14 Oct 2026'},
+ {slug:'memory-is-the-product',t:'Memory is the product.',d:'Provenance, correction, scope and expiry: what it takes for an assistant to remember well.',date:'2 Oct 2026'},
+ {slug:'autonomy-you-can-check',t:'Autonomy you can check.',d:'Reliable agents come from planning, boundaries and checking the result.',date:'22 Sep 2026'}];
+document.querySelectorAll('[data-list]').forEach(el=>{
+  const v=el.dataset.list,items=v==='rest'?ESSAYS.slice(1):ESSAYS.slice(0,+v);
+  el.innerHTML=items.map(e=>`<a href="#${e.slug}"><span class="when">${e.date}</span><div><h3>${e.t}</h3><p>${e.d}</p></div><span class="go" aria-hidden="true">→</span></a>`).join('');
+});
+
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+const pages=[...document.querySelectorAll('[data-page]')],hdr=document.getElementById('hdr'),ftr=document.getElementById('ftr');
+function route(){
+  let r=(location.hash||'#home').slice(1);
+  if(!pages.some(p=>p.dataset.page===r))r='home';
+  pages.forEach(p=>p.hidden=p.dataset.page!==r);
+  document.querySelectorAll('.nav a').forEach(a=>{const on=a.dataset.r===r||(a.dataset.r==='journal'&&ESSAYS.some(e=>e.slug===r));on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+  const inv=r==='inventory';
+  document.getElementById('rv-inv').setAttribute('aria-current',inv);document.getElementById('rv-site').setAttribute('aria-current',!inv);
+  hdr.hidden=inv;ftr.hidden=inv;closeDrawer(true);window.scrollTo(0,0);observe();
+  r==='home'?ambient.start():ambient.stop();
+}
+addEventListener('hashchange',route);
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
+
+let io;
+function observe(){
+  if(io)io.disconnect();if(reduced.matches||!('IntersectionObserver' in window))return;
+  io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('go');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('[data-page]:not([hidden]) .rise').forEach(el=>{el.classList.remove('go');if(el.getBoundingClientRect().top>innerHeight)io.observe(el)});
+}
+
+const stage=document.getElementById('stage');
+function vp(phone){stage.classList.toggle('phone',phone);document.getElementById('vp-phone').setAttribute('aria-pressed',phone);document.getElementById('vp-desktop').setAttribute('aria-pressed',!phone);requestAnimationFrame(()=>ambient.resize())}
+document.getElementById('vp-phone').onclick=()=>vp(true);document.getElementById('vp-desktop').onclick=()=>vp(false);
+const rb=document.querySelector('.review');new ResizeObserver(()=>root.style.setProperty('--rb',rb.offsetHeight+'px')).observe(rb);
+
+const drawer=document.getElementById('drawer'),mo=document.getElementById('menu-open');
+function closeDrawer(silent){if(drawer.hidden)return;drawer.hidden=true;mo.setAttribute('aria-expanded','false');if(!silent)mo.focus()}
+mo.onclick=()=>{drawer.hidden=false;mo.setAttribute('aria-expanded','true');drawer.querySelector('nav a').focus()};
+document.getElementById('menu-close').onclick=()=>closeDrawer();
+
+/* ---------- sheets ---------- */
+let opener=null;
+function openSheet(id,btn){closeDrawer(true);const s=document.getElementById('sheet-'+id);s.querySelector('[data-form]').hidden=false;s.querySelector('[data-done]').hidden=true;s.hidden=false;opener=btn;s.dataset.source=btn?.dataset.cta||'site';setTimeout(()=>s.querySelector('input')?.focus(),30)}
+function closeSheet(s){s.hidden=true;opener?.focus?.()}
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-legal]')){e.preventDefault();return}
+  const o=e.target.closest('[data-open]');if(o){e.preventDefault();openSheet(o.dataset.open,o);return}
+  const c=e.target.closest('[data-close]');if(c)closeSheet(c.closest('.sheet'));
+});
+document.addEventListener('keydown',e=>{
+  const s=document.querySelector('.sheet:not([hidden])')||(!drawer.hidden?drawer:null);if(!s)return;
+  if(e.key==='Escape'){s===drawer?closeDrawer():closeSheet(s);return}
+  if(e.key!=='Tab')return;
+  const f=[...s.querySelectorAll('button,a[href],input,select,textarea')].filter(x=>x.offsetParent!==null);if(!f.length)return;
+  const a=f[0],b=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}
+});
+
+/* validation mirrors the API rules (lib/waitlist/validate.ts) */
+const EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function phoneOk(cc,raw){let d=String(raw).replace(/\D/g,'');return cc==='IN'?/^[6-9]\d{9}$/.test(d):/^5\d{8}$/.test(d)}
+function phoneMsg(cc){return cc==='IN'?'Enter a 10-digit Indian mobile number starting with 6, 7, 8 or 9.':'Enter a 9-digit UAE mobile number starting with 5.'}
+function setErr(id,msg){const el=document.getElementById(id),inp=document.getElementById(id.replace(/-err$/,''));el.textContent=msg||'';if(inp)inp.setAttribute('aria-invalid',msg?'true':'false');return !msg}
+function wirePhone(inp,sel){inp.addEventListener('input',()=>{inp.value=inp.value.replace(/\D/g,'').slice(0,sel.value==='AE'?9:10)});sel.addEventListener('change',()=>{inp.placeholder=sel.value==='AE'?'50 123 4567':'98765 43210'})}
+wirePhone(document.getElementById('wl-phone'),document.getElementById('wl-country'));
+wirePhone(document.getElementById('ea-phone'),document.getElementById('ea-country'));
+function finish(form){const s=form.closest('.sheet');s.querySelector('[data-form]').hidden=true;const d=s.querySelector('[data-done]');d.hidden=false;d.querySelector('button').focus()}
+function firstInvalid(form){const x=form.querySelector('[aria-invalid="true"]');x&&x.focus()}
+document.getElementById('wl-form').addEventListener('submit',e=>{
+  e.preventDefault();const v=id=>document.getElementById(id).value.trim();const cc=v('wl-country');
+  const ok=[setErr('wl-email-err',EMAIL.test(v('wl-email'))?'':'Enter a valid email address.'),
+            setErr('wl-phone-err',phoneOk(cc,v('wl-phone'))?'':phoneMsg(cc))].every(Boolean);
+  ok?finish(e.target):firstInvalid(e.target);
+});
+document.getElementById('ea-form').addEventListener('submit',e=>{
+  e.preventDefault();const v=id=>document.getElementById(id).value.trim();const cc=v('ea-country');
+  const ok=[setErr('ea-name-err',v('ea-name').length>=2?'':'Enter your name.'),
+            setErr('ea-company-err',v('ea-company').length>=2?'':'Enter your company name.'),
+            setErr('ea-email-err',EMAIL.test(v('ea-email'))?'':'Enter a valid work email.'),
+            setErr('ea-phone-err',phoneOk(cc,v('ea-phone'))?'':phoneMsg(cc)),
+            setErr('ea-size-err',v('ea-size')?'':'Choose a team size.'),
+            setErr('ea-use-err',v('ea-use').length>=10?'':'Tell us in a sentence what you would hand off first.'),
+            setErr('ea-consent-err',document.getElementById('ea-consent').checked?'':'Please agree so we can contact you.')].every(Boolean);
+  ok?finish(e.target):firstInvalid(e.target);
+});
+
+/* ---------- ambient: faint contour lines of a slowly moving field. The pointer adds a soft bump. ---------- */
+function makeAmbient(canvas){
+  const ctx=canvas.getContext('2d');let w=0,h=0,dpr=1,raf=0,running=false,want=false,last=0,col='28,28,30',alpha=.075;
+  const P={x:-1e4,y:-1e4,tx:-1e4,ty:-1e4,amp:0,ta:0};
+  const CELL=18,LEVELS=[-1.5,-1.0,-.5,0,.5,1.0,1.5];
+  function recolor(){const cs=getComputedStyle(root);col=cs.getPropertyValue('--field').trim()||col;alpha=parseFloat(cs.getPropertyValue('--field-a'))||alpha;if(!running)draw(performance.now())}
+  function field(x,y,t){
+    const u=x/w*3.2,v=y/h*2.4;
+    let f=Math.sin(u*1.3+t*.05+Math.sin(v*1.7-t*.04)*1.4)
+         +.8*Math.sin(v*1.9-t*.035+Math.sin(u*1.1+t*.03)*1.2)
+         +.45*Math.sin((u+v)*2.3+t*.06);
+    if(P.amp>.001){const dx=x-P.x,dy=y-P.y;f+=P.amp*Math.exp(-(dx*dx+dy*dy)/(2*170*170))}
+    return f;
+  }
+  function draw(now){
+    const t=now/1000;ctx.clearRect(0,0,w,h);
+    const cols=Math.ceil(w/CELL)+1,rows=Math.ceil(h/CELL)+1,g=new Float32Array(cols*rows);
+    for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)g[j*cols+i]=field(i*CELL,j*CELL,t);
+    ctx.strokeStyle=`rgba(${col},${alpha})`;ctx.lineWidth=1;ctx.beginPath();
+    for(const L of LEVELS){
+      for(let j=0;j<rows-1;j++)for(let i=0;i<cols-1;i++){
+        const a=g[j*cols+i],b=g[j*cols+i+1],c=g[(j+1)*cols+i+1],d=g[(j+1)*cols+i];
+        const idx=(a>L?8:0)|(b>L?4:0)|(c>L?2:0)|(d>L?1:0);if(idx===0||idx===15)continue;
+        const x=i*CELL,y=j*CELL,lerp=(p,q)=>(L-p)/(q-p);
+        const T=[x+CELL*lerp(a,b),y],R=[x+CELL,y+CELL*lerp(b,c)],B=[x+CELL*lerp(d,c),y+CELL],Lf=[x,y+CELL*lerp(a,d)];
+        const seg=(p,q)=>{ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1])};
+        switch(idx){case 1:case 14:seg(Lf,B);break;case 2:case 13:seg(B,R);break;case 3:case 12:seg(Lf,R);break;case 4:case 11:seg(T,R);break;
+          case 5:seg(Lf,T);seg(B,R);break;case 6:case 9:seg(T,B);break;case 7:case 8:seg(Lf,T);break;case 10:seg(T,R);seg(Lf,B);break}
+      }
+    }
+    ctx.stroke();
+  }
+  function loop(now){
+    if(!running)return;
+    if(now-last>=40){ // ~25 fps is plenty for motion this slow
+      P.x+=(P.tx-P.x)*.06;P.y+=(P.ty-P.y)*.06;P.amp+=(P.ta-P.amp)*.04;draw(now);last=now}
+    raf=requestAnimationFrame(loop);
+  }
+  function resize(){const r=canvas.getBoundingClientRect();if(!r.width)return;dpr=Math.min(devicePixelRatio||1,1.5);w=r.width;h=r.height;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw(performance.now())}
+  const host=canvas.parentElement;
+  host.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=canvas.getBoundingClientRect();P.tx=e.clientX-r.left;P.ty=e.clientY-r.top;if(P.x<-9e3){P.x=P.tx;P.y=P.ty}P.ta=.9});
+  host.addEventListener('pointerleave',()=>{P.ta=0});
+  function go(){if(running||reduced.matches){if(reduced.matches)draw(performance.now());return}running=true;raf=requestAnimationFrame(loop)}
+  function halt(){running=false;cancelAnimationFrame(raf)}
+  new IntersectionObserver(es=>{es[0].isIntersecting&&want?go():halt()}).observe(canvas);
+  document.addEventListener('visibilitychange',()=>{document.hidden?halt():want&&go()});
+  new ResizeObserver(()=>resize()).observe(canvas);
+  reduced.addEventListener('change',()=>{halt();want&&go()});
+  return{start(){want=true;resize();go()},stop(){want=false;halt()},resize,recolor};
+}
+ambient=makeAmbient(document.getElementById('ambient'));
+ambient.recolor();
+route();
+})();
+</script>

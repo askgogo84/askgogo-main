@@ -1,0 +1,307 @@
+<!doctype html>
+<!-- AskGogo marketing redesign v3: DESIGN PREVIEW ONLY. Not production. Forms are simulated and send nothing. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>AskGogo — Less prompting. More living.</title>
+<meta name="description" content="A personal AI on WhatsApp that remembers the details and follows everyday tasks through, with your approval before payments, bookings or messages. Private beta.">
+<meta name="theme-color" content="#FFFFFF">
+<script>try{if(localStorage.getItem('askgogo-theme')==='dark')document.documentElement.classList.add('mode-dark')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/gogo.js"></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/home.js" defer></script>
+</head>
+<body data-page="home">
+<a class="skip" href="#main">Skip to content</a>
+<div class="site" id="site">
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="mark" href="" aria-label="AskGogo home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="secondbrain/" data-r="secondbrain">SecondBrain</a>
+      <a href="business/" data-r="business">Business</a>
+      <a href="journal/" data-r="journal">Journal</a>
+      <a href="about/" data-r="about">About</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+      </button>
+      <button class="btn btn-solid btn-sm" type="button" data-open="waitlist" data-cta="header">Join Waitlist</button>
+      <button class="icon-btn menu-btn" type="button" id="menu-open" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 9h16M4 15h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <a class="mark" href=""><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <div class="tools">
+      <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" type="button" id="menu-close" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="">Home</a><a href="secondbrain/" data-r="secondbrain">SecondBrain</a><a href="business/" data-r="business">Business</a><a href="journal/" data-r="journal">Journal</a><a href="about/" data-r="about">About</a>
+  </nav>
+  <div class="ctas">
+    <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="menu">Join Waitlist</button>
+    <button class="btn btn-ghost" type="button" data-open="access" data-cta="menu">Request Early Access</button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- 1. HERO -->
+<section class="hero" aria-labelledby="h-home" id="hero">
+  <canvas id="ambient" aria-hidden="true"></canvas>
+  <div class="stage">
+    <div class="center">
+      <span class="gogo-hero" data-gogo="listening" data-hero aria-hidden="true"></span>
+      <h1 id="h-home">Less prompting.<br>More living.</h1>
+      <p class="lede">A personal AI on WhatsApp that remembers the details and follows everyday tasks through, with your approval before payments, bookings or messages.</p>
+      <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="home-hero">Join Waitlist <span class="arrow" aria-hidden="true">↗</span></button>
+      <p class="fine">Private beta · Access by invitation</p>
+      <div class="scenes-mobile" aria-hidden="true"></div>
+    </div>
+
+    <div class="scene a" data-scene aria-hidden="true">
+      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2M4 12h16"/></svg></span><div><p class="k">Trip</p><p class="t">Goa · Sat 14 Nov</p></div></div>
+      <p class="cap"><span data-gogo="remembering"></span>Ticket details kept</p>
+    </div>
+    <div class="scene b" data-scene aria-hidden="true">
+      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span><div><p class="k">Receipt</p><p class="t">Washing machine, March</p></div></div>
+      <p class="cap"><span data-gogo="found"></span>Found when you asked</p>
+    </div>
+    <div class="scene c" data-scene aria-hidden="true">
+      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><div><p class="k">Appointment</p><p class="t">Car service · Thu 22 Oct</p></div></div>
+      <p class="cap"><span data-gogo="approval"></span>Waiting for your yes</p>
+    </div>
+    <div class="scene d" data-scene aria-hidden="true">
+      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span><div><p class="k">Reminder</p><p class="t">Electricity bill · Thu 5 Nov</p></div></div>
+      <p class="cap"><span data-gogo="watching"></span>Reminder set for the day before</p>
+    </div>
+  </div>
+  <div class="hero-foot"><p>Remembers the details. Acts with your approval. Shows you the result.</p></div>
+</section>
+
+<!-- 2. MEET GOGO -->
+<section class="s" aria-labelledby="h-meet" id="meet">
+  <div class="wrap">
+    <div class="sh center-h">
+      <p class="label">Meet Gogo</p>
+      <h2 id="h-meet">Tell it once. Gogo keeps the details and carries the task.</h2>
+    </div>
+    <div class="beats" id="beats">
+      <div class="beat" data-beat>
+        <p class="n">You share</p>
+        <div class="viz" style="flex-direction:column;align-items:flex-end">
+          <p class="bubble me">Here's my ticket for Goa</p>
+          <div class="file"><span class="fi">PDF</span>ticket-goa.pdf</div>
+        </div>
+        <p class="cap">Send a ticket, bill or voice note on WhatsApp.</p>
+      </div>
+      <div class="joint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="beat" data-beat>
+        <p class="n">Gogo remembers</p>
+        <div class="viz"><span data-gogo="remembering" aria-hidden="true"></span>
+          <div class="mem"><b>Bengaluru → Goa</b><br>Sat 14 Nov, 06:10<p class="src">From your ticket</p></div></div>
+        <p class="cap">The useful details are kept, with a note of where they came from.</p>
+      </div>
+      <div class="joint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="beat" data-beat>
+        <p class="n">Gogo helps</p>
+        <div class="viz"><span data-gogo="acting" aria-hidden="true"></span>
+          <div class="mem"><b>Check-in reminder</b><br>Fri 13 Nov, 06:10</div></div>
+        <p class="cap">It carries the task forward, and asks before anything consequential.</p>
+      </div>
+    </div>
+    <div class="beat-ctl"><button class="btn btn-ghost btn-sm" type="button" id="beats-replay"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>Replay</button></div>
+  </div>
+</section>
+
+<!-- 3. SEE HOW GOGO WORKS -->
+<section class="s soft" aria-labelledby="h-how" id="how">
+  <div class="wrap">
+    <div class="sh center-h">
+      <p class="label">Illustrative preview</p>
+      <h2 id="h-how">See how Gogo works.</h2>
+      <p>Pick an example. Gogo shows each step, and stops for your approval before it books anything.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Example tasks" style="margin-top:32px">
+      <button class="tab" role="tab" id="tab-car" aria-controls="story-panel" aria-selected="true" data-story="car">Car service before a trip</button>
+      <button class="tab" role="tab" id="tab-receipt" aria-controls="story-panel" aria-selected="false" tabindex="-1" data-story="receipt">Find a receipt</button>
+      <button class="tab" role="tab" id="tab-travel" aria-controls="story-panel" aria-selected="false" tabindex="-1" data-story="travel">Compare travel options</button>
+    </div>
+    <div class="story" id="story-panel" role="tabpanel" aria-labelledby="tab-car">
+      <div class="stage-card">
+        <span class="big" data-gogo="listening" id="story-gogo" aria-hidden="true"></span>
+        <div>
+          <p class="state" id="story-state">Step 1 of 6 · Listening</p>
+          <p class="what" id="story-what" aria-live="polite">Gogo reads the request.</p>
+          <div class="dots" id="story-dots" aria-label="Steps"></div>
+        </div>
+      </div>
+      <div class="chat">
+        <div class="chat-h"><span data-gogo="calm" aria-hidden="true"></span><div><p class="nm">Gogo</p><p class="sub">WhatsApp-style preview</p></div><span class="chip">Illustrative</span></div>
+        <div class="msgs" id="msgs"></div>
+        <div class="ctl">
+          <button class="icon-btn" type="button" id="st-prev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button class="icon-btn" type="button" id="st-play" aria-label="Pause"><svg class="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="icon-btn" type="button" id="st-next" aria-label="Next step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <span class="grow" id="st-hint">Plays step by step. Pauses while you hover or focus.</span>
+          <button class="icon-btn" type="button" id="st-replay" aria-label="Replay this example"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <p class="note">An illustration of the intended flow with example details. No booking is being made.</p>
+  </div>
+</section>
+
+<!-- 4. TRUST -->
+<section class="s" aria-labelledby="h-trust" id="trust">
+  <div class="wrap">
+    <div class="sh">
+      <p class="label">Built to be trusted</p>
+      <h2 id="h-trust">Helpful, and careful about it.</h2>
+    </div>
+    <div class="trust">
+      <div class="tlist" role="tablist" aria-label="How Gogo stays careful" aria-orientation="vertical">
+        <button class="titem" role="tab" id="tr-1" aria-controls="tviz" aria-selected="true" data-trust="0"><h3><span class="num">01</span>Remember with context</h3><p>Every memory shows where it came from, and you can correct it.</p></button>
+        <button class="titem" role="tab" id="tr-2" aria-controls="tviz" aria-selected="false" tabindex="-1" data-trust="1"><h3><span class="num">02</span>Ask before consequential actions</h3><p>Payments, bookings and messages to other people wait for your yes.</p></button>
+        <button class="titem" role="tab" id="tr-3" aria-controls="tviz" aria-selected="false" tabindex="-1" data-trust="2"><h3><span class="num">03</span>Show the result</h3><p>A task is marked done when there is something to show for it.</p></button>
+      </div>
+      <div class="tviz" id="tviz" role="tabpanel" aria-labelledby="tr-1"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. BUSINESS -->
+<section class="s soft" aria-labelledby="h-biz" id="biz">
+  <div class="wrap">
+    <div class="biz pre" id="bizstage">
+      <div class="intro">
+        <p class="label">AskGogo for Business</p>
+        <h2 id="h-biz">A Gogo for the work your team repeats.</h2>
+        <p>Shared company memory, work carried through end to end, approval at the steps that matter, and a result you can check.</p>
+        <button class="btn btn-solid" type="button" data-open="access" data-cta="home-business">Request Early Access</button>
+        <p class="fine">Illustrative workflows we are exploring with early teams.</p>
+      </div>
+      <div class="roles">
+        <div class="role r1"><span data-gogo="acting" aria-hidden="true"></span><p class="rt">Invoice follow-ups</p><p class="rd">Polite reminders until each invoice is paid, with replies tracked.</p></div>
+        <div class="role r2"><span data-gogo="remembering" aria-hidden="true"></span><p class="rt">Vendor onboarding</p><p class="rd">Collects documents and details, and flags what is missing.</p></div>
+        <div class="role r3"><span data-gogo="thinking" aria-hidden="true"></span><p class="rt">Scheduling</p><p class="rd">Finds times across calendars and confirms with everyone.</p></div>
+        <div class="role r4"><span data-gogo="found" aria-hidden="true"></span><p class="rt">Shared company knowledge</p><p class="rd">Answers from your own policies and history, with sources.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. JOURNAL -->
+<section class="s" aria-labelledby="h-journal" id="journal">
+  <div class="wrap">
+    <div class="head-row"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="journal/" data-r="journal">All essays <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="list">
+      <a href="journal/finish-the-work/"><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task.</p></div><span class="when">14 Oct 2026</span></a>
+      <a href="journal/memory-is-the-product/"><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire.</p></div><span class="when">2 Oct 2026</span></a>
+      <a href="journal/autonomy-you-can-check/"><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result.</p></div><span class="when">22 Sep 2026</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CLOSING -->
+<section class="s soft" aria-labelledby="h-close">
+  <div class="wrap">
+    <div class="closing">
+      <span data-gogo="calm" data-hands aria-hidden="true"></span>
+      <div>
+        <h2 id="h-close">Private beta. Access by invitation.</h2>
+        <p>We are opening AskGogo in small groups, across India and the world.</p>
+        <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="home-closing">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="home-closing" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="grid">
+      <div><a class="mark" href=""><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta in India and the UAE.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="secondbrain/" data-r="secondbrain">SecondBrain</a></li><li><a href="business/" data-r="business">Business</a></li><li><a href="journal/" data-r="journal">Journal</a></li><li><a href="about/" data-r="about">About</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="https://askgogo.in/privacy/" target="_blank" rel="noopener">Privacy</a></li><li><a href="https://askgogo.in/terms/" target="_blank" rel="noopener">Terms</a></li><li><a href="https://askgogo.in/refund/" target="_blank" rel="noopener">Refunds</a></li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 AskGogo Technologies</span><span>Remembers. Asks. Finishes.</span></div>
+  </div>
+</footer>
+</div>
+
+<!-- Waitlist sheet (mock) -->
+<div class="sheet" id="sheet-waitlist" hidden>
+  <div class="bd" data-close></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="wl-title">
+    <button class="icon-btn x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div data-form>
+      <span data-gogo="listening" aria-hidden="true"></span>
+      <h2 id="wl-title">Be among the first.</h2>
+      <p class="intro">Leave your email and WhatsApp number. We will tell you when your access is ready.</p>
+      <form id="wl-form" novalidate>
+        <div class="field"><label for="wl-email">Email</label><input id="wl-email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="wl-email-err"><span class="err" id="wl-email-err"></span></div>
+        <div class="field"><label for="wl-phone">WhatsApp number</label>
+          <div class="phone-row"><select id="wl-country" aria-label="Country code"><option value="91">+91 India</option><option value="971">+971 UAE</option><option value="1">+1 US / Canada</option><option value="44">+44 UK</option><option value="65">+65 Singapore</option><option value="966">+966 Saudi Arabia</option><option value="61">+61 Australia</option><option value="49">+49 Germany</option><option value="other">Other (type +code)</option></select><input id="wl-phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" aria-describedby="wl-phone-err"></div>
+          <span class="err" id="wl-phone-err"></span></div>
+        <label class="check"><input id="wl-optin" type="checkbox"> <span>Send me access updates on WhatsApp.</span></label>
+        <button class="btn btn-solid" type="submit">Join Waitlist</button>
+        <p class="err" data-status role="status" aria-live="polite"></p>
+        <p class="fine2">No spam. No WhatsApp messages unless you opt in.</p>
+      </form>
+    </div>
+    <div data-done hidden><span data-gogo="done" aria-hidden="true"></span><h2>You are on the list.</h2><p class="intro">We will write when your access is ready. Preview only: nothing was sent.</p><button class="btn btn-solid" type="button" data-close style="margin-top:22px">Done</button></div>
+  </div>
+</div>
+
+<!-- Early access sheet (mock) -->
+<div class="sheet" id="sheet-access" hidden>
+  <div class="bd" data-close></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="ea-title">
+    <button class="icon-btn x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div data-form>
+      <span data-gogo="listening" aria-hidden="true"></span>
+      <h2 id="ea-title">Tell us about your team.</h2>
+      <p class="intro">For companies interested in SecondBrain for Business. We reply within a few working days.</p>
+      <form id="ea-form" novalidate>
+        <div class="two">
+          <div class="field"><label for="ea-name">Your name</label><input id="ea-name" autocomplete="name" aria-describedby="ea-name-err"><span class="err" id="ea-name-err"></span></div>
+          <div class="field"><label for="ea-company">Company</label><input id="ea-company" autocomplete="organization" aria-describedby="ea-company-err"><span class="err" id="ea-company-err"></span></div>
+        </div>
+        <div class="field"><label for="ea-email">Work email</label><input id="ea-email" type="email" autocomplete="email" placeholder="you@company.com" aria-describedby="ea-email-err"><span class="err" id="ea-email-err"></span></div>
+        <div class="field"><label for="ea-phone">WhatsApp number</label>
+          <div class="phone-row"><select id="ea-country" aria-label="Country code"><option value="91">+91 India</option><option value="971">+971 UAE</option><option value="1">+1 US / Canada</option><option value="44">+44 UK</option><option value="65">+65 Singapore</option><option value="966">+966 Saudi Arabia</option><option value="61">+61 Australia</option><option value="49">+49 Germany</option><option value="other">Other (type +code)</option></select><input id="ea-phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" aria-describedby="ea-phone-err"></div>
+          <span class="err" id="ea-phone-err"></span></div>
+        <div class="field"><label for="ea-size">Team size</label><select id="ea-size"><option value="">Choose</option><option value="1-10">1–10</option><option value="11-50">11–50</option><option value="51-200">51–200</option><option value="201-1000">201–1,000</option><option value="1000-plus">1,000+</option></select><span class="err" id="ea-size-err"></span></div>
+        <div class="field"><label for="ea-use">What would you hand off first?</label><textarea id="ea-use" rows="3" maxlength="500" placeholder="For example: chasing vendor invoices every month" aria-describedby="ea-use-err"></textarea><span class="err" id="ea-use-err"></span></div>
+        <label class="check"><input id="ea-consent" type="checkbox"> <span>AskGogo may contact me about early access by email or WhatsApp. See the <a href="https://askgogo.in/privacy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+        <span class="err" id="ea-consent-err"></span>
+        <button class="btn btn-solid" type="submit">Request Early Access</button>
+              <p class="err" data-status role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div data-done hidden><span data-gogo="done" aria-hidden="true"></span><h2>Request received.</h2><p class="intro">We will be in touch within a few working days. Preview only: nothing was sent.</p><button class="btn btn-solid" type="button" data-close style="margin-top:22px">Done</button></div>
+  </div>
+</div>
+</body>
+</html>
