@@ -196,3 +196,4 @@ if(!reduced.matches&&'IntersectionObserver' in window){
    raf=parts.length?requestAnimationFrame(tick):0}
  });
 })();
+;(function(){var D=document.getElementById('drawer');if(!D||!window.AG)return;window.AG.$$('nav a',D).forEach(function(a){var sx=0,sy=0;a.addEventListener('pointerdown',function(e){sx=e.clientX;sy=e.clientY},{passive:true});a.addEventListener('pointerup',function(e){if(e.pointerType==='mouse')return;if(Math.hypot(e.clientX-sx,e.clientY-sy)>12)return;var h=a.getAttribute('href');if(!h||h.charAt(0)==='#')return;setTimeout(function(){if(!a.dataset.went){a.dataset.went='1';location.href=a.href}},60)});a.addEventListener('click',function(){a.dataset.went='1'})})})();
