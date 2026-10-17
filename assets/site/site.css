@@ -727,3 +727,6 @@ h1{letter-spacing:-.03em;line-height:1.05}
 :root.mode-dark .plan-art svg [fill="#fff"],:root.mode-dark .plan-biz-art svg [fill="#fff"]{fill:#232327}
 :root.mode-dark .plan-art svg,:root.mode-dark .plan-biz-art svg{stroke:#EDEDEE}
 :root.mode-dark .ai,:root.mode-dark .mi,:root.mode-dark .ct{background:#F4F3F0}
+
+/* v6.1: stacked scroll scenes are desktop-only. On phones the hero and the feed flow normally. */
+@media (max-width:1020px){.stack,.stack#now{position:static;z-index:auto}.stack#now{min-height:auto;display:block}.stack>*{opacity:1!important;transform:none!important}}
