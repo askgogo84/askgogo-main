@@ -26,16 +26,57 @@ document.addEventListener('click',e=>{
 const hdr=$('#hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
 const drawer=$('#drawer'),mo=$('#menu-open');
-function closeDrawer(silent){if(drawer.hidden)return;drawer.hidden=true;mo.setAttribute('aria-expanded','false');if(!silent)mo.focus()}
-mo.onclick=()=>{drawer.hidden=false;mo.setAttribute('aria-expanded','true');$('nav a',drawer).focus()};
+/* Show/hide through a class so the transition can turn around mid-flight. Hidden only once the exit transition ends. */
+function reveal(el){el.hidden=false;el.offsetHeight;el.classList.add('in')}
+function conceal(el,done){if(el.hidden)return;el.classList.remove('in');
+  const fin=()=>{if(!el.classList.contains('in')){el.hidden=true;done&&done()}};
+  if(reduced.matches){fin();return}
+  let ended=false;const h=e=>{if(e.target!==el&&!e.target.matches('.panel'))return;ended=true;el.removeEventListener('transitionend',h);fin()};
+  el.addEventListener('transitionend',h);setTimeout(()=>{if(!ended){el.removeEventListener('transitionend',h);fin()}},700)}
+function closeDrawer(silent){if(drawer.hidden)return;conceal(drawer);mo.setAttribute('aria-expanded','false');if(!silent)mo.focus()}
+mo.onclick=()=>{reveal(drawer);mo.setAttribute('aria-expanded','true');$('nav a',drawer).focus()};
 $('#menu-close').onclick=()=>closeDrawer();
 const PAGE=document.body.dataset.page||'';
 $$('.nav a,.drawer nav a').forEach(a=>{const r=a.dataset.r;const on=r===PAGE||(r==='journal'&&PAGE.startsWith('essay'));on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
 
 /* ---------- sheets (mock forms) ---------- */
 let opener=null;
-function openSheet(id,btn){closeDrawer(true);const s=$('#sheet-'+id);$('[data-form]',s).hidden=false;$('[data-done]',s).hidden=true;s.hidden=false;opener=btn;s.dataset.source=btn?.dataset.cta||'site';setTimeout(()=>$('input',s)?.focus(),30)}
-function closeSheet(s){s.hidden=true;opener?.focus?.()}
+function openSheet(id,btn){closeDrawer(true);const s=$('#sheet-'+id);$('[data-form]',s).hidden=false;$('[data-done]',s).hidden=true;const p=$('.panel',s);p.style.transform='';reveal(s);opener=btn;s.dataset.source=btn?.dataset.cta||'site';
+  if(!matchMedia('(max-width:520px)').matches)setTimeout(()=>$('input',s)?.focus(),60)}
+function closeSheet(s){if(s.hidden)return;conceal(s);opener?.focus?.()}
+/* Direct manipulation: the sheet follows the finger 1:1, rubber-bands past the top (0.55), and a flick or a long pull dismisses it with the finger's speed. */
+$$('.sheet .panel').forEach(panel=>{
+  const sheet=panel.closest('.sheet');let y0=0,dy=0,t0=0,vy=0,lastY=0,lastT=0,active=false,dragging=false,pid=null;
+  const rubber=d=>{const c=0.55,dim=panel.offsetHeight||400;return (1-(1/((d*c/dim)+1)))*dim};
+  panel.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    if(e.target.closest('input,select,textarea,button,a,label'))return;
+    if(panel.scrollTop>0)return;
+    active=true;dragging=false;y0=lastY=e.clientY;t0=lastT=e.timeStamp;dy=0;vy=0;pid=e.pointerId;
+  });
+  panel.addEventListener('pointermove',e=>{
+    if(!active)return;const d=e.clientY-y0;
+    if(!dragging){if(Math.abs(d)<10)return;dragging=true;panel.classList.add('dragging');panel.setPointerCapture(pid);sheet.classList.add('drag')}
+    dy=d;const now=e.timeStamp;if(now>lastT){vy=(e.clientY-lastY)/(now-lastT)}lastY=e.clientY;lastT=now;
+    const off=d>=0?d:-rubber(-d);
+    panel.style.transform=`translateY(${off}px)`;
+    $('.bd',sheet).style.opacity=String(Math.max(0,1-Math.max(0,d)/(panel.offsetHeight||400)*0.9));
+  });
+  const end=e=>{
+    if(!active)return;active=false;if(!dragging)return;dragging=false;
+    panel.classList.remove('dragging');sheet.classList.remove('drag');try{panel.releasePointerCapture(pid)}catch(x){}
+    $('.bd',sheet).style.opacity='';
+    const h=panel.offsetHeight||400;
+    if(dy>h*0.35||vy>0.5){
+      /* velocity handoff: the remaining travel takes as long as the finger would have taken, clamped */
+      const remain=h-dy,ms=Math.min(360,Math.max(140,vy>0?remain/vy:260));
+      panel.style.transition=`transform ${ms}ms cubic-bezier(.2,.6,.3,1)`;panel.style.transform=`translateY(${h+24}px)`;
+      const fin=()=>{panel.style.transition='';panel.style.transform='';sheet.classList.remove('in');sheet.hidden=true;opener?.focus?.()};
+      let done=false;panel.addEventListener('transitionend',()=>{if(!done){done=true;fin()}},{once:true});setTimeout(()=>{if(!done){done=true;fin()}},ms+80);
+    } else {panel.style.transform=''}
+  };
+  panel.addEventListener('pointerup',end);panel.addEventListener('pointercancel',end);
+});
 document.addEventListener('click',e=>{
   const o=e.target.closest('[data-open]');if(o){e.preventDefault();openSheet(o.dataset.open,o);return}
   const c=e.target.closest('[data-close]');if(c)closeSheet(c.closest('.sheet'));
