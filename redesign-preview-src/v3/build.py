@@ -65,10 +65,13 @@ def build_live():
     if os.path.isdir(LIVE):shutil.rmtree(LIVE)
     shutil.copytree(f'{HERE}/assets',f'{LIVE}/assets/site')
     today=__import__('datetime').date.today().isoformat()
+    STAMP=__import__('datetime').datetime.now(__import__('datetime').timezone.utc).strftime('%Y%m%d%H%M')
     urls=[]
     for key,(out,title,desc,script) in PAGES.items():
         root='../'*out.count('/');url=BASE+out.replace('index.html','')
         doc=render(key,root).replace(f'{root}assets/',f'{root}assets/site/')
+        # cache-busting: asset URLs carry the build stamp so phones never keep an old stylesheet or script after a deploy
+        doc=re.sub(r'(assets/site/[a-z]+\.(?:css|js))"',lambda m:f'{m.group(1)}?v={STAMP}"',doc)
         doc=doc.replace('<meta name="robots" content="noindex,nofollow,noarchive">\n','')
         og=f"""<link rel="canonical" href="{url}">
 <link rel="icon" type="image/svg+xml" href="/gogo-character-mark-v1.svg">
@@ -81,6 +84,7 @@ def build_live():
 """
         doc=doc.replace('<meta name="theme-color" content="#FFFFFF">','<meta name="theme-color" content="#FFFFFF">\n'+og)
         doc=doc.replace('<!-- AskGogo marketing redesign v3: DESIGN PREVIEW ONLY. Not production. Forms are simulated and send nothing. -->\n','')
+        doc=doc.replace(' Preview only: nothing was sent.','').replace('<!-- Waitlist sheet (mock) -->','<!-- Waitlist sheet -->').replace('<!-- Early access sheet (mock) -->','<!-- Early access sheet -->')
         for legal in ('privacy','terms','refund'):doc=doc.replace(f'href="https://askgogo.in/{legal}/" target="_blank" rel="noopener"',f'href="{root}{legal}/"')
         p=f'{LIVE}/{out}';os.makedirs(os.path.dirname(p),exist_ok=True);open(p,'w',encoding='utf-8').write(doc);urls.append(url)
     open(f'{LIVE}/robots.txt','w').write(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}sitemap.xml\n')

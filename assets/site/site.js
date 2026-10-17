@@ -22,6 +22,8 @@ document.addEventListener('click',e=>{
   applyTheme(next);
 });
 
+/* iOS Safari only applies :active (the press state) to links and non-button elements once a touch listener exists on the document. */
+document.addEventListener('touchstart',()=>{},{passive:true});
 /* ---------- header, drawer ---------- */
 const hdr=$('#hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
