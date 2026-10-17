@@ -730,3 +730,4 @@ h1{letter-spacing:-.03em;line-height:1.05}
 
 /* v6.1: stacked scroll scenes are desktop-only. On phones the hero and the feed flow normally. */
 @media (max-width:1020px){.stack,.stack#now{position:static;z-index:auto}.stack#now{min-height:auto;display:block}.stack>*{opacity:1!important;transform:none!important}}
+@container (max-width:640px){.rail{flex-direction:column;overflow:visible;scroll-snap-type:none;gap:16px;padding-inline:0;margin-inline:0}.rail>*{flex:none;width:100%;max-width:none;scroll-snap-align:none}}
