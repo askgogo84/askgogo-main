@@ -8,8 +8,8 @@ rd=lambda p: open(p,encoding='utf-8').read()
 HEAD=rd(f'{SRC}/_head.html'); HEADER=rd(f'{SRC}/_header.html'); FOOTER=rd(f'{SRC}/_footer.html')
 PAGES={ # key: (output path, title, description, page script)
  'home':('index.html','AskGogo — Less prompting. More living.','A personal AI on WhatsApp that remembers the details and follows everyday tasks through, with your approval before payments, bookings or messages. Private beta.','home.js'),
- 'secondbrain':('secondbrain/index.html','SecondBrain — memory that works for you · AskGogo','SecondBrain is the memory layer under AskGogo: it keeps what you share, with its source, and brings it back when it matters. In private development.','pages.js'),
- 'business':('business/index.html','AskGogo for Business — agents that know how your company works','Shared company memory, work carried through end to end, approval at the steps that matter, and a result you can check. Early access for teams.','pages.js'),
+ 'secondbrain':('secondbrain/index.html','SecondBrain — AskGogo for Business','Your company\'s memory, with agents that act on it. Shared, permissioned memory and a team of Gogos that carry recurring work through end to end, with approval where it matters. Early access for teams.','pages.js'),
+ 'integrations':('integrations/index.html','Integrations · AskGogo','Every app Gogo connects to: WhatsApp, Gmail, Google Calendar, UPI, Swiggy, Uber, IRCTC and more. Connect only what you use. Approval before anything that costs money.','pages.js'),
  'journal':('journal/index.html','Journal · AskGogo','Essays from the team building AskGogo, on memory, autonomy and what it takes to finish a task.','pages.js'),
  'about':('about/index.html','About · AskGogo','Built in Bengaluru. AskGogo is a personal AI on WhatsApp that remembers, acts with your approval and finishes the task. Private beta.','pages.js'),
  'essay-finish-the-work':('journal/finish-the-work/index.html','Why an assistant should finish the work · AskGogo Journal','Most assistants stop at advice. The useful part is finishing the task.','pages.js'),
@@ -41,7 +41,7 @@ def build():
     doc=doc.replace('{{TITLE}}','AskGogo v3 preview').replace('{{DESC}}','Design preview, all pages in one file.').replace('{{PAGE}}','home')
     # links: {{ROOT}}x/ -> #x ; {{ROOT}} -> #home ; essays -> #essay-slug
     doc=re.sub(r'href="\{\{ROOT\}\}journal/([a-z-]+)/"',r'href="#essay-\1"',doc)
-    doc=re.sub(r'href="\{\{ROOT\}\}(secondbrain|business|journal|about)/"',r'href="#\1"',doc)
+    doc=re.sub(r'href="\{\{ROOT\}\}(secondbrain|business|integrations|pricing|journal|about)/"',r'href="#\1"',doc)
     doc=doc.replace('href="{{ROOT}}"','href="#home"').replace('{{ROOT}}','')
     router='''<script>
 (function(){const show=()=>{let k=(location.hash||'#home').slice(1);if(!document.querySelector('.pg[data-pg="'+k+'"]'))k='home';
@@ -53,6 +53,9 @@ def build():
 </script>'''
     doc=doc.replace('</body>',router+f'<script>\n{esc(site)}\n</script>\n<script>\n{esc(home)}\n</script>\n<script>\n{esc(pages)}\n</script>\n</body>')
     import base64,glob
+    for svg in glob.glob(f'{HERE}/assets/apps/*.svg'):
+        name=os.path.basename(svg);b64=base64.b64encode(open(svg,'rb').read()).decode()
+        doc=doc.replace(f'src="assets/apps/{name}"',f'src="data:image/svg+xml;base64,{b64}"')
     for img in glob.glob(f'{HERE}/assets/*.jpg'):
         name=os.path.basename(img);b64=base64.b64encode(open(img,'rb').read()).decode()
         doc=doc.replace(f'src="assets/{name}"',f'src="data:image/jpeg;base64,{b64}"')

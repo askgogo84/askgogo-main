@@ -1,155 +1,173 @@
 <main id="main">
 
-<!-- 1. HERO -->
-<section class="hero" aria-labelledby="h-home" id="hero">
-  <canvas id="ambient" aria-hidden="true"></canvas>
+<!-- 1. HERO: a quiet headline with everyday moments around it -->
+<section class="hero-v5 stack" aria-labelledby="h-home" id="hero" data-stack data-confetti>
   <div class="stage">
     <div class="center">
       <span class="gogo-hero" data-gogo="listening" data-hero aria-hidden="true"></span>
       <h1 id="h-home">Less prompting.<br>More living.</h1>
-      <p class="lede">A personal AI on WhatsApp that remembers the details and follows everyday tasks through, with your approval before payments, bookings or messages.</p>
-      <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="home-hero">Join Waitlist <span class="arrow" aria-hidden="true">↗</span></button>
+      <p class="lede">Gogo remembers your details, calls, books and follows up to get everyday things done. On WhatsApp, with your approval before anything that matters.</p>
+      <div class="ctas"><button class="btn btn-solid btn-lg" type="button" data-open="waitlist" data-cta="home-hero">Join Waitlist</button><a class="tlink" href="#how">See Gogo at work</a></div>
       <p class="fine">Private beta · Access by invitation</p>
-      <div class="scenes-mobile" aria-hidden="true"></div>
+      <div class="moments-mobile" aria-hidden="true"></div>
     </div>
-
-    <div class="scene a" data-scene aria-hidden="true">
-      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2M4 12h16"/></svg></span><div><p class="k">Trip</p><p class="t">Goa · Sat 14 Nov</p></div></div>
-      <p class="cap"><span data-gogo="remembering"></span>Ticket details kept</p>
-    </div>
-    <div class="scene b" data-scene aria-hidden="true">
-      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span><div><p class="k">Receipt</p><p class="t">Washing machine, March</p></div></div>
-      <p class="cap"><span data-gogo="found"></span>Found when you asked</p>
-    </div>
-    <div class="scene c" data-scene aria-hidden="true">
-      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><div><p class="k">Appointment</p><p class="t">Car service · Thu 22 Oct</p></div></div>
-      <p class="cap"><span data-gogo="approval"></span>Waiting for your yes</p>
-    </div>
-    <div class="scene d" data-scene aria-hidden="true">
-      <div class="top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span><div><p class="k">Reminder</p><p class="t">Electricity bill · Thu 5 Nov</p></div></div>
-      <p class="cap"><span data-gogo="watching"></span>Reminder set for the day before</p>
-    </div>
+    <div class="moment m1" data-moment data-depth=".6" aria-hidden="true"><div class="ph"><div class="art"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="68" width="132" height="2" rx="1" fill="#1C1C1E" stroke="none" opacity=".25"/><path d="M28 66V48c0-3 2-5 5-5h12l12-14h36l14 14h10c4 0 7 3 7 7v16" fill="#FDF1E7"/><path d="M57 43l8-10h30l10 10z" fill="#fff"/><circle cx="48" cy="68" r="8" fill="#fff"/><circle cx="48" cy="68" r="3"/><circle cx="112" cy="68" r="8" fill="#fff"/><circle cx="112" cy="68" r="3"/><path d="M28 56h14M118 56h8"/><path d="M128 22l10-6M132 30l12-4" opacity=".6"/><path d="M132 86l-14 8M126 86l6 3" /><path d="M116 92c-5 0-8-4-7-8l9-9 6 6-8 11z" fill="#fff"/></svg></div></div><div class="cap"><span data-gogo="approval"></span><div><b>Car service booked</b><span>Thu 22 Oct · after you said yes</span></div></div></div>
+    <div class="moment m2" data-moment data-depth="1" aria-hidden="true"><div class="ph"><div class="art"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 78c20-6 40-6 60 0s40 6 80 0" fill="#FDF1E7"/><path d="M14 88c20-5 40-5 60 0s40 5 76 0"/><path d="M44 78V40" /><path d="M44 40c-10-10-22-10-30-2 10-2 20 2 30 2zM44 40c2-14 12-20 24-18-10 4-18 10-24 18zM44 40c10-6 22-4 28 6-10-4-20-4-28-6zM44 40c-12 2-22 10-22 20 8-8 16-14 22-20z" fill="#fff"/><path d="M96 78V52l18-16 18 16v26" fill="#fff"/><path d="M114 36v-8M110 32h8M104 78V64h20v14M108 54h12"/><circle cx="136" cy="22" r="7" fill="#F2C94C" stroke="none" opacity=".8"/></svg></div></div><div class="cap"><span data-gogo="remembering"></span><div><b>Goa trip, Sat 14 Nov</b><span>Ticket kept · check-in reminder set</span></div></div></div>
+    <div class="moment m3" data-moment data-depth=".8" aria-hidden="true"><div class="ph"><div class="art"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="22" width="56" height="60" rx="6" fill="#fff"/><circle cx="50" cy="56" r="15" fill="#F4F3F0"/><circle cx="50" cy="56" r="9"/><circle cx="34" cy="31" r="2" fill="#1C1C1E" stroke="none"/><circle cx="42" cy="31" r="2" fill="#1C1C1E" stroke="none"/><path d="M92 14h46v70l-6-4-6 4-6-4-6 4-6-4-6 4-6-4-4 3z" fill="#FDF1E7"/><path d="M102 30h26M102 40h26M102 50h16M102 64h26" /><path d="M122 62l4 4 8-8" stroke="#2FAE6A" stroke-width="2.2"/></svg></div></div><div class="cap"><span data-gogo="found"></span><div><b>Washing machine receipt</b><span>Found from March · sent as PDF</span></div></div></div>
+    <div class="moment m4" data-moment data-depth=".5" aria-hidden="true"><div class="ph"><div class="art"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M30 20h56v62l-5-4-5 4-5-4-5 4-5-4-5 4-5-4-5 4-5-4-6 4z" fill="#fff"/><path d="M40 34h36M40 44h36M40 54h22M40 68h36"/><path d="M110 70V56c-6-4-10-10-10-18a18 18 0 0 1 36 0c0 8-4 14-10 18v14z" fill="#FDF1E7"/><path d="M110 76h16M112 82h12"/><path d="M118 56l-4-10h8l-4 10" stroke="#EF7A27" stroke-width="2"/><path d="M136 18l6-6M140 30h8M100 18l-6-6" opacity=".6"/></svg></div></div><div class="cap"><span data-gogo="watching"></span><div><b>Electricity bill, ₹2,340</b><span>Reminder the day before it is due</span></div></div></div>
+    <div class="doodle" style="top:30%;left:20%;width:64px;height:64px" data-depth="1.2" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 40c6-14 20-22 34-18M38 16l6 6-8 2M12 52c10 2 18-2 24-10"/></svg></div>
+    <div class="doodle" style="top:22%;right:21%;width:72px;height:56px" data-depth="1.3" aria-hidden="true"><svg viewBox="0 0 72 56"><path d="M8 14h56v32H8zM8 14l28 20 28-20"/></svg></div>
+    <div class="doodle" style="bottom:28%;right:24%;width:60px;height:60px" data-depth="1.1" aria-hidden="true"><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="20"/><path d="M30 16v14l9 6"/></svg></div>
+    <span class="confetti" style="top:18%;left:28%;background:var(--accent)" aria-hidden="true"></span>
+    <span class="confetti" style="top:64%;left:34%;background:var(--ok)" aria-hidden="true"></span>
+    <span class="confetti" style="top:26%;right:30%;background:#F2C94C" aria-hidden="true"></span>
+    <span class="confetti" style="bottom:22%;right:34%;background:var(--accent)" aria-hidden="true"></span>
   </div>
   <div class="hero-foot"><p>Remembers the details. Acts with your approval. Shows you the result.</p></div>
 </section>
 
-<!-- 2. MEET GOGO -->
-<section class="s" aria-labelledby="h-meet" id="meet">
+<!-- 2. WORKING NOW -->
+<section class="s stack" id="now" aria-labelledby="h-now" data-stack>
   <div class="wrap">
-    <div class="sh center-h">
-      <p class="label">Meet Gogo</p>
-      <h2 id="h-meet">Tell it once. Gogo keeps the details and carries the task.</h2>
-    </div>
-    <div class="beats" id="beats">
-      <div class="beat" data-beat>
-        <p class="n">You share</p>
-        <div class="viz" style="flex-direction:column;align-items:flex-end">
-          <p class="bubble me">Here's my ticket for Goa</p>
-          <div class="file"><span class="fi">PDF</span>ticket-goa.pdf</div>
-        </div>
-        <p class="cap">Send a ticket, bill or voice note on WhatsApp.</p>
-      </div>
-      <div class="joint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      <div class="beat" data-beat>
-        <p class="n">Gogo remembers</p>
-        <div class="viz"><span data-gogo="remembering" aria-hidden="true"></span>
-          <div class="mem"><b>Bengaluru → Goa</b><br>Sat 14 Nov, 06:10<p class="src">From your ticket</p></div></div>
-        <p class="cap">The useful details are kept, with a note of where they came from.</p>
-      </div>
-      <div class="joint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      <div class="beat" data-beat>
-        <p class="n">Gogo helps</p>
-        <div class="viz"><span data-gogo="acting" aria-hidden="true"></span>
-          <div class="mem"><b>Check-in reminder</b><br>Fri 13 Nov, 06:10</div></div>
-        <p class="cap">It carries the task forward, and asks before anything consequential.</p>
-      </div>
-    </div>
-    <div class="beat-ctl"><button class="btn btn-ghost btn-sm" type="button" id="beats-replay"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>Replay</button></div>
+    <div class="sh center-h rv"><span class="live"><i></i>Gogo working now</span><h2 id="h-now">Small things, handled while you get on with your day.</h2><p>An illustration of a typical afternoon. Example details, real behaviour.</p></div>
+    <div class="feed" id="feed" aria-live="polite"></div>
   </div>
 </section>
 
-<!-- 3. SEE HOW GOGO WORKS -->
-<section class="s soft" aria-labelledby="h-how" id="how">
+<!-- 3. WHERE GOGO LIVES -->
+<section class="s soft over" id="how" aria-labelledby="h-how">
   <div class="wrap">
-    <div class="sh center-h">
-      <p class="label">Illustrative preview</p>
-      <h2 id="h-how">See how Gogo works.</h2>
-      <p>Pick an example. Gogo shows each step, and stops for your approval before it books anything.</p>
-    </div>
-    <div class="tabs" role="tablist" aria-label="Example tasks" style="margin-top:32px">
-      <button class="tab" role="tab" id="tab-car" aria-controls="story-panel" aria-selected="true" data-story="car">Car service before a trip</button>
-      <button class="tab" role="tab" id="tab-receipt" aria-controls="story-panel" aria-selected="false" tabindex="-1" data-story="receipt">Find a receipt</button>
-      <button class="tab" role="tab" id="tab-travel" aria-controls="story-panel" aria-selected="false" tabindex="-1" data-story="travel">Compare travel options</button>
-    </div>
-    <div class="story" id="story-panel" role="tabpanel" aria-labelledby="tab-car">
-      <div class="stage-card">
-        <span class="big" data-gogo="listening" id="story-gogo" aria-hidden="true"></span>
-        <div>
-          <p class="state" id="story-state">Step 1 of 6 · Listening</p>
-          <p class="what" id="story-what" aria-live="polite">Gogo reads the request.</p>
-          <div class="dots" id="story-dots" aria-label="Steps"></div>
-        </div>
+    <div class="sh rv"><p class="label">Where Gogo lives</p><h2 id="h-how">On WhatsApp for the asking. On the web for the overview.</h2><p>Ask in chat like you would a person. Open the dashboard when you want to see every task, every step it took, and everything it remembers.</p></div>
+    <div class="surfaces" data-stagger>
+      <div class="surface" style="--i:0">
+        <div class="t"><div><h3>WhatsApp</h3><p>Where you ask, approve and get the result.</p></div><span data-gogo="listening" aria-hidden="true"></span></div>
+        <div class="wa" aria-hidden="true"><div class="screen">
+          <div class="ch"><span data-gogo="calm"></span><div><p class="nm">Gogo</p><p class="sub">online</p></div></div>
+          <div class="wm" id="wa-msgs"></div>
+          <div class="cf"><div class="in"></div><div class="mic"></div></div>
+        </div></div>
       </div>
-      <div class="chat">
-        <div class="chat-h"><span data-gogo="calm" aria-hidden="true"></span><div><p class="nm">Gogo</p><p class="sub">WhatsApp-style preview</p></div><span class="chip">Illustrative</span></div>
-        <div class="msgs" id="msgs"></div>
-        <div class="ctl">
-          <button class="icon-btn" type="button" id="st-prev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-          <button class="icon-btn" type="button" id="st-play" aria-label="Pause"><svg class="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M8 5v14l11-7z"/></svg></button>
-          <button class="icon-btn" type="button" id="st-next" aria-label="Next step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-          <span class="grow" id="st-hint">Plays step by step. Pauses while you hover or focus.</span>
-          <button class="icon-btn" type="button" id="st-replay" aria-label="Replay this example"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>
+      <div class="surface" style="--i:1">
+        <div class="t"><div><h3>Dashboard</h3><p>Every task, every step, every memory. Yours to check and correct.</p></div><span data-gogo="watching" aria-hidden="true"></span></div>
+        <div class="browser" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i><div class="url">app.askgogo.in/dashboard</div></div>
+          <div class="dash">
+            <div class="side"><a class="on">Today</a><a><i></i>Activity</a><a><i></i>Memory</a><a><i></i>Reminders</a><a><i></i>Documents</a><a><i></i>Settings</a><div class="me"><b></b>Gogo · Rajajinagar</div></div>
+            <div class="main">
+              <h4>Today</h4><p class="sub">Fri 17 Oct · 3 tasks in progress, 2 done</p>
+              <div class="dtabs"><span class="dtab on">All</span><span class="dtab">Needs you</span><span class="dtab">Done</span></div>
+              <div class="act">
+                <div class="arow"><span data-gogo="approval"></span><div><b>Book car service before the Mysuru drive</b><span>Found Thu 22 Oct, 9:30 am with pickup</span></div><span class="st ap">Needs you</span></div>
+                <div class="steps"><i>Understood</i><i>Remembered your centre</i><i>Checked slots</i><i class="now">Waiting for approval</i><i class="todo">Book</i><i class="todo">Confirm</i></div>
+                <div class="arow"><span data-gogo="done"></span><div><b>Electricity bill, BESCOM</b><span>Paid ₹2,340 · receipt saved</span></div><span class="st ok">Done</span></div>
+                <div class="arow"><span data-gogo="acting"></span><div><b>Compare travel to Goa, Sat 14 Nov</b><span>Checking flights and buses…</span></div><span class="st">Working</span></div>
+                <div class="dmem"><p class="kk">Remembered this week</p><b>Prefers window seats</b><span>Corrected by you · 9 Oct · first noted from WhatsApp · 2 Sep</span></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <p class="note">An illustration of the intended flow with example details. No booking is being made.</p>
   </div>
 </section>
 
-<!-- 4. TRUST -->
-<section class="s" aria-labelledby="h-trust" id="trust">
+<!-- 4. ERRANDS -->
+<section class="s" id="errands" aria-labelledby="h-err">
+  <div class="wrap"><div class="sh center-h rv"><p class="label">Everyday errands</p><h2 id="h-err">Say it once. Gogo takes it from there.</h2><p>Each one shows the steps Gogo took, where it stopped to ask, and what counted as done.</p></div></div>
+  <div class="wrap"><div class="rail" data-stagger>
+    <div class="errand" style="--i:0"><div class="ph"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="68" width="132" height="2" rx="1" fill="#1C1C1E" stroke="none" opacity=".25"/><path d="M28 66V48c0-3 2-5 5-5h12l12-14h36l14 14h10c4 0 7 3 7 7v16" fill="#FDF1E7"/><path d="M57 43l8-10h30l10 10z" fill="#fff"/><circle cx="48" cy="68" r="8" fill="#fff"/><circle cx="48" cy="68" r="3"/><circle cx="112" cy="68" r="8" fill="#fff"/><circle cx="112" cy="68" r="3"/><path d="M28 56h14M118 56h8"/><path d="M128 22l10-6M132 30l12-4" opacity=".6"/><path d="M132 86l-14 8M126 86l6 3" /><path d="M116 92c-5 0-8-4-7-8l9-9 6 6-8 11z" fill="#fff"/></svg><div class="ask">Get my car serviced before the Mysuru drive on Saturday.</div></div>
+      <div class="body"><h3>Car service before a trip</h3><div class="tl">
+        <div class="done"><div><b>Remembered</b><span>Your hatchback, usual centre, mornings</span></div><em>0:02</em></div>
+        <div class="done"><div><b>Found a slot</b><span>Thu 22 Oct, 9:30 am, pickup from home</span></div><em>0:41</em></div>
+        <div class="ap"><div><b>Asked you</b><span>You approved in one tap</span></div><em>2:10</em></div>
+        <div class="done"><div><b>Booked and confirmed</b><span>SVC-48213 · reminder the evening before</span></div><em>2:35</em></div>
+      </div><span class="res">Done · confirmation attached</span></div></div>
+    <div class="errand" style="--i:1"><div class="ph"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="22" width="56" height="60" rx="6" fill="#fff"/><circle cx="50" cy="56" r="15" fill="#F4F3F0"/><circle cx="50" cy="56" r="9"/><circle cx="34" cy="31" r="2" fill="#1C1C1E" stroke="none"/><circle cx="42" cy="31" r="2" fill="#1C1C1E" stroke="none"/><path d="M92 14h46v70l-6-4-6 4-6-4-6 4-6-4-6 4-6-4-4 3z" fill="#FDF1E7"/><path d="M102 30h26M102 40h26M102 50h16M102 64h26" /><path d="M122 62l4 4 8-8" stroke="#2FAE6A" stroke-width="2.2"/></svg><div class="ask">Find the receipt for the washing machine I bought.</div></div>
+      <div class="body"><h3>A receipt from months ago</h3><div class="tl">
+        <div class="done"><div><b>Remembered</b><span>You shared it on WhatsApp in March</span></div><em>0:01</em></div>
+        <div class="done"><div><b>Searched your documents</b><span>One match in saved receipts</span></div><em>0:04</em></div>
+        <div class="done"><div><b>Sent the file</b><span>No approval needed: it only reads your own files</span></div><em>0:05</em></div>
+      </div><span class="res">Done · PDF sent</span></div></div>
+    <div class="errand" style="--i:2"><div class="ph"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 78c20-6 40-6 60 0s40 6 80 0" fill="#FDF1E7"/><path d="M14 88c20-5 40-5 60 0s40 5 76 0"/><path d="M44 78V40" /><path d="M44 40c-10-10-22-10-30-2 10-2 20 2 30 2zM44 40c2-14 12-20 24-18-10 4-18 10-24 18zM44 40c10-6 22-4 28 6-10-4-20-4-28-6zM44 40c-12 2-22 10-22 20 8-8 16-14 22-20z" fill="#fff"/><path d="M96 78V52l18-16 18 16v26" fill="#fff"/><path d="M114 36v-8M110 32h8M104 78V64h20v14M108 54h12"/><circle cx="136" cy="22" r="7" fill="#F2C94C" stroke="none" opacity=".8"/></svg><div class="ask">Compare ways to get to Goa on Sat 14 Nov. Morning, under ₹6,000.</div></div>
+      <div class="body"><h3>Travel options, compared</h3><div class="tl">
+        <div class="done"><div><b>Remembered</b><span>Flies from Bengaluru, prefers window seats</span></div><em>0:02</em></div>
+        <div class="done"><div><b>Compared options</b><span>Two flights and an overnight bus, side by side</span></div><em>1:12</em></div>
+        <div class="ap"><div><b>Asked you</b><span>06:10 flight, ₹4,850, window</span></div><em>1:20</em></div>
+        <div class="now"><div><b>Booking</b><span>E-ticket will be saved to your trip</span></div><em>now</em></div>
+      </div><span class="res ap">In progress</span></div></div>
+    <div class="errand" style="--i:3"><div class="ph"><svg viewBox="0 0 160 100" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M30 20h56v62l-5-4-5 4-5-4-5 4-5-4-5 4-5-4-5 4-5-4-6 4z" fill="#fff"/><path d="M40 34h36M40 44h36M40 54h22M40 68h36"/><path d="M110 70V56c-6-4-10-10-10-18a18 18 0 0 1 36 0c0 8-4 14-10 18v14z" fill="#FDF1E7"/><path d="M110 76h16M112 82h12"/><path d="M118 56l-4-10h8l-4 10" stroke="#EF7A27" stroke-width="2"/><path d="M136 18l6-6M140 30h8M100 18l-6-6" opacity=".6"/></svg><div class="ask">Remind me about the electricity bill before it is due.</div></div>
+      <div class="body"><h3>A bill, before it bites</h3><div class="tl">
+        <div class="done"><div><b>Read the bill you sent</b><span>₹2,340 · due Thu 5 Nov · BESCOM</span></div><em>0:03</em></div>
+        <div class="done"><div><b>Set the reminder</b><span>Wed 4 Nov, 7:00 pm, with the amount</span></div><em>0:04</em></div>
+        <div class="done"><div><b>Kept the bill</b><span>Findable later by asking</span></div><em>0:04</em></div>
+      </div><span class="res">Done · reminder set</span></div></div>
+  </div><p class="note">Illustrations with example names, amounts and dates.</p></div>
+</section>
+
+<!-- 4b. APPS -->
+<section class="s apps-strip" id="apps" aria-labelledby="h-apps">
+  <div class="wrap center-h"><div class="sh rv" style="margin-inline:auto;text-align:center"><p class="label">Works with your apps</p><h2 id="h-apps">Gogo reaches the services your week already runs on.</h2><p style="margin-inline:auto">Calendar, mail, payments, rides, food and tickets. Connect only what you use, and Gogo asks before anything that costs money.</p></div></div>
+  <div class="marq rv"><div class="mrow" aria-hidden="true"><div class="mtrack"><span class="mi"><img src="{{ROOT}}assets/apps/whatsapp.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/gmail.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlecalendar.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/swiggy.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/razorpay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/uber.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/notion.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/amazon.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/irctc.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/phonepe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoom.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/slack.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/makemytrip.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/upi.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googledrive.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/whatsapp.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/gmail.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlecalendar.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/swiggy.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/razorpay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/uber.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/notion.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/amazon.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/irctc.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/phonepe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoom.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/slack.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/makemytrip.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/upi.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googledrive.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/whatsapp.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/gmail.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlecalendar.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/swiggy.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/razorpay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/uber.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/notion.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/amazon.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/irctc.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/phonepe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoom.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/slack.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/makemytrip.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/upi.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googledrive.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/whatsapp.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/gmail.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlecalendar.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/swiggy.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/razorpay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/uber.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/notion.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/amazon.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/irctc.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/phonepe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoom.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/slack.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/makemytrip.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/upi.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googledrive.svg" alt="" width="26" height="26" loading="lazy"></span></div></div><div class="mrow rev" aria-hidden="true"><div class="mtrack"><span class="mi"><img src="{{ROOT}}assets/apps/zomato.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/flipkart.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/telegram.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlesheets.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/paytm.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/ola.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/bookmyshow.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/dropbox.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlepay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/stripe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoho.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/hubspot.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/calendly.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/asana.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/trello.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zomato.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/flipkart.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/telegram.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlesheets.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/paytm.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/ola.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/bookmyshow.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/dropbox.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlepay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/stripe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoho.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/hubspot.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/calendly.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/asana.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/trello.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zomato.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/flipkart.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/telegram.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlesheets.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/paytm.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/ola.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/bookmyshow.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/dropbox.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlepay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/stripe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoho.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/hubspot.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/calendly.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/asana.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/trello.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zomato.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/flipkart.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/telegram.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlesheets.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/paytm.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/ola.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/bookmyshow.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/dropbox.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/googlepay.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/stripe.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/zoho.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/hubspot.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/calendly.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/asana.svg" alt="" width="26" height="26" loading="lazy"></span><span class="mi"><img src="{{ROOT}}assets/apps/trello.svg" alt="" width="26" height="26" loading="lazy"></span></div></div></div>
+  <div class="wrap" style="text-align:center;margin-top:28px"><a class="tlink" href="{{ROOT}}integrations/" data-r="integrations">See every app Gogo connects to</a></div>
+</section>
+
+<!-- 5. TRUST -->
+<section class="s soft" id="trust" aria-labelledby="h-trust">
   <div class="wrap">
-    <div class="sh">
-      <p class="label">Built to be trusted</p>
-      <h2 id="h-trust">Helpful, and careful about it.</h2>
-    </div>
-    <div class="trust">
-      <div class="tlist" role="tablist" aria-label="How Gogo stays careful" aria-orientation="vertical">
-        <button class="titem" role="tab" id="tr-1" aria-controls="tviz" aria-selected="true" data-trust="0"><h3><span class="num">01</span>Remember with context</h3><p>Every memory shows where it came from, and you can correct it.</p></button>
-        <button class="titem" role="tab" id="tr-2" aria-controls="tviz" aria-selected="false" tabindex="-1" data-trust="1"><h3><span class="num">02</span>Ask before consequential actions</h3><p>Payments, bookings and messages to other people wait for your yes.</p></button>
-        <button class="titem" role="tab" id="tr-3" aria-controls="tviz" aria-selected="false" tabindex="-1" data-trust="2"><h3><span class="num">03</span>Show the result</h3><p>A task is marked done when there is something to show for it.</p></button>
-      </div>
-      <div class="tviz" id="tviz" role="tabpanel" aria-labelledby="tr-1"></div>
+    <div class="sh rv"><p class="label">Built to be trusted</p><h2 id="h-trust">Helpful, and careful about it.</h2></div>
+    <div class="princ four" data-stagger>
+      <div class="pr" style="--i:0"><span data-gogo="remembering" aria-hidden="true"></span><h3>Every memory has a source</h3><p>You can see what Gogo remembers, where it came from, and change it.</p></div>
+      <div class="pr" style="--i:1"><span data-gogo="approval" aria-hidden="true"></span><h3>Nothing consequential without a yes</h3><p>Payments, bookings and messages to other people wait for you.</p></div>
+      <div class="pr" style="--i:2"><span data-gogo="done" aria-hidden="true"></span><h3>Done comes with proof</h3><p>A task is complete when there is a confirmation to show, not when a reply sounds finished.</p></div>
+      <div class="pr" style="--i:3"><span data-gogo="secure" aria-hidden="true"></span><h3>Private by design</h3><p>Your conversations and memories are yours. Correct any of it, export it, or delete all of it whenever you like.</p></div>
     </div>
   </div>
 </section>
 
-<!-- 5. BUSINESS -->
-<section class="s soft" aria-labelledby="h-biz" id="biz">
+<!-- 6. BUSINESS -->
+<section class="s" id="biz" aria-labelledby="h-biz">
+  <div class="wrap"><div class="biz-v5 rv">
+    <div><p class="label">SecondBrain · AskGogo for Business</p><h2 id="h-biz">A Gogo for the work your team repeats.</h2><p class="lede" style="margin-top:14px;color:var(--ink-2)">Shared company memory, work carried through end to end, approval at the steps that matter, and a result you can check.</p>
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center"><button class="btn btn-solid" type="button" data-open="access" data-cta="home-business">Request Early Access</button><a class="tlink" href="{{ROOT}}secondbrain/" data-r="secondbrain">Explore SecondBrain</a></div></div>
+    <div class="roles static" data-stagger>
+      <div class="role" style="--i:0"><span data-gogo="acting" aria-hidden="true"></span><div><p class="rt">Invoice follow-ups</p><p class="rd">Polite reminders until each invoice is paid, with replies tracked.</p></div></div>
+      <div class="role" style="--i:1"><span data-gogo="remembering" aria-hidden="true"></span><div><p class="rt">Vendor onboarding</p><p class="rd">Collects documents and details, and flags what is missing.</p></div></div>
+      <div class="role" style="--i:2"><span data-gogo="thinking" aria-hidden="true"></span><div><p class="rt">Scheduling</p><p class="rd">Finds times across calendars and confirms with everyone.</p></div></div>
+      <div class="role" style="--i:3"><span data-gogo="found" aria-hidden="true"></span><div><p class="rt">Shared company knowledge</p><p class="rd">Answers from your own policies and history, with sources.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 7. FOUNDERS -->
+<section class="s soft" id="founders" aria-labelledby="h-founders">
+  <div class="wrap"><div class="founders rv">
+    <div class="frame"><img src="{{ROOT}}assets/bengaluru-vidhana-soudha.jpg" width="1260" height="842" alt="Watercolour of the Vidhana Soudha in Bengaluru" loading="lazy" decoding="async"></div>
+    <div><p class="label">Built in Bengaluru, for the world</p><h2 id="h-founders" style="font-size:clamp(30px,3.6cqi,44px);margin-top:12px">We built the assistant we wanted for ourselves.</h2><p class="lede" style="margin-top:14px;color:var(--ink-2)">Between us we have spent our careers building consumer technology in India, including one company that was acquired. AskGogo is the one that remembers, acts and finishes the job.</p>
+      <ul class="flist"><li><span class="fn">Goverdhan M D</span><a class="tlink" href="https://www.linkedin.com/in/goverdhanmd" target="_blank" rel="noopener">LinkedIn</a></li><li><span class="fn">Srinivas J</span><a class="tlink" href="https://www.linkedin.com/in/srinivas-jayaram-26a9031/" target="_blank" rel="noopener">LinkedIn</a></li><li><span class="fn">Mathew Varkey</span><a class="tlink" href="https://www.linkedin.com/in/mathew-varkey-4a84a312/" target="_blank" rel="noopener">LinkedIn</a></li></ul>
+      <p style="margin-top:18px"><a class="tlink" href="{{ROOT}}about/" data-r="about">More about us</a></p></div>
+  </div></div>
+</section>
+
+<!-- 8. FAQ -->
+<section class="s" id="faq" aria-labelledby="h-faq">
   <div class="wrap">
-    <div class="biz pre" id="bizstage">
-      <div class="intro">
-        <p class="label">AskGogo for Business</p>
-        <h2 id="h-biz">A Gogo for the work your team repeats.</h2>
-        <p>Shared company memory, work carried through end to end, approval at the steps that matter, and a result you can check.</p>
-        <button class="btn btn-solid" type="button" data-open="access" data-cta="home-business">Request Early Access</button>
-        <p class="fine">Illustrative workflows we are exploring with early teams.</p>
-      </div>
-      <div class="roles">
-        <div class="role r1"><span data-gogo="acting" aria-hidden="true"></span><p class="rt">Invoice follow-ups</p><p class="rd">Polite reminders until each invoice is paid, with replies tracked.</p></div>
-        <div class="role r2"><span data-gogo="remembering" aria-hidden="true"></span><p class="rt">Vendor onboarding</p><p class="rd">Collects documents and details, and flags what is missing.</p></div>
-        <div class="role r3"><span data-gogo="thinking" aria-hidden="true"></span><p class="rt">Scheduling</p><p class="rd">Finds times across calendars and confirms with everyone.</p></div>
-        <div class="role r4"><span data-gogo="found" aria-hidden="true"></span><p class="rt">Shared company knowledge</p><p class="rd">Answers from your own policies and history, with sources.</p></div>
-      </div>
+    <div class="sh center-h rv"><p class="label">Questions</p><h2 id="h-faq">Things people ask before they hand something over.</h2></div>
+    <div class="faq rv">
+      <details><summary><span class="n">01</span>What can Gogo actually do?<span class="pm">+</span></summary><div class="a">Remember what you tell it and what you send it, set reminders that know the context, find your documents, compare options, book appointments and services, and follow up until the thing is done. It works through WhatsApp, your calendar, your mail and the web.</div></details>
+      <details><summary><span class="n">02</span>Does it do things without asking me?<span class="pm">+</span></summary><div class="a">Reading your own files, reminders and research happen on their own. Anything that spends money, books something or messages another person waits for your yes, in the chat, with the details in front of you.</div></details>
+      <details><summary><span class="n">03</span>Where does my data live?<span class="pm">+</span></summary><div class="a">In your own account. You can see everything Gogo remembers on the dashboard, correct it, or delete it. We do not sell personal data.</div></details>
+      <details><summary><span class="n">04</span>Do I need to install an app?<span class="pm">+</span></summary><div class="a">No. Gogo lives in WhatsApp. The web dashboard is there when you want the overview; you never have to use it.</div></details>
+      <details><summary><span class="n">05</span>Which countries and currencies?<span class="pm">+</span></summary><div class="a">India first, then the world. Searches, bookings and services are chosen for where you live, in your currency, on the sites you actually use.</div></details>
+      <details><summary><span class="n">06</span>What does it cost?<span class="pm">+</span></summary><div class="a">Private beta is free by invitation. Paid plans come later and will be announced to the waitlist first.</div></details>
     </div>
   </div>
 </section>
 
-<!-- 6. JOURNAL -->
-<section class="s" aria-labelledby="h-journal" id="journal">
+<!-- 9. JOURNAL -->
+<section class="s soft" aria-labelledby="h-journal" id="journal">
   <div class="wrap">
-    <div class="head-row"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="{{ROOT}}journal/" data-r="journal">All essays <span class="arrow" aria-hidden="true">→</span></a></div>
-    <div class="list">
+    <div class="head-row rv"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="{{ROOT}}journal/" data-r="journal">All essays <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="list rv">
       <a href="{{ROOT}}journal/finish-the-work/"><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task.</p></div><span class="when">14 Oct 2026</span></a>
       <a href="{{ROOT}}journal/memory-is-the-product/"><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire.</p></div><span class="when">2 Oct 2026</span></a>
       <a href="{{ROOT}}journal/autonomy-you-can-check/"><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result.</p></div><span class="when">22 Sep 2026</span></a>
@@ -157,10 +175,10 @@
   </div>
 </section>
 
-<!-- 7. CLOSING -->
-<section class="s soft" aria-labelledby="h-close">
+<!-- 10. CLOSING -->
+<section class="s" aria-labelledby="h-close">
   <div class="wrap">
-    <div class="closing">
+    <div class="closing rv">
       <span data-gogo="calm" data-hands aria-hidden="true"></span>
       <div>
         <h2 id="h-close">Private beta. Access by invitation.</h2>

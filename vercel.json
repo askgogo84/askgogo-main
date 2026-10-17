@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/business",
+      "destination": "/secondbrain/",
+      "permanent": true
+    },
+    {
+      "source": "/business/:path*",
+      "destination": "/secondbrain/",
+      "permanent": true
+    },
+    {
       "source": "/dashboard",
       "destination": "/",
       "permanent": false
