@@ -1,14 +1,15 @@
 /* AskGogo v3 — character-led. White ground, charcoal text, Gogo orange used sparingly, green only for labelled confirmation. */
 :root{
-  --bg:#FFFFFF; --soft:#F8F7F5; --surface:#F4F3F0; --ink:#1C1C1E; --ink-2:#5F5F65; --ink-3:#74747A;
-  --line:#ECECEE; --line-2:#DCDCDF; --accent:#EF7A27; --accent-ink:#B4510F; --accent-wash:#FDF1E7;
-  --ok:#2FAE6A; --ok-ink:#1F7A49; --ok-wash:#E9F6EF; --on-ink:#FFFFFF; --card:#FFFFFF;
+  --bg:#F4F1E8; --soft:#ECE8DC; --surface:#E9E4D6; --ink:#1C1C1E; --ink-2:#5B5A57; --ink-3:#7E7C77;
+  --line:#DDD8CA; --line-2:#CCC6B5; --accent:#EF7A27; --accent-ink:#B4510F; --accent-wash:#FDF1E7;
+  --ok:#2FAE6A; --ok-ink:#1F7A49; --ok-wash:#E6F2E8; --on-ink:#F4F1E8; --card:#FBF9F3;
   --shadow:0 1px 2px rgba(20,20,22,.04),0 8px 24px -12px rgba(20,20,22,.12);
   --shadow-2:0 2px 4px rgba(20,20,22,.04),0 24px 48px -24px rgba(20,20,22,.22);
   --field:28,28,30; --field-a:.04;
   --sans:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --wide:1160px;
+  --scripts:"Instrument Serif","Noto Serif Kannada","Noto Serif Devanagari","Noto Serif Tamil","Noto Serif Telugu","Noto Serif Malayalam","Noto Serif Bengali","Noto Serif Gujarati","Noto Serif Gurmukhi","Noto Naskh Arabic","Noto Serif JP","Noto Serif KR","Noto Serif SC",serif;
   /* Springs (apple-design): sampled spring curves, no fixed-duration eases. ui = damping 1.0 / response .35s; sheet = damping .8 / response .3s (one soft settle); press = damping 1.0 / response .3s */
   --spring-ui:cubic-bezier(.2,.7,.2,1); --spring-ui-d:.4s;
   --spring-sheet:cubic-bezier(.2,.7,.2,1); --spring-sheet-d:.4s;
@@ -19,6 +20,7 @@
   --spring-sheet:linear(0, 0.103, 0.311, 0.526, 0.705, 0.836, 0.922, 0.974, 1.001, 1.012, 1.015, 1.014, 1.010, 1.007, 1.004, 1.002, 1.001, 1, 1, 1, 1, 1, 1, 1, 1); --spring-sheet-d:.6s;
   --spring-press:linear(0, 0.053, 0.167, 0.301, 0.431, 0.547, 0.645, 0.726, 0.790, 0.841, 0.881, 0.911, 0.934, 0.951, 0.964, 0.973, 0.981, 0.986, 0.990, 0.992, 0.995, 0.996, 0.997, 0.998, 1); --spring-press-d:.42s;
 }}
+:root.mode-white{--bg:#FFFFFF;--soft:#F8F7F5;--surface:#F4F3F0;--ink-2:#5F5F65;--ink-3:#74747A;--line:#ECECEE;--line-2:#DCDCDF;--on-ink:#FFFFFF;--card:#FFFFFF;--ok-wash:#E9F6EF}
 :root.mode-dark{
   --bg:#0F0F10; --soft:#151517; --surface:#1B1B1E; --ink:#EDEDEE; --ink-2:#A6A6AB; --ink-3:#8E8E93;
   --line:#232327; --line-2:#333338; --accent:#F08A40; --accent-ink:#F5A066; --accent-wash:#2A1F17;
@@ -727,3 +729,143 @@ h1{letter-spacing:-.03em;line-height:1.05}
 :root.mode-dark .plan-art svg [fill="#fff"],:root.mode-dark .plan-biz-art svg [fill="#fff"]{fill:#232327}
 :root.mode-dark .plan-art svg,:root.mode-dark .plan-biz-art svg{stroke:#EDEDEE}
 :root.mode-dark .ai,:root.mode-dark .mi,:root.mode-dark .ct{background:#F4F3F0}
+/* v6.1: stacked scroll scenes are desktop-only. On phones the hero and the feed flow normally. */
+@media (max-width:1020px){
+  .stack,.stack#now{position:static;z-index:auto}
+  .stack#now{min-height:auto;display:block}
+  .stack>*{opacity:1!important;transform:none!important}
+}
+/* v6.2: errand cards stack on phones; the hero rail advances on its own */
+@container (max-width:640px){
+  .rail{flex-direction:column;overflow:visible;scroll-snap-type:none;gap:16px;padding-inline:0;margin-inline:0}
+  .rail>*{flex:none;width:100%;max-width:none;scroll-snap-align:none}
+}
+
+/* ===== v7: cream editorial theme, serif display, rotating-script logo, watercolour washes ===== */
+h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+h1{line-height:1.02}h2{line-height:1.06}
+.hero-v5 h1{font-size:clamp(46px,7vw,86px);letter-spacing:-.01em}
+.phero h1{font-size:clamp(42px,5.6cqi,70px);letter-spacing:-.01em}
+.sh h2,.closing h2,.biz-v5 h2{font-size:clamp(34px,4.6cqi,58px)}
+.closing h2{font-size:clamp(36px,4.8cqi,60px)}
+.story .res,.plan-price b{font-family:var(--serif);font-weight:400}
+.btn{border-radius:999px}
+/* logo */
+.mark{gap:6px;font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:0}
+.mark b{font-weight:400}
+.mark .g{position:relative;display:inline-block;min-width:3.2em;color:var(--accent);font-weight:400}
+.mark .g i{visibility:hidden;font-style:normal}
+.mark .g span{position:absolute;left:0;top:0;white-space:nowrap;font-family:var(--scripts);opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .6s var(--spring-ui)}
+.mark .g span.on{opacity:1;transform:none}
+.drawer .mark{font-size:26px}.ftr .mark{font-size:22px}
+/* theme dots */
+.theme-dots{display:inline-flex;gap:8px;align-items:center;padding:0 6px}
+.tdot{width:16px;height:16px;border-radius:50%;border:1px solid var(--line-2);cursor:pointer;padding:0;background:#F4F1E8;transition:box-shadow .2s}
+.tdot.w{background:#FFFFFF}.tdot.d{background:#141416}
+.tdot[aria-pressed=true]{box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--ink)}
+.theme-btn{display:none}
+/* watercolour washes under illustrations */
+.moment .ph,.errand .ph,.phero-art .moment .ph{background:
+ radial-gradient(60% 70% at 30% 40%,rgba(247,215,191,.75),transparent 70%),
+ radial-gradient(55% 60% at 75% 35%,rgba(207,227,245,.7),transparent 70%),
+ radial-gradient(70% 50% at 55% 85%,rgba(249,226,184,.8),transparent 70%),
+ var(--surface)}
+.moment .ph::after,.errand .ph::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.moment .ph .art svg [fill="#FDF1E7"],.errand .ph svg [fill="#FDF1E7"]{fill:rgba(255,250,243,.85)}
+:root.mode-dark .moment .ph,:root.mode-dark .errand .ph,:root.mode-dark .phero-art .moment .ph{background:radial-gradient(60% 70% at 30% 40%,rgba(120,80,50,.45),transparent 70%),radial-gradient(55% 60% at 75% 35%,rgba(60,80,110,.5),transparent 70%),var(--surface)}
+/* paper grain on the page */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+:root.mode-white body::before{display:none}
+.site{position:relative;z-index:1}
+/* what Gogo does */
+.does{margin-top:40px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.do{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;min-height:168px}
+.do .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:radial-gradient(70% 70% at 35% 35%,rgba(247,215,191,.9),transparent 75%),radial-gradient(60% 60% at 70% 70%,rgba(207,227,245,.9),transparent 75%),var(--surface)}
+.do .ic svg{width:24px;height:24px;fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.do h3{font-size:17px;font-weight:500}
+.do p{font-size:14px;color:var(--ink-2)}
+.do .eg{margin-top:auto;font-size:12.5px;color:var(--ink-3)}
+@container (max-width:1020px){.does{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:640px){.does{grid-template-columns:minmax(0,1fr)}.do{min-height:0}}
+/* a day with Gogo */
+.day-h{padding:64px 0 8px;text-align:center}
+.dbeat{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:center;min-height:72vh;padding:40px 0}
+.dbeat .dart{position:sticky;top:90px}
+.dscene{display:block;width:100%;height:auto;border-radius:8px;box-shadow:var(--shadow-2)}
+.dbeat .dwhen{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:500;margin-bottom:16px}
+.dbeat .dmsg{max-width:34ch;padding:12px 15px;border-radius:16px;font-size:16px;line-height:1.5;margin-top:10px}
+.dbeat .dmsg.me{background:#DCF4C9;color:#1C1C1E;margin-left:auto;border-bottom-right-radius:4px}.dbeat .dmsg.me:empty{display:none}
+.dbeat .dmsg.gg{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+.dbeat .dres{margin-top:18px;font-family:var(--serif);font-size:26px;line-height:1.2;max-width:24ch}
+.dbeat:nth-child(even) .dart{order:2}
+@container (max-width:860px){.dbeat{grid-template-columns:minmax(0,1fr);gap:18px;min-height:0;padding:30px 0}.dbeat .dart{position:static}.dbeat:nth-child(even) .dart{order:0}.dbeat .dmsg{max-width:100%}.dbeat .dres{font-size:22px}}
+
+/* ===== v7.1: no scroll-in loading. Content is there when you arrive; only a soft 250ms settle. ===== */
+.rv,[data-stagger]>*{opacity:1;transform:none;transition:opacity .25s ease}
+.rv:not(.in),[data-stagger]:not(.in)>*{opacity:.92}
+.rise{opacity:1!important;transform:none!important}
+.fitem{opacity:1;transform:none;transition:none}
+
+/* ===== day with Gogo: pinned stage, scenes slide in and out with scroll ===== */
+.dstory{position:relative}
+.dstage{position:sticky;top:0;height:100svh;min-height:560px;overflow:hidden;z-index:1}
+.dstage-in{position:relative;height:100%;padding-top:84px;padding-bottom:28px}
+.dprog{position:absolute;left:24px;top:76px;display:flex;gap:8px;z-index:3}
+.dprog i{width:22px;height:3px;border-radius:2px;background:var(--line-2);transition:background .3s,width .3s}
+.dprog i.on{background:var(--ink);width:34px}
+.ds{position:absolute;inset:84px 24px 28px;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:center;opacity:0;pointer-events:none;visibility:hidden}
+.ds .ds-art{transform:translateY(40px) scale(.97);opacity:0;transition:transform .9s var(--spring-ui),opacity .5s ease}
+.ds .ds-txt{transform:translateY(30px);opacity:0;transition:transform .8s var(--spring-ui) .08s,opacity .45s ease .08s}
+.ds.on{opacity:1;visibility:visible;pointer-events:auto}
+.ds.on .ds-art,.ds.on .ds-txt{transform:none;opacity:1}
+.ds.out .ds-art{transform:translateY(-30px) scale(.98);opacity:0;transition:transform .5s ease,opacity .35s ease}
+.ds.out .ds-txt{transform:translateY(-20px);opacity:0;transition:transform .45s ease,opacity .3s ease}
+.ds.out{opacity:1;visibility:visible}
+.ds h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.2cqi,40px);line-height:1.08;margin-top:4px}
+.ds-sub{margin-top:8px;color:var(--ink-2);font-size:15.5px;max-width:40ch}
+.dchat{margin-top:14px;display:grid;gap:8px;max-width:400px}
+.dlist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:5px;font-size:14px;color:var(--ink-2)}
+.dlist li{position:relative;padding-left:16px}.dlist li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.ds .dres{margin-top:14px;font-size:22px}
+.dstep{height:100vh}.dstep:last-child{height:60vh}
+.dscene{box-shadow:var(--shadow-2);border-radius:10px}
+@container (max-width:860px){
+  .dstage{min-height:0;height:100svh}.dstage-in{padding-top:74px}
+  .dprog{top:66px;left:22px}.dprog i{width:16px}.dprog i.on{width:26px}
+  .ds{inset:74px 22px 20px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:12px;align-items:start}
+  .ds-art{max-width:100%}.dscene{border-radius:8px}
+  .ds h3{font-size:26px}.ds-sub{font-size:14px}.dchat{gap:6px;max-width:100%}.dchat .dmsg{font-size:14px;padding:9px 12px}
+  .dlist{font-size:13px;gap:3px;margin-top:10px}.ds .dres{font-size:18px;margin-top:10px}
+  .dstep{height:90vh}
+}
+@media (prefers-reduced-motion:reduce){.ds .ds-art,.ds .ds-txt{transition:none}}
+.dstage{margin-bottom:-100svh}
+.ds .dmsg{max-width:34ch;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.45}
+.ds .dmsg.me{background:#DCF4C9;color:#1C1C1E;margin-left:auto;border-bottom-right-radius:4px}
+.ds .dmsg.gg{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+@container (max-width:860px){.ds .dscene{max-height:30svh;width:auto;max-width:100%;margin-inline:auto}.ds-sub{display:none}.ds h3{margin-top:0}}
+@container (max-width:860px){.ds .dscene{max-height:25svh}.ds .dmsg{font-size:13.5px;padding:8px 11px;line-height:1.4}.dlist{font-size:12.5px;gap:2px;margin-top:8px}.ds .dres{font-size:17px;margin-top:8px}.ds h3{font-size:23px}.dchat{margin-top:8px}}
+
+/* ===== journal as blog cards; day teaser; day page end fix ===== */
+.posts{margin-top:36px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.post{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .5s var(--spring-ui),box-shadow .5s}
+.post:hover{transform:translateY(-4px);box-shadow:var(--shadow-2)}
+.pc{aspect-ratio:400/220;background:var(--surface)}.pcover{display:block;width:100%;height:100%}
+.pb{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ptag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.post h3{font-family:var(--serif);font-weight:400;letter-spacing:0;font-size:clamp(22px,2.2cqi,27px);line-height:1.15}
+.pb p:not(.ptag):not(.pmeta){color:var(--ink-2);font-size:14.5px}
+.pmeta{margin-top:auto;padding-top:8px;font-size:13px;color:var(--ink-3)}
+@container (max-width:1020px){.posts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:640px){.posts{grid-template-columns:minmax(0,1fr);gap:14px}}
+.dayt{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:0;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .5s var(--spring-ui),box-shadow .5s}
+.dayt:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+.dayt-art{background:var(--surface);min-height:260px}.dayt-art .pcover{width:100%;height:100%;display:block}
+.dayt-txt{padding:30px 32px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.dayt-txt h2{font-size:clamp(28px,3.2cqi,40px)}.dayt-txt p:not(.label){color:var(--ink-2);font-size:15.5px;max-width:46ch}
+@container (max-width:860px){.dayt{grid-template-columns:minmax(0,1fr)}.dayt-art{min-height:0;aspect-ratio:400/220}.dayt-txt{padding:22px}}
+:root.mode-dark .pcover rect:first-of-type,:root.mode-dark .dscene rect:first-of-type{fill:#1B1B1E}
+/* the sections after the pinned story sit above it, opaque, so the last scene never bleeds through */
+.dstory ~ .s{position:relative;z-index:3;background:var(--bg)}
+.dstory ~ .s.soft{background:var(--soft)}
+.dstep:last-child{height:100vh}

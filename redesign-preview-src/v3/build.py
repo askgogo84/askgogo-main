@@ -8,6 +8,7 @@ rd=lambda p: open(p,encoding='utf-8').read()
 HEAD=rd(f'{SRC}/_head.html'); HEADER=rd(f'{SRC}/_header.html'); FOOTER=rd(f'{SRC}/_footer.html')
 PAGES={ # key: (output path, title, description, page script)
  'home':('index.html','AskGogo — Less prompting. More living.','A personal AI on WhatsApp that remembers the details and follows everyday tasks through, with your approval before payments, bookings or messages. Private beta.','home.js'),
+ 'day':('day/index.html','A day with Gogo · AskGogo','One ordinary Tuesday and a Saturday with a personal AI on WhatsApp: car service, medicines, dinner, bills and a flight, handled with approval and proof.','pages.js'),
  'secondbrain':('secondbrain/index.html','SecondBrain — AskGogo for Business','Your company\'s memory, with agents that act on it. Shared, permissioned memory and a team of Gogos that carry recurring work through end to end, with approval where it matters. Early access for teams.','pages.js'),
  'integrations':('integrations/index.html','Integrations · AskGogo','Every app Gogo connects to: WhatsApp, Gmail, Google Calendar, UPI, Swiggy, Uber, IRCTC and more. Connect only what you use. Approval before anything that costs money.','pages.js'),
  'journal':('journal/index.html','Journal · AskGogo','Essays from the team building AskGogo, on memory, autonomy and what it takes to finish a task.','pages.js'),
@@ -41,7 +42,7 @@ def build():
     doc=doc.replace('{{TITLE}}','AskGogo v3 preview').replace('{{DESC}}','Design preview, all pages in one file.').replace('{{PAGE}}','home')
     # links: {{ROOT}}x/ -> #x ; {{ROOT}} -> #home ; essays -> #essay-slug
     doc=re.sub(r'href="\{\{ROOT\}\}journal/([a-z-]+)/"',r'href="#essay-\1"',doc)
-    doc=re.sub(r'href="\{\{ROOT\}\}(secondbrain|business|integrations|pricing|journal|about)/"',r'href="#\1"',doc)
+    doc=re.sub(r'href="\{\{ROOT\}\}(day|secondbrain|business|integrations|pricing|journal|about)/"',r'href="#\1"',doc)
     doc=doc.replace('href="{{ROOT}}"','href="#home"').replace('{{ROOT}}','')
     router='''<script>
 (function(){const show=()=>{let k=(location.hash||'#home').slice(1);if(!document.querySelector('.pg[data-pg="'+k+'"]'))k='home';

@@ -9,7 +9,8 @@ const stacks=$$('[data-stack]');
 /* a sticky element's offsetTop reports where it is stuck, so measure from the siblings before it instead */
 const docTop=el=>{let y=0;for(let n=el.parentElement;n;n=n.offsetParent)y+=n.offsetTop;for(let s=el.previousElementSibling;s;s=s.previousElementSibling)y+=s.offsetHeight;return y};
 let tops=[];const measure=()=>{tops=stacks.map(docTop)};measure();addEventListener('load',measure);
-function stack(){if(reduced.matches)return;measure();const vh=innerHeight;stacks.forEach((el,i)=>{const inner=el.firstElementChild||el;
+const stackOn=matchMedia('(min-width:1021px)');
+function stack(){if(reduced.matches||!stackOn.matches){stacks.forEach(el=>{const inner=el.firstElementChild||el;inner.style.opacity='';inner.style.transform=''});return}measure();const vh=innerHeight;stacks.forEach((el,i)=>{const inner=el.firstElementChild||el;
   const p=Math.min(1,Math.max(0,(scrollY-tops[i])/(vh*.6)));inner.style.opacity=String(1-p);inner.style.transform=`translateY(${(p*-40).toFixed(1)}px) scale(${(1-p*.04).toFixed(3)})`})}
 addEventListener('scroll',()=>requestAnimationFrame(stack),{passive:true});addEventListener('resize',()=>{measure();stack()});
 const par=$$('[data-depth]');
@@ -41,7 +42,7 @@ const feed=$('#feed');
 const fitem=f=>`<div class="fitem"><span data-gogo="${f[0]}"></span><div><b>${f[1]}</b><span>${f[2]}</span></div><span class="when">${f[3]}</span></div>`;
 if(feed){let k=0,t=null,run=false;
   const step=()=>{clearTimeout(t);if(!run||document.hidden||k>=FEED.length)return;feed.insertAdjacentHTML('afterbegin',fitem(FEED[k]));const el=feed.firstElementChild;Gogo.mountAll(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('in')));k++;t=setTimeout(step,900)};
-  if(reduced.matches){feed.innerHTML=FEED.map(fitem).join('');Gogo.mountAll(feed);$$('.fitem',feed).forEach(e=>e.classList.add('in'))}
+  if(true){feed.innerHTML=FEED.map(fitem).join('');Gogo.mountAll(feed);$$('.fitem',feed).forEach(e=>e.classList.add('in'))}
   else{new IntersectionObserver(es=>{run=es[0].isIntersecting;if(run&&!t)t=setTimeout(step,300);if(!run){clearTimeout(t);t=null}},{threshold:.2}).observe(feed);
     document.addEventListener('visibilitychange',()=>{if(!document.hidden&&run&&k<FEED.length)t=setTimeout(step,400)})}
 }
@@ -64,4 +65,19 @@ if(box){let k=-1,t=null,run=false;
   else{new IntersectionObserver(es=>{run=es[0].isIntersecting;if(run&&!t)t=setTimeout(step,500);if(!run){clearTimeout(t);t=null}},{threshold:.3}).observe(box);
     document.addEventListener('visibilitychange',()=>{if(!document.hidden&&run)t=setTimeout(step,400)})}
 }
+})();
+
+/* v6.2: the hero moment rail advances by itself on phones; a touch pauses it for a while */
+(function(){
+  const {$,$$,reduced}=window.AG;const rail=$('.moments-mobile');if(!rail||reduced.matches)return;
+  let i=0,t=0,pauseUntil=0,visible=false;
+  const cards=()=>$$('.moment',rail);
+  function step(){if(!visible||Date.now()<pauseUntil||getComputedStyle(rail).display==='none')return;
+    const c=cards();if(c.length<2)return;i=(i+1)%c.length;const target=c[i];
+    rail.scrollTo({left:target.offsetLeft-(rail.clientWidth-target.offsetWidth)/2,behavior:'smooth'})}
+  function start(){clearInterval(t);t=setInterval(step,3200)}
+  ['pointerdown','touchstart','wheel'].forEach(ev=>rail.addEventListener(ev,()=>{pauseUntil=Date.now()+8000},{passive:true}));
+  rail.addEventListener('scroll',()=>{if(Date.now()<pauseUntil){const c=cards();let best=0,bd=1e9;c.forEach((el,k)=>{const d=Math.abs(el.offsetLeft-rail.scrollLeft-(rail.clientWidth-el.offsetWidth)/2);if(d<bd){bd=d;best=k}});i=best}},{passive:true});
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting},{threshold:.4}).observe(rail);
+  start();
 })();

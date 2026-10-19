@@ -8,22 +8,29 @@ Gogo.mountAll();
 const KEY='askgogo-theme';
 function readTheme(){try{return localStorage.getItem(KEY)}catch(e){return null}}
 function applyTheme(t){
-  root.classList.toggle('mode-dark',t==='dark');
+  if(t!=='dark'&&t!=='white')t='cream';
+  root.classList.toggle('mode-dark',t==='dark');root.classList.toggle('mode-white',t==='white');
+  $$('.tdot').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===t)));
   $$('.theme-btn').forEach(b=>{b.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
     b.querySelector('.i-moon').toggleAttribute('hidden',t==='dark');b.querySelector('.i-sun').toggleAttribute('hidden',t!=='dark')});
   Gogo.mountAll(); (AG.onTheme||[]).forEach(f=>f(t));
 }
 AG.onTheme=[];
-applyTheme(readTheme()==='dark'?'dark':'light');
+applyTheme(readTheme()||'cream');
 document.addEventListener('click',e=>{
+  const d=e.target.closest('.tdot');if(d){try{localStorage.setItem(KEY,d.dataset.theme)}catch(err){}applyTheme(d.dataset.theme);return}
   if(!e.target.closest('.theme-btn'))return;
-  const next=root.classList.contains('mode-dark')?'light':'dark';
+  const next=root.classList.contains('mode-dark')?'cream':'dark';
   try{localStorage.setItem(KEY,next)}catch(err){}
   applyTheme(next);
 });
 
 /* iOS Safari only applies :active (the press state) to links and non-button elements once a touch listener exists on the document. */
 document.addEventListener('touchstart',()=>{},{passive:true});
+/* rotating-script logo: the word Gogo in Indian and world scripts */
+{const marks=$$('[data-langs]');if(marks.length&&!reduced.matches){let k=0;const n=marks[0].querySelectorAll('span').length;
+ const show=()=>marks.forEach(m=>{const s=m.querySelectorAll('span');s.forEach((x,i)=>x.classList.toggle('on',i===k))});show();
+ setInterval(()=>{if(document.hidden)return;k=(k+1)%n;show()},1600)}else marks.forEach(m=>m.querySelector('span')?.classList.add('on'))}
 /* ---------- header, drawer ---------- */
 const hdr=$('#hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
@@ -38,6 +45,10 @@ function conceal(el,done){if(el.hidden)return;el.classList.remove('in');
 function closeDrawer(silent){if(drawer.hidden)return;conceal(drawer);mo.setAttribute('aria-expanded','false');if(!silent)mo.focus()}
 mo.onclick=()=>{reveal(drawer);mo.setAttribute('aria-expanded','true');$('nav a',drawer).focus()};
 $('#menu-close').onclick=()=>closeDrawer();
+$$('nav a',drawer).forEach(a=>{let sx=0,sy=0;
+  a.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY},{passive:true});
+  a.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;if(Math.hypot(e.clientX-sx,e.clientY-sy)>12)return;const h=a.getAttribute('href');if(!h||h.startsWith('#'))return;setTimeout(()=>{if(!a.dataset.went){a.dataset.went='1';location.href=a.href}},60)});
+  a.addEventListener('click',()=>{a.dataset.went='1'})});
 const PAGE=document.body.dataset.page||'';
 $$('.nav a,.drawer nav a').forEach(a=>{const r=a.dataset.r;const on=r===PAGE||(r==='journal'&&PAGE.startsWith('essay'));on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
 

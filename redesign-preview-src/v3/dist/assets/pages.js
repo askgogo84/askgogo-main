@@ -15,3 +15,11 @@ function beatSeq(beats,replay){
 }
 const sb=$('#sb-beats');if(sb)beatSeq(sb,$('#sb-replay'));
 })();
+
+(function(){const {$,$$}=window.AG;
+/* a day with Gogo: the stage is pinned; each spacer that scrolls under it switches the scene in and the last one out */
+{const story=$('[data-day]');if(story){const scenes=$$('.ds',story),steps=$$('.dstep',story),dots=$$('.dprog i',story);let cur=-1;
+ const go=i=>{if(i===cur)return;scenes.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('out',k===cur&&k<i)});dots.forEach((d,k)=>d.classList.toggle('on',k<=i));cur=i};
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)go(+e.target.dataset.i)})},{rootMargin:'-45% 0px -45% 0px',threshold:0});
+ steps.forEach(s=>io.observe(s));go(0)}}
+})();

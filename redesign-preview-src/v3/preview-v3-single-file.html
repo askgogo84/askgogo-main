@@ -7,23 +7,24 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>AskGogo v3 preview</title>
 <meta name="description" content="Design preview, all pages in one file.">
-<meta name="theme-color" content="#FFFFFF">
-<script>try{if(localStorage.getItem('askgogo-theme')==='dark')document.documentElement.classList.add('mode-dark')}catch(e){}</script>
+<meta name="theme-color" content="#F4F1E8">
+<script>try{var t=localStorage.getItem('askgogo-theme');if(t==='dark'||t==='white')document.documentElement.classList.add('mode-'+t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&family=Noto+Serif+Kannada:wght@400&family=Noto+Serif+Devanagari:wght@400&family=Noto+Serif+Tamil:wght@400&family=Noto+Serif+Telugu:wght@400&family=Noto+Serif+Malayalam:wght@400&family=Noto+Serif+Bengali:wght@400&family=Noto+Serif+Gujarati:wght@400&family=Noto+Serif+Gurmukhi:wght@400&family=Noto+Naskh+Arabic:wght@400&family=Noto+Serif+JP:wght@400&family=Noto+Serif+KR:wght@400&family=Noto+Serif+SC:wght@400&display=swap">
 <style>
 /* AskGogo v3 — character-led. White ground, charcoal text, Gogo orange used sparingly, green only for labelled confirmation. */
 :root{
-  --bg:#FFFFFF; --soft:#F8F7F5; --surface:#F4F3F0; --ink:#1C1C1E; --ink-2:#5F5F65; --ink-3:#74747A;
-  --line:#ECECEE; --line-2:#DCDCDF; --accent:#EF7A27; --accent-ink:#B4510F; --accent-wash:#FDF1E7;
-  --ok:#2FAE6A; --ok-ink:#1F7A49; --ok-wash:#E9F6EF; --on-ink:#FFFFFF; --card:#FFFFFF;
+  --bg:#F4F1E8; --soft:#ECE8DC; --surface:#E9E4D6; --ink:#1C1C1E; --ink-2:#5B5A57; --ink-3:#7E7C77;
+  --line:#DDD8CA; --line-2:#CCC6B5; --accent:#EF7A27; --accent-ink:#B4510F; --accent-wash:#FDF1E7;
+  --ok:#2FAE6A; --ok-ink:#1F7A49; --ok-wash:#E6F2E8; --on-ink:#F4F1E8; --card:#FBF9F3;
   --shadow:0 1px 2px rgba(20,20,22,.04),0 8px 24px -12px rgba(20,20,22,.12);
   --shadow-2:0 2px 4px rgba(20,20,22,.04),0 24px 48px -24px rgba(20,20,22,.22);
   --field:28,28,30; --field-a:.04;
   --sans:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --wide:1160px;
+  --scripts:"Instrument Serif","Noto Serif Kannada","Noto Serif Devanagari","Noto Serif Tamil","Noto Serif Telugu","Noto Serif Malayalam","Noto Serif Bengali","Noto Serif Gujarati","Noto Serif Gurmukhi","Noto Naskh Arabic","Noto Serif JP","Noto Serif KR","Noto Serif SC",serif;
   /* Springs (apple-design): sampled spring curves, no fixed-duration eases. ui = damping 1.0 / response .35s; sheet = damping .8 / response .3s (one soft settle); press = damping 1.0 / response .3s */
   --spring-ui:cubic-bezier(.2,.7,.2,1); --spring-ui-d:.4s;
   --spring-sheet:cubic-bezier(.2,.7,.2,1); --spring-sheet-d:.4s;
@@ -34,6 +35,7 @@
   --spring-sheet:linear(0, 0.103, 0.311, 0.526, 0.705, 0.836, 0.922, 0.974, 1.001, 1.012, 1.015, 1.014, 1.010, 1.007, 1.004, 1.002, 1.001, 1, 1, 1, 1, 1, 1, 1, 1); --spring-sheet-d:.6s;
   --spring-press:linear(0, 0.053, 0.167, 0.301, 0.431, 0.547, 0.645, 0.726, 0.790, 0.841, 0.881, 0.911, 0.934, 0.951, 0.964, 0.973, 0.981, 0.986, 0.990, 0.992, 0.995, 0.996, 0.997, 0.998, 1); --spring-press-d:.42s;
 }}
+:root.mode-white{--bg:#FFFFFF;--soft:#F8F7F5;--surface:#F4F3F0;--ink-2:#5F5F65;--ink-3:#74747A;--line:#ECECEE;--line-2:#DCDCDF;--on-ink:#FFFFFF;--card:#FFFFFF;--ok-wash:#E9F6EF}
 :root.mode-dark{
   --bg:#0F0F10; --soft:#151517; --surface:#1B1B1E; --ink:#EDEDEE; --ink-2:#A6A6AB; --ink-3:#8E8E93;
   --line:#232327; --line-2:#333338; --accent:#F08A40; --accent-ink:#F5A066; --accent-wash:#2A1F17;
@@ -742,6 +744,146 @@ h1{letter-spacing:-.03em;line-height:1.05}
 :root.mode-dark .plan-art svg [fill="#fff"],:root.mode-dark .plan-biz-art svg [fill="#fff"]{fill:#232327}
 :root.mode-dark .plan-art svg,:root.mode-dark .plan-biz-art svg{stroke:#EDEDEE}
 :root.mode-dark .ai,:root.mode-dark .mi,:root.mode-dark .ct{background:#F4F3F0}
+/* v6.1: stacked scroll scenes are desktop-only. On phones the hero and the feed flow normally. */
+@media (max-width:1020px){
+  .stack,.stack#now{position:static;z-index:auto}
+  .stack#now{min-height:auto;display:block}
+  .stack>*{opacity:1!important;transform:none!important}
+}
+/* v6.2: errand cards stack on phones; the hero rail advances on its own */
+@container (max-width:640px){
+  .rail{flex-direction:column;overflow:visible;scroll-snap-type:none;gap:16px;padding-inline:0;margin-inline:0}
+  .rail>*{flex:none;width:100%;max-width:none;scroll-snap-align:none}
+}
+
+/* ===== v7: cream editorial theme, serif display, rotating-script logo, watercolour washes ===== */
+h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+h1{line-height:1.02}h2{line-height:1.06}
+.hero-v5 h1{font-size:clamp(46px,7vw,86px);letter-spacing:-.01em}
+.phero h1{font-size:clamp(42px,5.6cqi,70px);letter-spacing:-.01em}
+.sh h2,.closing h2,.biz-v5 h2{font-size:clamp(34px,4.6cqi,58px)}
+.closing h2{font-size:clamp(36px,4.8cqi,60px)}
+.story .res,.plan-price b{font-family:var(--serif);font-weight:400}
+.btn{border-radius:999px}
+/* logo */
+.mark{gap:6px;font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:0}
+.mark b{font-weight:400}
+.mark .g{position:relative;display:inline-block;min-width:3.2em;color:var(--accent);font-weight:400}
+.mark .g i{visibility:hidden;font-style:normal}
+.mark .g span{position:absolute;left:0;top:0;white-space:nowrap;font-family:var(--scripts);opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .6s var(--spring-ui)}
+.mark .g span.on{opacity:1;transform:none}
+.drawer .mark{font-size:26px}.ftr .mark{font-size:22px}
+/* theme dots */
+.theme-dots{display:inline-flex;gap:8px;align-items:center;padding:0 6px}
+.tdot{width:16px;height:16px;border-radius:50%;border:1px solid var(--line-2);cursor:pointer;padding:0;background:#F4F1E8;transition:box-shadow .2s}
+.tdot.w{background:#FFFFFF}.tdot.d{background:#141416}
+.tdot[aria-pressed=true]{box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--ink)}
+.theme-btn{display:none}
+/* watercolour washes under illustrations */
+.moment .ph,.errand .ph,.phero-art .moment .ph{background:
+ radial-gradient(60% 70% at 30% 40%,rgba(247,215,191,.75),transparent 70%),
+ radial-gradient(55% 60% at 75% 35%,rgba(207,227,245,.7),transparent 70%),
+ radial-gradient(70% 50% at 55% 85%,rgba(249,226,184,.8),transparent 70%),
+ var(--surface)}
+.moment .ph::after,.errand .ph::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.moment .ph .art svg [fill="#FDF1E7"],.errand .ph svg [fill="#FDF1E7"]{fill:rgba(255,250,243,.85)}
+:root.mode-dark .moment .ph,:root.mode-dark .errand .ph,:root.mode-dark .phero-art .moment .ph{background:radial-gradient(60% 70% at 30% 40%,rgba(120,80,50,.45),transparent 70%),radial-gradient(55% 60% at 75% 35%,rgba(60,80,110,.5),transparent 70%),var(--surface)}
+/* paper grain on the page */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+:root.mode-white body::before{display:none}
+.site{position:relative;z-index:1}
+/* what Gogo does */
+.does{margin-top:40px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.do{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;min-height:168px}
+.do .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:radial-gradient(70% 70% at 35% 35%,rgba(247,215,191,.9),transparent 75%),radial-gradient(60% 60% at 70% 70%,rgba(207,227,245,.9),transparent 75%),var(--surface)}
+.do .ic svg{width:24px;height:24px;fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.do h3{font-size:17px;font-weight:500}
+.do p{font-size:14px;color:var(--ink-2)}
+.do .eg{margin-top:auto;font-size:12.5px;color:var(--ink-3)}
+@container (max-width:1020px){.does{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:640px){.does{grid-template-columns:minmax(0,1fr)}.do{min-height:0}}
+/* a day with Gogo */
+.day-h{padding:64px 0 8px;text-align:center}
+.dbeat{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:center;min-height:72vh;padding:40px 0}
+.dbeat .dart{position:sticky;top:90px}
+.dscene{display:block;width:100%;height:auto;border-radius:8px;box-shadow:var(--shadow-2)}
+.dbeat .dwhen{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:500;margin-bottom:16px}
+.dbeat .dmsg{max-width:34ch;padding:12px 15px;border-radius:16px;font-size:16px;line-height:1.5;margin-top:10px}
+.dbeat .dmsg.me{background:#DCF4C9;color:#1C1C1E;margin-left:auto;border-bottom-right-radius:4px}.dbeat .dmsg.me:empty{display:none}
+.dbeat .dmsg.gg{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+.dbeat .dres{margin-top:18px;font-family:var(--serif);font-size:26px;line-height:1.2;max-width:24ch}
+.dbeat:nth-child(even) .dart{order:2}
+@container (max-width:860px){.dbeat{grid-template-columns:minmax(0,1fr);gap:18px;min-height:0;padding:30px 0}.dbeat .dart{position:static}.dbeat:nth-child(even) .dart{order:0}.dbeat .dmsg{max-width:100%}.dbeat .dres{font-size:22px}}
+
+/* ===== v7.1: no scroll-in loading. Content is there when you arrive; only a soft 250ms settle. ===== */
+.rv,[data-stagger]>*{opacity:1;transform:none;transition:opacity .25s ease}
+.rv:not(.in),[data-stagger]:not(.in)>*{opacity:.92}
+.rise{opacity:1!important;transform:none!important}
+.fitem{opacity:1;transform:none;transition:none}
+
+/* ===== day with Gogo: pinned stage, scenes slide in and out with scroll ===== */
+.dstory{position:relative}
+.dstage{position:sticky;top:0;height:100svh;min-height:560px;overflow:hidden;z-index:1}
+.dstage-in{position:relative;height:100%;padding-top:84px;padding-bottom:28px}
+.dprog{position:absolute;left:24px;top:76px;display:flex;gap:8px;z-index:3}
+.dprog i{width:22px;height:3px;border-radius:2px;background:var(--line-2);transition:background .3s,width .3s}
+.dprog i.on{background:var(--ink);width:34px}
+.ds{position:absolute;inset:84px 24px 28px;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:center;opacity:0;pointer-events:none;visibility:hidden}
+.ds .ds-art{transform:translateY(40px) scale(.97);opacity:0;transition:transform .9s var(--spring-ui),opacity .5s ease}
+.ds .ds-txt{transform:translateY(30px);opacity:0;transition:transform .8s var(--spring-ui) .08s,opacity .45s ease .08s}
+.ds.on{opacity:1;visibility:visible;pointer-events:auto}
+.ds.on .ds-art,.ds.on .ds-txt{transform:none;opacity:1}
+.ds.out .ds-art{transform:translateY(-30px) scale(.98);opacity:0;transition:transform .5s ease,opacity .35s ease}
+.ds.out .ds-txt{transform:translateY(-20px);opacity:0;transition:transform .45s ease,opacity .3s ease}
+.ds.out{opacity:1;visibility:visible}
+.ds h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.2cqi,40px);line-height:1.08;margin-top:4px}
+.ds-sub{margin-top:8px;color:var(--ink-2);font-size:15.5px;max-width:40ch}
+.dchat{margin-top:14px;display:grid;gap:8px;max-width:400px}
+.dlist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:5px;font-size:14px;color:var(--ink-2)}
+.dlist li{position:relative;padding-left:16px}.dlist li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.ds .dres{margin-top:14px;font-size:22px}
+.dstep{height:100vh}.dstep:last-child{height:60vh}
+.dscene{box-shadow:var(--shadow-2);border-radius:10px}
+@container (max-width:860px){
+  .dstage{min-height:0;height:100svh}.dstage-in{padding-top:74px}
+  .dprog{top:66px;left:22px}.dprog i{width:16px}.dprog i.on{width:26px}
+  .ds{inset:74px 22px 20px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:12px;align-items:start}
+  .ds-art{max-width:100%}.dscene{border-radius:8px}
+  .ds h3{font-size:26px}.ds-sub{font-size:14px}.dchat{gap:6px;max-width:100%}.dchat .dmsg{font-size:14px;padding:9px 12px}
+  .dlist{font-size:13px;gap:3px;margin-top:10px}.ds .dres{font-size:18px;margin-top:10px}
+  .dstep{height:90vh}
+}
+@media (prefers-reduced-motion:reduce){.ds .ds-art,.ds .ds-txt{transition:none}}
+.dstage{margin-bottom:-100svh}
+.ds .dmsg{max-width:34ch;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.45}
+.ds .dmsg.me{background:#DCF4C9;color:#1C1C1E;margin-left:auto;border-bottom-right-radius:4px}
+.ds .dmsg.gg{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+@container (max-width:860px){.ds .dscene{max-height:30svh;width:auto;max-width:100%;margin-inline:auto}.ds-sub{display:none}.ds h3{margin-top:0}}
+@container (max-width:860px){.ds .dscene{max-height:25svh}.ds .dmsg{font-size:13.5px;padding:8px 11px;line-height:1.4}.dlist{font-size:12.5px;gap:2px;margin-top:8px}.ds .dres{font-size:17px;margin-top:8px}.ds h3{font-size:23px}.dchat{margin-top:8px}}
+
+/* ===== journal as blog cards; day teaser; day page end fix ===== */
+.posts{margin-top:36px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.post{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .5s var(--spring-ui),box-shadow .5s}
+.post:hover{transform:translateY(-4px);box-shadow:var(--shadow-2)}
+.pc{aspect-ratio:400/220;background:var(--surface)}.pcover{display:block;width:100%;height:100%}
+.pb{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ptag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.post h3{font-family:var(--serif);font-weight:400;letter-spacing:0;font-size:clamp(22px,2.2cqi,27px);line-height:1.15}
+.pb p:not(.ptag):not(.pmeta){color:var(--ink-2);font-size:14.5px}
+.pmeta{margin-top:auto;padding-top:8px;font-size:13px;color:var(--ink-3)}
+@container (max-width:1020px){.posts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:640px){.posts{grid-template-columns:minmax(0,1fr);gap:14px}}
+.dayt{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:0;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .5s var(--spring-ui),box-shadow .5s}
+.dayt:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+.dayt-art{background:var(--surface);min-height:260px}.dayt-art .pcover{width:100%;height:100%;display:block}
+.dayt-txt{padding:30px 32px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.dayt-txt h2{font-size:clamp(28px,3.2cqi,40px)}.dayt-txt p:not(.label){color:var(--ink-2);font-size:15.5px;max-width:46ch}
+@container (max-width:860px){.dayt{grid-template-columns:minmax(0,1fr)}.dayt-art{min-height:0;aspect-ratio:400/220}.dayt-txt{padding:22px}}
+:root.mode-dark .pcover rect:first-of-type,:root.mode-dark .dscene rect:first-of-type{fill:#1B1B1E}
+/* the sections after the pinned story sit above it, opaque, so the last scene never bleeds through */
+.dstory ~ .s{position:relative;z-index:3;background:var(--bg)}
+.dstory ~ .s.soft{background:var(--soft)}
+.dstep:last-child{height:100vh}
 
 .pg>main{display:block}
 </style>
@@ -814,14 +956,16 @@ h1{letter-spacing:-.03em;line-height:1.05}
 
 <header class="hdr" id="hdr">
   <div class="wrap">
-    <a class="mark" href="#home" aria-label="AskGogo home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <a class="mark" href="#home" aria-label="AskGogo home"><span data-gogo="calm" aria-hidden="true"></span><span>ask<b class="g" data-langs><i>ಗೋಗೋ</i><span>ಗೋಗೋ</span><span>गोगो</span><span>கோகோ</span><span>గోగో</span><span>ഗോగോ</span><span>গোগো</span><span>ગોગો</span><span>ਗੋਗੋ</span><span>گوگو</span><span>gogo</span><span>ゴーゴー</span><span>고고</span><span>戈戈</span><span>Гого</span></b></span></a>
     <nav class="nav" aria-label="Primary">
+      <a href="#day" data-r="day">A day with Gogo</a>
       <a href="#secondbrain" data-r="secondbrain">SecondBrain</a>
       <a href="#integrations" data-r="integrations">Integrations</a>
       <a href="#journal" data-r="journal">Journal</a>
       <a href="#about" data-r="about">About</a>
     </nav>
     <div class="tools">
+      <span class="theme-dots" role="group" aria-label="Theme"><button class="tdot c" type="button" data-theme="cream" aria-label="Cream" aria-pressed="true"></button><button class="tdot w" type="button" data-theme="white" aria-label="White" aria-pressed="false"></button><button class="tdot d" type="button" data-theme="dark" aria-label="Dark" aria-pressed="false"></button></span>
       <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
@@ -836,8 +980,9 @@ h1{letter-spacing:-.03em;line-height:1.05}
 
 <div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-label="Menu">
   <div class="top">
-    <a class="mark" href="#home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a>
+    <a class="mark" href="#home"><span data-gogo="calm" aria-hidden="true"></span><span>ask<b class="g" data-langs><i>ಗೋಗೋ</i><span>ಗೋಗೋ</span><span>गोगो</span><span>கோகோ</span><span>గోగో</span><span>ഗോగോ</span><span>গোগো</span><span>ગોગો</span><span>ਗੋਗੋ</span><span>گوگو</span><span>gogo</span><span>ゴーゴー</span><span>고고</span><span>戈戈</span><span>Гого</span></b></span></a>
     <div class="tools">
+      <span class="theme-dots" role="group" aria-label="Theme"><button class="tdot c" type="button" data-theme="cream" aria-label="Cream" aria-pressed="true"></button><button class="tdot w" type="button" data-theme="white" aria-label="White" aria-pressed="false"></button><button class="tdot d" type="button" data-theme="dark" aria-label="Dark" aria-pressed="false"></button></span>
       <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark theme">
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
@@ -846,7 +991,7 @@ h1{letter-spacing:-.03em;line-height:1.05}
     </div>
   </div>
   <nav aria-label="Mobile">
-    <a href="#home">Home</a><a href="#secondbrain" data-r="secondbrain">SecondBrain</a><a href="#integrations" data-r="integrations">Integrations</a><a href="#journal" data-r="journal">Journal</a><a href="#about" data-r="about">About</a>
+    <a href="#home">Home</a><a href="#day" data-r="day">A day with Gogo</a><a href="#secondbrain" data-r="secondbrain">SecondBrain</a><a href="#integrations" data-r="integrations">Integrations</a><a href="#journal" data-r="journal">Journal</a><a href="#about" data-r="about">About</a>
   </nav>
   <div class="ctas">
     <button class="btn btn-solid" type="button" data-open="waitlist" data-cta="menu">Join Waitlist</button>
@@ -924,6 +1069,25 @@ h1{letter-spacing:-.03em;line-height:1.05}
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- 3a. A DAY WITH GOGO teaser -->
+<section class="s" id="day-teaser" aria-labelledby="h-dt">
+  <div class="wrap">
+    <a class="dayt" href="#day" data-r="day">
+      <div class="dayt-art"><svg class="pcover" viewBox="0 0 400 220" aria-hidden="true"><defs><filter id="pw21" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="21" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="1"/></filter><filter id="pg21"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="26"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0"/></filter></defs><rect width="400" height="220" fill="#F4F1E8"/><g filter="url(#pw21)"><ellipse cx="200" cy="160" rx="260" ry="70" fill="#F9E2B8" opacity="0.7"/><ellipse cx="90" cy="70" rx="110" ry="60" fill="#CFE3F5" opacity="0.55"/><ellipse cx="330" cy="80" rx="100" ry="60" fill="#F7D7BF" opacity="0.6"/></g><rect width="400" height="220" filter="url(#pg21)" opacity=".9"/><g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 170h400" opacity=".5"/><path d="M60 170v-50h70v50M78 170v-26h18v26" fill="#FBF9F3"/><circle cx="250" cy="120" r="8" fill="#2A2622"/><path d="M239 135c0-6 6.6-9 11-9h0c4.4 0 11 3 11 9l3 26h-28z" fill="#2A2622" stroke="none"/><path d="M245 159l-2 11M255 159l2 11" stroke="#2A2622" stroke-width="4"/><path d="M300 150l20-8 8 10" /><circle cx="330" cy="130" r="10" fill="#2FAE6A" stroke="none" opacity=".9"/><path d="M325 130l4 4 7-7" stroke="#fff" stroke-width="2"/></g></svg></div>
+      <div class="dayt-txt"><p class="label">A day with Gogo</p><h2 id="h-dt">Arjun, 34, Bengaluru. One ordinary Tuesday, and a Saturday.</h2><p>Six moments from one week, as they happen on WhatsApp. Car service, Amma’s medicines, dinner with Divya and Nithin, a bill, and a flight. Nine things handled, four approvals, zero chasing.</p><span class="tlink">Scroll through the day →</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- 3b. WHAT GOGO DOES -->
+<section class="s" id="does" aria-labelledby="h-does">
+  <div class="wrap">
+    <div class="sh rv"><p class="label">What Gogo does</p><h2 id="h-does">Everything you would hand to a very good assistant.</h2><p>Say it once on WhatsApp. Gogo remembers, acts, asks before anything that matters, and shows you the result.</p></div>
+    <div class="does" data-stagger><div class="do" style="--i:0"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 1 7 7c0 3-2 5-3 6v2H8v-2c-1-1-3-3-3-6a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg></span><h3>Remembers</h3><p>What you tell it, what you send it, and what it did for you. Every memory has a source you can see and correct.</p><span class="eg">Prefers window seats · from 9 Oct</span></div><div class="do" style="--i:1"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><h3>Reminds</h3><p>Reminders that know the context: the bill amount, the ticket, the person, not just a time.</p><span class="eg">Electricity bill, Wed 7 pm, ₹2,340</span></div><div class="do" style="--i:2"><span class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><h3>Finds your documents</h3><p>Send a receipt, a ticket, a policy. Gogo files it and finds it later when you ask in plain words.</p><span class="eg">Washing machine receipt, March</span></div><div class="do" style="--i:3"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span><h3>Books and orders</h3><p>Car service, dinner, a cab, groceries, a doctor. Options first, then it books after you say yes.</p><span class="eg">Table for 3, Truffles, 8:15 pm</span></div><div class="do" style="--i:4"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></span><h3>Pays, with your approval</h3><p>UPI and bills go through only after you tap approve, with the amount in front of you.</p><span class="eg">Amma’s tablets, ₹412, approved</span></div><div class="do" style="--i:5"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><h3>Calls on your behalf</h3><p>Rings the service centre, the clinic, the restaurant, and reports back with what was agreed.</p><span class="eg">Dentist: Thu 5 pm booked</span></div><div class="do" style="--i:6"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Keeps watch</h3><p>PNR status, bill due dates, price drops and renewals, with a nudge before anything bites.</p><span class="eg">Goa flight: checked in</span></div><div class="do" style="--i:7"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M8 11h6M11 8v6"/></svg></span><h3>Researches and compares</h3><p>Flights, plans, prices and options, compared for where you live and in your currency.</p><span class="eg">3 flights under ₹6,000, you picked one</span></div></div>
+    <div class="wrap" style="padding:0;margin-top:26px"><a class="tlink" href="#day" data-r="day">See a whole day with Gogo</a></div>
   </div>
 </section>
 
@@ -1023,11 +1187,7 @@ h1{letter-spacing:-.03em;line-height:1.05}
 <section class="s soft" aria-labelledby="h-journal" id="journal">
   <div class="wrap">
     <div class="head-row rv"><div><p class="label">Journal</p><h2 id="h-journal">Notes on building an assistant that finishes the work.</h2></div><a class="tlink" href="#journal" data-r="journal">All essays <span class="arrow" aria-hidden="true">→</span></a></div>
-    <div class="list rv">
-      <a href="#essay-finish-the-work"><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task.</p></div><span class="when">14 Oct 2026</span></a>
-      <a href="#essay-memory-is-the-product"><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire.</p></div><span class="when">2 Oct 2026</span></a>
-      <a href="#essay-autonomy-you-can-check"><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result.</p></div><span class="when">22 Sep 2026</span></a>
-    </div>
+    <div class="posts"><a class="post" href="#essay-finish-the-work"><div class="pc"><svg class="pcover" viewBox="0 0 400 220" aria-hidden="true"><defs><filter id="pw21" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="21" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="1"/></filter><filter id="pg21"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="26"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0"/></filter></defs><rect width="400" height="220" fill="#F4F1E8"/><g filter="url(#pw21)"><ellipse cx="200" cy="160" rx="260" ry="70" fill="#F9E2B8" opacity="0.7"/><ellipse cx="90" cy="70" rx="110" ry="60" fill="#CFE3F5" opacity="0.55"/><ellipse cx="330" cy="80" rx="100" ry="60" fill="#F7D7BF" opacity="0.6"/></g><rect width="400" height="220" filter="url(#pg21)" opacity=".9"/><g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 170h400" opacity=".5"/><path d="M60 170v-50h70v50M78 170v-26h18v26" fill="#FBF9F3"/><circle cx="250" cy="120" r="8" fill="#2A2622"/><path d="M239 135c0-6 6.6-9 11-9h0c4.4 0 11 3 11 9l3 26h-28z" fill="#2A2622" stroke="none"/><path d="M245 159l-2 11M255 159l2 11" stroke="#2A2622" stroke-width="4"/><path d="M300 150l20-8 8 10" /><circle cx="330" cy="130" r="10" fill="#2FAE6A" stroke="none" opacity=".9"/><path d="M325 130l4 4 7-7" stroke="#fff" stroke-width="2"/></g></svg></div><div class="pb"><p class="ptag">Product · 7 min read</p><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task, and showing you it is done.</p><p class="pmeta">14 Oct 2026</p></div></a><a class="post" href="#essay-memory-is-the-product"><div class="pc"><svg class="pcover" viewBox="0 0 400 220" aria-hidden="true"><defs><filter id="pw22" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="22" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="1"/></filter><filter id="pg22"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="27"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0"/></filter></defs><rect width="400" height="220" fill="#F4F1E8"/><g filter="url(#pw22)"><ellipse cx="200" cy="120" rx="250" ry="90" fill="#E8E0F7" opacity="0.65"/><ellipse cx="110" cy="60" rx="110" ry="60" fill="#F7D7BF" opacity="0.55"/><ellipse cx="320" cy="150" rx="110" ry="60" fill="#CFE3F5" opacity="0.6"/></g><rect width="400" height="220" filter="url(#pg22)" opacity=".9"/><g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 172h400" opacity=".5"/><circle cx="120" cy="126" r="8" fill="#2A2622"/><path d="M109 141c0-6 6.6-9 11-9h0c4.4 0 11 3 11 9l3 26h-28z" fill="#2A2622" stroke="none"/><path d="M115 165l-2 11M125 165l2 11" stroke="#2A2622" stroke-width="4"/><rect x="200" y="78" width="120" height="76" rx="8" fill="#FBF9F3"/><path d="M214 98h70M214 114h50M214 130h60" opacity=".7"/><path d="M160 120c10-20 30-30 40-30" opacity=".5" stroke-dasharray="4 6"/></g></svg></div><div class="pb"><p class="ptag">Memory · 6 min read</p><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire. The unglamorous part that makes the rest work.</p><p class="pmeta">2 Oct 2026</p></div></a><a class="post" href="#essay-autonomy-you-can-check"><div class="pc"><svg class="pcover" viewBox="0 0 400 220" aria-hidden="true"><defs><filter id="pw23" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="23" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="1"/></filter><filter id="pg23"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="28"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0"/></filter></defs><rect width="400" height="220" fill="#F4F1E8"/><g filter="url(#pw23)"><ellipse cx="200" cy="150" rx="270" ry="80" fill="#BFE3D9" opacity="0.6"/><ellipse cx="80" cy="70" rx="100" ry="60" fill="#F9E2B8" opacity="0.6"/><ellipse cx="330" cy="70" rx="110" ry="60" fill="#E8E0F7" opacity="0.55"/></g><rect width="400" height="220" filter="url(#pg23)" opacity=".9"/><g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 172h400" opacity=".5"/><circle cx="90" cy="126" r="8" fill="#2A2622"/><path d="M79 141c0-6 6.6-9 11-9h0c4.4 0 11 3 11 9l3 26h-28z" fill="#2A2622" stroke="none"/><path d="M85 165l-2 11M95 165l2 11" stroke="#2A2622" stroke-width="4"/><path d="M150 150c40-40 100-40 140-20s60 20 100 0" stroke-dasharray="4 7" opacity=".7"/><circle cx="150" cy="150" r="6" fill="#FBF9F3"/><circle cx="290" cy="130" r="6" fill="#FBF9F3"/><circle cx="385" cy="130" r="11" fill="#2FAE6A" stroke="none"/><path d="M379 130l4 4 8-8" stroke="#fff" stroke-width="2.2"/><rect x="230" y="60" width="90" height="50" rx="8" fill="#FBF9F3"/><path d="M244 78h40M244 94h60" opacity=".7"/><rect x="292" y="70" width="16" height="16" rx="4" fill="#EF7A27" stroke="none"/></g></svg></div><div class="pb"><p class="ptag">Trust · 7 min read</p><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result. How Gogo decides what to do alone and what waits for you.</p><p class="pmeta">22 Sep 2026</p></div></a></div>
   </div>
 </section>
 
@@ -1041,6 +1201,129 @@ h1{letter-spacing:-.03em;line-height:1.05}
         <p>We are opening AskGogo in small groups, across India and the world.</p>
         <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="home-closing">Join Waitlist</button><button class="tlink" type="button" data-open="access" data-cta="home-closing" style="border:0;background-color:transparent;font:inherit;cursor:pointer">For teams: Request Early Access</button></div>
       </div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div><div class="pg" data-pg="day" hidden><main id="main">
+
+<section class="phero" aria-labelledby="h-day">
+  <div class="wrap center-h">
+    <p class="label">A day with Gogo</p>
+    <h1 id="h-day" style="max-width:none;margin-inline:auto">Arjun, 34, Bengaluru. One ordinary Tuesday, and a Saturday.</h1>
+    <p class="lede" style="margin-inline:auto">Keep scrolling. Six moments from one week, exactly as they happen on WhatsApp. Gogo remembers, acts, asks before anything that matters, and shows the result.</p>
+    <p class="fine">Example names, amounts and dates. The behaviour is real.</p>
+  </div>
+</section>
+
+<section class="dstory" id="dstory" data-day>
+  <div class="dstage">
+    <div class="wrap dstage-in">
+      <div class="dprog" aria-hidden="true"><i data-i="0"></i><i data-i="1"></i><i data-i="2"></i><i data-i="3"></i><i data-i="4"></i><i data-i="5"></i></div>
+      <div class="ds" data-i="0">
+      <div class="ds-art"><svg viewBox="0 0 640 360" class="dscene" aria-hidden="true"><defs>
+<filter id="w1" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" seed="1" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="26"/><feGaussianBlur stdDeviation="1.2"/></filter>
+<filter id="g1"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0"/></filter></defs>
+<rect width="640" height="360" fill="#F4F1E8"/><g filter="url(#w1)"><ellipse cx="320" cy="250" rx="420" ry="120" fill="#F9E2B8" opacity="0.7"/><ellipse cx="140" cy="120" rx="160" ry="90" fill="#FDE7C9" opacity="0.6"/><ellipse cx="520" cy="90" rx="140" ry="70" fill="#CFE3F5" opacity="0.5"/></g><rect width="640" height="360" filter="url(#g1)" opacity=".9"/>
+<g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 262c120-10 240-6 360 2s200 8 280 0" opacity=".6"/><circle cx="512" cy="92" r="26" fill="#F7C16B" stroke="none" opacity=".8"/><path d="M60 250v-60h110v60M80 190v-18h70v18" fill="#FBF9F3"/><path d="M78 250v-34h22v34M118 214h30v18h-30z"/><circle cx="300.0" cy="216.0" r="8.0" fill="#2A2622"/><path d="M289.0 231.0c0-6 6.6-9 11.0-9h0c4.4 0 11.0 3 11.0 9l3.0 26.0h-28.0z" fill="#2A2622" stroke="none"/><path d="M295.0 255.0l-2.0 11.0M305.0 255.0l2.0 11.0" stroke="#2A2622" stroke-width="4.0"/><path d="M300 222l-8 -8M296 214l-14 -4" opacity=".7"/><rect x="286" y="206" width="12" height="18" rx="2" fill="#FBF9F3"/></g></svg></div>
+      <div class="ds-txt">
+        <p class="dwhen">6:40 am · Rajajinagar</p>
+        <h3>Morning brief</h3><p class="ds-sub">Gogo reads the day: calendar, reminders, what is running low, who has not replied.</p>
+        <div class="dchat"><div class="dmsg me">Good morning Gogo. What does today look like?</div><div class="dmsg gg">Three things. Car service at 9:30 with pickup from home, Amma’s BP tablets run out tomorrow, and dinner with Divya and Nithin is still unconfirmed. I can sort all three. Shall I?</div></div>
+        <ul class="dlist"><li>Remembered: Amma’s prescription runs out tomorrow</li><li>Checked: the service centre opens at 9</li><li>Asked: one question, three jobs</li></ul>
+        <p class="dres">Reply: yes. Gogo takes it from there.</p>
+      </div>
+    </div><div class="ds" data-i="1">
+      <div class="ds-art"><svg viewBox="0 0 640 360" class="dscene" aria-hidden="true"><defs>
+<filter id="w2" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="26"/><feGaussianBlur stdDeviation="1.2"/></filter>
+<filter id="g2"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0"/></filter></defs>
+<rect width="640" height="360" fill="#F4F1E8"/><g filter="url(#w2)"><ellipse cx="320" cy="260" rx="440" ry="110" fill="#CFE3F5" opacity="0.6"/><ellipse cx="500" cy="110" rx="180" ry="90" fill="#F7D7BF" opacity="0.5"/><ellipse cx="140" cy="120" rx="170" ry="90" fill="#E8E0F7" opacity="0.5"/></g><rect width="640" height="360" filter="url(#g2)" opacity=".9"/>
+<g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 270h640" opacity=".5"/><path d="M160 262v-24c0-4 3-7 7-7h20l16-18h50l18 18h18c5 0 8 3 8 8v23" fill="#FBF9F3"/><circle cx="190" cy="262" r="10" fill="#FBF9F3"/><circle cx="270" cy="262" r="10" fill="#FBF9F3"/><path d="M203 231l10-12h40l12 12z" fill="#FBF9F3"/><circle cx="420.0" cy="222.0" r="8.0" fill="#2A2622"/><path d="M409.0 237.0c0-6 6.6-9 11.0-9h0c4.4 0 11.0 3 11.0 9l3.0 26.0h-28.0z" fill="#2A2622" stroke="none"/><path d="M415.0 261.0l-2.0 11.0M425.0 261.0l2.0 11.0" stroke="#2A2622" stroke-width="4.0"/><path d="M560 268v-70h50v70M575 210h20v18h-20z" fill="#FBF9F3"/><path d="M330 150l16-10M340 140l20-4" opacity=".6"/></g></svg></div>
+      <div class="ds-txt">
+        <p class="dwhen">9:20 am · Pickup confirmed</p>
+        <h3>Car service</h3><p class="ds-sub">Booked yesterday after a yes. Today it only reports.</p>
+        <div class="dchat"><div class="dmsg me">Did the service centre come?</div><div class="dmsg gg">Driver Manjunath picked the car up at 9:18. Estimated return 2 pm. I will send the invoice here when it is in.</div></div>
+        <ul class="dlist"><li>Did: confirmed pickup with the centre</li><li>Watching: return time and the invoice</li><li>Kept: SVC-48213 under Vehicle</li></ul>
+        <p class="dres">Remembered your usual centre. No forms, no calls.</p>
+      </div>
+    </div><div class="ds" data-i="2">
+      <div class="ds-art"><svg viewBox="0 0 640 360" class="dscene" aria-hidden="true"><defs>
+<filter id="w3" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="26"/><feGaussianBlur stdDeviation="1.2"/></filter>
+<filter id="g3"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="6"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0"/></filter></defs>
+<rect width="640" height="360" fill="#F4F1E8"/><g filter="url(#w3)"><ellipse cx="320" cy="230" rx="420" ry="130" fill="#E9F6EF" opacity="0.6"/><ellipse cx="160" cy="110" rx="170" ry="80" fill="#F9E2B8" opacity="0.6"/><ellipse cx="520" cy="130" rx="150" ry="80" fill="#F7D7BF" opacity="0.5"/></g><rect width="640" height="360" filter="url(#g3)" opacity=".9"/>
+<g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 268h640" opacity=".5"/><path d="M80 268v-110h150v110" fill="#FBF9F3"/><path d="M80 158l75-30 75 30" fill="#FBF9F3"/><path d="M130 268v-50h50v50M100 190h30v24h-30zM180 190h30v24h-30z"/><circle cx="330.0" cy="222.0" r="8.0" fill="#2A2622"/><path d="M319.0 237.0c0-6 6.6-9 11.0-9h0c4.4 0 11.0 3 11.0 9l3.0 26.0h-28.0z" fill="#2A2622" stroke="none"/><path d="M325.0 261.0l-2.0 11.0M335.0 261.0l2.0 11.0" stroke="#2A2622" stroke-width="4.0"/><circle cx="372.0" cy="231.2" r="6.4" fill="#2A2622"/><path d="M363.2 243.2c0-6 5.28-9 8.8-9h0c3.5200000000000005 0 8.8 3 8.8 9l2.4000000000000004 20.8h-22.400000000000002z" fill="#2A2622" stroke="none"/><path d="M368.0 262.4l-1.6 8.8M376.0 262.4l1.6 8.8" stroke="#2A2622" stroke-width="3.2"/><path d="M560 230h40v-14h-40zM565 216v-10h30v10" fill="#FBF9F3"/><path d="M450 120c20-16 40-16 60 0" opacity=".5"/></g></svg></div>
+      <div class="ds-txt">
+        <p class="dwhen">12:05 pm · Amma’s medicines</p>
+        <h3>Medicines</h3><p class="ds-sub">A reorder that needs money, so it waits for a tap.</p>
+        <div class="dchat"><div class="dmsg gg">Amma’s BP tablets: same brand, 30 days, ₹412 from the usual pharmacy, delivery by 6 pm to Malleshwaram. Approve?</div></div>
+        <ul class="dlist"><li>Remembered: brand, dose, pharmacy, address</li><li>Asked: approve ₹412 by UPI</li><li>Watching: delivery by 6 pm</li></ul>
+        <p class="dres">You tap once. Gogo pays with your UPI and tracks the delivery.</p>
+      </div>
+    </div><div class="ds" data-i="3">
+      <div class="ds-art"><svg viewBox="0 0 640 360" class="dscene" aria-hidden="true"><defs>
+<filter id="w4" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="26"/><feGaussianBlur stdDeviation="1.2"/></filter>
+<filter id="g4"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0"/></filter></defs>
+<rect width="640" height="360" fill="#F4F1E8"/><g filter="url(#w4)"><ellipse cx="320" cy="240" rx="440" ry="130" fill="#F7D7BF" opacity="0.65"/><ellipse cx="130" cy="100" rx="160" ry="90" fill="#E8E0F7" opacity="0.55"/><ellipse cx="540" cy="100" rx="170" ry="80" fill="#F9E2B8" opacity="0.6"/></g><rect width="640" height="360" filter="url(#g4)" opacity=".9"/>
+<g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 270h640" opacity=".5"/><circle cx="520" cy="110" r="22" fill="#EF9D5A" stroke="none" opacity=".7"/><path d="M220 270v-40h200v40M200 230h240" fill="#FBF9F3"/><circle cx="200.0" cy="226.0" r="7.2" fill="#2A2622"/><path d="M190.1 239.5c0-6 5.94-9 9.9-9h0c3.9600000000000004 0 9.9 3 9.9 9l2.7 23.400000000000002h-25.200000000000003z" fill="#2A2622" stroke="none"/><path d="M195.5 261.1l-1.8 9.9M204.5 261.1l1.8 9.9" stroke="#2A2622" stroke-width="3.6"/><circle cx="452.0" cy="226.0" r="7.2" fill="#2A2622"/><path d="M442.1 239.5c0-6 5.94-9 9.9-9h0c3.9600000000000004 0 9.9 3 9.9 9l2.7 23.400000000000002h-25.200000000000003z" fill="#2A2622" stroke="none"/><path d="M447.5 261.1l-1.8 9.9M456.5 261.1l1.8 9.9" stroke="#2A2622" stroke-width="3.6"/><path d="M280 218h20M330 218h20M300 206c4-8 20-8 24 0" opacity=".8"/><path d="M60 270v-90h60v90M75 200h30v20h-30z" fill="#FBF9F3" opacity=".9"/><path d="M560 270v-60h50v60" fill="#FBF9F3" opacity=".9"/></g></svg></div>
+      <div class="ds-txt">
+        <p class="dwhen">7:30 pm · Dinner, sorted</p>
+        <h3>Dinner</h3><p class="ds-sub">Gogo messaged two friends, only after Arjun said yes.</p>
+        <div class="dchat"><div class="dmsg me">Did Divya reply?</div><div class="dmsg gg">Divya and Nithin are in. Table for three at Truffles, Koramangala, 8:15 pm, booked under your name. I moved your 8 pm reminder.</div></div>
+        <ul class="dlist"><li>Did: found a table for three at 8:15</li><li>Did: moved the 8 pm reminder</li><li>Kept: the booking under Arjun’s name</li></ul>
+        <p class="dres">Gogo messaged them only after you said yes.</p>
+      </div>
+    </div><div class="ds" data-i="4">
+      <div class="ds-art"><svg viewBox="0 0 640 360" class="dscene" aria-hidden="true"><defs>
+<filter id="w5" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" seed="5" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="26"/><feGaussianBlur stdDeviation="1.2"/></filter>
+<filter id="g5"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="8"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0"/></filter></defs>
+<rect width="640" height="360" fill="#F4F1E8"/><g filter="url(#w5)"><ellipse cx="320" cy="220" rx="460" ry="140" fill="#D8D4EA" opacity="0.7"/><ellipse cx="160" cy="90" rx="170" ry="90" fill="#CFE3F5" opacity="0.5"/><ellipse cx="500" cy="120" rx="160" ry="80" fill="#E8E0F7" opacity="0.6"/></g><rect width="640" height="360" filter="url(#g5)" opacity=".9"/>
+<g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 272h640" opacity=".5"/><circle cx="120" cy="80" r="18" fill="#FBF9F3"/><path d="M400 272v-120h160v120M420 170h30v30h-30zM470 170h30v30h-30zM420 220h30v30h-30z" fill="#FBF9F3"/><path d="M180 272v-70c0-6 4-10 10-10h120c6 0 10 4 10 10v70" fill="#FBF9F3"/><path d="M190 252h120" opacity=".6"/><circle cx="250.0" cy="226.0" r="7.2" fill="#2A2622"/><path d="M240.1 239.5c0-6 5.94-9 9.9-9h0c3.9600000000000004 0 9.9 3 9.9 9l2.7 23.400000000000002h-25.200000000000003z" fill="#2A2622" stroke="none"/><path d="M245.5 261.1l-1.8 9.9M254.5 261.1l1.8 9.9" stroke="#2A2622" stroke-width="3.6"/><rect x="236" y="214" width="12" height="18" rx="2" fill="#FBF9F3"/><path d="M60 60l6 2M70 90l5 -3M560 60l4 4" opacity=".6"/></g></svg></div>
+      <div class="ds-txt">
+        <p class="dwhen">10:40 pm · Before you sleep</p>
+        <h3>Before sleep</h3><p class="ds-sub">Bills and receipts, filed where they can be found later.</p>
+        <div class="dchat"><div class="dmsg gg">The electricity bill came in: ₹2,340, due Thursday. Reminder set for Wednesday evening. Car invoice is filed under Vehicle. Goodnight.</div></div>
+        <ul class="dlist"><li>Did: read the BESCOM bill, ₹2,340</li><li>Set: reminder Wednesday evening</li><li>Filed: car invoice under Vehicle</li></ul>
+        <p class="dres">Nothing to chase tomorrow. Gogo kept the receipts.</p>
+      </div>
+    </div><div class="ds" data-i="5">
+      <div class="ds-art"><svg viewBox="0 0 640 360" class="dscene" aria-hidden="true"><defs>
+<filter id="w6" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" seed="6" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="26"/><feGaussianBlur stdDeviation="1.2"/></filter>
+<filter id="g6"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="9"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0"/></filter></defs>
+<rect width="640" height="360" fill="#F4F1E8"/><g filter="url(#w6)"><ellipse cx="320" cy="250" rx="460" ry="120" fill="#BFE3D9" opacity="0.6"/><ellipse cx="160" cy="110" rx="180" ry="90" fill="#CFE3F5" opacity="0.6"/><ellipse cx="520" cy="100" rx="160" ry="80" fill="#F9E2B8" opacity="0.6"/></g><rect width="640" height="360" filter="url(#g6)" opacity=".9"/>
+<g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 262c100-8 200-4 320 4s220 6 320 -2" opacity=".6"/><circle cx="540" cy="80" r="24" fill="#F7C16B" stroke="none" opacity=".8"/><path d="M160 262c-4-50-10-90-30-120M130 142c-30-10-60-4-80 14M130 142c10-30 30-50 60-54M130 142c30-14 60-10 80 10" /><path d="M440 262v-70l40-30 40 30v70M470 262v-30h20v30" fill="#FBF9F3"/><path d="M480 150v-18M472 140h16"/><circle cx="320.0" cy="220.0" r="8.0" fill="#2A2622"/><path d="M309.0 235.0c0-6 6.6-9 11.0-9h0c4.4 0 11.0 3 11.0 9l3.0 26.0h-28.0z" fill="#2A2622" stroke="none"/><path d="M315.0 259.0l-2.0 11.0M325.0 259.0l2.0 11.0" stroke="#2A2622" stroke-width="4.0"/><circle cx="350.0" cy="226.9" r="6.8" fill="#2A2622"/><path d="M340.65 239.65c0-6 5.609999999999999-9 9.35-9h0c3.74 0 9.35 3 9.35 9l2.55 22.099999999999998h-23.799999999999997z" fill="#2A2622" stroke="none"/><path d="M345.75 260.05l-1.7 9.35M354.25 260.05l1.7 9.35" stroke="#2A2622" stroke-width="3.4"/></g></svg></div>
+      <div class="ds-txt">
+        <p class="dwhen">Saturday · Goa</p>
+        <h3>Saturday</h3><p class="ds-sub">Travel handled the way Arjun likes it.</p>
+        <div class="dchat"><div class="dmsg me">Flights?</div><div class="dmsg gg">Checked in. Window seats, as you prefer. Boarding passes are saved here, cab to the airport at 5:10 am is booked.</div></div>
+        <ul class="dlist"><li>Did: web check-in, window seats</li><li>Kept: boarding passes in the chat</li><li>Did: cab to the airport at 5:10 am</li></ul>
+        <p class="dres">Say it once. Gogo takes it from there.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="dstep" data-i="0" aria-hidden="true"></div><div class="dstep" data-i="1" aria-hidden="true"></div><div class="dstep" data-i="2" aria-hidden="true"></div><div class="dstep" data-i="3" aria-hidden="true"></div><div class="dstep" data-i="4" aria-hidden="true"></div><div class="dstep" data-i="5" aria-hidden="true"></div>
+</section>
+
+<section class="s soft" id="day-does" aria-labelledby="h-dd">
+  <div class="wrap">
+    <div class="sh center-h"><p class="label">In one day</p><h2 id="h-dd">Nine things handled. Four approvals. Zero chasing.</h2><p style="margin-inline:auto">Car service, medicines, dinner, a bill, the invoice, flight check-in, a cab, two reminders. Each one with a confirmation Arjun can show.</p></div>
+    <div class="princ four" style="margin-top:36px">
+      <div class="pr"><span data-gogo="remembering" aria-hidden="true"></span><h3>Remembered 6 things</h3><p>Prescription, pharmacy, service centre, seat preference, friends, due dates.</p></div>
+      <div class="pr"><span data-gogo="approval" aria-hidden="true"></span><h3>Asked 4 times</h3><p>Once each for money, a booking, a message to other people and a cab.</p></div>
+      <div class="pr"><span data-gogo="acting" aria-hidden="true"></span><h3>Did 9 things</h3><p>Booked, ordered, paid, messaged, checked in, filed, set reminders.</p></div>
+      <div class="pr"><span data-gogo="done" aria-hidden="true"></span><h3>Showed proof 9 times</h3><p>A confirmation number, a receipt, a boarding pass, a reply.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="h-day-close">
+  <div class="wrap closing">
+    <span data-gogo="calm" data-hands aria-hidden="true"></span>
+    <div>
+      <h2 id="h-day-close">Your week has enough to chase. Hand some of it to Gogo.</h2>
+      <p>Join the waitlist. We open access in small groups, India first, then the world.</p>
+      <div class="ctas"><button class="btn btn-solid" type="button" data-open="waitlist" data-cta="day-close">Join Waitlist</button></div>
     </div>
   </div>
 </section>
@@ -1108,7 +1391,7 @@ h1{letter-spacing:-.03em;line-height:1.05}
         <div class="wbody">
           <p class="wk">2 · Remembers</p>
           <h3>It uses what the company already knows.</h3>
-          <div class="wcard"><p class="kk">Company memory</p><p class="v">Acme Supplies · accounts contact: Priya · net 30 · prefers email · last reply 2 Oct</p><p class="meta">From the vendor record and past threads</p></div>
+          <div class="wcard"><p class="kk">Company memory</p><p class="v">Acme Supplies · accounts contact: Divya · net 30 · prefers email · last reply 2 Oct</p><p class="meta">From the vendor record and past threads</p></div>
         </div>
       </li>
       <li class="wstep" data-rise>
@@ -1116,7 +1399,7 @@ h1{letter-spacing:-.03em;line-height:1.05}
         <div class="wbody">
           <p class="wk">3 · Drafts</p>
           <h3>It writes the reminder in your company’s tone.</h3>
-          <div class="wcard draft"><p class="kk">Draft</p><p class="v">Hi Priya, a gentle reminder that INV-2041 for ₹1,24,000 was due on 2 Oct. Could you share an expected payment date? Thanks.</p></div>
+          <div class="wcard draft"><p class="kk">Draft</p><p class="v">Hi Divya, a gentle reminder that INV-2041 for ₹1,24,000 was due on 2 Oct. Could you share an expected payment date? Thanks.</p></div>
         </div>
       </li>
       <li class="wstep" data-rise>
@@ -1187,7 +1470,7 @@ h1{letter-spacing:-.03em;line-height:1.05}
             <h4>Company memory</h4><p class="sub">1,284 facts · 36 added this week · 4 teams</p>
             <div class="dtabs"><span class="dtab on">All</span><span class="dtab">Vendors</span><span class="dtab">Policies</span><span class="dtab">Customers</span></div>
             <div class="act">
-              <div class="dmem"><p class="kk">Vendor</p><b>Acme Supplies · accounts contact Priya · net 30 · prefers email</b><span>From the vendor record and past threads · Finance can edit</span><div class="fix"><span>Correct</span><span>History</span></div></div>
+              <div class="dmem"><p class="kk">Vendor</p><b>Acme Supplies · accounts contact Divya · net 30 · prefers email</b><span>From the vendor record and past threads · Finance can edit</span><div class="fix"><span>Correct</span><span>History</span></div></div>
               <div class="dmem"><p class="kk">Policy</p><b>Reminders go out at 14 days overdue, then every 7 days</b><span>Set by Finance · 3 Sep · applies to all invoice agents</span><div class="fix"><span>Correct</span><span>History</span></div></div>
               <div class="dmem"><p class="kk">Customer</p><b>Kiran Logistics · onboarding in progress · PAN missing</b><span>From the onboarding agent · 16 Oct</span><div class="fix"><span>Open</span><span>History</span></div></div>
               <div class="dmem"><p class="kk">Decision</p><b>Q4 review moved to Thu 30 Oct, 11:00</b><span>Agreed in the scheduling thread · everyone confirmed</span><div class="fix"><span>Open</span><span>History</span></div></div>
@@ -1505,14 +1788,10 @@ h1{letter-spacing:-.03em;line-height:1.05}
   </div>
 </section>
 
-<section class="s" aria-labelledby="h-essays" style="padding-top:0;border-top:0">
+<section class="s" aria-labelledby="h-essays" style="padding-top:8px;border-top:0">
   <div class="wrap">
     <h2 id="h-essays" class="visually-hidden">Essays</h2>
-    <div class="list reading">
-      <a href="#essay-finish-the-work"><span data-gogo="done" aria-hidden="true"></span><div><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task.</p><p class="rmeta">7 min read · 14 Oct 2026</p></div><span class="when">14 Oct 2026</span></a>
-      <a href="#essay-memory-is-the-product"><span data-gogo="remembering" aria-hidden="true"></span><div><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire.</p><p class="rmeta">6 min read · 2 Oct 2026</p></div><span class="when">2 Oct 2026</span></a>
-      <a href="#essay-autonomy-you-can-check"><span data-gogo="approval" aria-hidden="true"></span><div><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result.</p><p class="rmeta">7 min read · 22 Sep 2026</p></div><span class="when">22 Sep 2026</span></a>
-    </div>
+    <div class="posts"><a class="post" href="#essay-finish-the-work"><div class="pc"><svg class="pcover" viewBox="0 0 400 220" aria-hidden="true"><defs><filter id="pw21" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="21" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="1"/></filter><filter id="pg21"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="26"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0"/></filter></defs><rect width="400" height="220" fill="#F4F1E8"/><g filter="url(#pw21)"><ellipse cx="200" cy="160" rx="260" ry="70" fill="#F9E2B8" opacity="0.7"/><ellipse cx="90" cy="70" rx="110" ry="60" fill="#CFE3F5" opacity="0.55"/><ellipse cx="330" cy="80" rx="100" ry="60" fill="#F7D7BF" opacity="0.6"/></g><rect width="400" height="220" filter="url(#pg21)" opacity=".9"/><g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 170h400" opacity=".5"/><path d="M60 170v-50h70v50M78 170v-26h18v26" fill="#FBF9F3"/><circle cx="250" cy="120" r="8" fill="#2A2622"/><path d="M239 135c0-6 6.6-9 11-9h0c4.4 0 11 3 11 9l3 26h-28z" fill="#2A2622" stroke="none"/><path d="M245 159l-2 11M255 159l2 11" stroke="#2A2622" stroke-width="4"/><path d="M300 150l20-8 8 10" /><circle cx="330" cy="130" r="10" fill="#2FAE6A" stroke="none" opacity=".9"/><path d="M325 130l4 4 7-7" stroke="#fff" stroke-width="2"/></g></svg></div><div class="pb"><p class="ptag">Product · 7 min read</p><h3>Why an assistant should finish the work.</h3><p>Most assistants stop at advice. The useful part is finishing the task, and showing you it is done.</p><p class="pmeta">14 Oct 2026</p></div></a><a class="post" href="#essay-memory-is-the-product"><div class="pc"><svg class="pcover" viewBox="0 0 400 220" aria-hidden="true"><defs><filter id="pw22" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="22" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="1"/></filter><filter id="pg22"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="27"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0"/></filter></defs><rect width="400" height="220" fill="#F4F1E8"/><g filter="url(#pw22)"><ellipse cx="200" cy="120" rx="250" ry="90" fill="#E8E0F7" opacity="0.65"/><ellipse cx="110" cy="60" rx="110" ry="60" fill="#F7D7BF" opacity="0.55"/><ellipse cx="320" cy="150" rx="110" ry="60" fill="#CFE3F5" opacity="0.6"/></g><rect width="400" height="220" filter="url(#pg22)" opacity=".9"/><g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 172h400" opacity=".5"/><circle cx="120" cy="126" r="8" fill="#2A2622"/><path d="M109 141c0-6 6.6-9 11-9h0c4.4 0 11 3 11 9l3 26h-28z" fill="#2A2622" stroke="none"/><path d="M115 165l-2 11M125 165l2 11" stroke="#2A2622" stroke-width="4"/><rect x="200" y="78" width="120" height="76" rx="8" fill="#FBF9F3"/><path d="M214 98h70M214 114h50M214 130h60" opacity=".7"/><path d="M160 120c10-20 30-30 40-30" opacity=".5" stroke-dasharray="4 6"/></g></svg></div><div class="pb"><p class="ptag">Memory · 6 min read</p><h3>Memory is the product.</h3><p>Where a memory came from, how you correct it, and when it should expire. The unglamorous part that makes the rest work.</p><p class="pmeta">2 Oct 2026</p></div></a><a class="post" href="#essay-autonomy-you-can-check"><div class="pc"><svg class="pcover" viewBox="0 0 400 220" aria-hidden="true"><defs><filter id="pw23" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="23" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="1"/></filter><filter id="pg23"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="28"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0"/></filter></defs><rect width="400" height="220" fill="#F4F1E8"/><g filter="url(#pw23)"><ellipse cx="200" cy="150" rx="270" ry="80" fill="#BFE3D9" opacity="0.6"/><ellipse cx="80" cy="70" rx="100" ry="60" fill="#F9E2B8" opacity="0.6"/><ellipse cx="330" cy="70" rx="110" ry="60" fill="#E8E0F7" opacity="0.55"/></g><rect width="400" height="220" filter="url(#pg23)" opacity=".9"/><g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 172h400" opacity=".5"/><circle cx="90" cy="126" r="8" fill="#2A2622"/><path d="M79 141c0-6 6.6-9 11-9h0c4.4 0 11 3 11 9l3 26h-28z" fill="#2A2622" stroke="none"/><path d="M85 165l-2 11M95 165l2 11" stroke="#2A2622" stroke-width="4"/><path d="M150 150c40-40 100-40 140-20s60 20 100 0" stroke-dasharray="4 7" opacity=".7"/><circle cx="150" cy="150" r="6" fill="#FBF9F3"/><circle cx="290" cy="130" r="6" fill="#FBF9F3"/><circle cx="385" cy="130" r="11" fill="#2FAE6A" stroke="none"/><path d="M379 130l4 4 8-8" stroke="#fff" stroke-width="2.2"/><rect x="230" y="60" width="90" height="50" rx="8" fill="#FBF9F3"/><path d="M244 78h40M244 94h60" opacity=".7"/><rect x="292" y="70" width="16" height="16" rx="4" fill="#EF7A27" stroke="none"/></g></svg></div><div class="pb"><p class="ptag">Trust · 7 min read</p><h3>Autonomy you can check.</h3><p>Plan the task, set the limits, check the result. How Gogo decides what to do alone and what waits for you.</p><p class="pmeta">22 Sep 2026</p></div></a></div>
   </div>
 </section>
 
@@ -1718,8 +1997,8 @@ h1{letter-spacing:-.03em;line-height:1.05}
 <footer class="ftr">
   <div class="wrap">
     <div class="grid">
-      <div><a class="mark" href="#home"><span data-gogo="calm" aria-hidden="true"></span><span>askgogo<b>.</b></span></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta. Built in Bengaluru, opening to the world.</p></div>
-      <div><h4>Explore</h4><ul><li><a href="#secondbrain" data-r="secondbrain">SecondBrain</a></li><li><a href="#integrations" data-r="integrations">Integrations</a></li><li></li><li><a href="#journal" data-r="journal">Journal</a></li><li><a href="#about" data-r="about">About</a></li></ul></div>
+      <div><a class="mark" href="#home"><span data-gogo="calm" aria-hidden="true"></span><span>ask<b class="g" data-langs><i>ಗೋಗೋ</i><span>ಗೋಗೋ</span><span>गोगो</span><span>கோகோ</span><span>గోగో</span><span>ഗോగോ</span><span>গোগো</span><span>ગોગો</span><span>ਗੋਗੋ</span><span>گوگو</span><span>gogo</span><span>ゴーゴー</span><span>고고</span><span>戈戈</span><span>Гого</span></b></span></a><p class="tag">A personal AI that remembers, acts and finishes the work. Private beta. Built in Bengaluru, opening to the world.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#day" data-r="day">A day with Gogo</a></li><li><a href="#secondbrain" data-r="secondbrain">SecondBrain</a></li><li><a href="#integrations" data-r="integrations">Integrations</a></li><li></li><li><a href="#journal" data-r="journal">Journal</a></li><li><a href="#about" data-r="about">About</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="https://askgogo.in/privacy/" target="_blank" rel="noopener">Privacy</a></li><li><a href="https://askgogo.in/terms/" target="_blank" rel="noopener">Terms</a></li><li><a href="https://askgogo.in/refund/" target="_blank" rel="noopener">Refunds</a></li></ul></div>
     </div>
     <div class="base"><span>© 2026 AskGogo Technologies</span><span>Remembers. Asks. Finishes.</span></div>
@@ -1798,22 +2077,29 @@ Gogo.mountAll();
 const KEY='askgogo-theme';
 function readTheme(){try{return localStorage.getItem(KEY)}catch(e){return null}}
 function applyTheme(t){
-  root.classList.toggle('mode-dark',t==='dark');
+  if(t!=='dark'&&t!=='white')t='cream';
+  root.classList.toggle('mode-dark',t==='dark');root.classList.toggle('mode-white',t==='white');
+  $$('.tdot').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===t)));
   $$('.theme-btn').forEach(b=>{b.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
     b.querySelector('.i-moon').toggleAttribute('hidden',t==='dark');b.querySelector('.i-sun').toggleAttribute('hidden',t!=='dark')});
   Gogo.mountAll(); (AG.onTheme||[]).forEach(f=>f(t));
 }
 AG.onTheme=[];
-applyTheme(readTheme()==='dark'?'dark':'light');
+applyTheme(readTheme()||'cream');
 document.addEventListener('click',e=>{
+  const d=e.target.closest('.tdot');if(d){try{localStorage.setItem(KEY,d.dataset.theme)}catch(err){}applyTheme(d.dataset.theme);return}
   if(!e.target.closest('.theme-btn'))return;
-  const next=root.classList.contains('mode-dark')?'light':'dark';
+  const next=root.classList.contains('mode-dark')?'cream':'dark';
   try{localStorage.setItem(KEY,next)}catch(err){}
   applyTheme(next);
 });
 
 /* iOS Safari only applies :active (the press state) to links and non-button elements once a touch listener exists on the document. */
 document.addEventListener('touchstart',()=>{},{passive:true});
+/* rotating-script logo: the word Gogo in Indian and world scripts */
+{const marks=$$('[data-langs]');if(marks.length&&!reduced.matches){let k=0;const n=marks[0].querySelectorAll('span').length;
+ const show=()=>marks.forEach(m=>{const s=m.querySelectorAll('span');s.forEach((x,i)=>x.classList.toggle('on',i===k))});show();
+ setInterval(()=>{if(document.hidden)return;k=(k+1)%n;show()},1600)}else marks.forEach(m=>m.querySelector('span')?.classList.add('on'))}
 /* ---------- header, drawer ---------- */
 const hdr=$('#hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
@@ -1828,6 +2114,10 @@ function conceal(el,done){if(el.hidden)return;el.classList.remove('in');
 function closeDrawer(silent){if(drawer.hidden)return;conceal(drawer);mo.setAttribute('aria-expanded','false');if(!silent)mo.focus()}
 mo.onclick=()=>{reveal(drawer);mo.setAttribute('aria-expanded','true');$('nav a',drawer).focus()};
 $('#menu-close').onclick=()=>closeDrawer();
+$$('nav a',drawer).forEach(a=>{let sx=0,sy=0;
+  a.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY},{passive:true});
+  a.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;if(Math.hypot(e.clientX-sx,e.clientY-sy)>12)return;const h=a.getAttribute('href');if(!h||h.startsWith('#'))return;setTimeout(()=>{if(!a.dataset.went){a.dataset.went='1';location.href=a.href}},60)});
+  a.addEventListener('click',()=>{a.dataset.went='1'})});
 const PAGE=document.body.dataset.page||'';
 $$('.nav a,.drawer nav a').forEach(a=>{const r=a.dataset.r;const on=r===PAGE||(r==='journal'&&PAGE.startsWith('essay'));on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
 
@@ -2000,7 +2290,8 @@ const stacks=$$('[data-stack]');
 /* a sticky element's offsetTop reports where it is stuck, so measure from the siblings before it instead */
 const docTop=el=>{let y=0;for(let n=el.parentElement;n;n=n.offsetParent)y+=n.offsetTop;for(let s=el.previousElementSibling;s;s=s.previousElementSibling)y+=s.offsetHeight;return y};
 let tops=[];const measure=()=>{tops=stacks.map(docTop)};measure();addEventListener('load',measure);
-function stack(){if(reduced.matches)return;measure();const vh=innerHeight;stacks.forEach((el,i)=>{const inner=el.firstElementChild||el;
+const stackOn=matchMedia('(min-width:1021px)');
+function stack(){if(reduced.matches||!stackOn.matches){stacks.forEach(el=>{const inner=el.firstElementChild||el;inner.style.opacity='';inner.style.transform=''});return}measure();const vh=innerHeight;stacks.forEach((el,i)=>{const inner=el.firstElementChild||el;
   const p=Math.min(1,Math.max(0,(scrollY-tops[i])/(vh*.6)));inner.style.opacity=String(1-p);inner.style.transform=`translateY(${(p*-40).toFixed(1)}px) scale(${(1-p*.04).toFixed(3)})`})}
 addEventListener('scroll',()=>requestAnimationFrame(stack),{passive:true});addEventListener('resize',()=>{measure();stack()});
 const par=$$('[data-depth]');
@@ -2032,7 +2323,7 @@ const feed=$('#feed');
 const fitem=f=>`<div class="fitem"><span data-gogo="${f[0]}"></span><div><b>${f[1]}</b><span>${f[2]}</span></div><span class="when">${f[3]}</span></div>`;
 if(feed){let k=0,t=null,run=false;
   const step=()=>{clearTimeout(t);if(!run||document.hidden||k>=FEED.length)return;feed.insertAdjacentHTML('afterbegin',fitem(FEED[k]));const el=feed.firstElementChild;Gogo.mountAll(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('in')));k++;t=setTimeout(step,900)};
-  if(reduced.matches){feed.innerHTML=FEED.map(fitem).join('');Gogo.mountAll(feed);$$('.fitem',feed).forEach(e=>e.classList.add('in'))}
+  if(true){feed.innerHTML=FEED.map(fitem).join('');Gogo.mountAll(feed);$$('.fitem',feed).forEach(e=>e.classList.add('in'))}
   else{new IntersectionObserver(es=>{run=es[0].isIntersecting;if(run&&!t)t=setTimeout(step,300);if(!run){clearTimeout(t);t=null}},{threshold:.2}).observe(feed);
     document.addEventListener('visibilitychange',()=>{if(!document.hidden&&run&&k<FEED.length)t=setTimeout(step,400)})}
 }
@@ -2057,6 +2348,21 @@ if(box){let k=-1,t=null,run=false;
 }
 })();
 
+/* v6.2: the hero moment rail advances by itself on phones; a touch pauses it for a while */
+(function(){
+  const {$,$$,reduced}=window.AG;const rail=$('.moments-mobile');if(!rail||reduced.matches)return;
+  let i=0,t=0,pauseUntil=0,visible=false;
+  const cards=()=>$$('.moment',rail);
+  function step(){if(!visible||Date.now()<pauseUntil||getComputedStyle(rail).display==='none')return;
+    const c=cards();if(c.length<2)return;i=(i+1)%c.length;const target=c[i];
+    rail.scrollTo({left:target.offsetLeft-(rail.clientWidth-target.offsetWidth)/2,behavior:'smooth'})}
+  function start(){clearInterval(t);t=setInterval(step,3200)}
+  ['pointerdown','touchstart','wheel'].forEach(ev=>rail.addEventListener(ev,()=>{pauseUntil=Date.now()+8000},{passive:true}));
+  rail.addEventListener('scroll',()=>{if(Date.now()<pauseUntil){const c=cards();let best=0,bd=1e9;c.forEach((el,k)=>{const d=Math.abs(el.offsetLeft-rail.scrollLeft-(rail.clientWidth-el.offsetWidth)/2);if(d<bd){bd=d;best=k}});i=best}},{passive:true});
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting},{threshold:.4}).observe(rail);
+  start();
+})();
+
 </script>
 <script>
 /* Inner pages: SecondBrain beats. Everything else on these pages is CSS plus the shared chrome in site.js. */
@@ -2075,6 +2381,14 @@ function beatSeq(beats,replay){
   onceVisible(beats,play,.4);if(replay)replay.onclick=play;
 }
 const sb=$('#sb-beats');if(sb)beatSeq(sb,$('#sb-replay'));
+})();
+
+(function(){const {$,$$}=window.AG;
+/* a day with Gogo: the stage is pinned; each spacer that scrolls under it switches the scene in and the last one out */
+{const story=$('[data-day]');if(story){const scenes=$$('.ds',story),steps=$$('.dstep',story),dots=$$('.dprog i',story);let cur=-1;
+ const go=i=>{if(i===cur)return;scenes.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('out',k===cur&&k<i)});dots.forEach((d,k)=>d.classList.toggle('on',k<=i));cur=i};
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)go(+e.target.dataset.i)})},{rootMargin:'-45% 0px -45% 0px',threshold:0});
+ steps.forEach(s=>io.observe(s));go(0)}}
 })();
 
 </script>
