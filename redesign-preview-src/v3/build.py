@@ -15,6 +15,12 @@ PAGES={ # key: (output path, title, description, page script)
  'about':('about/index.html','About · AskGogo','Built in Bengaluru. AskGogo is a personal AI on WhatsApp that remembers, acts with your approval and finishes the task. Private beta.','pages.js'),
  'essay-finish-the-work':('journal/finish-the-work/index.html','Why an assistant should finish the work · AskGogo Journal','Most assistants stop at advice. The useful part is finishing the task.','pages.js'),
  'essay-memory-is-the-product':('journal/memory-is-the-product/index.html','Memory is the product · AskGogo Journal','Where a memory came from, how you correct it, and when it should expire.','pages.js'),
+ 'essay-why-whatsapp':('journal/why-whatsapp/index.html','Why WhatsApp, not another app · AskGogo Journal','The best place for an assistant is the place you already talk to the people who help you.','pages.js'),
+ 'essay-in-your-language':('journal/in-your-language/index.html','Say it in your language · AskGogo Journal','People do not think in one language. An assistant built for India has to keep up with how people actually speak.','pages.js'),
+ 'essay-the-approval-moment':('journal/the-approval-moment/index.html','The approval moment · AskGogo Journal','The single most important screen in an assistant is the one that asks you for a yes. Here is how we design it.','pages.js'),
+ 'essay-built-in-bengaluru':('journal/built-in-bengaluru/index.html','Built in Bengaluru, for the world · AskGogo Journal','Why we are starting with Indian errands, Indian payments and Indian languages, and what that teaches us about everywhere else.','pages.js'),
+ 'essay-a-teams-memory':('journal/a-teams-memory/index.html','A team’s memory · AskGogo Journal','Every company runs on knowledge that lives in a few people’s heads. SecondBrain is our attempt to make it shared, permissioned and useful.','pages.js'),
+ 'essay-your-data-your-rules':('journal/your-data-your-rules/index.html','Your data, your rules · AskGogo Journal','An assistant that remembers your life has to be clear about what it keeps, why, and how you take it back.','pages.js'),
  'essay-autonomy-you-can-check':('journal/autonomy-you-can-check/index.html','Autonomy you can check · AskGogo Journal','Plan the task, set the limits, check the result.','pages.js'),
 }
 def render(key,root):
