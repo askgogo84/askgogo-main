@@ -84,15 +84,15 @@ def build_live():
         doc=re.sub(r'(assets/site/[a-z]+\.(?:css|js))"',lambda m:f'{m.group(1)}?v={STAMP}"',doc)
         doc=doc.replace('<meta name="robots" content="noindex,nofollow,noarchive">\n','')
         og=f"""<link rel="canonical" href="{url}">
-<link rel="icon" type="image/svg+xml" href="/gogo-character-mark-v1.svg">
-<link rel="apple-touch-icon" href="/gogo-character-app-icon-v1.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="AskGogo"><meta property="og:url" content="{url}">
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
 <meta property="og:image" content="{BASE}askgogo-gogo-character-og-20260911.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="{BASE}askgogo-gogo-character-og-20260911.png">
 <script>window.AG_LIVE=true</script>
 """
-        doc=doc.replace('<meta name="theme-color" content="#FFFFFF">','<meta name="theme-color" content="#FFFFFF">\n'+og)
+        # insert after the theme-color meta, whatever its colour; fail the build if it is missing so live tags are never silently dropped
+        doc,nsub=re.subn(r'(<meta name="theme-color" content="[^"]*">)',lambda m:m.group(1)+'\n'+og,doc,count=1)
+        assert nsub==1 and 'window.AG_LIVE=true' in doc,f'live head tags not inserted for {key}'
         doc=doc.replace('<!-- AskGogo marketing redesign v3: DESIGN PREVIEW ONLY. Not production. Forms are simulated and send nothing. -->\n','')
         doc=doc.replace(' Preview only: nothing was sent.','').replace('<!-- Waitlist sheet (mock) -->','<!-- Waitlist sheet -->').replace('<!-- Early access sheet (mock) -->','<!-- Early access sheet -->')
         for legal in ('privacy','terms','refund'):doc=doc.replace(f'href="https://askgogo.in/{legal}/" target="_blank" rel="noopener"',f'href="{root}{legal}/"')
