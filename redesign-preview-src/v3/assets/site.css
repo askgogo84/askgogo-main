@@ -9,7 +9,7 @@
   --sans:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --wide:1160px;
-  --scripts:"Instrument Serif","Noto Serif Kannada","Noto Serif Devanagari","Noto Serif Tamil","Noto Serif Telugu","Noto Serif Malayalam","Noto Serif Bengali","Noto Serif Gujarati","Noto Serif Gurmukhi","Noto Serif Oriya","Noto Serif Hebrew","Noto Serif Thai","Noto Naskh Arabic","Noto Serif JP","Noto Serif KR","Noto Serif SC","Noto Serif",serif;
+  --scripts:"Instrument Serif","Noto Serif Kannada","Noto Serif Devanagari","Noto Serif Tamil","Noto Serif Telugu","Noto Serif Malayalam","Noto Serif Bengali","Noto Serif Thai","Noto Naskh Arabic","Noto Serif JP","Noto Serif KR","Noto Serif SC","Noto Serif",serif;
   /* Springs (apple-design): sampled spring curves, no fixed-duration eases. ui = damping 1.0 / response .35s; sheet = damping .8 / response .3s (one soft settle); press = damping 1.0 / response .3s */
   --spring-ui:cubic-bezier(.2,.7,.2,1); --spring-ui-d:.4s;
   --spring-sheet:cubic-bezier(.2,.7,.2,1); --spring-sheet-d:.4s;
