@@ -16,14 +16,14 @@
 <meta property="og:url" content="https://askgogo.in/">
 <meta property="og:title" content="Meet Gogo — Your personal AI agent">
 <meta property="og:description" content="Gogo remembers, plans, acts — and keeps working when you're away.">
-<meta property="og:image" content="https://askgogo.in/og-image-v2.png">
+<meta property="og:image" content="https://askgogo.in/askgogo-gogo-og-20261108.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="AskGogo — Meet Gogo, your personal AI agent">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Meet Gogo — Your personal AI agent">
 <meta name="twitter:description" content="Gogo remembers, plans, acts — and keeps working when you're away.">
-<meta name="twitter:image" content="https://askgogo.in/og-image-v2.png">
+<meta name="twitter:image" content="https://askgogo.in/askgogo-gogo-og-20261108.png">
 <script>
 window.__resources = {
   "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/vendor/react.production.min.js",
